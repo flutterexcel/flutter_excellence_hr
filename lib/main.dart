@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'routes.dart';
+import 'package:flutter_excellence_hr/LoginScreen.dart';
+//import 'routes.dart';
 
 void main() {
   runApp(HrApp());
@@ -15,7 +16,7 @@ class HrApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: routes,
+      home: LoginScreen(),
     );
   }
 }
