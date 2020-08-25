@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter_excellence_hr/LoginScreen.dart';
 import 'routes.dart';
 
 void main() {
@@ -10,12 +11,18 @@ class HrApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Excellence HR',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: routes,
+     // home: LoginScreen(),
+
+
+    initialRoute: "/",
+      routes: routes
+       
     );
   }
 }
