@@ -1,26 +1,13 @@
 import 'package:flutter/material.dart';
+import '../widgets/bottomList.dart';
+import '../widgets/bottomFeature.dart';
 
 class LoginBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.fromLTRB(32, 16, 16, 8),
-                child: Text('About Excellence HRMS',
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Color(0xff485057))),
-              ),
-            ),
-          ],
-        ),
+        BottomList(text: 'About Excellence HRMS'),
         Row(
           children: [
             Expanded(
@@ -49,153 +36,15 @@ class LoginBottom extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(32, 0, 0, 16),
-                    child: Image.asset(
-                      'assets/images/greenbtn.png',
-                      width: 10,
-                      height: 10,
-                    ))),
-            Expanded(
-              flex: 9,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
-                child: Text('Core HR: Attendence,Leaves & Timesheets',
-                    style: TextStyle(fontSize: 15, color: Color(0xff485057))),
-              ),
-            ),
-          ],
+        BottomFeature(
+          text: 'Core HR: Attendence,Leaves & Timesheets',
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(32, 0, 0, 16),
-                    child: Image.asset(
-                      'assets/images/greenbtn.png',
-                      width: 10,
-                      height: 10,
-                    ))),
-            Expanded(
-              flex: 9,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
-                child: Text('Manage Employee & Maintain Employee Life Cycle',
-                    style: TextStyle(fontSize: 15, color: Color(0xff485057))),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(32, 0, 0, 16),
-                    child: Image.asset(
-                      'assets/images/greenbtn.png',
-                      width: 10,
-                      height: 10,
-                    ))),
-            Expanded(
-              flex: 9,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
-                child: Text('Salary Management',
-                    style: TextStyle(fontSize: 15, color: Color(0xff485057))),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(32, 0, 0, 16),
-                    child: Image.asset(
-                      'assets/images/greenbtn.png',
-                      width: 10,
-                      height: 10,
-                    ))),
-            Expanded(
-              flex: 9,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
-                child: Text('Mail Templates & Variables',
-                    style: TextStyle(fontSize: 15, color: Color(0xff485057))),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(32, 0, 0, 16),
-                    child: Image.asset(
-                      'assets/images/greenbtn.png',
-                      width: 10,
-                      height: 10,
-                    ))),
-            Expanded(
-              flex: 9,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
-                child: Text('Employee Document Management',
-                    style: TextStyle(fontSize: 15, color: Color(0xff485057))),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(32, 0, 0, 16),
-                    child: Image.asset(
-                      'assets/images/greenbtn.png',
-                      width: 10,
-                      height: 10,
-                    ))),
-            Expanded(
-              flex: 9,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
-                child: Text('Auditing and Inventory Management',
-                    style: TextStyle(fontSize: 15, color: Color(0xff485057))),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(32, 0, 0, 16),
-                    child: Image.asset(
-                      'assets/images/greenbtn.png',
-                      width: 10,
-                      height: 10,
-                    ))),
-            Expanded(
-              flex: 9,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
-                child: Text('Team Management',
-                    style: TextStyle(fontSize: 15, color: Color(0xff485057))),
-              ),
-            ),
-          ],
-        ),
+        BottomFeature(text: 'Manage Employee & Maintain Employee Life Cycle'),
+        BottomFeature(text: 'Salary Management'),
+        BottomFeature(text: 'Mail Templates & Variables'),
+        BottomFeature(text: 'Employee Document Management'),
+        BottomFeature(text: 'Auditing and Inventory Management'),
+        BottomFeature(text: 'Team Management'),
       ],
     );
   }
