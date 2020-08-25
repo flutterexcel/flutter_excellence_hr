@@ -4,7 +4,7 @@ class User {
   String token;
   String message;
   String userid;
-  String error;
+  int error;
   User(this._username, this._password);
 
   User.map(dynamic obj) {

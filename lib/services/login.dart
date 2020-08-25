@@ -24,6 +24,7 @@ class Login {
       if (res["error"] == 0) {
         StorageUtil.putString('token', res["data"]["token"]);
         StorageUtil.putString('userid', res["data"]["userid"]);
+        StorageUtil.putBool('islogged', true);
       }
       return User.map(res);
     });
