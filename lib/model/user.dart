@@ -4,6 +4,7 @@ class User {
   String token;
   String message;
   String userid;
+  String error;
   User(this._username, this._password);
 
   User.map(dynamic obj) {
@@ -13,6 +14,7 @@ class User {
     this.token = obj["data"]["token"];
     this.message = obj["data"]["message"];
     this.userid = obj["data"]["userid"];
+    this.error = obj["error"];
   }
 
   String get username => _username;
@@ -25,6 +27,7 @@ class User {
     map["token"] = token;
     map["message"] = message;
     map["userid"] = userid;
+    map["error"] = error;
     return map;
   }
 }
