@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_excellence_hr/screens/loginBottom.dart';
-import 'package:flutter_excellence_hr/screens/loginPage.dart';
-import 'package:flutter_excellence_hr/screens/welcomeScreen.dart';
-import 'package:flutter_excellence_hr/widgets/googleLogin.dart';
-import 'widgets/logo.dart';
-import 'widgets/googleLogin.dart';
-import 'screens/loginBottom.dart';
-import 'screens/welcomeScreen.dart';
-import 'screens/loginPage.dart';
+import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import '../screens/login_bottom.dart';
+import '../screens/login_page.dart';
+import '../screens/welcome_screen.dart';
+import '../widgets/google_login.dart';
+import '../widgets/logo.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
