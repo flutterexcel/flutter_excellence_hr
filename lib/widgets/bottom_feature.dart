@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/resources/app_colors.dart';
 
 class BottomFeature extends StatelessWidget {
   String text;
@@ -21,7 +22,7 @@ class BottomFeature extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
             child: Text(text,
-                style: TextStyle(fontSize: 15, color: Color(0xff485057))),
+                style: TextStyle(fontSize: 15, color: AppColors.LIGHTBLACK_COLOR)),
           ),
         ),
       ],

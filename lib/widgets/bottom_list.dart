@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/resources/app_colors.dart';
 
 class BottomList extends StatelessWidget {
     String text;
@@ -16,7 +17,7 @@ class BottomList extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Color(0xff485057))),
+                        color: AppColors.BTN_BLACK_COLOR)),
               ),
             ),
           ],
