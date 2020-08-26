@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/resources/font_size.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -12,8 +14,8 @@ class WelcomeScreen extends StatelessWidget {
                 child: Text('Welcome to',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: 18,
-                      color: Color(0xff485057),
+                      fontSize: FontSize().eighteen,
+                      color: AppColors.LIGHTBLACK_COLOR,
                     ))),
           ],
         ),
@@ -27,7 +29,7 @@ class WelcomeScreen extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
-                        color: Color(0xff485057))),
+                        color: AppColors.LIGHTBLACK_COLOR)),
               ),
             ),
           ],

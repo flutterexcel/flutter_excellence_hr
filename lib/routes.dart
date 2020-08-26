@@ -1,6 +1,6 @@
  import 'package:flutter/material.dart';
-// import 'package:screens/home/home_screen.dart';
- import 'LoginScreen.dart';
+ import 'package:flutter_excellence_hr/screens/login_screen.dart';
+
 
 final routes = {
    '/login': (BuildContext context) =>  LoginScreen(),
