@@ -14,7 +14,12 @@ dependencies:
   http: ^0.12.2
   shared_preferences: ^0.5.10
   hexcolor: ^1.0.4
-  google_sign_in: ^4.0.4
+  bloc: ^6.0.0
+  flutter_bloc: ^6.0.0
+  google_sign_in: ^4.5.3
+  equatable: ^1.2.0
+  meta: ^1.1.8
+  uuid: ^2.1.0
   
 
 

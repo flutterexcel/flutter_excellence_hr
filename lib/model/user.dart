@@ -5,7 +5,7 @@ class User {
   String message;
   String userid;
   int error;
-  User(this._username, this._password);
+  User(this._username, this._password, {String user});
 
   User.map(dynamic obj) {
     //print(obj);

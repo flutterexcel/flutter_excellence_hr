@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import '../screens/login_bottom.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/bloc.dart';
+import '../services/authentication_services.dart';
 import '../screens/login_page.dart';
+import '../widgets/widgets.dart';
 import '../screens/welcome_screen.dart';
-import '../widgets/google_login.dart';
-import '../widgets/logo.dart';
+import '../screens/login_bottom.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -12,31 +13,73 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff8f9fa), // just add oxff before hexa code
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            //      mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Logo(),
-                ],
-              ),
-              WelcomeScreen(),
-              LoginPage(),
-              GoogleLogin(),
-              LoginBottom(),
-            ],
-          ),
+        body: SingleChildScrollView(
+      child: SafeArea(
+          minimum: const EdgeInsets.all(16),
+          child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, state) {
+              final authBloc = BlocProvider.of<AuthenticationBloc>(context);
+              if (state is AuthenticationNotAuthenticated) {
+                return _AuthForm(); // show authentication form
+              }
+              if (state is AuthenticationFailure) {
+                // show error message
+                return Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(state.message),
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      child: Text('Retry'),
+                      onPressed: () {
+                        authBloc.add(AppLoaded());
+                      },
+                    )
+                  ],
+                ));
+              }
+              // show splash screen
+              return Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              );
+            },
+          )),
+    ));
+  }
+}
+
+class _AuthForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final authService = RepositoryProvider.of<AuthenticationService>(context);
+    final authBloc = BlocProvider.of<AuthenticationBloc>(context);
+
+    return Container(
+      alignment: Alignment.center,
+      child: BlocProvider<LoginBloc>(
+        create: (context) => LoginBloc(authBloc, authService),
+        child: Column(
+          //      mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Logo(),
+              ],
+            ),
+            WelcomeScreen(),
+            LoginPage(),
+            GoogleLogin(),
+            LoginBottom(),
+          ],
         ),
       ),
     );

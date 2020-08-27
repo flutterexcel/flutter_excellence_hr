@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class Post {
   final JsonDecoder _decoder = JsonDecoder();
 
-  Future<dynamic> post(String url, {Map headers, body, encoding}) {
+  Future<dynamic> post(String url, {Map headers, body, encoding}) async {
     return http
         .post(url, body: body, headers: headers, encoding: encoding)
         .then((http.Response response) {
