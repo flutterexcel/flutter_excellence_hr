@@ -64,6 +64,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final user = await _authenticationService.signInWithEmailAndPassword(
           event.email, event.password);
 
+      print("after sign in with email");
       if (user != null) {
         // push new login event
 

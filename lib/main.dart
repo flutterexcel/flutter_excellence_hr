@@ -41,6 +41,7 @@ class HrApp extends StatelessWidget {
           print(state);
         },
         builder: (context, state) {
+          print("XXXXX");
           print(state);
           print('main');
           if (state is CheckAuthenticated) {
