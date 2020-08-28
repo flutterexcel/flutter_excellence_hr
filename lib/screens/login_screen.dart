@@ -39,11 +39,11 @@ class LoginScreen extends StatelessWidget {
 class _AuthForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final authService = RepositoryProvider.of<AuthenticationService>(context);
+    final authService = RepositoryProvider.of<AuthenticationService>(context);
 
     return Container(
-        alignment: Alignment.center,
-        child: Column(
+      alignment: Alignment.center,
+      child: Column(
           //      mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -58,6 +58,7 @@ class _AuthForm extends StatelessWidget {
             GoogleLogin(),
             LoginBottom(),
           ],
-        ));
+        )
+    );
   }
 }
