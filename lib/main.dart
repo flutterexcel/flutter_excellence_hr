@@ -11,7 +11,7 @@ void main() => runApp(
         // Injects the Authentication service
         RepositoryProvider<AuthenticationService>(
       create: (context) {
-        return FakeAuthenticationService();
+        return LoginAuthenticationService();
       },
       // Injects the Authentication BLoC
       child: BlocProvider<AuthenticationBloc>(

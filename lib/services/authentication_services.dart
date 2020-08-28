@@ -7,7 +7,7 @@ abstract class AuthenticationService {
   Future<void> signOut();
 }
 
-class FakeAuthenticationService extends AuthenticationService {
+class LoginAuthenticationService extends AuthenticationService {
   @override
   Future<User> getCurrentUser() async {
     return null; // return null for now
@@ -16,14 +16,8 @@ class FakeAuthenticationService extends AuthenticationService {
   @override
   Future<User> signInWithEmailAndPassword(String email, String password) async {
     final Login api = Login();
-    await api.login(email, password).then((User user) {
-      print(user.token);
-    });
-
-    return User(email, password, user: 'test');
-    // if (email.toLowerCase() != 'test@domain.com' || password != 'testpass123') {
-    //   throw Exception('Wrong username or password');
-    // }
+    User user = await api.login(email, password);
+    return User(user: user.user, token: user.token, message: user.message);
   }
 
   @override

@@ -1,33 +1,23 @@
-class User {
-  String _username;
-  String _password;
-  String token;
-  String message;
-  String userid;
-  int error;
-  User(this._username, this._password, {String user});
+import 'package:equatable/equatable.dart';
 
-  User.map(dynamic obj) {
-    //print(obj);
-    this._username = obj["username"];
-    this._password = obj["password"];
-    this.token = obj["data"]["token"];
-    this.message = obj["data"]["message"];
-    this.userid = obj["data"]["userid"];
-    this.error = obj["error"];
+class User extends Equatable {
+  final user;
+  final String token;
+  final String message;
+
+  const User({this.user, this.token, this.message});
+
+  @override
+  List<Object> get props => [user, token, message];
+
+  static User fromJson(dynamic json) {
+    return User(
+      user: json["data"]["userid"],
+      token: json["data"]["userid"],
+      message: json["data"]["userid"],
+    );
   }
 
-  String get username => _username;
-  String get password => _password;
-
-  Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
-    map["username"] = _username;
-    map["password"] = _password;
-    map["token"] = token;
-    map["message"] = message;
-    map["userid"] = userid;
-    map["error"] = error;
-    return map;
-  }
+  @override
+  String toString() => 'User { user: $user }';
 }

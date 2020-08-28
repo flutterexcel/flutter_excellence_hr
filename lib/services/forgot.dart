@@ -15,7 +15,7 @@ class Forgot {
         .then((dynamic res) async {
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
 
-      return User.map(res);
+      return User.fromJson(res);
     });
   }
 }

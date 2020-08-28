@@ -26,7 +26,7 @@ class Login {
         StorageUtil.putString('userid', res["data"]["userid"]);
         StorageUtil.putBool('islogged', true);
       }
-      return User.map(res);
+      return User.fromJson(res);
     });
   }
 }
