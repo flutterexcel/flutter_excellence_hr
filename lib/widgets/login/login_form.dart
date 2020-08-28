@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/bloc.dart';
+import '../../bloc/bloc.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,14 +19,14 @@ class _LoginPageState extends State<LoginPage> {
     final _loginBloc = BlocProvider.of<LoginBloc>(context);
 
     _onLoginButtonPressed() {
-      if (_key.currentState.validate()) {
-        _loginBloc.add(LoginInWithEmailButtonPressed(
-            email: _emailController.text, password: _passwordController.text));
-      } else {
-        setState(() {
-          _autoValidate = true;
-        });
-      }
+      // if (_key.currentState.validate()) {
+      _loginBloc.add(LoginInWithEmailButtonPressed(
+          email: _emailController.text, password: _passwordController.text));
+      // } else {
+      //   setState(() {
+      //     _autoValidate = true;
+      //   });
+      // }
     }
 
     return BlocListener<LoginBloc, LoginState>(
@@ -88,6 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                           margin: EdgeInsets.fromLTRB(0, 0, 32, 0),
                           child: InkWell(
                             onTap: () {
+                              print('forgot');
+                              print(state);
                               Navigator.of(context).pop();
                             },
                             child: Text(

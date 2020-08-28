@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'services/storage_service.dart';
-import 'routes.dart';
-import 'screens/login_screen.dart';
-import 'screens/my_inventory.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/bloc.dart';
+import 'routes.dart';
+import 'screens/screens.dart';
 import 'services/authentication_services.dart';
 
 void main() => runApp(
@@ -13,12 +11,13 @@ void main() => runApp(
       create: (context) {
         return LoginAuthenticationService();
       },
-      // Injects the Authentication BLoC
-      child: BlocProvider<AuthenticationBloc>(
+      // Injects the LoginBloc BLoC
+      child: BlocProvider<LoginBloc>(
         create: (context) {
           final authService =
               RepositoryProvider.of<AuthenticationService>(context);
-          return AuthenticationBloc(authService)..add(AppLoaded());
+
+          return LoginBloc(authService)..add(AppLoad());
         },
         child: HrApp(),
       ),
@@ -33,12 +32,18 @@ class HrApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      // BlocBuilder will listen to changes in AuthenticationState
+      // BlocBuilder will listen to changes in LoginState
       // and build an appropriate widget based on the state.
-      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      home: BlocBuilder<LoginBloc, LoginState>(
+        // ignore: missing_return
+        buildWhen: (previousState, state) {
+          print(previousState);
+          print(state);
+        },
         builder: (context, state) {
-          //print(state);
-          if (state is AuthenticationAuthenticated) {
+          print(state);
+          print('main');
+          if (state is CheckAuthenticated) {
             // show home page
             return MyInventory();
           }

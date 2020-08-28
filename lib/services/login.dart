@@ -22,9 +22,9 @@ class Login {
         .then((dynamic res) async {
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
       if (res["error"] == 0) {
-        StorageUtil.putString('token', res["data"]["token"]);
-        StorageUtil.putString('userid', res["data"]["userid"]);
-        StorageUtil.putBool('islogged', true);
+        StorageUtil.setUserToken(res["data"]["token"]);
+        StorageUtil.setUserId(res["data"]["userid"]);
+        StorageUtil.setLoggedIn(true);
       }
       return User.fromJson(res);
     });

@@ -21,6 +21,42 @@ class StorageUtil {
     _preferences = await SharedPreferences.getInstance();
   }
 
+  //get usertoken
+  static String getUserToken({String defValue = ''}) {
+    if (_preferences == null) return defValue;
+    return _preferences.getString('usertoken') ?? defValue;
+  }
+
+  //set usertoken
+  static Future<bool> setUserToken(String value) async {
+    if (_preferences == null) return null;
+    return _preferences.setString('usertoken', value);
+  }
+
+  //get userid
+  static String getUserId({String defValue = ''}) {
+    if (_preferences == null) return defValue;
+    return _preferences.getString('userid') ?? defValue;
+  }
+
+  //set userid
+  static Future<bool> setUserId(String value) async {
+    if (_preferences == null) return null;
+    return _preferences.setString('userid', value);
+  }
+
+  //get isLoggedIn
+  static bool getLoggedIn({bool defValue = false}) {
+    if (_preferences == null) return defValue;
+    return _preferences.getBool('islogged') ?? defValue;
+  }
+
+  //set isLoggedIn
+  static Future<bool> setLoggedIn(bool value) async {
+    if (_preferences == null) return null;
+    return _preferences.setBool('islogged', value);
+  }
+
   // get string
   static String getString(String key, {String defValue = ''}) {
     if (_preferences == null) return defValue;

@@ -2,47 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/bloc.dart';
 import '../services/authentication_services.dart';
-import '../screens/login_page.dart';
-import '../widgets/widgets.dart';
-import '../screens/welcome_screen.dart';
-import '../screens/login_bottom.dart';
+import '../widgets/login/login.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
+// class LoginScreen extends StatefulWidget {
+//   @override
+//   _LoginScreenState createState() => _LoginScreenState();
+// }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
       child: SafeArea(
           minimum: const EdgeInsets.all(16),
-          child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          child: BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
-              final authBloc = BlocProvider.of<AuthenticationBloc>(context);
-              if (state is AuthenticationNotAuthenticated) {
+              print(state.toString());
+              if (state is NotAuthenticated) {
                 return _AuthForm(); // show authentication form
               }
-              if (state is AuthenticationFailure) {
-                // show error message
-                return Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(state.message),
-                    FlatButton(
-                      textColor: Theme.of(context).primaryColor,
-                      child: Text('Retry'),
-                      onPressed: () {
-                        authBloc.add(AppLoaded());
-                      },
-                    )
-                  ],
-                ));
-              }
+
               // show splash screen
               return Center(
                 child: CircularProgressIndicator(
@@ -59,12 +39,11 @@ class _AuthForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = RepositoryProvider.of<AuthenticationService>(context);
-    final authBloc = BlocProvider.of<AuthenticationBloc>(context);
 
     return Container(
       alignment: Alignment.center,
       child: BlocProvider<LoginBloc>(
-        create: (context) => LoginBloc(authBloc, authService),
+        create: (context) => LoginBloc(authService),
         child: Column(
           //      mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.center,
