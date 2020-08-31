@@ -42,10 +42,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         this.add(UserLogIn(user: currentUser.user));
         yield CheckAuthenticated(user: currentUser.user);
       } else {
-        yield NotAuthenticated();
+        yield LoginFailure();
       }
     } catch (e) {
-      yield NotAuthenticated();
+      yield LoginFailure();
     }
   }
 
@@ -55,7 +55,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapUserLogOutToState(UserLogOut event) async* {
     await _authenticationService.signOut();
-    yield NotAuthenticated();
+    yield LoginFailure();
   }
 
   Stream<LoginState> _mapLoginWithEmailToState(
@@ -70,18 +70,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         this.add(UserLogIn(user: user));
         yield LoginSuccess();
-        yield LoginInitial();
       } else {
         yield LoginFailure(error: 'Login failed');
-        yield NotAuthenticated();
       }
       // ignore: unused_catch_clause
     } on Exception catch (e) {
       yield LoginFailure(error: 'Login failed');
-      yield NotAuthenticated();
     } catch (err) {
       yield LoginFailure(error: 'Login failed');
-      yield NotAuthenticated();
     }
   }
 }

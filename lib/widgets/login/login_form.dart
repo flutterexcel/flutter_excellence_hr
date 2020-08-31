@@ -25,10 +25,6 @@ class LoginPage extends StatelessWidget {
 
     LoginState state = _loginBloc.state;
 
-    if (state is LoginFailure) {
-      _showError(context);
-    }
-
     if (state is LoginLoading) {
       return Center(
         child: CircularProgressIndicator(),
@@ -116,12 +112,5 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _showError(context) {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text('Invalid login details!'),
-      backgroundColor: Theme.of(context).errorColor,
-    ));
   }
 }

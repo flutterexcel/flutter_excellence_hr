@@ -17,7 +17,7 @@ class LoginSuccess extends LoginState {}
 class LoginFailure extends LoginState {
   final String error;
 
-  LoginFailure({@required this.error});
+  LoginFailure({this.error});
 
   @override
   List<Object> get props => [error];
@@ -33,5 +33,3 @@ class CheckAuthenticated extends LoginState {
 }
 
 class AuthenticationLoad extends LoginState {}
-
-class NotAuthenticated extends LoginState {}
