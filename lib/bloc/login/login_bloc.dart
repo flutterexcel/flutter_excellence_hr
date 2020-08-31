@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'login_event.dart';
 import 'login_state.dart';
-//import '../authentication/authentication.dart';
 import '../../services/authentication_services.dart';
+import '../../services/storage_service.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationService _authenticationService;
@@ -34,16 +34,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapAppLoadToState(AppLoad event) async* {
     yield AuthenticationLoad(); // to display splash screen
+    StorageUtil.getInstance();
     try {
       final currentUser = await _authenticationService.getCurrentUser();
 
       if (currentUser != null) {
-        yield CheckAuthenticated(user: currentUser);
+        this.add(UserLogIn(user: currentUser.user));
+        yield CheckAuthenticated(user: currentUser.user);
       } else {
         yield NotAuthenticated();
       }
     } catch (e) {
-      //yield NotAuthenticated();
+      yield NotAuthenticated();
     }
   }
 
@@ -58,27 +60,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithEmailToState(
       LoginInWithEmailButtonPressed event) async* {
-    print("login loading");
     yield LoginLoading();
     try {
       final user = await _authenticationService.signInWithEmailAndPassword(
           event.email, event.password);
 
-      print("after sign in with email");
       if (user != null) {
         // push new login event
 
         this.add(UserLogIn(user: user));
-        // yield LoginSuccess();
-        // yield LoginInitial();
+        yield LoginSuccess();
+        yield LoginInitial();
       } else {
-        yield LoginFailure(error: 'Something very weird just happened');
+        yield LoginFailure(error: 'Login failed');
+        yield NotAuthenticated();
       }
       // ignore: unused_catch_clause
     } on Exception catch (e) {
-      yield LoginFailure(error: null);
+      yield LoginFailure(error: 'Login failed');
+      yield NotAuthenticated();
     } catch (err) {
-      yield LoginFailure(error: err.message ?? 'An unknown error occured');
+      yield LoginFailure(error: 'Login failed');
+      yield NotAuthenticated();
     }
   }
 }

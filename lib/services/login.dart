@@ -11,6 +11,7 @@ class Login {
   Future<User> login(String username, String password) async {
     final prodUrl = await AppConfig.forEnvironment('prod');
     final loginUrl = prodUrl.baseUrl + "/attendance/API_HR/api.php";
+
     Map data = {
       "token": apiKey,
       "action": "login",

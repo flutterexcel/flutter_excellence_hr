@@ -18,8 +18,6 @@ class LoginScreen extends StatelessWidget {
           minimum: const EdgeInsets.all(16),
           child: BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
-              print("login screen line 21");
-              print(state.toString());
               if (state is NotAuthenticated) {
                 return _AuthForm(); // show authentication form
               }
@@ -42,8 +40,8 @@ class _AuthForm extends StatelessWidget {
     final authService = RepositoryProvider.of<AuthenticationService>(context);
 
     return Container(
-      alignment: Alignment.center,
-      child: Column(
+        alignment: Alignment.center,
+        child: Column(
           //      mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -58,7 +56,6 @@ class _AuthForm extends StatelessWidget {
             GoogleLogin(),
             LoginBottom(),
           ],
-        )
-    );
+        ));
   }
 }

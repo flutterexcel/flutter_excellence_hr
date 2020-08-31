@@ -19,23 +19,14 @@ class LoginPage extends StatelessWidget {
     final _loginBloc = BlocProvider.of<LoginBloc>(context);
 
     _onLoginButtonPressed() {
-      // if (_key.currentState.validate()) {
       _loginBloc.add(LoginInWithEmailButtonPressed(
           email: _emailController.text, password: _passwordController.text));
-      // } else {
-      //   setState(() {
-      //     _autoValidate = true;
-      //   });
-      // }
     }
 
     LoginState state = _loginBloc.state;
 
-    print("login form dart line 40");
-    print(state.toString());
-
     if (state is LoginFailure) {
-      _showError(state.error, context);
+      _showError(context);
     }
 
     if (state is LoginLoading) {
@@ -89,8 +80,6 @@ class LoginPage extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(0, 0, 32, 0),
                     child: InkWell(
                       onTap: () {
-                        print('forgot');
-                        print(state);
                         Navigator.of(context).pop();
                       },
                       child: Text(
@@ -127,22 +116,9 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-
-    // return BlocListener<LoginBloc, LoginState>(
-    //   listener: (context, state) {
-    //     if (state is LoginFailure) {
-    //       _showError(state.error);
-    //     }
-    //   },
-    //   child: BlocBuilder<LoginBloc, LoginState>(
-    //     builder: (context, state) {
-
-    //     },
-    //   ),
-    // );
   }
 
-  void _showError(String error, context) {
+  void _showError(context) {
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Text('Invalid login details!'),
       backgroundColor: Theme.of(context).errorColor,

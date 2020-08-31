@@ -6,6 +6,7 @@ import 'screens/screens.dart';
 import 'services/authentication_services.dart';
 
 void main() => runApp(
+
         // Injects the Authentication service
         RepositoryProvider<AuthenticationService>(
       create: (context) {
@@ -35,15 +36,7 @@ class HrApp extends StatelessWidget {
       // BlocBuilder will listen to changes in LoginState
       // and build an appropriate widget based on the state.
       home: BlocBuilder<LoginBloc, LoginState>(
-        // ignore: missing_return
-        buildWhen: (previousState, state) {
-          print(previousState);
-          print(state);
-        },
         builder: (context, state) {
-          print("XXXXX");
-          print(state);
-          print('main');
           if (state is CheckAuthenticated) {
             // show home page
             return MyInventory();

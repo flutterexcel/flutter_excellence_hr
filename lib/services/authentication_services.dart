@@ -1,5 +1,6 @@
 import '../model/user.dart';
 import '../services/login.dart';
+import 'storage_service.dart';
 
 abstract class AuthenticationService {
   Future<User> getCurrentUser();
@@ -10,6 +11,10 @@ abstract class AuthenticationService {
 class LoginAuthenticationService extends AuthenticationService {
   @override
   Future<User> getCurrentUser() async {
+    final islogin = StorageUtil.getLoggedIn();
+    if (islogin) {
+      return User(user: StorageUtil.getUserId());
+    }
     return null; // return null for now
   }
 
