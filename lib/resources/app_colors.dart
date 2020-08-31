@@ -11,5 +11,8 @@ class AppColors{
   static const Color NAV_ICON_COLOR = Color(0xFF838D9C);
   static const Color RED_COLOR = Color(0xFFEF5C5C);
   static const Color PINK_COLOR = Color(0xFFF8D3D5);
-  static const Color DARK_GREY = Color(0xFF798792);
+  static const Color DARK_GREY = Color(0xFF798792);// CAD1E2
+  static const Color COMMENT_ICON = Color(0xFF798792);//7BA9DD
+  static const Color COMMENT_NAME = Color(0xFF7BA9DD);
+
 }
