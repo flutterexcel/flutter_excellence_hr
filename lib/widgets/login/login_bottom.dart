@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import '../widgets/bottom_list.dart';
-import '../widgets/bottom_feature.dart';
+import 'bottom_list.dart';
+import 'bottom_feature.dart';
 
 class LoginBottom extends StatelessWidget {
   @override
@@ -16,7 +16,8 @@ class LoginBottom extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(32, 0, 32, 16),
                 child: Text(
                     'Say goodbye to cluttered spreadsheets From attendence to timesheets and performance, run HR on the cloud. Get more done with a simple user interface, effortless automation, and efficient processing.',
-                    style: TextStyle(fontSize: 15, color: AppColors.LIGHTBLACK_COLOR)),
+                    style: TextStyle(
+                        fontSize: 15, color: AppColors.LIGHTBLACK_COLOR)),
               ),
             ),
           ],

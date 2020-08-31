@@ -14,5 +14,6 @@ class AppColors{
   static const Color DARK_GREY = Color(0xFF798792);// CAD1E2
   static const Color COMMENT_ICON = Color(0xFF798792);//7BA9DD
   static const Color COMMENT_NAME = Color(0xFF7BA9DD);
+  static const Color GREEN_COLOR = Color(0xFF59C8A3);
 
 }

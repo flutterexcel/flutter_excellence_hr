@@ -1,28 +1,51 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_excellence_hr/LoginScreen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'bloc/bloc.dart';
 import 'routes.dart';
+import 'screens/screens.dart';
+import 'services/authentication_services.dart';
+import 'screens/navigate/inventory.dart';
+void main() => runApp(
 
-void main() {
-  runApp(HrApp());
-}
+        // Injects the Authentication service
+        RepositoryProvider<AuthenticationService>(
+      create: (context) {
+        return LoginAuthenticationService();
+      },
+      // Injects the LoginBloc BLoC
+      child: BlocProvider<LoginBloc>(
+        create: (context) {
+          final authService =
+              RepositoryProvider.of<AuthenticationService>(context);
+
+          return LoginBloc(authService)..add(AppLoad());
+        },
+        child: HrApp(),
+      ),
+    ));
 
 class HrApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Excellence HR',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.teal,
       ),
-     // home: LoginScreen(),
-
-
-    initialRoute: "/",
-      routes: routes
-       
+      // BlocBuilder will listen to changes in LoginState
+      // and build an appropriate widget based on the state.
+      home: BlocBuilder<LoginBloc, LoginState>(
+        builder: (context, state) {
+          if (state is CheckAuthenticated) {
+            // show home page
+            return MyInventory();
+          }
+          // otherwise show login page
+          return LoginScreen();
+        },
+      ),
+      routes: routes,
     );
   }
 }

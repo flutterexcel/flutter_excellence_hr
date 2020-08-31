@@ -19,7 +19,7 @@ class _GoogleLoginState extends State<GoogleLogin> {
                 margin: EdgeInsets.fromLTRB(32.0, 5.0, 32.0, 5.0),
                 child: new RaisedButton(
                     padding: EdgeInsets.only(top: 3.0, bottom: 3.0, left: 3.0),
-                    color:  Color(0xFF4285F4),
+                    color: Color(0xFF4285F4),
                     onPressed: () {},
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5.0))),
@@ -33,15 +33,17 @@ class _GoogleLoginState extends State<GoogleLogin> {
                             fit: BoxFit.contain,
                           ),
                         ),
-                        Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                            child: new Text(
-                              "Login with your company google account",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                        Expanded(
+                          child: Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                              child: new Text(
+                                "Login with your company google account",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ),
                       ],
                     )),
               ),

@@ -7,7 +7,7 @@ import '../navigate/inventory_items.dart';
 import '../navigate/recent_comments.dart';
 import '../navigate/dropdown_inventory.dart';
 import '../navigate/inventory_item_details.dart';
-
+import '../navigate/navigate.dart';
 class MyInventory extends StatefulWidget {
   @override
   _MyInventoryState createState() => _MyInventoryState();
@@ -18,7 +18,13 @@ class _MyInventoryState extends State<MyInventory> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home: Scaffold( floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: Text('Assign Device'),
+        backgroundColor: AppColors.GREEN_COLOR,
+      ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -90,9 +96,10 @@ class _MyInventoryState extends State<MyInventory> {
           ),
         ),
       ),
+     
     );
   }
-
+      
   customDialog() {
     return showDialog(
         context: context,
@@ -108,12 +115,15 @@ class _MyInventoryState extends State<MyInventory> {
                   color: AppColors.BACKGROUND_COLOR),
               child: SingleChildScrollView(
                 child: Column(children: <Widget>[
-                  Text(
-                    'Device Details',
-                    style: TextStyle(
-                        color: AppColors.LIGHTBLACK_COLOR,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(8, 16, 8, 16),
+                    child: Text(
+                      'Device Details',
+                      style: TextStyle(
+                          color: AppColors.LIGHTBLACK_COLOR,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,),
+                    ),
                   ),
                   DropDown(),
                   InventoryItemDetails(
@@ -141,7 +151,7 @@ class _MyInventoryState extends State<MyInventory> {
                   SizedBox(
                     height: 30,
                   ),
-                   RecentComments(),
+                  for(int i=0;i<5;i++)
                   CommentSection(
                     name: 'Deepak Mishra',
                     date: '6th April20, 11:55 am',
