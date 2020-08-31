@@ -1,9 +1,6 @@
- import 'package:flutter/material.dart';
- import 'package:flutter_excellence_hr/screens/login_screen.dart';
-
+import 'package:flutter/material.dart';
+import 'screens/my_inventory.dart';
 
 final routes = {
-   '/login': (BuildContext context) =>  LoginScreen(),
-  // '/home': (BuildContext context) =>  HomeScreen(),
-  '/': (BuildContext context) =>  LoginScreen(),
+  '/my_inventory': (BuildContext context) => MyInventory(),
 };
