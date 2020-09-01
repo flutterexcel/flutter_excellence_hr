@@ -11,7 +11,9 @@ abstract class AuthenticationService {
 class LoginAuthenticationService extends AuthenticationService {
   @override
   Future<User> getCurrentUser() async {
+    StorageUtil.getInstance();
     final islogin = StorageUtil.getLoggedIn();
+
     if (islogin) {
       return User(user: StorageUtil.getUserId());
     }
