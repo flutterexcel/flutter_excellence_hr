@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/widgets/navigate/comment_section.dart';
@@ -8,16 +9,23 @@ import '../navigate/recent_comments.dart';
 import '../navigate/dropdown_inventory.dart';
 import '../navigate/inventory_item_details.dart';
 import '../navigate/navigate.dart';
-
+import 'package:flutter/cupertino.dart';
+import 'package:universal_io/io.dart';
 class MyInventory extends StatefulWidget {
   @override
   _MyInventoryState createState() => _MyInventoryState();
 }
 
 class _MyInventoryState extends State<MyInventory> {
+  int _index=0;  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    if(Platform.isIOS){
+  
+        print('OS: ${Platform.isIOS}');
+    }
+ 
+   return Scaffold(
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,13 +38,18 @@ class _MyInventoryState extends State<MyInventory> {
         ),
       ),
       drawer: Navigation(),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
-        label: Text('Assign Device'),
-        backgroundColor: AppColors.GREEN_COLOR,
-      ),
+      
+      floatingActionButton: CupertinoButton (
+              onPressed: ()=>{},
+              color: Colors.orange,
+              borderRadius: new BorderRadius.circular(30.0),
+              child:
+              new Text("Get Started",
+                textAlign: TextAlign.center,
+                style: new TextStyle(color: Colors.white),
+              ),
+            ),
+      
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
