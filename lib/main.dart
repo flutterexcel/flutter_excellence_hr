@@ -5,7 +5,7 @@ import 'bloc/bloc.dart';
 import 'routes.dart';
 import 'screens/screens.dart';
 import 'services/authentication_services.dart';
-import 'screens/navigate/inventory.dart';
+import 'screens/navigate/my_inventory.dart';
 void main() => runApp(
 
         // Injects the Authentication service
@@ -18,7 +18,6 @@ void main() => runApp(
         create: (context) {
           final authService =
               RepositoryProvider.of<AuthenticationService>(context);
-
           return LoginBloc(authService)..add(AppLoad());
         },
         child: HrApp(),
@@ -40,7 +39,7 @@ class HrApp extends StatelessWidget {
         builder: (context, state) {
           if (state is CheckAuthenticated) {
             // show home page
-            return MyInventory();
+            return YourInventory();
           }
           // otherwise show login page
           return LoginScreen();
@@ -50,4 +49,3 @@ class HrApp extends StatelessWidget {
     );
   }
 }
-
