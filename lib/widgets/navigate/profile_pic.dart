@@ -8,33 +8,7 @@ class InventoryProfilePic extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-     /*  Container(
-          margin: EdgeInsets.fromLTRB(8, 8, 8,8),
-          child: RaisedButton.icon(
-            onPressed: () {
-            Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Navigation()),
-                  );
-              print('Button Clicked.');
-            },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5.0))),
-            label: Text(
-              '',
-              style: TextStyle(color: Colors.white),
-            ),
-            icon: Icon(
-              Icons.menu,
-              color: Colors.white,size: 20,
-            ),
-            textColor: Colors.white,
-            splashColor: AppColors.BACKGROUND_COLOR,
-            color: AppColors.THEME_COLOR,
-          ),
-        ),
-        //Text('My Inventory',style: TextStyle(color:AppColors.THEME_COLOR,fontSize: 30,fontWeight: FontWeight.bold)),
-       */ Container(
+        Container(
           margin: EdgeInsets.fromLTRB(16, 16, 16, 32),
           child: CircleAvatar(
             radius: 20,
