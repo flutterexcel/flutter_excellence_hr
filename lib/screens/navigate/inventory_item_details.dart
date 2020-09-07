@@ -23,6 +23,7 @@ class InventoryDetails extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemBuilder: (_, int index) =>
             listDetails(this.text1[index], this.text2[index]),
         itemCount: this.text1.length,

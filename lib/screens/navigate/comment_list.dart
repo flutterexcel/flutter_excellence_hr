@@ -24,6 +24,7 @@ class CommentList extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemBuilder: (_, int index) => listDataItems(
             this.listOf[index], this.date[index], this.comment[index]),
         itemCount: this.listOf.length,

@@ -24,6 +24,7 @@ class InventoryItems extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemBuilder: (_, int index) =>
             listItems(this.company[index], this.deviceType[index],this.uid[index]),
         itemCount: this.company.length,
