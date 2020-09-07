@@ -13,8 +13,8 @@ class User extends Equatable {
   static User fromJson(dynamic json) {
     return User(
       user: json["data"]["userid"],
-      token: json["data"]["userid"],
-      message: json["data"]["userid"],
+      token: json["data"]["token"],
+      message: json["data"]["message"],
     );
   }
 
