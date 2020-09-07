@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'post.dart';
-import '../model/inventory/inventory.dart';
-import '../app_config.dart';
-import 'storage_service.dart';
+import '../post.dart';
+import '../../model/inventory/inventory.dart';
+import '../../app_config.dart';
+import '../storage_service.dart';
 
 class Inventory {
   Post _post = Post();

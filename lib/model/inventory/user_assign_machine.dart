@@ -1,3 +1,6 @@
+import 'audit_current_month.dart';
+import 'history.dart';
+
 class UserAssignMachine {
   String id;
   String machineType;
@@ -21,6 +24,8 @@ class UserAssignMachine {
   String assignDate;
   String name;
   String workEmail;
+  AuditCurrentMonthStatus auditCurrentMonthStatus;
+  List<History> history;
 
   UserAssignMachine({
     this.id,
@@ -45,6 +50,8 @@ class UserAssignMachine {
     this.assignDate,
     this.name,
     this.workEmail,
+    //this.auditCurrentMonthStatus,
+    this.history,
   });
 
   UserAssignMachine.fromJson(Map<String, dynamic> json) {
@@ -70,10 +77,19 @@ class UserAssignMachine {
     assignDate = json['assign_date'];
     name = json['name'];
     workEmail = json['work_email'];
+    // auditCurrentMonthStatus = json['audit_current_month_status'] != null
+    //     ? AuditCurrentMonthStatus.fromJson(json['audit_current_month_status'])
+    //     : null;
+    if (json['history'] != null) {
+      history = List<History>();
+      json['history'].forEach((v) {
+        history.add(History.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['machine_type'] = this.machineType;
     data['machine_name'] = this.machineName;
@@ -96,7 +112,13 @@ class UserAssignMachine {
     data['assign_date'] = this.assignDate;
     data['name'] = this.name;
     data['work_email'] = this.workEmail;
-
+    // if (this.auditCurrentMonthStatus != null) {
+    //   data['audit_current_month_status'] =
+    //       this.auditCurrentMonthStatus.toJson();
+    // }
+    if (this.history != null) {
+      data['history'] = this.history.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
