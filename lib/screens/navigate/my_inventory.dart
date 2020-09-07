@@ -1,81 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:io';
+//import 'package:flutter_excellence_hr/screens/navigate/inventory_item_details.dart';
+import 'package:flutter_excellence_hr/widgets/navigate/comment_section.dart';
+import 'package:flutter_excellence_hr/widgets/navigate/imp_notes_inventory.dart';
 import 'package:universal_io/io.dart';
 import '../navigate/navigate.dart';
-import 'package:flutter_excellence_hr/widgets/navigate/imp_notes_inventory.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:flutter_excellence_hr/widgets/navigate/comment_section.dart';
 
 class YourInventory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
-      print('OS: ${Platform.isIOS}');
-    }
- customDialog() {
-      return showDialog(
-          context: context,
-          builder: (BuildContext c) {
-            return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Container(
-                height: 450,
-                width: MediaQuery.of(context).size.width,
-                decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: AppColors.BACKGROUND_COLOR),
-                child: SingleChildScrollView(
-                  child: Column(children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.fromLTRB(8, 16, 8, 16),
-                      child: Text(
-                        'Device Details',
-                        style: TextStyle(
-                          color: AppColors.LIGHTBLACK_COLOR,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    DropDown(),
-                    InventoryItemDetails(
-                      text1: "BSY ",
-                      text2: "Chargers",
-                    ),
-                    InventoryItemDetails(
-                      text1: "id",
-                      text2: "504",
-                    ),
-                    InventoryItemDetails(
-                        text1: "Assign Date", text2: "2018-08-08"),
-                    InventoryItemDetails(
-                      text1: "Serial Number",
-                      text2: "BSYE1202000",
-                    ),
-                    InventoryItemDetails(
-                      text1: "Internal Serial Nummber ",
-                      text2: "CHA001",
-                    ),
-                    InventoryItemDetails(
-                      text1: "Deepak Mishra",
-                      text2: "No Designation Data",
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    for (int i = 0; i < 5; i++)
-                      CommentSection(
-                        name: 'Deepak Mishra',
-                        date: '6th April20, 11:55 am',
-                        comment: 'All Good',
-                      ),
-                  ]),
-                ),
-              ),
-            );
-          });
-    }
+    Widget _getFAB() {
+        if(Platform.isWindows){
+          return FloatingActionButton(
+              backgroundColor: Colors.deepOrange[800],
+              child: Icon(Icons.add_shopping_cart),
+              onPressed: null);
+        }else{
+          return FloatingActionButton(
+              backgroundColor: Colors.deepOrange[800],
+              child: Icon(Icons.add_alarm),
+              onPressed: null);
+        }
+      }
 
     return Scaffold(
       appBar: AppBar(
@@ -93,7 +41,8 @@ class YourInventory extends StatelessWidget {
           ],
         ),
       ),
-      drawer: Navigation(),
+      drawer: Navigation(),    
+    
       floatingActionButton: CupertinoButton(
         onPressed: () => {},
         color: Colors.orange,
@@ -104,47 +53,54 @@ class YourInventory extends StatelessWidget {
           style: new TextStyle(color: Colors.white),
         ),
       ),
+    
+ /*   
+    floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: Text('Assign Device'),
+        backgroundColor: AppColors.GREEN_COLOR,
+      ),
+   */   
+
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: <Widget>[
               ImportantNotesInventory(),
               SizedBox(height: 20),
-              InkWell(
-                onTap: () {
-                  customDialog();
-                },
-                child: InventoryItems(
-                  company: 'LENOVO', //company
-                  deviceType: 'Mouse2018', //device type
-                  uid: 'MOUO27', // Uid
-                ),
-              ),
-              SizedBox(height: 10),
-              InventoryItems(
-                company: 'BSY',
-                deviceType: 'Chargers',
-                uid: 'CHA001',
-              ),
-              SizedBox(height: 10),
-              InventoryItems(
-                company: 'JUMPER',
-                deviceType: 'Laptop',
-                uid: 'LAP047',
-              ),
-              SizedBox(height: 10),
-              InventoryItems(
-                company: 'Quantam',
-                deviceType: 'LAN Adapter',
-                uid: 'LA002',
-              ),
-              SizedBox(height: 10),
-              InventoryItems(
-                company: 'Quantam QHMPL USB 2.0 LAN Adapter',
-                deviceType: 'LAN Adapter',
-                uid: 'LA015',
-              ),
-              SizedBox(height: 50),
+ //            InventoryItems(),
+              SizedBox(height: 50),  
+            Container(
+                      margin: EdgeInsets.fromLTRB(8, 16, 8, 16),
+                      child: Text(
+                        'Device Details',
+                        style: TextStyle(
+                          color: AppColors.LIGHTBLACK_COLOR,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+              DropDown(),
+              _getFAB(),        
+              CommentSection(),
+             InventoryDetails() , 
+             SizedBox(height:20),
+             Container(
+                      margin: EdgeInsets.fromLTRB(8, 16, 8, 16),
+                      child: Text(
+                        'Recent Comments',
+                        style: TextStyle(
+                          color: AppColors.COMMENT_ICON,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),           
+           //  CommentList(),
             ],
           ),
         ),

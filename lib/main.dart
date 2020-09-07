@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
@@ -6,8 +8,10 @@ import 'routes.dart';
 import 'screens/screens.dart';
 import 'services/authentication_services.dart';
 import 'screens/navigate/my_inventory.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:universal_io/io.dart';
 void main() => runApp(
-
+            
         // Injects the Authentication service
         RepositoryProvider<AuthenticationService>(
       create: (context) {
@@ -25,9 +29,13 @@ void main() => runApp(
     ));
 
 class HrApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+       if(Platform.isIOS){
+          
+    }else
+    return MaterialApp( 
       debugShowCheckedModeBanner: false,
       title: 'Excellence HR',
       theme: ThemeData(

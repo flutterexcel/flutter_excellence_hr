@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:flutter_excellence_hr/screens/navigate/inventory.dart';
-
-void main() => runApp(Navigation());
+import '../navigate/navigate.dart';
 
 class Navigation extends StatelessWidget {
   final appTitle = 'Excellence Technosoft H.R.M.S';
@@ -18,7 +16,6 @@ class Navigation extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
-
   MyHomePage({Key key, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -98,7 +95,7 @@ class MyHomePage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MyInventory()),
+                    MaterialPageRoute(builder: (context) => YourInventory()),
                   );
                 },
               ),
