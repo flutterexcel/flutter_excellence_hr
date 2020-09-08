@@ -78,6 +78,7 @@ class ShowInventory extends StatelessWidget {
                           ListTile(
                             title: Text(usermachine.machineName),
                             subtitle: Text(usermachine.machineType),
+                      
                             onTap: () {
                               _inventoryBloc.add(LoadInventory(
                                   data: state.data,
