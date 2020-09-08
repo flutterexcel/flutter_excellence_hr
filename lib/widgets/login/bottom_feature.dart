@@ -22,7 +22,8 @@ class BottomFeature extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.fromLTRB(8, 0, 32, 16),
             child: Text(text,
-                style: TextStyle(fontSize: 15, color: AppColors.LIGHTBLACK_COLOR)),
+                style:
+                    TextStyle(fontSize: 15, color: AppColors.LIGHTBLACK_COLOR)),
           ),
         ),
       ],
