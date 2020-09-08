@@ -7,3 +7,4 @@ export 'recent_comments.dart';
 export 'my_inventory.dart';
 export 'inventory_dialog.dart';
 export 'comment_list.dart';
+export 'overview.dart';
