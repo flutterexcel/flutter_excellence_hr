@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:google_sign_in/google_sign_in.dart";
+import 'package:flutter_excellence_hr/resources/app_colors.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['profile', 'email']);
 
