@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "608973494737",
+    "firebase_url": "https://excellence-hr.firebaseio.com",
+    "project_id": "excellence-hr",
+    "storage_bucket": "excellence-hr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608973494737:android:77e055d0044f97979b68f0",
+        "android_client_info": {
+          "package_name": "com.example.flutter_excellence_hr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608973494737-73altd6repr0m7uva5la4mjg650qqdu5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_excellence_hr",
+            "certificate_hash": "a18079fc8dbb5b1964ad7bcae23e76cfc38b266d"
+          }
+        },
+        {
+          "client_id": "608973494737-nal28kb6olvq3svuhuqempe37t39leqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Vvw_oB2KyATCGUh3jAF1kUSANWTpQIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608973494737-nal28kb6olvq3svuhuqempe37t39leqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

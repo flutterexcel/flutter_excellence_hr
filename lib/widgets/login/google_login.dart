@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import "package:google_sign_in/google_sign_in.dart";
+
+GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['profile', 'email']);
 
 class GoogleLogin extends StatefulWidget {
   @override
@@ -6,7 +9,19 @@ class GoogleLogin extends StatefulWidget {
 }
 
 class _GoogleLoginState extends State<GoogleLogin> {
+  GoogleSignInAccount _currentUser;
+
   @override
+  void initState() {
+    super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
+      setState(() {
+        _currentUser = account;
+      });
+    });
+    _googleSignIn.signInSilently();
+  }
+
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -19,7 +34,7 @@ class _GoogleLoginState extends State<GoogleLogin> {
                 margin: EdgeInsets.fromLTRB(32.0, 5.0, 32.0, 5.0),
                 child: new RaisedButton(
                     padding: EdgeInsets.only(top: 3.0, bottom: 3.0, left: 3.0),
-                    color:  Color(0xFF4285F4),
+                    color: Color(0xFF4285F4),
                     onPressed: () {},
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5.0))),
@@ -34,14 +49,14 @@ class _GoogleLoginState extends State<GoogleLogin> {
                           ),
                         ),
                         Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                            child: new Text(
-                              "Login with your company google account",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: RaisedButton(
+                            onPressed: _handleSignIn,
+                            child:
+                                Text('Login with your company google account'),
+                          ),
+                        ),
                       ],
                     )),
               ),
@@ -50,5 +65,13 @@ class _GoogleLoginState extends State<GoogleLogin> {
         ),
       ],
     );
+  }
+}
+
+Future<void> _handleSignIn() async {
+  try {
+    await _googleSignIn.signIn();
+  } catch (error) {
+    print(error);
   }
 }
