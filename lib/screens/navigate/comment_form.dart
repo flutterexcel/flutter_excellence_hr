@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/bloc/inventory/inventory.dart';
+import 'package:flutter_excellence_hr/model/inventory/user_assign_machine.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../services/inventory/add_inventory_audit.dart';
 
 class KeyValueModel {
   String key;
@@ -16,7 +18,7 @@ class CommentForm extends StatelessWidget {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final _commentController = TextEditingController();
   bool _autoValidate = false;
-
+  final AddInventoryAudit api = AddInventoryAudit();
   List<KeyValueModel> _datas = [
     KeyValueModel(key: "select", value: "Select your Audit Report"),
     KeyValueModel(key: "all_good", value: "Nothing To Report (all good)"),
@@ -60,7 +62,9 @@ class CommentForm extends StatelessWidget {
                             _inventoryBloc.add(LoadInventory(
                                 data: state.data,
                                 enablecomment: true,
-                                comment: key));
+                                comment: key,
+                                count: state.count,
+                                enableoverview: false));
                           },
                           hint: Text('Select Your Audit Report'),
                         ),
@@ -99,9 +103,14 @@ class CommentForm extends StatelessWidget {
                         SizedBox(height: 20),
                         state.comment != 'select'
                             ? RaisedButton(
-                                onPressed: () {
-                                  print(state.comment);
-                                  print(_commentController.text);
+                                onPressed: () async {
+                                  final itemmachine =
+                                      state.data.userMachine[state.count];
+
+                                  UserAssignMachine usermachine =
+                                      UserAssignMachine.fromJson(itemmachine);
+                                  await api.addinventory(state.comment,
+                                      _commentController.text, usermachine.id);
                                 },
                                 color: AppColors.GOOGLE_BTN_COLOR,
                                 shape: RoundedRectangleBorder(

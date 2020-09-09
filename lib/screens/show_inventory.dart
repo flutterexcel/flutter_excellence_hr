@@ -27,6 +27,7 @@ class ShowInventory extends StatelessWidget {
         if (state is InventoryInitial) {
           _inventoryBloc.add(LoadInventory());
         }
+
         return Scaffold(
             appBar: AppBar(
               title: Row(
@@ -55,97 +56,109 @@ class ShowInventory extends StatelessWidget {
               child: Container(
                 child: Column(
                   children: <Widget>[
-                    Center(
-                      child: ImportantNotesInventory(),
-                    ),
                     if (state is InventorySuccess) ...{
-                      ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        // Let the ListView know how many items it needs to build.
-                        itemCount: state.data.userMachine.length,
-                        // Provide a builder function. This is where the magic happens.
-                        // Convert each item into a widget based on the type of item it is.
-                        itemBuilder: (context, index) {
-                          final item = state.data.userMachine[index];
-                          UserAssignMachine usermachine =
-                              UserAssignMachine.fromJson(item);
+                      state.enableoverview
+                          ? Overview()
+                          : Column(
+                              children: <Widget>[
+                                Center(
+                                  child: ImportantNotesInventory(),
+                                ),
+                                ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  // Let the ListView know how many items it needs to build.
+                                  itemCount: state.data.userMachine.length,
+                                  // Provide a builder function. This is where the magic happens.
+                                  // Convert each item into a widget based on the type of item it is.
+                                  itemBuilder: (context, index) {
+                                    final item = state.data.userMachine[index];
+                                    UserAssignMachine usermachine =
+                                        UserAssignMachine.fromJson(item);
 
-                          return InventoryList(usermachine, index, state.data);
-                        },
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: 1,
-                          itemBuilder: (context, index) {
-                            final itemmachine =
-                                state.data.userMachine[state.count];
+                                    return InventoryList(
+                                        usermachine, index, state.data);
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: 1,
+                                    itemBuilder: (context, index) {
+                                      final itemmachine =
+                                          state.data.userMachine[state.count];
 
-                            UserAssignMachine usermachine =
-                                UserAssignMachine.fromJson(itemmachine);
-                            final itemuser = state.data.userProfile;
-                            UserProfileDetail userprofile =
-                                UserProfileDetail.fromJson(itemuser);
+                                      UserAssignMachine usermachine =
+                                          UserAssignMachine.fromJson(
+                                              itemmachine);
+                                      final itemuser = state.data.userProfile;
+                                      UserProfileDetail userprofile =
+                                          UserProfileDetail.fromJson(itemuser);
 
-                            return InventoryDetails(usermachine, userprofile);
-                          }),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      CommentForm(state),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.fromLTRB(16, 16, 8, 16),
-                              child: Text(
-                                'Recent Comments',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    color: AppColors.LIGHTBLACK_COLOR,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        height: 2,
-                        endIndent: 16,
-                        indent: 16,
-                        thickness: 2,
-                        color: AppColors.COMMENT_ICON,
-                      ),
-                      ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          final itemmachine =
-                              state.data.userMachine[state.count];
+                                      return InventoryDetails(
+                                          usermachine, userprofile);
+                                    }),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                CommentForm(state),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        margin:
+                                            EdgeInsets.fromLTRB(16, 16, 8, 16),
+                                        child: Text(
+                                          'Recent Comments',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              color: AppColors.LIGHTBLACK_COLOR,
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Divider(
+                                  height: 2,
+                                  endIndent: 16,
+                                  indent: 16,
+                                  thickness: 2,
+                                  color: AppColors.COMMENT_ICON,
+                                ),
+                                ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: 5,
+                                  itemBuilder: (context, index) {
+                                    final itemmachine =
+                                        state.data.userMachine[state.count];
 
-                          UserAssignMachine usermachine =
-                              UserAssignMachine.fromJson(itemmachine);
-                          final itemuser = state.data.userProfile;
-                          UserProfileDetail userprofile =
-                              UserProfileDetail.fromJson(itemuser);
-                          final item = usermachine.history[index];
-                          History userhistory = History.fromJson(item.toJson());
-                          return RecentComments(userprofile, userhistory);
-                        },
-                      ),
-                    },
+                                    UserAssignMachine usermachine =
+                                        UserAssignMachine.fromJson(itemmachine);
+                                    final itemuser = state.data.userProfile;
+                                    UserProfileDetail userprofile =
+                                        UserProfileDetail.fromJson(itemuser);
+                                    final item = usermachine.history[index];
+                                    History userhistory =
+                                        History.fromJson(item.toJson());
+                                    return RecentComments(
+                                        userprofile, userhistory);
+                                  },
+                                ),
+                              ],
+                            )
+                    }
                   ],
                 ),
               ),

@@ -30,7 +30,10 @@ class InventoryList extends StatelessWidget {
             ? InkWell(
                 onTap: () {
                   _inventoryBloc.add(LoadInventory(
-                      data: data, count: index, enablecomment: false));
+                      data: data,
+                      count: index,
+                      enablecomment: false,
+                      enableoverview: false));
                 },
                 child: Column(
                   children: <Widget>[

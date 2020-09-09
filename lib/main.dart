@@ -36,12 +36,13 @@ class HrApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
        
-    return MaterialApp( 
+    return MaterialApp(  
       debugShowCheckedModeBanner: false,
       title: 'Excellence HR',
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
+      
       // BlocBuilder will listen to changes in LoginState
       // and build an appropriate widget based on the state.
       home: BlocBuilder<LoginBloc, LoginState>(
