@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
 import 'dart:convert';
-
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
 
 class Overview extends StatelessWidget {
@@ -55,371 +54,125 @@ class Overview extends StatelessWidget {
 
     }
 }""";
-  var overview = json.decode(jsonS);
-  var myName = overview['overview']['profile'][0]['description'];
-  print('${myName}');
-
+    var overview = json.decode(jsonS);
+    var myName = overview['overview']['profile'][0]['description'];
+    //print('${myName}');
 
     return Scaffold(
       appBar: AppBar(
-        title: AppBarWidget(pageName: "Overview",),
+        title: AppBarWidget(
+          pageName: "Overview",
+        ),
       ),
       drawer: Navigation(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 32, 32, 16),
-                          child: Text(
-                            overview['overview']['main'][0]['heading'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 30),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0, 32, 0),
-                          child: Text(
-                            overview['overview']['main'][0]['description'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'OpenSans',
-                                fontSize: 15),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 32, 32, 32),
-                          child: Text(
-                            overview['overview']['main'][0]['feature'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 20),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          child: Image(
-                    image: AssetImage(overview['overview']['main'][0]['employeepic']),
-                    width: 70,
-                    height: 70,
-                  ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            overview['overview']['emp'][0]['heading'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 20),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                          child: Text(
-                            overview['overview']['emp'][0]['description'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'OpenSans',
-                                fontSize: 15),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          child: Image(
-                    image: AssetImage(overview['overview']['pay'][0]['imgpay']),
-                    width: 70,
-                    height: 70,
-                  ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            overview['overview']['pay'][0]['heading'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 20),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                          child: Text(
-                            myName = overview['overview']['pay'][0]['description'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'OpenSans',
-                                fontSize: 15),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          child: Image(
-                    image: AssetImage(overview['overview']['inventory'][0]['imginventory']),
-                    width: 70,
-                    height: 70,
-                  ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            overview['overview']['inventory'][0]['heading'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 20),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                          child: Text(
-                            overview['overview']['inventory'][0]['description'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'OpenSans',
-                                fontSize: 15),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          child: Image(
-                    image: AssetImage(overview['overview']['leave'][0]['imgleave']),
-                    width: 70,
-                    height: 70,
-                  ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            overview['overview']['leave'][0]['heading'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 20),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                          child: Text(
-                            overview['overview']['leave'][0]['description'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'OpenSans',
-                                fontSize: 15),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          child: Image(
-                    image: AssetImage(overview['overview']['document'][0]['imgdocument']),
-                    width: 70,
-                    height: 70,
-                  ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            overview['overview']['document'][0]['heading'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 20),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                          child: Text(
-                            overview['overview']['document'][0]['description'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'OpenSans',
-                                fontSize: 15),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          child: Image(
-                    image: AssetImage(overview['overview']['policies'][0]['imgpolicy']),
-                    width: 70,
-                    height: 70,
-                  ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            overview['overview']['policies'][0]['heading'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 20),
-                          ))),
-                ],
-              ),
-            Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                          child: Text(
-                            overview['overview']['policies'][0]['description'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'OpenSans',
-                                fontSize: 15),
-                          ))),
-                ],
-              ),
-            Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          child: Image(
-                    image: AssetImage(overview['overview']['profile'][0]['imgprofile']),
-                    width: 70,
-                    height: 70,
-                  ))),
-                ],
-              ),
-             Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            overview['overview']['profile'][0]['heading'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',
-                                fontSize: 20),
-                          ))),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
-                          child: Text(
-                            overview['overview']['profile'][0]['description'],textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'OpenSans',
-                                fontSize: 15),
-                          ))),
-                ],
-              ),
-                                                                       
+              SizedBox(height:16),
+              WidgetHeading(heading:overview['overview']['main'][0]['heading']),
+              SizedBox(height:16),  
+              WidgetDescription(description: overview['overview']['main'][0]['description']),
+              SizedBox(height:16),
+              WidgetHeading(heading: overview['overview']['main'][0]['feature']),
+              SizedBox(height:16),
+              WidgetImage(overview['overview']['main'][0]['employeepic']),
+              WidgetHeading(heading:overview['overview']['emp'][0]['heading']),
+              WidgetDescription(description:overview['overview']['emp'][0]['description']),
+              WidgetImage(overview['overview']['pay'][0]['imgpay']),
+              WidgetHeading(heading: overview['overview']['pay'][0]['heading']),
+              WidgetDescription(
+                  description: overview['overview']['pay'][0]['description']),
+              WidgetImage(overview['overview']['inventory'][0]['imginventory']),
+              WidgetHeading(heading:overview['overview']['inventory'][0]['heading']),
+              WidgetDescription(description: overview['overview']['inventory'][0]['description']),
+              WidgetImage(overview['overview']['leave'][0]['imgleave']),
+              WidgetHeading(heading:overview['overview']['leave'][0]['heading']),
+              WidgetDescription(description:overview['overview']['leave'][0]['description']),
+              WidgetImage(overview['overview']['document'][0]['imgdocument']),
+              WidgetHeading(heading:overview['overview']['document'][0]['heading']),
+              WidgetDescription(description:overview['overview']['document'][0]['description']),
+              WidgetImage(overview['overview']['policies'][0]['imgpolicy']),
+              WidgetHeading(heading: overview['overview']['policies'][0]['heading']),
+              WidgetDescription(description: overview['overview']['policies'][0]['description']),
+              WidgetImage(overview['overview']['profile'][0]['imgprofile']),
+              WidgetHeading(heading:overview['overview']['profile'][0]['heading']),
+              WidgetDescription(description:overview['overview']['profile'][0]['description'])
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class WidgetHeading extends StatelessWidget {
+  String heading;
+  WidgetHeading({this.heading});
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+            child: Container(
+                margin: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                child: Text(
+                  heading,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: AppColors.LIGHTBLACK_COLOR,
+                      fontFamily: 'SourceSans',
+                      fontSize: 20),
+                ))),
+      ],
+    );
+  }
+}
+
+class WidgetDescription extends StatelessWidget {
+  String description;
+  WidgetDescription({this.description});
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+            child: Container(
+                margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
+                child: Text(
+                  description,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: AppColors.LIGHTBLACK_COLOR,
+                      fontFamily: 'OpenSans',
+                      fontSize: 15),
+                ))),
+      ],
+    );
+  }
+}
+
+class WidgetImage extends StatelessWidget {
+  String image;
+  WidgetImage(this.image);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+            child: Container(
+                child: Image(
+          image: AssetImage(image),
+          width: 70,
+          height: 70,
+        ))),
+      ],
     );
   }
 }
