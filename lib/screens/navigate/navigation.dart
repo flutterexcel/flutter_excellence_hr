@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/screens/profile/edit_profile.dart';
 import '../navigate/navigate.dart';
 
 class Navigation extends StatelessWidget {
@@ -52,26 +53,30 @@ class MyHomePage extends StatelessWidget {
                   Icons.person,
                   color: AppColors.LIGHTBLACK_COLOR,
                 ),
-                title: Text(
-                  'My Profile',
-                  style: TextStyle(color: AppColors.LIGHTBLACK_COLOR),
-                ),
+                title: Text('My Profile',
+                    style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+                    onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyProfile())
+                  );
+                },
               ),
               ListTile(
                 leading:
-                    Icon(Icons.view_day, color:AppColors.LIGHTBLACK_COLOR),
+                    Icon(Icons.view_day, color: AppColors.LIGHTBLACK_COLOR),
                 title: Text('My Attendance',
                     style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               ),
               ListTile(
-                leading: Icon(Icons.view_week,
-                    color: AppColors.LIGHTBLACK_COLOR),
+                leading:
+                    Icon(Icons.view_week, color: AppColors.LIGHTBLACK_COLOR),
                 title: Text('Weekly Time Sheet',
                     style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               ),
               ListTile(
-                leading:
-                    Icon(Icons.view_carousel, color: AppColors.LIGHTBLACK_COLOR),
+                leading: Icon(Icons.view_carousel,
+                    color: AppColors.LIGHTBLACK_COLOR),
                 title: Text('Apply Leave',
                     style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               ),
@@ -82,14 +87,16 @@ class MyHomePage extends StatelessWidget {
                     style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               ),
               ListTile(
-                leading:
-                    Icon(Icons.view_module_rounded, color: AppColors.LIGHTBLACK_COLOR),
+                leading: Icon(Icons.view_module_rounded,
+                    color: AppColors.LIGHTBLACK_COLOR),
                 title: Text('My Salary',
                     style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               ),
               ListTile(
-                leading:
-                    Icon(Icons.dashboard_rounded, color: AppColors.LIGHTBLACK_COLOR,),
+                leading: Icon(
+                  Icons.dashboard_rounded,
+                  color: AppColors.LIGHTBLACK_COLOR,
+                ),
                 title: Text('My Inventory',
                     style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
                 onTap: () {

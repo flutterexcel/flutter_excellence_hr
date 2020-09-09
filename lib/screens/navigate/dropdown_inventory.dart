@@ -8,10 +8,11 @@ class DropDown extends StatefulWidget {
 
 class _DropDownState extends State<DropDown> {
   List<ListItem> _dropdownItems = [
-    ListItem(1, "Select Your Audit Report "),
-    ListItem(2, "Second Item"),
-    ListItem(3, "Third Item"),
-    ListItem(4, "Fourth Item")
+    ListItem(1, "Single "),
+    ListItem(2, "Married"),
+    ListItem(3, "Separated"),
+    ListItem(4, "Divorsed"),
+    ListItem(5, "--Select Your Blood Group--")
   ];
 
   List<DropdownMenuItem<ListItem>> _dropdownMenuItems;
@@ -28,7 +29,7 @@ class _DropDownState extends State<DropDown> {
     for (ListItem listItem in listItems) {
       items.add(
         DropdownMenuItem(
-          child: Text(listItem.name),
+          child: Text(listItem.name,style: TextStyle(fontSize:15),),
           value: listItem,
         ),
       );
@@ -45,13 +46,14 @@ class _DropDownState extends State<DropDown> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-              width: MediaQuery.of(context).size.width*.9,
+              height: 35,
+              margin: EdgeInsets.fromLTRB(8, 0, 8, 0),
+              width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.only(left: 10.0, right: 10.0),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   //color: Colors.cyan,
-                  border: Border.all(width: 1, color: AppColors.DARK_GREY)),
+                  border: Border.all(width: 1, color: AppColors.DARK_GREY),color: AppColors.EDIT_TEXT_COLOR),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<ListItem>(
                   value: _selectedItem,
