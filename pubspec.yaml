@@ -34,7 +34,16 @@ flutter:
   assets:
     - assets/config/
     - assets/images/
-
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: fonts/OpenSansCondensed-Light.ttf
+      
+    - family: SourceSans
+      fonts:
+        - asset: fonts/SourceSansPro-Regular.ttf
+   
+        
   uses-material-design: true
   
     
