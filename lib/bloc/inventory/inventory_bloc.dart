@@ -30,6 +30,7 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
   Stream<InventoryState> _mapUserInventoryToState(LoadInventory event) async* {
     int count = 0;
     bool enablecomment = false;
+    bool enableoverview = false;
     String comment;
 
     if (event.count != null) {
@@ -43,7 +44,8 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
             data: event.data,
             count: count,
             enablecomment: event.enablecomment,
-            comment: event.comment);
+            comment: event.comment,
+            enableoverview: event.enableoverview);
         return;
       }
       final inventory = await invapi.inventory();
@@ -51,7 +53,8 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
           data: inventory,
           count: count,
           enablecomment: enablecomment,
-          comment: comment);
+          comment: comment,
+          enableoverview: enableoverview);
     } on Exception catch (e) {} catch (err) {}
   }
 }

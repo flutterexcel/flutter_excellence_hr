@@ -70,6 +70,7 @@ class ShowInventory extends StatelessWidget {
                           final item = state.data.userMachine[index];
                           UserAssignMachine usermachine =
                               UserAssignMachine.fromJson(item);
+
                           return InventoryList(usermachine, index, state.data);
                         },
                       ),

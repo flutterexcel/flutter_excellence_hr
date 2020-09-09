@@ -99,7 +99,10 @@ class CommentForm extends StatelessWidget {
                         SizedBox(height: 20),
                         state.comment != 'select'
                             ? RaisedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  print(state.comment);
+                                  print(_commentController.text);
+                                },
                                 color: AppColors.GOOGLE_BTN_COLOR,
                                 shape: RoundedRectangleBorder(
                                     borderRadius:

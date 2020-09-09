@@ -6,6 +6,7 @@ class InventoryDetails extends StatelessWidget {
   final usermachine;
   final userprofile;
   InventoryDetails(this.usermachine, this.userprofile);
+
   @override
   Widget build(BuildContext context) {
     return Container(

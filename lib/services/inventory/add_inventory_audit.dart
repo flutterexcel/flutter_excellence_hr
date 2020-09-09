@@ -8,7 +8,7 @@ import '../storage_service.dart';
 class AddInventoryAudit {
   static final apiKey = null;
   Post _post = Post();
-  Future<AddInventoryAuditModel> login(String auditCommentType,
+  Future<AddInventoryAuditModel> addinventory(String auditCommentType,
       String auditMessage, int doRefreshToken, int inventoryId) async {
     final prodUrl = await AppConfig.forEnvironment('prod');
     final loginUrl = prodUrl.baseUrl + "/attendance/API_HR/api.php";
