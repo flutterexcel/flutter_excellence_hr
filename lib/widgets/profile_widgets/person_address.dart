@@ -21,7 +21,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Name",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -32,10 +32,11 @@ class PersonAddress extends StatelessWidget {
           height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
+            enabled: false,
             controller: empName,
-            decoration: InputDecoration(
+                decoration: InputDecoration(
               border: OutlineInputBorder(),
-            ),
+            ),           
           ),
         ),
         Row(
@@ -45,7 +46,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Marital Status",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -70,6 +71,7 @@ class PersonAddress extends StatelessWidget {
           height: 70,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
+            enabled: false,
             controller: currAddress,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
@@ -86,7 +88,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Permanent Address",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -97,6 +99,7 @@ class PersonAddress extends StatelessWidget {
           height: 70,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
+            enabled: false,
             controller: currAddress,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
@@ -113,7 +116,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Personal Contact Number",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -124,6 +127,7 @@ class PersonAddress extends StatelessWidget {
           height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
+            enabled: false,
             controller: personalContact,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
@@ -137,7 +141,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Emergency Contact",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -148,6 +152,7 @@ class PersonAddress extends StatelessWidget {
           height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
+            enabled: false,
             controller: emergencyContact,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
@@ -161,7 +166,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Personal Email Address ",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -172,6 +177,7 @@ class PersonAddress extends StatelessWidget {
           height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
+            enabled: false,
             controller: personalEmail,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
@@ -185,7 +191,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Blood Group ",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -199,7 +205,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Any Medical Condition ",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -210,6 +216,7 @@ class PersonAddress extends StatelessWidget {
           height: 70,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
+            enabled: false,
             controller: medicalCondition,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
