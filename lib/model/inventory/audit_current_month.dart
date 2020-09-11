@@ -8,7 +8,7 @@ class AuditCurrentMonthStatus {
   AuditCurrentMonthStatus.fromJson(Map<String, dynamic> json) {
     year = json['year'];
     month = json['month'];
-    status = json['status'];
+    status = false;
   }
 
   Map<String, dynamic> toJson() {

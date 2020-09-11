@@ -50,7 +50,7 @@ class UserAssignMachine {
     this.assignDate,
     this.name,
     this.workEmail,
-    //this.auditCurrentMonthStatus,
+    this.auditCurrentMonthStatus,
     this.history,
   });
 
@@ -77,9 +77,9 @@ class UserAssignMachine {
     assignDate = json['assign_date'];
     name = json['name'];
     workEmail = json['work_email'];
-    // auditCurrentMonthStatus = json['audit_current_month_status'] != null
-    //     ? AuditCurrentMonthStatus.fromJson(json['audit_current_month_status'])
-    //     : null;
+    auditCurrentMonthStatus = json['audit_current_month_status'] != null
+        ? AuditCurrentMonthStatus.fromJson(json['audit_current_month_status'])
+        : null;
     if (json['history'] != null) {
       history = List<History>();
       json['history'].forEach((v) {
@@ -112,10 +112,10 @@ class UserAssignMachine {
     data['assign_date'] = this.assignDate;
     data['name'] = this.name;
     data['work_email'] = this.workEmail;
-    // if (this.auditCurrentMonthStatus != null) {
-    //   data['audit_current_month_status'] =
-    //       this.auditCurrentMonthStatus.toJson();
-    // }
+    if (this.auditCurrentMonthStatus != null) {
+      data['audit_current_month_status'] =
+          this.auditCurrentMonthStatus.toJson();
+    }
     if (this.history != null) {
       data['history'] = this.history.map((v) => v.toJson()).toList();
     }

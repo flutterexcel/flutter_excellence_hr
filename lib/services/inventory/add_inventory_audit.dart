@@ -6,23 +6,23 @@ import '../../app_config.dart';
 import '../storage_service.dart';
 
 class AddInventoryAudit {
-  static final apiKey = null;
   Post _post = Post();
-  Future<AddInventoryAuditModel> login(String auditCommentType,
-      String auditMessage, int doRefreshToken, int inventoryId) async {
-    final prodUrl = await AppConfig.forEnvironment('prod');
-    final loginUrl = prodUrl.baseUrl + "/attendance/API_HR/api.php";
-
+  Future<AddInventoryAuditModel> addinventory(
+      String auditCommentType, String auditMessage, String inventoryId) async {
+    final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
+    final auditUrl = prodUrl.baseUrl;
+    StorageUtil.getInstance();
+    final apiKey = StorageUtil.getUserToken();
     Map data = {
       "token": apiKey,
       "action": "add_inventory_audit",
       "audit_comment_type": auditCommentType,
       "audit_message": auditMessage,
-      "do_refresh_token": doRefreshToken,
+      "do_refresh_token": 1,
       "inventory_id": inventoryId
     };
     return _post
-        .post(loginUrl, body: json.encode(data))
+        .post(auditUrl, body: json.encode(data))
         .then((dynamic res) async {
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
       if (res["error"] == 0) {
