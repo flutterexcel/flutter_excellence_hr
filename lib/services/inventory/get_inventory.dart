@@ -8,9 +8,9 @@ import '../storage_service.dart';
 class Inventory {
   Post _post = Post();
   Future<InventoryDetails> inventory() async {
-    final prodUrl = await AppConfig.forEnvironment('prod');
+    final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     var token = StorageUtil.getUserToken();
-    final apiUrl = prodUrl.baseUrl + "/attendance/API_HR/api.php";
+    final apiUrl = prodUrl.baseUrl;
     Map data = {"action": "get_my_inventories", "token": token};
     return _post
         .post(apiUrl, body: json.encode(data))
