@@ -9,8 +9,8 @@ class Login {
   static final apiKey = null;
   Post _post = Post();
   Future<User> login(String username, String password) async {
-    final prodUrl = await AppConfig.forEnvironment('prod');
-    final loginUrl = prodUrl.baseUrl + "/attendance/API_HR/api.php";
+    final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
+    final loginUrl = prodUrl.baseUrl;
 
     Map data = {
       "token": apiKey,

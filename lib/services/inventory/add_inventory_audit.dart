@@ -9,8 +9,8 @@ class AddInventoryAudit {
   Post _post = Post();
   Future<AddInventoryAuditModel> addinventory(
       String auditCommentType, String auditMessage, String inventoryId) async {
-    final prodUrl = await AppConfig.forEnvironment('prod');
-    final auditUrl = prodUrl.baseUrl + "/attendance/API_HR/api.php";
+    final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
+    final auditUrl = prodUrl.baseUrl;
     StorageUtil.getInstance();
     final apiKey = StorageUtil.getUserToken();
     Map data = {
