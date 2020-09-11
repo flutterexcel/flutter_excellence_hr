@@ -5,7 +5,7 @@ class AppConfig {
   String baseUrl;
 
   AppConfig({this.baseUrl});
-  static Future<AppConfig> forEnvironment(String env) async {
+  static Future<AppConfig> forEnvironment(String env, String url) async {
     // set default to dev if nothing was passed
     env = env ?? 'dev';
 
@@ -18,6 +18,6 @@ class AppConfig {
     final json = jsonDecode(contents);
 
     // convert our JSON into an instance of our AppConfig class
-    return AppConfig(baseUrl: json['baseUrl']);
+    return AppConfig(baseUrl: json[url]);
   }
 }

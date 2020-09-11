@@ -7,8 +7,8 @@ import '../app_config.dart';
 class Forgot {
   Post _post = Post();
   Future<User> forgot(String username, String password) async {
-    final prodUrl = await AppConfig.forEnvironment('prod');
-    final loginUrl = prodUrl.baseUrl + "/attendance/API_HR/api.php";
+    final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
+    final loginUrl = prodUrl.baseUrl;
     Map data = {"action": "forgot_password", "username": username};
     return _post
         .post(loginUrl, body: json.encode(data))
