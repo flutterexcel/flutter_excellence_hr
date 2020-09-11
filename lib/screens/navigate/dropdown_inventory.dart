@@ -11,8 +11,8 @@ class _DropDownState extends State<DropDown> {
     ListItem(1, "Single "),
     ListItem(2, "Married"),
     ListItem(3, "Separated"),
-    ListItem(4, "Divorsed"),
-    ListItem(5, "--Select Your Blood Group--")
+    ListItem(5, "--Select Your Blood Group--"),
+    ListItem(6, "--Select Doc Type--")
   ];
 
   List<DropdownMenuItem<ListItem>> _dropdownMenuItems;

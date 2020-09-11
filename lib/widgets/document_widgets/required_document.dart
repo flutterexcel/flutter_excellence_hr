@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class UploadDocuments extends StatelessWidget {
+class RequiredDocument extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(children: <Widget>[
+    return Column(
+      children: <Widget>[
         Row(
           children: [
             Container(
                 margin: EdgeInsets.fromLTRB(8, 32, 0, 16),
                 child: Text(
-                  "Upload",
+                  "Required",
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'OpenSans',
@@ -19,7 +19,7 @@ class UploadDocuments extends StatelessWidget {
             Container(
                 margin: EdgeInsets.fromLTRB(8, 32, 32, 16),
                 child: Text(
-                  "New Documents",
+                  "Documents",
                   style: TextStyle(
                       fontSize: 20,
                       fontFamily: 'SourceSans',
@@ -27,7 +27,7 @@ class UploadDocuments extends StatelessWidget {
                 )),
           ],
         ),
-      ]),
+      ],
     );
   }
 }
