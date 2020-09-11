@@ -12,7 +12,13 @@ class LoadInventory extends InventoryEvent {
   InventoryDetails data;
   bool enablecomment = false;
   String comment;
-  LoadInventory({this.data, this.count, this.enablecomment, this.comment});
+  bool enableoverview = false;
+  LoadInventory(
+      {this.data,
+      this.count,
+      this.enablecomment,
+      this.comment,
+      this.enableoverview});
 }
 
 class InventoryHistory extends InventoryEvent {

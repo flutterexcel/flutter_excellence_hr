@@ -1,3 +1,4 @@
 {
-    "baseUrl": "https://apistaginghr.excellencetechnologies.in"
+    "baseUrl": "https://apistaginghr.excellencetechnologies.in",
+    "apiUrl" : "https://apistaginghr.excellencetechnologies.in/attendance/API_HR/api.php"
 }
