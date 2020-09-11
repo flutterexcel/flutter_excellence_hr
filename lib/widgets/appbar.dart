@@ -12,7 +12,7 @@ class AppBarWidget extends StatelessWidget {
             Text(pageName,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 20,fontFamily: 'OpenSans',
                     fontWeight: FontWeight.bold)),
             CircleAvatar(
                 radius: 20,
