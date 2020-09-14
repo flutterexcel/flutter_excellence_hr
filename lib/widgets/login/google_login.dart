@@ -49,13 +49,16 @@ class _GoogleLoginState extends State<GoogleLogin> {
                             fit: BoxFit.contain,
                           ),
                         ),
-                        Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                          child: RaisedButton(
-                            onPressed: _handleSignIn,
-                            child:
-                                Text('Login with your company google account'),
+                        Expanded(
+                          child: Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                            child: FlatButton(
+                              onPressed: _handleSignIn,
+                              color: AppColors.GOOGLE_BTN_COLOR,
+                              child: Text(
+                                  'Login with your company google account',style: TextStyle(color:Colors.white,fontFamily: 'SourceSans'),),
+                            ),
                           ),
                         ),
                       ],
