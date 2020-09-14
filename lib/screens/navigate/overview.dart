@@ -55,8 +55,6 @@ class Overview extends StatelessWidget {
     }
 }""";
     var overview = json.decode(jsonS);
-    var myName = overview['overview']['profile'][0]['description'];
-    //print('${myName}');
 
     return Column(
       children: [

@@ -2,45 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'dart:io';
 import 'package:universal_io/io.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
+import '../../services/profile/update_pass.dart';
 
 class EnterPassword extends StatelessWidget {
   final password = TextEditingController();
+  final RoundedLoadingButtonController _btnController =
+      new RoundedLoadingButtonController();
+  UpdatePassword api = UpdatePassword();
+  void _doUpdate() async {
+    await api
+        .updatePassword(password.text)
+        .then((value) => _btnController.success());
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget _getFAB() {
       if (Platform.isWindows) {
-        return RaisedButton(
-          onPressed: () {},
+        return RoundedLoadingButton(
           color: AppColors.BTN_BLUE,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          textColor: Colors.white,
-          child: Text(
-            "Update password",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'OpenSans',
-              fontSize: 18,
-            ),
-          ),
+          width: 150,
+          borderRadius: 10,
+          child: Text('Update Password', style: TextStyle(color: Colors.white)),
+          controller: _btnController,
+          onPressed: _doUpdate,
         );
       } else {
-        RaisedButton(
-          onPressed: () {},
+        return RoundedLoadingButton(
           color: AppColors.BTN_BLUE,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          textColor: Colors.white,
-          child: Text(
-            "Update password",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'OpenSans',
-              fontSize: 18,
-            ),
-          ),
+          width: 150,
+          borderRadius: 10,
+          child: Text('Update Password', style: TextStyle(color: Colors.white)),
+          controller: _btnController,
+          onPressed: _doUpdate,
         );
       }
     }

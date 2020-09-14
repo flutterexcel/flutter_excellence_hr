@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/profile/ProfileDetails.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 
 class IdCard extends StatelessWidget {
-  String name, designation, empId, joinDate, workEmail, gender, dob, contact;
-  IdCard(
-      {this.name,
-      this.designation,
-      this.empId,
-      this.joinDate,
-      this.workEmail,
-      this.gender,
-      this.dob,
-      this.contact});
+  ProfileDetails profileDetails;
+  IdCard({this.profileDetails});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -24,7 +17,8 @@ class IdCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                     radius: 30,
-                    backgroundImage: AssetImage('assets/images/person.jpg')),
+                    backgroundImage: NetworkImage(
+                        profileDetails.data.userProfileDetail.profileImage)),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +27,7 @@ class IdCard extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         child: Text(
-                          name,
+                          profileDetails.data.userProfileDetail.username,
                           style: TextStyle(
                             fontSize: 18,
                             fontFamily: 'SourceSans',
@@ -46,7 +40,9 @@ class IdCard extends StatelessWidget {
                           Expanded(
                             child: Container(
                                 padding: EdgeInsets.fromLTRB(16, 0, 16, 4),
-                                child: Text(designation,
+                                child: Text(
+                                    profileDetails
+                                        .data.userProfileDetail.jobtitle,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontFamily: 'SourceSans',
@@ -68,7 +64,8 @@ class IdCard extends StatelessWidget {
                           Expanded(
                             child: Container(
                                 padding: EdgeInsets.fromLTRB(0, 0, 16, 4),
-                                child: (Text(empId,
+                                child: (Text(
+                                    profileDetails.data.userProfileDetail.id,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         fontFamily: 'SourceSans',
@@ -97,7 +94,8 @@ class IdCard extends StatelessWidget {
                 Expanded(
                   child: Container(
                       padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                      child: (Text(joinDate,
+                      child: (Text(
+                          profileDetails.data.userProfileDetail.dateofjoining,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -118,7 +116,8 @@ class IdCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                      child: (Text(workEmail,
+                      child: (Text(
+                          profileDetails.data.userProfileDetail.workEmail,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -139,7 +138,7 @@ class IdCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                      child: (Text(gender,
+                      child: (Text(profileDetails.data.userProfileDetail.gender,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -161,7 +160,7 @@ class IdCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                      child: (Text(dob,
+                      child: (Text(profileDetails.data.userProfileDetail.dob,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -182,7 +181,8 @@ class IdCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                      child: (Text(contact,
+                      child: (Text(
+                          profileDetails.data.userProfileDetail.emergencyPh1,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontFamily: 'SourceSans',

@@ -1,37 +1,80 @@
+import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
-import 'package:flutter_excellence_hr/widgets/appbar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/profile/profile_bloc.dart';
+import '../../model/profile/ProfileDetails.dart';
+import '../../screens/navigate/navigate.dart';
 import 'package:flutter_excellence_hr/widgets/profile_widgets/bank_details.dart';
 import 'package:flutter_excellence_hr/widgets/profile_widgets/edit_bank_details.dart';
 import 'package:flutter_excellence_hr/widgets/profile_widgets/profile_widgets.dart';
 
-class MyProfile extends StatelessWidget {
+class ShowProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(  
-      appBar: AppBar(
-        title: AppBarWidget(
-          pageName: "Edit profile",
-        ),
-      ),
-      drawer: Navigation(),
-      body: SafeArea(      
-          child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            EditNotice(),
-            IdCard(name: " Shubham Mishra", designation:"Jr.Mobile App Developer", empId:"523",joinDate:"2020-08-10",workEmail: "shubham@excellence.in",gender: "Male",dob: "1997-09-06",contact: "9999999988",),
-            PersonDetails(),
-            PersonAddress(),
-            BankDetails(),
-            EditBankDetails(),
-            UpdatePassword(),
-            EnterPassword(),
-            ProfilePicture(),
-            UploadPic(),              
-          ],
-        ),
-      )),
+    final _proflieBloc = BlocProvider.of<ProfileBloc>(context);
+
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        if (state is ProfileLoad) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is ProfileInitial) {
+          _proflieBloc.add(ProfileLoading());
+        }
+
+        return Scaffold(
+            appBar: AppBar(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('My Profile',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                  CircleAvatar(
+                      radius: 20,
+                      backgroundImage: AssetImage('assets/images/person.jpg'))
+                ],
+              ),
+            ),
+            drawer: Navigation(),
+            body: SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    if (state is ProfileSuccess) ...{
+                      ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 1,
+                          itemBuilder: (context, index) {
+                            ProfileDetails profileDetails =
+                                ProfileDetails.fromJson(state.data.toJson());
+                            return Column(
+                              children: <Widget>[
+                                EditNotice(),
+                                IdCard(profileDetails: profileDetails),
+                                PersonDetails(),
+                                PersonAddress(profileDetails: profileDetails),
+                                BankDetails(),
+                                EditBankDetails(profileDetails: profileDetails),
+                                UpdatePassword(),
+                                EnterPassword(),
+                                ProfilePicture(),
+                                UploadPic(),
+                              ],
+                            );
+                          }),
+                    }
+                  ],
+                ),
+              ),
+            ));
+      },
     );
   }
 }

@@ -1,48 +1,61 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/profile/profile_bloc.dart';
+import 'package:flutter_excellence_hr/model/profile/ProfileDetails.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:universal_io/io.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class EditBankDetails extends StatelessWidget {
+  ProfileDetails profileDetails;
   final acNum = TextEditingController();
   final bnkName = TextEditingController();
   final bnkAddress = TextEditingController();
-  final Ifsc = TextEditingController();
+  final ifsc = TextEditingController();
+
+  final RoundedLoadingButtonController _btnControllerz =
+      new RoundedLoadingButtonController();
+  EditBankDetails({this.profileDetails});
   @override
   Widget build(BuildContext context) {
+    final _proflieBloc = BlocProvider.of<ProfileBloc>(context);
+    ProfileState state = _proflieBloc.state;
+    _dosave() async {
+      _proflieBloc.add(SaveProfile(
+          acNum: acNum.text,
+          bnkAddress: bnkAddress.text,
+          bnkName: bnkName.text,
+          ifsc: ifsc.text,
+          data: this.profileDetails));
+      _btnControllerz.success();
+    }
+
     Widget _getFAB() {
       if (Platform.isWindows) {
-        return RaisedButton(
-          onPressed: () {},
+        return RoundedLoadingButton(
           color: AppColors.BTN_BLUE,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          textColor: Colors.white,
-          child: Text(
-            "Update Bank Details",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'OpenSans',
-              fontSize: 18,
-            ),
-          ),
+          width: 150,
+          borderRadius: 10,
+          child: Text('Update Bank Details',
+              style: TextStyle(color: Colors.white)),
+          controller: _btnControllerz,
+          onPressed: () async {
+            await _dosave();
+          },
         );
       } else {
-        RaisedButton(
-          onPressed: () {},
+        return RoundedLoadingButton(
           color: AppColors.BTN_BLUE,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          textColor: Colors.white,
-          child: Text(
-            "Update Bank Details",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'OpenSans',
-              fontSize: 18,
-            ),
-          ),
+          width: 150,
+          borderRadius: 10,
+          child: Text('Update Bank Details',
+              style: TextStyle(color: Colors.white)),
+          controller: _btnControllerz,
+          onPressed: () async {
+            await _dosave();
+          },
         );
       }
     }
@@ -66,7 +79,8 @@ class EditBankDetails extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
           height: 35,
           child: TextFormField(
-            controller: acNum,
+            controller: acNum
+              ..text = profileDetails.data.userBankDetail.bankAccountNo,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
@@ -89,7 +103,8 @@ class EditBankDetails extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
           height: 35,
           child: TextFormField(
-            controller: bnkName,
+            controller: bnkName
+              ..text = profileDetails.data.userBankDetail.bankName,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
@@ -112,7 +127,8 @@ class EditBankDetails extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
           height: 35,
           child: TextFormField(
-            controller: bnkAddress,
+            controller: bnkAddress
+              ..text = profileDetails.data.userBankDetail.bankAddress,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
@@ -135,7 +151,7 @@ class EditBankDetails extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
           height: 35,
           child: TextFormField(
-            controller: Ifsc,
+            controller: ifsc..text = profileDetails.data.userBankDetail.ifsc,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
