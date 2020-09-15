@@ -8,6 +8,7 @@ import '../bloc/inventory/inventory.dart';
 import '../model/inventory/user_assign_machine.dart';
 import '../widgets/navigate/imp_notes_inventory.dart';
 import '../screens/navigate/navigate.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ShowInventory extends StatelessWidget {
   //final Inventory api = Inventory();
@@ -75,9 +76,17 @@ class ShowInventory extends StatelessWidget {
                                     final item = state.data.userMachine[index];
                                     UserAssignMachine usermachine =
                                         UserAssignMachine.fromJson(item);
-
-                                    return InventoryList(
-                                        usermachine, index, state.data);
+                                    return AnimationConfiguration.staggeredList(
+                                        position: index,
+                                        duration:
+                                            const Duration(milliseconds: 1000),
+                                        child: SlideAnimation(
+                                          verticalOffset: 50.0,
+                                          child: FadeInAnimation(
+                                            child: InventoryList(
+                                                usermachine, index, state.data),
+                                          ),
+                                        ));
                                   },
                                 ),
                                 SizedBox(

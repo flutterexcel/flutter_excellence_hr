@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/profile/ProfileDetails.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:flutter_excellence_hr/screens/navigate/dropdown_inventory.dart';
-import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
 
+// ignore: must_be_immutable
 class PersonAddress extends StatelessWidget {
+  ProfileDetails profileDetails;
+
   final empName = TextEditingController();
   final currAddress = TextEditingController();
   final permanentAddress = TextEditingController();
@@ -11,6 +13,9 @@ class PersonAddress extends StatelessWidget {
   final emergencyContact = TextEditingController();
   final personalEmail = TextEditingController();
   final medicalCondition = TextEditingController();
+  final martialStatus = TextEditingController();
+  final bloodgroup = TextEditingController();
+  PersonAddress({this.profileDetails});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,10 +39,11 @@ class PersonAddress extends StatelessWidget {
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
-            controller: empName,
-                decoration: InputDecoration(
+            controller: empName
+              ..text = profileDetails.data.userProfileDetail.name,
+            decoration: InputDecoration(
               border: OutlineInputBorder(),
-            ),           
+            ),
           ),
         ),
         Row(
@@ -53,7 +59,19 @@ class PersonAddress extends StatelessWidget {
                 )),
           ],
         ),
-        DropDown(),
+        Container(
+          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+          height: 35,
+          color: AppColors.EDIT_TEXT_COLOR,
+          child: TextFormField(
+            enabled: false,
+            controller: martialStatus
+              ..text = profileDetails.data.userProfileDetail.maritalStatus,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ),
         Row(
           children: [
             Container(
@@ -67,21 +85,24 @@ class PersonAddress extends StatelessWidget {
                 )),
           ],
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 70,
-          color: AppColors.EDIT_TEXT_COLOR,
-          child: TextFormField(
-            enabled: false,
-            controller: currAddress,
-            textInputAction: TextInputAction.newline,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ),
+        // Container(
+        //   margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+        //   height: 70,
+        //   color: AppColors.EDIT_TEXT_COLOR,
+        //   child: TextFormField(
+        //     enabled: false,
+        //     controller: currAddress
+        //       ..text = profileDetails.data.userProfileDetail.address1 +
+        //           ' ' +
+        //           profileDetails.data.userProfileDetail.address2,
+        //     textInputAction: TextInputAction.newline,
+        //     keyboardType: TextInputType.multiline,
+        //     maxLines: null,
+        //     decoration: InputDecoration(
+        //       border: OutlineInputBorder(),
+        //     ),
+        //   ),
+        // ),
         Row(
           children: [
             Container(
@@ -101,7 +122,8 @@ class PersonAddress extends StatelessWidget {
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
-            controller: currAddress,
+            controller: currAddress
+              ..text = profileDetails.data.userProfileDetail.currentAddress,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
             maxLines: null,
@@ -129,7 +151,8 @@ class PersonAddress extends StatelessWidget {
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
-            controller: personalContact,
+            controller: personalContact
+              ..text = profileDetails.data.userProfileDetail.emergencyPh1,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
@@ -154,7 +177,8 @@ class PersonAddress extends StatelessWidget {
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
-            controller: emergencyContact,
+            controller: emergencyContact
+              ..text = profileDetails.data.userProfileDetail.emergencyPh1,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
@@ -179,7 +203,8 @@ class PersonAddress extends StatelessWidget {
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
-            controller: personalEmail,
+            controller: personalEmail
+              ..text = profileDetails.data.userProfileDetail.otherEmail,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
@@ -198,7 +223,19 @@ class PersonAddress extends StatelessWidget {
                 )),
           ],
         ),
-        DropDown(),
+        Container(
+          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+          height: 35,
+          color: AppColors.EDIT_TEXT_COLOR,
+          child: TextFormField(
+            enabled: false,
+            controller: bloodgroup
+              ..text = profileDetails.data.userProfileDetail.bloodGroup,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ),
         Row(
           children: [
             Container(
@@ -218,7 +255,8 @@ class PersonAddress extends StatelessWidget {
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
-            controller: medicalCondition,
+            controller: medicalCondition
+              ..text = profileDetails.data.userProfileDetail.medicalCondition,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
             maxLines: null,
