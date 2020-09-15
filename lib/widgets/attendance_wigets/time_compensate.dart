@@ -4,6 +4,43 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 class TimeCompensate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    customDialog() {
+      return showDialog(
+          context: context,
+          builder: (BuildContext c) {
+            return Dialog(
+              child: Container(
+                height: 250,
+                width: MediaQuery.of(context).size.width,
+                child: Column(children: <Widget>[
+                  Row(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.fromLTRB(16, 24, 16, 0),
+                          child: Text(
+                            "Time Comapnsation Summary",
+                            style: TextStyle(
+                                color: AppColors.THEME_COLOR,
+                                fontSize: 20,
+                                fontFamily: 'OpenSans'),
+                          )),
+                    ],
+                  ),
+                  Container(
+                      margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                      child: Text(
+                        'Nothing To Compensate',
+                        style: TextStyle(
+                            color: AppColors.THEME_COLOR,
+                            fontSize: 16,
+                            fontFamily: 'OpenSans'),
+                      ))
+                ]),
+              ),
+            );
+          });
+    }
+
     return Card(
       child: Column(children: <Widget>[
         Row(
@@ -41,9 +78,14 @@ class TimeCompensate extends StatelessWidget {
           children: [
             Container(
                 margin: EdgeInsets.only(left: 8),
-                child: Icon(
-                  Icons.info_outline_rounded,
-                  color: AppColors.LIGHT_YELLOW,
+                child: InkWell(
+                  onTap: () {
+                    customDialog();
+                  },
+                  child: Icon(
+                    Icons.info_outline_rounded,
+                    color: AppColors.LIGHT_YELLOW,
+                  ),
                 )),
           ],
         ),

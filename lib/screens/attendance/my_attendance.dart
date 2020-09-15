@@ -18,7 +18,13 @@ class MyAttendance extends StatelessWidget {
           NameDesignation(name: "Shakti",designation: "Jr.Mobile App Developer",),
           CompletePending(),  
           TimeCompensate(),
-                      
+          DayRefrence(), 
+          WorkingDays(),  
+          NonWorkingDays(),   
+          LeaveDays(), 
+         HalfDay(),
+         Alert(),                  
+         Calendar(),   
         ]),
       )),
     );

@@ -27,6 +27,7 @@ dependencies:
   string_validator: ^0.1.4
   dotted_border: 1.0.6
   image_form_field: 0.0.3
+  syncfusion_flutter_calendar: ^18.2.57
 
 dev_dependencies:
   flutter_test:
