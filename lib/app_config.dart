@@ -18,6 +18,6 @@ class AppConfig {
     final json = jsonDecode(contents);
 
     // convert our JSON into an instance of our AppConfig class
-    return AppConfig(baseUrl: json[url]);
+    return AppConfig(baseUrl: json['baseUrl'] + json[url]);
   }
 }
