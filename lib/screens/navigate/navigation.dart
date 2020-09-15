@@ -38,6 +38,12 @@ class Navigation extends StatelessWidget {
                 'My Profile',
                 style: TextStyle(color: AppColors.LIGHTBLACK_COLOR),
               ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShowProfile()),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.view_day, color: AppColors.LIGHTBLACK_COLOR),

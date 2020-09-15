@@ -26,7 +26,7 @@ class AddInventoryAudit {
         .then((dynamic res) async {
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
       if (res["error"] == 0) {
-        StorageUtil.setUserToken(res["data"]["token"]);
+        //StorageUtil.setUserToken(res["data"]["token"]);
       }
       return AddInventoryAuditModel.fromJson(res);
     });
