@@ -19,5 +19,10 @@ class AppColors{
   static const Color DARK_VOILET = Color(0xFF9964E3); 
   static const Color FADE_BLACK = Colors.black38;
   static const Color MIDIUM_BLACK = Color(0xFF656572); //597FF8
-  static const Color BTN_BLUE = Color(0xFF597FF8);
+  static const Color BTN_BLUE = Color(0xFF597FF8);//EF5B5C
+  static const Color LIGHT_RED = Color(0xFFEF5B5C);//FBC753
+  static const Color LIGHT_YELLOW = Color(0xFFFBC753);//F8CDD2
+  static const Color HALF_DAY = Color(0xFFF8CDD2);//4051B5
+  static const Color NAVY_BLUE = Color(0xFF4051B5);
+
 }

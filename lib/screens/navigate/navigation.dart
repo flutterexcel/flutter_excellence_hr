@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/screens/attendance/my_attendance.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
 
 class Navigation extends StatelessWidget {
@@ -49,6 +50,12 @@ class Navigation extends StatelessWidget {
               leading: Icon(Icons.view_day, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('My Attendance',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+                onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyAttendance()),
+                );
+              },                  
             ),
             ListTile(
               leading: Icon(Icons.view_week, color: AppColors.LIGHTBLACK_COLOR),
