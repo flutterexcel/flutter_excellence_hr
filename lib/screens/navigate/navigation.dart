@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/apply_leave/apply_leave.dart';
 import 'package:flutter_excellence_hr/screens/attendance/my_attendance.dart';
+import 'package:flutter_excellence_hr/screens/holiday_list/holiday_list.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
 
 class Navigation extends StatelessWidget {
@@ -116,6 +117,12 @@ class Navigation extends StatelessWidget {
               leading: Icon(Icons.bookmark, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('Holidays',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+            onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HolidayList()),
+                );
+              },
             ),
             Divider(height: 1),
             ListTile(
