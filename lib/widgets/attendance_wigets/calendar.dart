@@ -1,77 +1,89 @@
 import 'dart:html';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 
-class Calendar extends StatelessWidget {
+class Calander extends StatefulWidget {
+  @override
+  _CalanderState createState() => _CalanderState();
+}
+
+class _CalanderState extends State<Calander> {
+  DateTime _currentDate;
+
+  var _markedDateMap;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SfCalendar(
-        view: CalendarView.week,
-        showNavigationArrow: true,
-        dataSource: MeetingDataSource(_getDataSource()),
-    monthViewSettings: MonthViewSettings(
-        appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
-        selectionDecoration: BoxDecoration(
-            color: Colors.transparent,
-            border: Border.all(color: Colors.blue, width: 2),
-            borderRadius: const BorderRadius.all(Radius.circular(4)),
-            shape: BoxShape.rectangle,
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.0),
+          child: CalendarCarousel<EventInterface>(
+            onDayPressed: (DateTime date, List<EventInterface> events) {
+              this.setState(() => _currentDate = date);
+            },
+            weekendTextStyle: TextStyle(
+              color: Colors.red,
+            ),
+            thisMonthDayBorderColor: Colors.grey,
+            todayButtonColor: Colors.blueAccent,
+            customDayBuilder: (
+              bool isSelectable,
+              int index,
+              bool isSelectedDay,
+              bool isToday,
+              bool isPrevMonthDay,
+              TextStyle textStyle,
+              bool isNextMonthDay,
+              bool isThisMonthDay,
+              DateTime day,
+            ) {
+              var d = day.day;
+              if (day.day <= 15 && isThisMonthDay) {
+                return Card(
+                  color: (d == 5 || d == 6 || d == 13 || d == 19 || d == 27)
+                      ? Colors.yellowAccent
+                      : Colors.blueAccent,
+                  child: (d == 5 || d == 6 || d == 13 || d == 19 || d == 27)
+                      ? Text('Holiday', style: TextStyle(color: Colors.black))
+                      : SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Text(
+                                "$d",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              Text(
+                                '10:24 am- 7:34 PM',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              Container(
+                                  margin: EdgeInsets.all(8),
+                                  color: Colors.redAccent,
+                                  child: Text(
+                                    '0h:1m:20 sec',
+                                    style: TextStyle(color: Colors.white),
+                                  )),
+                            ],
+                          ),
+                        ),
+                );
+              } else {
+                return null;
+              }
+            },
+            weekFormat: false,
+            markedDatesMap: _markedDateMap,
+            height: 420.0,
+            selectedDateTime: _currentDate,
+            daysHaveCircularBorder: false,
+            /// null for not rendering any border, true for circular border, false for rectangular border
           ),
-      ),
+        ),
+        SizedBox(height: 30),
+      ],
     );
   }
-  List<Meeting> _getDataSource() {
-  var meetings = <Meeting>[];
-  final DateTime today = DateTime.now();
-  final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 9, 0, 0);
-  final DateTime endTime = startTime.add(const Duration(hours: 1));
-  meetings.add(Meeting(
-      'In/Out Time Missing',  startTime, endTime, AppColors.NAVY_BLUE,false));
-  return meetings;
-}
-}
-
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Meeting> source){
-    appointments = source;
-  }
-
-  @override
-  DateTime getStartTime(int index) {
-    return appointments[index].from;
-  }
-
-  @override
-  DateTime getEndTime(int index) {
-    return appointments[index].to;
-  }
-
-  @override
-  String getSubject(int index) {
-    return appointments[index].eventName;
-  }
-
-  @override
-  Color getColor(int index) {
-    return appointments[index].background;
-  }
-
-  @override
-  bool isAllDay(int index) {
-    return appointments[index].isAllDay;
-  }
-}
-
-class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
-
-  String eventName;
-  DateTime from;
-  DateTime to;
-  Color background;
-  bool isAllDay;
 }
