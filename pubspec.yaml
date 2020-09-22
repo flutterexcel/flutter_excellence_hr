@@ -27,8 +27,9 @@ dependencies:
   dotted_border: 1.0.6
   rounded_loading_button: ^1.0.0
   flutter_staggered_animations: "^0.1.2"
-  syncfusion_flutter_calendar: ^18.2.57
-  flutter_calendar_carousel: ^1.4.12
+  percent_indicator: ^2.1.6
+  sticky_headers: "^0.1.7"
+  datetime_picker_formfield: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
