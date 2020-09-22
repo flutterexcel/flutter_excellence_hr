@@ -8,11 +8,11 @@ class DropDown extends StatefulWidget {
 
 class _DropDownState extends State<DropDown> {
   List<ListItem> _dropdownItems = [
-    ListItem(1, "Single "),
-    ListItem(2, "Married"),
-    ListItem(3, "Separated"),
-    ListItem(5, "--Select Your Blood Group--"),
-    ListItem(6, "--Select Doc Type--")
+    ListItem(1, "Leave Option"),
+    ListItem(2, "Casual"),
+    ListItem(3, "Sick"),
+    ListItem(4, "RH Compansation")
+
   ];
 
   List<DropdownMenuItem<ListItem>> _dropdownMenuItems;
@@ -47,7 +47,7 @@ class _DropDownState extends State<DropDown> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               height: 35,
-              margin: EdgeInsets.fromLTRB(8, 0, 8, 0),
+            //  margin: EdgeInsets.fromLTRB(8, 0, 8, 0),
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.only(left: 10.0, right: 10.0),
               decoration: BoxDecoration(
