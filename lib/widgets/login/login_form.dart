@@ -103,7 +103,7 @@ class LoginPage extends StatelessWidget {
                 color: AppColors.BTN_BLACK_COLOR,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child: Text('Login'),
+                child: Text('Login',style: TextStyle(fontFamily:'SourceSans'),),
                 onPressed:
                     state is LoginLoading ? () {} : _onLoginButtonPressed,
               ),

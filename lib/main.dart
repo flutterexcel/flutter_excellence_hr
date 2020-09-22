@@ -6,6 +6,7 @@ import 'screens/screens.dart';
 import 'services/authentication_services.dart';
 import 'bloc/inventory/inventory.dart';
 import 'bloc/profile/profile_bloc.dart';
+import 'bloc/attendance/attendance_bloc.dart';
 
 void main() => runApp(
 
@@ -30,6 +31,9 @@ void main() => runApp(
           ),
           BlocProvider<ProfileBloc>(
             create: (BuildContext context) => ProfileBloc(),
+          ),
+          BlocProvider<AttendanceBloc>(
+            create: (BuildContext context) => AttendanceBloc(),
           ),
         ],
         child: HrApp(),

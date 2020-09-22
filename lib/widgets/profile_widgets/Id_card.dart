@@ -65,7 +65,8 @@ class IdCard extends StatelessWidget {
                             child: Container(
                                 padding: EdgeInsets.fromLTRB(0, 0, 16, 4),
                                 child: (Text(
-                                    profileDetails.data.userProfileDetail.id,
+                                    profileDetails
+                                        .data.userProfileDetail.userId,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         fontFamily: 'SourceSans',
