@@ -24,7 +24,7 @@ class MyAttendance extends StatelessWidget {
           LeaveDays(), 
          HalfDay(),
          Alert(),                  
-         Calander(),
+        // Calander(),
         ]),
       )),
     );
