@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:flutter_excellence_hr/screens/navigate/dropdown_inventory.dart';
+import 'package:flutter_excellence_hr/services/attendance/apply_leave.dart';
+import 'package:flutter_excellence_hr/widgets/apply_leave_widgets/dropdown_rh.dart';
 import 'package:intl/intl.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class LeaveCalendar extends StatefulWidget {
   @override
@@ -16,20 +18,34 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   final to = TextEditingController();
   final noOfDay = TextEditingController();
   final reason = TextEditingController();
-  
+  String leaveType, rhdate;
+  ApplyLeave api = ApplyLeave();
+  Future _doApply({String leavetype, String rhdate = ''}) async {
+    await api.applyLeave(
+        fromDate: from.text,
+        toDate: to.text,
+        noOfDays: noOfDay.text,
+        reason: reason.text,
+        leaveType: leavetype,
+        rhDates: [rhdate]);
+  }
+
+  final RoundedLoadingButtonController _btnController =
+      new RoundedLoadingButtonController();
+  DropDown dropdown;
   Future<Null> _selectedDate(BuildContext context) async {
+    var today = DateTime.now();
     final DateTime _selDate = await showDatePicker(
         context: context,
         initialDate: _currentDate,
-        firstDate: DateTime(2019),
-        lastDate: DateTime(2025),        
+        firstDate: DateTime(today.year - 1),
+        lastDate: DateTime(today.year + 1),
         builder: (context, child) {
-        
           return SingleChildScrollView(child: child);
         });
-        
+
     if (_selDate != null) {
-      setState(() {    
+      setState(() {
         _currentDate = _selDate;
         _lastDate = _selDate;
       });
@@ -37,11 +53,12 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   }
 
   Future<Null> _secondDate(BuildContext context) async {
+    var today = DateTime.now();
     final DateTime _selDate = await showDatePicker(
         context: context,
         initialDate: _currentDate,
         firstDate: _currentDate,
-        lastDate: DateTime(2025),
+        lastDate: DateTime(today.year + 1),
         builder: (context, child) {
           return SingleChildScrollView(child: child);
         });
@@ -54,9 +71,11 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    String _formattedDate = DateFormat.yMMMd().format(_currentDate);
-    String _toDate = DateFormat.yMMMd().format(_lastDate);
-    int difference = _lastDate.difference(_currentDate).inDays;
+    var _formattedDate = DateFormat.yMMMd().format(_currentDate);
+    var _toDate = DateFormat.yMMMd().format(_lastDate);
+
+    int difference = _lastDate.difference(_currentDate).inDays + 1;
+
     return Column(
       children: [
         Row(
@@ -83,6 +102,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
               flex: 4,
               child: InkWell(
                 onTap: () {
+                  _btnController.reset();
                   _selectedDate(context);
                 },
                 child: Container(
@@ -90,7 +110,10 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   height: 35,
                   child: TextFormField(
                     enabled: false,
-                    controller: from,
+                    controller: from
+                      ..text = DateFormat("yyyy-MM-dd")
+                          .format(_currentDate)
+                          .toString(),
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "$_formattedDate",
@@ -117,6 +140,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
               flex: 4,
               child: InkWell(
                 onTap: () {
+                  _btnController.reset();
                   _secondDate(context);
                 },
                 child: Container(
@@ -124,7 +148,9 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   height: 35,
                   child: TextFormField(
                     enabled: false,
-                    controller: to,
+                    controller: to
+                      ..text =
+                          DateFormat("yyyy-MM-dd").format(_lastDate).toString(),
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "$_toDate",
@@ -152,7 +178,14 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
               child: Container(
                 margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
                 height: 55,
-                child: DropDown(),
+                child: DropDown(
+                  onLeaveChange: (String leave) {
+                    leaveType = leave;
+                  },
+                  onRHChange: (String rh) {
+                    rhdate = rh;
+                  },
+                ),
               ),
             ),
           ],
@@ -173,7 +206,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                 height: 35,
                 child: TextFormField(
                   enabled: false,
-                  controller: noOfDay,
+                  controller: noOfDay..text = "$difference",
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "$difference",
@@ -271,15 +304,16 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * .9,
-          child: RaisedButton(
-            color: AppColors.GREEN_COLOR,
-            onPressed: () {},
-            child: const Text('Apply',
-                style: TextStyle(
-                    color: Colors.white, fontSize: 18, fontFamily: 'OpenSans')),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0),
-            ),
+          child: RoundedLoadingButton(
+            color: AppColors.BLUE_COLOR,
+            width: 150,
+            borderRadius: 10,
+            controller: _btnController,
+            onPressed: () async {
+              await _doApply(leavetype: leaveType, rhdate: rhdate)
+                  .then((value) => _btnController.success());
+            },
+            child: Text('Apply Leave', style: TextStyle(color: Colors.white)),
           ),
         ),
       ],
