@@ -20,12 +20,16 @@ dependencies:
   equatable: ^1.2.0
   meta: ^1.1.8
   uuid: ^2.1.0
+  intl: ^0.16.1
   universal_io: 1.0.1
-
-
-
   cupertino_icons: ^0.1.3
-
+  string_validator: ^0.1.4
+  dotted_border: 1.0.6
+  rounded_loading_button: ^1.0.0
+  flutter_staggered_animations: "^0.1.2"
+  percent_indicator: ^2.1.6
+  sticky_headers: "^0.1.7"
+  datetime_picker_formfield: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -34,7 +38,16 @@ flutter:
   assets:
     - assets/config/
     - assets/images/
-
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: fonts/OpenSansCondensed-Light.ttf
+      
+    - family: SourceSans
+      fonts:
+        - asset: fonts/SourceSansPro-Regular.ttf
+   
+        
   uses-material-design: true
   
     

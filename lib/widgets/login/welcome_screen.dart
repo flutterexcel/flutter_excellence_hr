@@ -14,7 +14,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Text('Welcome to',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: FontSize().eighteen,
+                      fontSize: FontSize().eighteen,fontFamily: 'SourceSans',
                       color: AppColors.LIGHTBLACK_COLOR,
                     ))),
           ],
@@ -28,7 +28,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Text('Human Resource Management System',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 22,
+                        fontSize: 22,fontFamily: 'SourceSans',
                         color: AppColors.LIGHTBLACK_COLOR)),
               ),
             ),

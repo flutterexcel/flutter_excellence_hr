@@ -5,8 +5,11 @@ import 'routes.dart';
 import 'screens/screens.dart';
 import 'services/authentication_services.dart';
 import 'bloc/inventory/inventory.dart';
+import 'bloc/profile/profile_bloc.dart';
+import 'bloc/attendance/attendance_bloc.dart';
+
 void main() => runApp(
-            
+
         // Injects the Authentication service
         RepositoryProvider<AuthenticationService>(
       create: (context) {
@@ -26,22 +29,27 @@ void main() => runApp(
           BlocProvider<InventoryBloc>(
             create: (BuildContext context) => InventoryBloc(InventoryInitial()),
           ),
+          BlocProvider<ProfileBloc>(
+            create: (BuildContext context) => ProfileBloc(),
+          ),
+          BlocProvider<AttendanceBloc>(
+            create: (BuildContext context) => AttendanceBloc(),
+          ),
         ],
         child: HrApp(),
       ),
     ));
 
 class HrApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-       
-    return MaterialApp( 
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Excellence HR',
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
+
       // BlocBuilder will listen to changes in LoginState
       // and build an appropriate widget based on the state.
       home: BlocBuilder<LoginBloc, LoginState>(

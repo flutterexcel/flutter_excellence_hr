@@ -7,7 +7,7 @@ class Logo extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.fromLTRB(16, 48, 32, 32),
         child: Image.asset(
-          'images/logo.png',
+          'assets/images/logo.png',
           height: 50,
         ),
       ),

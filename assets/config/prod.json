@@ -1,3 +1,5 @@
 {
-    "baseUrl": "https://apistaginghr.excellencetechnologies.in"
+    "baseUrl": "https://apistaginghr.excellencetechnologies.in",
+    "apiUrl" : "/attendance/API_HR/api.php",
+    "salUrl" : "/attendance/sal_info/api.php"
 }
