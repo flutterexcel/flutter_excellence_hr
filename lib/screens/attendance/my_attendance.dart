@@ -12,29 +12,6 @@ import 'package:sticky_headers/sticky_headers.dart';
 class MyAttendance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Scaffold(
-      backgroundColor: AppColors.BACKGROUND_COLOR,
-      appBar: AppBar(title: AppBarWidget(pageName: "My Attendance")),
-      drawer: Navigation(),
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(children: <Widget>[
-          Month(),
-          NameDesignation(name: "Shakti",designation: "Jr.Mobile App Developer",),
-          CompletePending(),  
-          TimeCompensate(),
-          DayRefrence(), 
-          WorkingDays(),  
-          NonWorkingDays(),   
-          LeaveDays(), 
-         HalfDay(),
-         Alert(),                  
-       //  Calander(),
-        ]),
-      )),
-    );
-=======
     final _attendanceBloc = BlocProvider.of<AttendanceBloc>(context);
     return BlocBuilder<AttendanceBloc, AttendanceState>(
         builder: (context, state) {
@@ -77,6 +54,5 @@ class MyAttendance extends StatelessWidget {
             ));
       }
     });
->>>>>>> 56cb28f8e8bc8e7b1f305131fd994633a1237703
   }
 }
