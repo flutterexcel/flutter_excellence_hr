@@ -76,7 +76,9 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
     int difference = 1;
     if (DateFormat("yyyy-MM-dd").format(_lastDate).toString() !=
         DateFormat("yyyy-MM-dd").format(_currentDate).toString()) {
-      difference = _lastDate.difference(_currentDate).inDays + 2;
+      DateTime currentTime =
+          DateTime(_currentDate.year, _currentDate.month, _currentDate.day);
+      difference = _lastDate.difference(currentTime).inDays + 1;
     }
 
     return Column(
