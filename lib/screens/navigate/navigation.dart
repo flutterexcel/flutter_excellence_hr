@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/screens/apply_leave/apply_leave.dart';
 import 'package:flutter_excellence_hr/screens/attendance/my_attendance.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
 
@@ -67,6 +68,12 @@ class Navigation extends StatelessWidget {
                   Icon(Icons.view_carousel, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('Apply Leave',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+                 onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ApplyLeave()),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.view_list, color: AppColors.LIGHTBLACK_COLOR),

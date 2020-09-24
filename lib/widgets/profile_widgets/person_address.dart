@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/profile/ProfileDetails.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'dart:io';
 
 // ignore: must_be_immutable
 class PersonAddress extends StatelessWidget {
   ProfileDetails profileDetails;
-
   final empName = TextEditingController();
   final currAddress = TextEditingController();
   final permanentAddress = TextEditingController();
@@ -85,24 +85,22 @@ class PersonAddress extends StatelessWidget {
                 )),
           ],
         ),
-        // Container(
-        //   margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        //   height: 70,
-        //   color: AppColors.EDIT_TEXT_COLOR,
-        //   child: TextFormField(
-        //     enabled: false,
-        //     controller: currAddress
-        //       ..text = profileDetails.data.userProfileDetail.address1 +
-        //           ' ' +
-        //           profileDetails.data.userProfileDetail.address2,
-        //     textInputAction: TextInputAction.newline,
-        //     keyboardType: TextInputType.multiline,
-        //     maxLines: null,
-        //     decoration: InputDecoration(
-        //       border: OutlineInputBorder(),
-        //     ),
-        //   ),
-        // ),
+        Container(
+          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+          height: 70,
+          color: AppColors.EDIT_TEXT_COLOR,
+          child: TextFormField(
+            enabled: false,
+            controller: currAddress
+              ..text = profileDetails.data.userProfileDetail.address1,
+            textInputAction: TextInputAction.newline,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ),
         Row(
           children: [
             Container(
@@ -122,8 +120,8 @@ class PersonAddress extends StatelessWidget {
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
-            controller: currAddress
-              ..text = profileDetails.data.userProfileDetail.currentAddress,
+            controller: permanentAddress
+              ..text = profileDetails.data.userProfileDetail.permanentAddress,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
             maxLines: null,
