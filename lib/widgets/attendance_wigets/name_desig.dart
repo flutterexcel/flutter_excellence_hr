@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 
 class NameDesignation extends StatelessWidget {
-  final String name, designation;
-  NameDesignation({
-    this.name,
-    this.designation,
-  });
+  final String name, designation, image;
+  NameDesignation({this.name, this.designation, this.image});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -17,9 +14,7 @@ class NameDesignation extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage('assets/images/person.jpg')),
+                CircleAvatar(radius: 30, backgroundImage: NetworkImage(image)),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
