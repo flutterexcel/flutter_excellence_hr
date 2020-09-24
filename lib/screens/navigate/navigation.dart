@@ -6,6 +6,7 @@ import 'package:flutter_excellence_hr/screens/holiday_list/holiday_list.dart';
 import 'package:flutter_excellence_hr/screens/my_leaves/my_leaves.dart';
 import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
+import 'package:flutter_excellence_hr/screens/weekly_timesheet/weekly_timesheet.dart';
 
 class Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -65,6 +66,12 @@ class Navigation extends StatelessWidget {
               leading: Icon(Icons.view_week, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('Weekly Time Sheet',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+            onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WeeklyTimeSheet()),
+                );
+              },
             ),
             ListTile(
               leading:

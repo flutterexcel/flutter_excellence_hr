@@ -56,7 +56,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   Widget build(BuildContext context) {
     String _formattedDate = DateFormat.yMMMd().format(_currentDate);
     String _toDate = DateFormat.yMMMd().format(_lastDate);
-    int difference = _lastDate.difference(_currentDate).inDays;
+    final int difference = (_lastDate==_currentDate) ?1: (_lastDate.difference(_currentDate).inDays==0?2:_lastDate.difference(_currentDate).inDays);
     return Column(
       children: [
         Row(

@@ -12,8 +12,10 @@ import 'package:sticky_headers/sticky_headers.dart';
 class MyAttendance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: close_sinks
     final _attendanceBloc = BlocProvider.of<AttendanceBloc>(context);
     return BlocBuilder<AttendanceBloc, AttendanceState>(
+        // ignore: missing_return
         builder: (context, state) {
       if (state is AttendanceLoading) {
         return Center(
@@ -47,7 +49,6 @@ class MyAttendance extends StatelessWidget {
                   CompletePending(monthSummary: attendance.data.monthSummary),
                   TimeCompensate(monthAttendance: state.data),
                   DayRefrence(monthAttendance: state.data),
-                  //for (var i = 1; i <= 30; i++)
                   CalendarScreen(monthAttendance: state.data),
                 ]),
               )),
