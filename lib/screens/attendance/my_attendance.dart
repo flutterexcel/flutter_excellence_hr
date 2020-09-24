@@ -13,7 +13,6 @@ import 'package:sticky_headers/sticky_headers.dart';
 class MyAttendance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: AppColors.BACKGROUND_COLOR,
       appBar: AppBar(title: AppBarWidget(pageName: "My Attendance")),
