@@ -199,7 +199,7 @@ class Attendance {
   String dayText;
   String inTime;
   String outTime;
-  String totalTime;
+  var totalTime;
   var extraTime;
   String text;
   var adminAlert;
