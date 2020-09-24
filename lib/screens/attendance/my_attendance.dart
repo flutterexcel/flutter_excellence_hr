@@ -5,6 +5,7 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import 'package:flutter_excellence_hr/widgets/attendance_wigets/attendance_widgets.dart';
+import 'package:flutter_excellence_hr/widgets/attendance_wigets/calendar.dart';
 import '../../model/attendance/month_attendance.dart';
 import '../../services/storage_service.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -12,9 +13,7 @@ import 'package:sticky_headers/sticky_headers.dart';
 class MyAttendance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
     return Scaffold(
       backgroundColor: AppColors.BACKGROUND_COLOR,
       appBar: AppBar(title: AppBarWidget(pageName: "My Attendance")),
@@ -27,17 +26,11 @@ class MyAttendance extends StatelessWidget {
           CompletePending(),  
           TimeCompensate(),
           DayRefrence(), 
-          WorkingDays(),  
-          NonWorkingDays(),   
-          LeaveDays(), 
-         HalfDay(),
-         Alert(),                  
        //  Calander(),
         ]),
       )),
     );
-=======
->>>>>>> 2ad9e8f4a3716af43285db9e4d22a374f91fecad
+
     final _attendanceBloc = BlocProvider.of<AttendanceBloc>(context);
     return BlocBuilder<AttendanceBloc, AttendanceState>(
         builder: (context, state) {
@@ -80,9 +73,5 @@ class MyAttendance extends StatelessWidget {
             ));
       }
     });
-<<<<<<< HEAD
-=======
->>>>>>> 56cb28f8e8bc8e7b1f305131fd994633a1237703
->>>>>>> 2ad9e8f4a3716af43285db9e4d22a374f91fecad
   }
 }
