@@ -91,8 +91,11 @@ class PersonAddress extends StatelessWidget {
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
-            controller: currAddress
-              ..text = profileDetails.data.userProfileDetail.address1,
+            controller: (profileDetails.data.userProfileDetail.address2) != null
+                ? (currAddress
+                  ..text = profileDetails.data.userProfileDetail.address1 +
+                      profileDetails.data.userProfileDetail.address2)
+                : profileDetails.data.userProfileDetail.address1,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
             maxLines: null,
