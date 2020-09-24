@@ -3,6 +3,7 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/apply_leave/apply_leave.dart';
 import 'package:flutter_excellence_hr/screens/attendance/my_attendance.dart';
 import 'package:flutter_excellence_hr/screens/holiday_list/holiday_list.dart';
+import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
 
 class Navigation extends StatelessWidget {
@@ -106,6 +107,12 @@ class Navigation extends StatelessWidget {
                   Icon(Icons.view_array, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('My Documents',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+            onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyDocuments()),
+                );
+              },
             ),
             ListTile(
               leading:
