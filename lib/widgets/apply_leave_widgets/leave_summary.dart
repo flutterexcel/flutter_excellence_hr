@@ -73,8 +73,11 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   Widget build(BuildContext context) {
     var _formattedDate = DateFormat.yMMMd().format(_currentDate);
     var _toDate = DateFormat.yMMMd().format(_lastDate);
-
-    int difference = _lastDate.difference(_currentDate).inDays + 1;
+    int difference = 1;
+    if (DateFormat("yyyy-MM-dd").format(_lastDate).toString() !=
+        DateFormat("yyyy-MM-dd").format(_currentDate).toString()) {
+      difference = _lastDate.difference(_currentDate).inDays + 2;
+    }
 
     return Column(
       children: [
