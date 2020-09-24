@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigation.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
+import 'package:flutter_excellence_hr/widgets/document_widgets/document_widgets.dart';
+import 'package:flutter_excellence_hr/widgets/profile_widgets/profile_widgets.dart';
 import 'package:flutter_excellence_hr/widgets/timesheet_widgets/timesheet_widgets.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class WeeklyTimeSheet extends StatelessWidget {
   final totalTime = TextEditingController();
@@ -20,94 +23,132 @@ class WeeklyTimeSheet extends StatelessWidget {
                 height: 450,
                 width: MediaQuery.of(context).size.width,
                 decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                   ),
-                child: Column(
-                  children: <Widget>[Row(
-                    children: [
-                      Container(margin:EdgeInsets.all(16), child: Text("Monday Time Sheet",style: TextStyle(fontSize:18,fontFamily: 'OpenSans'),)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          Container(
+                              margin: EdgeInsets.all(16),
+                              child: Text(
+                                "Monday Time Sheet",
+                                style: TextStyle(
+                                    fontSize: 18, fontFamily: 'OpenSans'),
+                              )),
+                        ],
+                      ),
+                      Divider(height: 1, thickness: .5, color: Colors.grey),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                                margin: EdgeInsets.only(left: 16),
+                                child: Text("Total Time ",
+                                    style: TextStyle(
+                                        fontFamily: 'OpenSans', fontSize: 16))),
+                          ),
+                        ],
+                      ),
+                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                              height: 35,
+                              child: TextFormField(
+                                enabled: true,
+                                controller: totalTime,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: "",
+                                    labelStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'OpenSans',
+                                        fontSize: 16)),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                                margin: EdgeInsets.only(left: 16),
+                                child: Text("Comment ",
+                                    style: TextStyle(
+                                        fontFamily: 'OpenSans', fontSize: 16))),
+                          ),
+                        ],
+                      ),
+                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(         
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                              height: 100,
+                              child: TextFormField(
+                                enabled: true,
+                                maxLines: 5,
+                                controller: comment,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: "",
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      
+                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                                margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                                height: 45,
+                                child: Text(
+                                    'Its better if you put your detail reports on tms and HR system will automatically fetch it for you',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+                          ),
+                        ],
+                      ),
+                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                                margin: EdgeInsets.only(left: 16),
+                                child: Text("Upload Tracker Screenshot",
+                                    style: TextStyle(
+                                        fontFamily: 'OpenSans', fontSize: 16))),
+                          ),
+                        ],
+                      ),
+                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                              child: UploadPic(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      RoundedLoadingButton(
+                        color: AppColors.GREEN_COLOR,
+                        width: 150,
+                        borderRadius: 10,
+                        onPressed: () {},
+                        child: Text('Submit',
+                            style: TextStyle(color: Colors.white)),
+                      ),
+                      SizedBox(height:30)
                     ],
                   ),
-                  Divider(height: 1,thickness: .5,color: Colors.grey),
-                  SizedBox(height: 16,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                  margin: EdgeInsets.all(8),
-                  child: Text("Total Time ",
-                      style: TextStyle(fontFamily: 'OpenSans', fontSize: 16))),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
-                height: 35,
-                child: TextFormField(
-                  enabled: true ,
-                  controller: totalTime,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "",
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'OpenSans',
-                          fontSize: 16)),
-                ),
-              ),
-            ),
-          ],
-        ),
-Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                  margin: EdgeInsets.all(8),
-                  child: Text("Comment ",
-                      style: TextStyle(fontFamily: 'OpenSans', fontSize: 16))),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
-                height: 100,
-                child: TextFormField(
-                  enabled: true,
-                  maxLines: 5,
-                  controller: comment,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "Give Reason",
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                  margin: EdgeInsets.all(8),
-                  child: Text("",
-                      style: TextStyle(fontFamily: 'OpenSans', fontSize: 16))),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
-                height: 35,
-                child: Text('Its better if you put your detail reports on tms and HR system will automatically fetch it for you')
-              ),
-            ),
-          ],
-        ),
-
-                  ],
                 ),
               ),
             );
