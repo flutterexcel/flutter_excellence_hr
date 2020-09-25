@@ -1,30 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/holiday/holiday.dart';
 
 class DropDown extends StatefulWidget {
+  final Function(Future<dynamic>, String) onYearChange;
+
+  DropDown({Key key, this.onYearChange});
   @override
-  _DropDownState createState() => _DropDownState();
+  _DropDownState createState() =>
+      _DropDownState(onYearChange: (Future<dynamic> holiday, String year) {
+        onYearChange(holiday, year);
+      });
 }
 
 class _DropDownState extends State<DropDown> {
-  List<ListItem> _dropdownItems = [
-    ListItem(1, "2017"),
-    ListItem(2, "2018"),
-    ListItem(3, "2019"),
-    ListItem(4, "2020")
-  ];
+  final Function(Future<dynamic>, String) onYearChange;
+  int _currentYear = DateTime.now().year;
+
+  List<ListItem> _dropdownItems = [];
 
   List<DropdownMenuItem<ListItem>> _dropdownMenuItems;
   ListItem _selectedItem;
 
+  _DropDownState({this.onYearChange});
+  GetHoliday api = GetHoliday();
+  Future _getHoliday(String year) async {
+    return await api.getHoliday(year: year);
+  }
+
   void initState() {
     super.initState();
+    for (var i = 0; i <= 5; i++) {
+      var year = (_currentYear - i).toString();
+      _dropdownItems.add(ListItem(i, year));
+    }
     _dropdownMenuItems = buildDropDownMenuItems(_dropdownItems);
     _selectedItem = _dropdownMenuItems[0].value;
+    onYearChange(_getHoliday(_selectedItem.name), _selectedItem.name);
   }
 
   List<DropdownMenuItem<ListItem>> buildDropDownMenuItems(List listItems) {
     List<DropdownMenuItem<ListItem>> items = List();
+
     for (ListItem listItem in listItems) {
       items.add(
         DropdownMenuItem(
@@ -64,6 +81,7 @@ class _DropDownState extends State<DropDown> {
                   onChanged: (value) {
                     setState(() {
                       _selectedItem = value;
+                      onYearChange(_getHoliday(value.name), value.name);
                     });
                   },
                   style: TextStyle(
@@ -81,6 +99,5 @@ class _DropDownState extends State<DropDown> {
 class ListItem {
   int value;
   String name;
-  String color;
   ListItem(this.value, this.name);
 }
