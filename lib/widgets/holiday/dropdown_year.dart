@@ -15,12 +15,9 @@ class DropDown extends StatefulWidget {
 
 class _DropDownState extends State<DropDown> {
   final Function(Future<dynamic>, String) onYearChange;
-  List<ListItem> _dropdownItems = [
-    ListItem(1, "2020"),
-    ListItem(2, "2019"),
-    ListItem(3, "2018"),
-    ListItem(4, "2017")
-  ];
+  int _currentYear = DateTime.now().year;
+
+  List<ListItem> _dropdownItems = [];
 
   List<DropdownMenuItem<ListItem>> _dropdownMenuItems;
   ListItem _selectedItem;
@@ -33,6 +30,10 @@ class _DropDownState extends State<DropDown> {
 
   void initState() {
     super.initState();
+    for (var i = 0; i <= 5; i++) {
+      var year = (_currentYear - i).toString();
+      _dropdownItems.add(ListItem(i, year));
+    }
     _dropdownMenuItems = buildDropDownMenuItems(_dropdownItems);
     _selectedItem = _dropdownMenuItems[0].value;
     onYearChange(_getHoliday(_selectedItem.name), _selectedItem.name);
