@@ -24,5 +24,5 @@ class AppColors{
   static const Color LIGHT_YELLOW = Color(0xFFFBC753);//F8CDD2
   static const Color HALF_DAY = Color(0xFFF8CDD2);//4051B5
   static const Color NAVY_BLUE = Color(0xFF4051B5);
-
+  
 }
