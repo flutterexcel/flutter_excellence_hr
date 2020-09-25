@@ -30,6 +30,7 @@ dependencies:
   percent_indicator: ^2.1.6
   sticky_headers: "^0.1.7"
   datetime_picker_formfield: ^1.0.0
+  url_launcher: ^5.7.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

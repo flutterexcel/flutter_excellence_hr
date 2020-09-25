@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/policy/policy_document.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
+import 'package:flutter_excellence_hr/services/policy/get_policy.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class PolicyDocuments extends StatelessWidget {
+class PolicyDocuments extends StatefulWidget {
+  @override
+  _PolicyDocumentsState createState() => _PolicyDocumentsState();
+}
+
+class _PolicyDocumentsState extends State<PolicyDocuments> {
+  GetPolicy api = GetPolicy();
   List<String> listOf = [
     "POSH Compliance",
     "5th Saturdays Off",
@@ -19,6 +28,16 @@ class PolicyDocuments extends StatelessWidget {
     "HR Bot & System Information Document",
     "HR Policy"
   ];
+  Future<dynamic> _getPolicy() async {
+    return await api.getPolicy();
+  }
+
+  PolicyDocument policy;
+  @override
+  void initState() {
+    _getPolicy().then((value) => policy);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +60,8 @@ class PolicyDocuments extends StatelessWidget {
                 thickness: .5,
                 color: Colors.grey[300],
               ),
-              itemBuilder: (_, int index) => listDataItems(this.listOf[index]),
-              itemCount: this.listOf.length,
+              itemBuilder: (_, int index) => ListDataItems(policy.data[index]),
+              itemCount: policy.data.length,
             ),
           ),
         ]),
@@ -51,9 +70,20 @@ class PolicyDocuments extends StatelessWidget {
   }
 }
 
-class listDataItems extends StatelessWidget {
-  String itemName;
-  listDataItems(this.itemName);
+class ListDataItems extends StatelessWidget {
+  Data data;
+
+  ListDataItems(this.data);
+
+  _launchURL(String url) async {
+    //const url = 'https://flutter.dev';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,14 +96,21 @@ class listDataItems extends StatelessWidget {
           backgroundColor: Colors.deepPurple,
           foregroundColor: Colors.white,
         ),
-        Image(image: AssetImage('assets/images/doc.png'),width: 50,height: 70),
+        Image(
+            image: AssetImage('assets/images/doc.png'), width: 50, height: 70),
         Padding(padding: EdgeInsets.all(8)),
-        Expanded(
-          child: Text(
-            itemName,
-            style: TextStyle(fontSize: 12,color: AppColors.LIGHTBLACK_COLOR,fontFamily: 'SourceSans',fontWeight: FontWeight.bold),
-          ),
-        )
+        InkWell(
+            onTap: _launchURL(data.link),
+            child: Expanded(
+              child: Text(
+                data.name,
+                style: TextStyle(
+                    fontSize: 12,
+                    color: AppColors.LIGHTBLACK_COLOR,
+                    fontFamily: 'SourceSans',
+                    fontWeight: FontWeight.bold),
+              ),
+            ))
       ]),
     );
   }
