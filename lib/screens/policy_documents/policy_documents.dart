@@ -14,21 +14,7 @@ class PolicyDocuments extends StatefulWidget {
 class _PolicyDocumentsState extends State<PolicyDocuments> {
   GetPolicy api = GetPolicy();
   bool show = false;
-  List<String> listOf = [
-    "POSH Compliance",
-    "5th Saturdays Off",
-    "New Leave Policy",
-    "ABSENTEEISM FROM OFFICE",
-    "RH Leave Clarifications",
-    "NO FOOD INSIDE OFFICE",
-    "Office Reporting Time",
-    "Dress Code Policy w.r.t 1st Sept 2017",
-    "Notice Period Announcement w.r.t 1st Jan",
-    "Compensation Policy w.r.t 1st Jan 2017",
-    "Leave Policy w.r.t 1st Jan 2017",
-    "HR Bot & System Information Document",
-    "HR Policy"
-  ];
+
   Future<dynamic> _getPolicy() async {
     return await api.getPolicy();
   }
