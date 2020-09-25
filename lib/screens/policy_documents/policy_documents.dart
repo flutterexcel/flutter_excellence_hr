@@ -13,6 +13,7 @@ class PolicyDocuments extends StatefulWidget {
 
 class _PolicyDocumentsState extends State<PolicyDocuments> {
   GetPolicy api = GetPolicy();
+  bool show = false;
   List<String> listOf = [
     "POSH Compliance",
     "5th Saturdays Off",
@@ -35,7 +36,12 @@ class _PolicyDocumentsState extends State<PolicyDocuments> {
   PolicyDocument policy;
   @override
   void initState() {
-    _getPolicy().then((value) => policy);
+    _getPolicy().then((value) {
+      policy = value;
+      setState(() {
+        show = true;
+      });
+    });
     super.initState();
   }
 
@@ -43,29 +49,43 @@ class _PolicyDocumentsState extends State<PolicyDocuments> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.BACKGROUND_COLOR,
-      appBar: AppBar(title: AppBarWidget(pageName: 'Policy Documents')),
+      appBar:
+          AppBar(title: AppBarWidget(pageName: 'Policy Documents directory')),
       drawer: Navigation(),
       body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(6),
-            padding: EdgeInsets.all(6),
-            child: ListView.separated(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              separatorBuilder: (BuildContext context, int index) => Divider(
-                height: 1,
-                thickness: .5,
-                color: Colors.grey[300],
-              ),
-              itemBuilder: (_, int index) => ListDataItems(policy.data[index]),
-              itemCount: policy.data.length,
-            ),
-          ),
-        ]),
-      )),
+        child: SingleChildScrollView(
+          child: show
+              ? Column(children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(8, 32, 8, 32),
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            left: BorderSide(width: 1, color: Colors.grey[300]),
+                            right:
+                                BorderSide(width: 1, color: Colors.grey[300]),
+                            top: BorderSide(width: 2, color: Colors.grey[300]),
+                            bottom:
+                                BorderSide(width: 1, color: Colors.grey[300]))),
+                    child: ListView.separated(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      separatorBuilder: (BuildContext context, int index) =>
+                          Divider(
+                        height: 1,
+                        thickness: .5,
+                        color: Colors.grey[300],
+                      ),
+                      itemBuilder: (_, int index) =>
+                          ListDataItems(policy.data[index]),
+                      itemCount: policy.data.length,
+                    ),
+                  ),
+                ])
+              : Center(child: CircularProgressIndicator()),
+        ),
+      ),
     );
   }
 }
@@ -76,7 +96,6 @@ class ListDataItems extends StatelessWidget {
   ListDataItems(this.data);
 
   _launchURL(String url) async {
-    //const url = 'https://flutter.dev';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -87,30 +106,29 @@ class ListDataItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(7),
-      padding: EdgeInsets.all(6),
       child:
           Row(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
-        CircleAvatar(
-          child: Text("1"),
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-        ),
-        Image(
-            image: AssetImage('assets/images/doc.png'), width: 50, height: 70),
-        Padding(padding: EdgeInsets.all(8)),
+        Checkbox(value: data.read == 1 ? true : false, onChanged: null),
         InkWell(
-            onTap: _launchURL(data.link),
-            child: Expanded(
-              child: Text(
-                data.name,
-                style: TextStyle(
-                    fontSize: 12,
-                    color: AppColors.LIGHTBLACK_COLOR,
-                    fontFamily: 'SourceSans',
-                    fontWeight: FontWeight.bold),
-              ),
-            ))
+          onTap: () {
+            _launchURL(data.link);
+          },
+          child: Image(
+              image: AssetImage('assets/images/doc.png'),
+              width: 40,
+              height: 60),
+        ),
+        Padding(padding: EdgeInsets.all(8)),
+        Expanded(
+          child: Text(
+            data.name,
+            style: TextStyle(
+                fontSize: 12,
+                color: AppColors.LIGHTBLACK_COLOR,
+                fontFamily: 'SourceSans',
+                fontWeight: FontWeight.bold),
+          ),
+        )
       ]),
     );
   }
