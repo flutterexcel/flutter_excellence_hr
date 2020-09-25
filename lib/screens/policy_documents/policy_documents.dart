@@ -67,8 +67,7 @@ class PolicyDataItems extends StatelessWidget {
       child:
           Row(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
         Checkbox(value: false, onChanged: null),
-        InkWell(onTap: (){
-          
+        InkWell(onTap: (){  
         },
           child: Image(
               image: AssetImage('assets/images/doc.png'),
