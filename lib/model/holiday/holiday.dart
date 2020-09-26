@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Holiday {
   int error;
   Data data;
@@ -22,15 +24,16 @@ class Holiday {
 class Data {
   String message;
   List<Holidays> holidays;
-
   Data({this.message, this.holidays});
-
   Data.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     if (json['holidays'] != null) {
       holidays = new List<Holidays>();
       json['holidays'].forEach((v) {
         holidays.add(new Holidays.fromJson(v));
+        holidays.sort((a, b) {
+          return a.date.compareTo(b.date);
+        });
       });
     }
   }
