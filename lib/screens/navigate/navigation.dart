@@ -19,12 +19,12 @@ class Navigation extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             Container(
-              height: 80.0,
+              height: 100.0,
               child: DrawerHeader(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Expanded(
+                    Flexible(
                       child: Image(
                         image: AssetImage('assets/images/logo.jpg'),
                         fit: BoxFit.cover,
