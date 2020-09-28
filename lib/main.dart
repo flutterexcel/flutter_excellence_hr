@@ -49,7 +49,6 @@ class HrApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-
       // BlocBuilder will listen to changes in LoginState
       // and build an appropriate widget based on the state.
       home: BlocBuilder<LoginBloc, LoginState>(
