@@ -9,7 +9,7 @@ import '../../bloc/bloc.dart';
 // }
 
 class LoginPage extends StatelessWidget {
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+//  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   bool _autoValidate = false;
@@ -19,6 +19,7 @@ class LoginPage extends StatelessWidget {
     final _loginBloc = BlocProvider.of<LoginBloc>(context);
 
     _onLoginButtonPressed() {
+      print("Login");
       _loginBloc.add(LoginInWithEmailButtonPressed(
           email: _emailController.text, password: _passwordController.text));
     }
@@ -31,8 +32,8 @@ class LoginPage extends StatelessWidget {
       );
     }
     return Form(
-      key: _key,
-      autovalidate: _autoValidate,
+   //   key: _key,
+    //  autovalidate: _autoValidate,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
