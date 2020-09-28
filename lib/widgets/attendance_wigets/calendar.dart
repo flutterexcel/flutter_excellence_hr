@@ -12,6 +12,7 @@ class CalendarScreen extends StatelessWidget {
     return GridView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
+     physics: NeverScrollableScrollPhysics(),   
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       itemBuilder: (_, index) => monthAttendance
