@@ -17,8 +17,11 @@ class MyAttendance extends StatelessWidget {
     return BlocBuilder<AttendanceBloc, AttendanceState>(
         builder: (context, state) {
       if (state is AttendanceLoading) {
-        return Center(
-          child: CircularProgressIndicator(),
+        return Scaffold(backgroundColor: Colors.white,
+        body:
+        Center(
+          child: CircularProgressIndicator(backgroundColor: Colors.cyan,),
+        ),
         );
       }
       if (state is AttendanceInitial) {
