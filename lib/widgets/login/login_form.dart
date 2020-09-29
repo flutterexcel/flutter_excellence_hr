@@ -79,11 +79,11 @@ class LoginPage extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(0, 0, 32, 0),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ForgetPassword()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => ForgetPassword()),
+                          // );
                         },
                         child: Text(
                           'Forget password',
