@@ -16,15 +16,15 @@ class MyAttendance extends StatelessWidget {
     final _attendanceBloc = BlocProvider.of<AttendanceBloc>(context);
     return BlocBuilder<AttendanceBloc, AttendanceState>(
         builder: (context, state) {
-      // if (state is AttendanceLoading) {
-      //   return Scaffold(backgroundColor: Colors.white,
-      //   body:
-      //    Center(
-      //     child: CircularProgressIndicator(backgroundColor: Colors.cyan,),
-      //    ),
-      //   );
-      // }
-      // if (state is AttendanceInitial) {
+      if (state is AttendanceLoading) {
+        return Scaffold(backgroundColor: Colors.white,
+        body:
+         Center(
+          child: CircularProgressIndicator(backgroundColor: Colors.cyan,),
+         ),
+        );
+      }
+      if (state is AttendanceInitial) {
         var date = new DateTime.now().toString();
         var dateParse = DateTime.parse(date);
         _attendanceBloc.add(LoadAttendance(
