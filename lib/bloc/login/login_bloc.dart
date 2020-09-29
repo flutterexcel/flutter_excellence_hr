@@ -64,7 +64,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     
     //yield LoginLoading();
     try {
-      print("LOgin succes");
+      print("Login succes");
       final user = await _authenticationService.signInWithEmailAndPassword(
           event.email, event.password);
     print("try");

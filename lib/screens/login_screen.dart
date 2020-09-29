@@ -18,10 +18,10 @@ class LoginScreen extends StatelessWidget {
           minimum: const EdgeInsets.all(16),
           child: BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
+              
               if (state is LoginFailure) {
                 return _AuthForm(); // show authentication form
               }
-
               // show splash screen
               return Center(
                 child: CircularProgressIndicator(
