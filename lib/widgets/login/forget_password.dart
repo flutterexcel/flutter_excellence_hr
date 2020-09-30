@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/login_screen.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
+
+import '../../services/login/forget_password_api.dart';
 
 class ForgetPassword extends StatelessWidget {
   final _passwordController = TextEditingController();
+  final RoundedLoadingButtonController _btnController =
+      new RoundedLoadingButtonController();
+  UpdateForgetPassword api = UpdateForgetPassword();
+  void _doUpdate() async {
+    await api
+        .updateForgetPassword(_passwordController.text)
+        .then((value) => _btnController.success());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,16 +71,14 @@ class ForgetPassword extends StatelessWidget {
                 height: 40,
                 width: double.infinity,
                 margin: EdgeInsets.fromLTRB(16, 0, 16, 12),
-                child: RaisedButton(
-                    textColor: Colors.white,
-                    color: AppColors.BTN_BLACK_COLOR,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                    child: Text(
-                      'Reset Password',
-                      style: TextStyle(fontFamily: 'SourceSans'),
-                    ),
-                    onPressed: () {}),
+                child: RoundedLoadingButton(
+                  color: AppColors.BTN_BLACK_COLOR,
+                  borderRadius: 10,
+                  child: Text('Reset Password',
+                      style: TextStyle(color: Colors.white)),
+                  controller: _btnController,
+                  onPressed: _doUpdate,
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
