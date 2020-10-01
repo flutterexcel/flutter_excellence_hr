@@ -64,7 +64,7 @@ class listDataItems extends StatelessWidget {
         child: Text(
                 'MONTH',
                 style: TextStyle(
-          fontSiz
+          fontSize: 12,
           fontFamily: 'SourceSans',
           fontWeight: FontWeight.bold,
           color: AppColors.LIGHTBLACK_COLOR),
