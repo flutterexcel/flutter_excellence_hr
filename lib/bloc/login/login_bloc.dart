@@ -35,7 +35,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _mapAppLoadToState(AppLoad event) async* {
     yield AuthenticationLoad(); // to display splash screen
     StorageUtil.getInstance();
-    print("object");
+  
     try {
       final currentUser = await _authenticationService.getCurrentUser();
 
@@ -62,12 +62,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _mapLoginWithEmailToState(
       LoginInWithEmailButtonPressed event) async* {
     
-    //yield LoginLoading();
+    yield LoginLoading();
     try {
-      print("Login succes");
+    
       final user = await _authenticationService.signInWithEmailAndPassword(
           event.email, event.password);
-    print("try");
+    
       if (user != null) {
         // push new login event
 
@@ -78,7 +78,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
       // ignore: unused_catch_clause
     } on Exception catch (e) {
-      print("catch 1");
+      
       yield LoginFailure(error: 'Login failed');
     } catch (err) {
       print("catch 2"+err);

@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
     final _loginBloc = BlocProvider.of<LoginBloc>(context);
 
     _onLoginButtonPressed() {
-      print("Login");
+    
       _loginBloc.add(LoginInWithEmailButtonPressed(
           email: _emailController.text, password: _passwordController.text));
     }
