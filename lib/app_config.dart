@@ -11,7 +11,9 @@ class AppConfig {
 
     // load the json file
     final contents = await rootBundle.loadString(
+
       'assets/config/$env.json',
+
     );
 
     // decode our json
