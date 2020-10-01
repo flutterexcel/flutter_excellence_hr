@@ -81,7 +81,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       
       yield LoginFailure(error: 'Login failed');
     } catch (err) {
-      print("catch 2"+err);
+      
       yield LoginFailure(error: 'Login failed');
     }
   }
