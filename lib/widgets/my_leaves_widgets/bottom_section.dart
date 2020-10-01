@@ -59,7 +59,7 @@ class listDataItems extends StatelessWidget {
       child: Row(children: <Widget>[
   SizedBox(width:16),
         Container(padding: EdgeInsets.all(8), color: AppColors.EDIT_TEXT_COLOR,
-            child: Column(children: <Widget>[
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
               Container(
         child: Text(
                 'MONTH',
@@ -67,7 +67,7 @@ class listDataItems extends StatelessWidget {
           fontSize: 12,
           fontFamily: 'SourceSans',
           fontWeight: FontWeight.bold,
-          color: AppColors.LIGHTBLACK_COLOR),
+          color:AppColors.GREEN_COLOR),
               )),
               Container(
         child: Text(
@@ -76,7 +76,7 @@ class listDataItems extends StatelessWidget {
           fontSize: 12,
           fontFamily: 'SourceSans',
           fontWeight: FontWeight.bold,
-          color: AppColors.LIGHTBLACK_COLOR),
+          color: Colors.red[300]),
               )),
               Container(
         child: Text(
@@ -85,7 +85,7 @@ class listDataItems extends StatelessWidget {
           fontSize: 12,
           fontFamily: 'SourceSans',
           fontWeight: FontWeight.bold,
-          color: AppColors.LIGHTBLACK_COLOR),
+          color: Colors.deepPurple[300]),
               )),
               Container(
         child: Text(
@@ -94,7 +94,7 @@ class listDataItems extends StatelessWidget {
           fontSize: 12,
           fontFamily: 'SourceSans',
           fontWeight: FontWeight.bold,
-          color: AppColors.LIGHTBLACK_COLOR),
+          color: Colors.deepPurple[300]),
               )),
               Container(
         child: Text(
@@ -103,7 +103,7 @@ class listDataItems extends StatelessWidget {
           fontSize: 12,
           fontFamily: 'SourceSans',
           fontWeight: FontWeight.bold,
-          color: AppColors.LIGHTBLACK_COLOR),
+          color:AppColors.GREEN_COLOR),
               )),
               Container(
         child: Text(
@@ -112,7 +112,7 @@ class listDataItems extends StatelessWidget {
           fontSize: 12,
           fontFamily: 'SourceSans',
           fontWeight: FontWeight.bold,
-          color: AppColors.LIGHTBLACK_COLOR),
+          color: Colors.red[300]),
               )),
             ]),
           ),
@@ -172,7 +172,7 @@ class listDataItems extends StatelessWidget {
         ),
         SizedBox(width:16),
         Container(padding: EdgeInsets.all(8),color: AppColors.EDIT_TEXT_COLOR,
-          child: Column(children: <Widget>[
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
             Container(
                 child: Text(
               'MONTH',
@@ -180,7 +180,7 @@ class listDataItems extends StatelessWidget {
                   fontSize: 12,
                   fontFamily: 'SourceSans',
                   fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
+                  color: AppColors.GREEN_COLOR),
             )),
             Container(
                 child: Text(
@@ -189,7 +189,7 @@ class listDataItems extends StatelessWidget {
                   fontSize: 12,
                   fontFamily: 'SourceSans',
                   fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
+                  color: Colors.red[300]),
             )),
             Container(
                 child: Text(
@@ -198,7 +198,7 @@ class listDataItems extends StatelessWidget {
                   fontSize: 12,
                   fontFamily: 'SourceSans',
                   fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
+                  color: Colors.deepPurple[300]),
             )),
             Container(
                 child: Text(
@@ -207,7 +207,7 @@ class listDataItems extends StatelessWidget {
                   fontSize: 12,
                   fontFamily: 'SourceSans',
                   fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
+                  color: Colors.deepPurple[300]),
             )),
             Container(
                 child: Text(
@@ -216,7 +216,7 @@ class listDataItems extends StatelessWidget {
                   fontSize: 12,
                   fontFamily: 'SourceSans',
                   fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
+                  color: AppColors.GREEN_COLOR),
             )),
             Container(
                 child: Text(
@@ -225,7 +225,7 @@ class listDataItems extends StatelessWidget {
                   fontSize: 12,
                   fontFamily: 'SourceSans',
                   fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
+                  color:Colors.red[300]),
             )),
           ]),
         ),
