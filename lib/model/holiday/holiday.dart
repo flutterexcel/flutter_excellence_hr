@@ -29,9 +29,13 @@ class Data {
     message = json['message'];
     if (json['holidays'] != null) {
       holidays = new List<Holidays>();
+
       json['holidays'].forEach((v) {
         holidays.add(new Holidays.fromJson(v));
       });
+      Comparator<Holidays> holidayComparator =
+          (a, b) => a.date.compareTo(b.date);
+      holidays.sort(holidayComparator);
     }
   }
 
