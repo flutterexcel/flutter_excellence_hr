@@ -45,10 +45,6 @@ class BottomSection extends StatelessWidget {
             );
         } 
         ), 
-        // itemBuilder: (_, int index) =>
-        //      listDataItems(this.listOf[index], this.totalLeave[index]),
-        // // //itemCount: this.listOf.length,
-      
     );
   }
 }
@@ -63,63 +59,63 @@ class listDataItems extends StatelessWidget {
       child: Row(children: <Widget>[
   SizedBox(width:16),
         Container(padding: EdgeInsets.all(8), color: AppColors.EDIT_TEXT_COLOR,
-          child: Column(children: <Widget>[
-            Container(
-                child: Text(
-              'MONTH',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              'TOTAL LEAVE TAKEN',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              'LEAVE BALANCE',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              'ALLOACTED LEAVES',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              'PAID LEAVES',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              'UNPAID LEAVES',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-          ]),
-        ),
+            child: Column(children: <Widget>[
+              Container(
+        child: Text(
+                'MONTH',
+                style: TextStyle(
+          fontSiz
+          fontFamily: 'SourceSans',
+          fontWeight: FontWeight.bold,
+          color: AppColors.LIGHTBLACK_COLOR),
+              )),
+              Container(
+        child: Text(
+                'TOTAL LEAVE TAKEN',
+                style: TextStyle(
+          fontSize: 12,
+          fontFamily: 'SourceSans',
+          fontWeight: FontWeight.bold,
+          color: AppColors.LIGHTBLACK_COLOR),
+              )),
+              Container(
+        child: Text(
+                'LEAVE BALANCE',
+                style: TextStyle(
+          fontSize: 12,
+          fontFamily: 'SourceSans',
+          fontWeight: FontWeight.bold,
+          color: AppColors.LIGHTBLACK_COLOR),
+              )),
+              Container(
+        child: Text(
+                'ALLOACTED LEAVES',
+                style: TextStyle(
+          fontSize: 12,
+          fontFamily: 'SourceSans',
+          fontWeight: FontWeight.bold,
+          color: AppColors.LIGHTBLACK_COLOR),
+              )),
+              Container(
+        child: Text(
+                'PAID LEAVES',
+                style: TextStyle(
+          fontSize: 12,
+          fontFamily: 'SourceSans',
+          fontWeight: FontWeight.bold,
+          color: AppColors.LIGHTBLACK_COLOR),
+              )),
+              Container(
+        child: Text(
+                'UNPAID LEAVES',
+                style: TextStyle(
+          fontSize: 12,
+          fontFamily: 'SourceSans',
+          fontWeight: FontWeight.bold,
+          color: AppColors.LIGHTBLACK_COLOR),
+              )),
+            ]),
+          ),
         Container(padding: EdgeInsets.all(8), color: AppColors.EDIT_TEXT_COLOR,
 
           child: Column(children: <Widget>[
@@ -234,7 +230,6 @@ class listDataItems extends StatelessWidget {
           ]),
         ),
         Container(padding: EdgeInsets.all(8), color: AppColors.EDIT_TEXT_COLOR,
-
           child: Column(children: <Widget>[
             Container(
                 child: Text(
@@ -286,8 +281,7 @@ class listDataItems extends StatelessWidget {
                   color: AppColors.LIGHTBLACK_COLOR),
             )),
           ]),
-        ),
-        
+        ),        
       ]),
     );
   }
