@@ -26,55 +26,57 @@ class TimeCompensate extends StatelessWidget {
               child: Container(
                 height: 250,
                 width: MediaQuery.of(context).size.width,
-                child: Column(children: <Widget>[
-                  Row(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.fromLTRB(16, 24, 16, 0),
-                          child: Text(
-                            "Time Comapnsation Summary",
-                            style: TextStyle(
-                                color: AppColors.THEME_COLOR,
-                                fontSize: 20,
-                                fontFamily: 'OpenSans'),
-                          )),
-                    ],
-                  ),
-                  showCompensate
-                      ? Container(
-                          margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-                          child: SingleChildScrollView(
-                              child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            // Let the ListView know how many items it needs to build.
-                            itemCount: monthAttendance.data.compensationSummary
-                                .compensationBreakUp.length,
-                            // Provide a builder function. This is where the magic happens.
-                            // Convert each item into a widget based on the type of item it is.
-                            itemBuilder: (context, index) {
-                              final item = monthAttendance
-                                  .data
-                                  .compensationSummary
-                                  .compensationBreakUp[index];
+                child: SingleChildScrollView(
+                                  child: Column(children: <Widget>[
+                    Row(
+                      children: [
+                        Container(
+                            margin: EdgeInsets.fromLTRB(16, 24, 16, 0),
+                            child: Text(
+                              "Time Comapnsation Summary",
+                              style: TextStyle(
+                                  color: AppColors.THEME_COLOR,
+                                  fontSize: 20,
+                                  fontFamily: 'OpenSans'),
+                            )),
+                      ],
+                    ),
+                    showCompensate
+                        ? Container(
+                            margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                            child: SingleChildScrollView(
+                                child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              // Let the ListView know how many items it needs to build.
+                              itemCount: monthAttendance.data.compensationSummary
+                                  .compensationBreakUp.length,
+                              // Provide a builder function. This is where the magic happens.
+                              // Convert each item into a widget based on the type of item it is.
+                              itemBuilder: (context, index) {
+                                final item = monthAttendance
+                                    .data
+                                    .compensationSummary
+                                    .compensationBreakUp[index];
 
-                              return ListTile(
-                                title: Text(item.text,
-                                    style: TextStyle(fontSize: 12)),
-                                dense: true,
-                              );
-                            },
-                          )))
-                      : Container(
-                          margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-                          child: Text(
-                            'Nothing To Compensate',
-                            style: TextStyle(
-                                color: AppColors.THEME_COLOR,
-                                fontSize: 16,
-                                fontFamily: 'OpenSans'),
-                          ))
-                ]),
+                                return ListTile(
+                                  title: Text(item.text,
+                                      style: TextStyle(fontSize: 12)),
+                                  dense: true,
+                                );
+                              },
+                            )))
+                        : Container(
+                            margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                            child: Text(
+                              'Nothing To Compensate',
+                              style: TextStyle(
+                                  color: AppColors.THEME_COLOR,
+                                  fontSize: 16,
+                                  fontFamily: 'OpenSans'),
+                            ))
+                  ]),
+                ),
               ),
             );
           });
