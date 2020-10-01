@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../model/profile/ProfileDetails.dart';
 import '../../screens/navigate/navigate.dart';
@@ -26,19 +27,7 @@ class ShowProfile extends StatelessWidget {
 
         return Scaffold(
             appBar: AppBar(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('My Profile',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                  CircleAvatar(
-                      radius: 20,
-                      backgroundImage: AssetImage('assets/images/person.jpg'))
-                ],
-              ),
+              title: AppBarWidget(pageName: "My Profile",)
             ),
             drawer: Navigation(),
             body: SingleChildScrollView(
