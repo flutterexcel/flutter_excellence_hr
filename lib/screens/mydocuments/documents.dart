@@ -3,7 +3,6 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import 'package:flutter_excellence_hr/widgets/document_widgets/document_widgets.dart';
-import 'package:flutter_excellence_hr/widgets/profile_widgets/profile_widgets.dart';
 
 class MyDocuments extends StatelessWidget {
   @override
@@ -20,7 +19,7 @@ class MyDocuments extends StatelessWidget {
             DocNotice(),
             DocumentType(),
             DropDown(),
-            UploadPic(),
+            UploadDocumentPic(),
             CertifyDocuments(),
             RequiredDocument(),
             DocumentList(),

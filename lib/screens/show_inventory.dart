@@ -21,8 +21,11 @@ class ShowInventory extends StatelessWidget {
     return BlocBuilder<InventoryBloc, InventoryState>(
       builder: (context, state) {
         if (state is InventoryLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
+          return Scaffold(backgroundColor: Colors.white,
+            body:
+           Center(
+            child: CircularProgressIndicator(backgroundColor: Colors.cyan,),
+           ),
           );
         }
         if (state is InventoryInitial) {

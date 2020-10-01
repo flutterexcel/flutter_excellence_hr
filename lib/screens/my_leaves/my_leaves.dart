@@ -21,7 +21,7 @@ class MyLeaves extends StatelessWidget {
           StatisticsRH(),
           MyLeavesList(),
           RestrictedLeave(),
-          BotttomSecion(),
+          BottomSection(),
         ]),
       )),
     );

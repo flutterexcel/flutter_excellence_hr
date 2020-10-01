@@ -14,14 +14,16 @@ class LoginAuthenticationService extends AuthenticationService {
     StorageUtil.getInstance();
     final islogin = StorageUtil.getLoggedIn();
 
-    if (islogin) {
-      return User(user: StorageUtil.getUserId());
-    }
+    // if (islogin) {
+    //   return User(user: StorageUtil.getUserId());
+    // }
     return null; // return null for now
   }
 
   @override
   Future<User> signInWithEmailAndPassword(String email, String password) async {
+    print(email);
+    print(password);
     final Login api = Login();
     User user = await api.login(email, password);
     return User(user: user.user, token: user.token, message: user.message);
