@@ -4,6 +4,7 @@ import 'package:flutter_excellence_hr/screens/apply_leave/apply_leave.dart';
 import 'package:flutter_excellence_hr/screens/attendance/my_attendance.dart';
 import 'package:flutter_excellence_hr/screens/holiday_list/holiday_list.dart';
 import 'package:flutter_excellence_hr/screens/my_leaves/my_leaves.dart';
+import 'package:flutter_excellence_hr/screens/my_salary/my_salary.dart';
 import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/screens/policy_documents/policy_documents.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
@@ -18,12 +19,12 @@ class Navigation extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             Container(
-              height: 80.0,
+              height: 100.0,
               child: DrawerHeader(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Expanded(
+                    Flexible(
                       child: Image(
                         image: AssetImage('assets/images/logo.jpg'),
                         fit: BoxFit.cover,
@@ -102,6 +103,12 @@ class Navigation extends StatelessWidget {
                   color: AppColors.LIGHTBLACK_COLOR),
               title: Text('My Salary',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+             onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MySalary()),
+                );
+              },
             ),
             ListTile(
               leading: Icon(

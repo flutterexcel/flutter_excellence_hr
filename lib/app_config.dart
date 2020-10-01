@@ -13,7 +13,6 @@ class AppConfig {
     final contents = await rootBundle.loadString(
 
       'assets/config/$env.json',
-
     );
 
     // decode our json
