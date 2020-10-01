@@ -1,50 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_excellence_hr/screens/loginBottom.dart';
-import 'package:flutter_excellence_hr/screens/loginPage.dart';
-import 'package:flutter_excellence_hr/screens/welcomeScreen.dart';
-import 'package:flutter_excellence_hr/widgets/googleLogin.dart';
-import '../widgets/logo.dart';
-import '../widgets/googleLogin.dart';
-import '../screens/loginBottom.dart';
-import '../screens/welcomeScreen.dart';
-import '../screens/loginPage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/bloc.dart';
+import '../services/authentication_services.dart';
+import '../widgets/login/login.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
+// class LoginScreen extends StatefulWidget {
+//   @override
+//   _LoginScreenState createState() => _LoginScreenState();
+// }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Color(0xfff8f9fa), // just add oxff before hexa code
+    return Scaffold(
         body: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
-              //      mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Logo(),
-                  ],
+      child: SafeArea(
+          minimum: const EdgeInsets.all(16),
+          child: BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, state) {
+              if (state is LoginFailure) {
+                return _AuthForm(); // show authentication form
+              }
+
+              // show splash screen
+              return Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
                 ),
-                WelcomeScreen(),
-                LoginPage(),
-                GoogleLogin(),
-                LoginBottom(),
+              );
+            },
+          )),
+    ));
+  }
+}
+
+class _AuthForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final authService = RepositoryProvider.of<AuthenticationService>(context);
+
+    return Container(
+        alignment: Alignment.center,
+        child: Column(
+          //      mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Logo(),
               ],
             ),
-          ),
-        ),
-      ),
-    );
+            WelcomeScreen(),
+            LoginPage(),
+            GoogleLogin(),
+            LoginBottom(),
+          ],
+        ));
   }
 }
