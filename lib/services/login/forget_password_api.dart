@@ -9,15 +9,11 @@ class UpdateForgetPassword {
   Future<ProfileDetails> updateForgetPassword(String username) async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     final apiUrl = prodUrl.baseUrl;
-    Map data = {
-      "action": "forgot_password",   
-      "username": username
-    };
+    Map data = {"action": "forgot_password", "username": username};
     return _post
         .post(apiUrl, body: json.encode(data))
         .then((dynamic res) async {
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
-
       return ProfileDetails.fromJson(res);
     });
   }
