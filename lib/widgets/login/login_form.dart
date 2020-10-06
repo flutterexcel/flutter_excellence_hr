@@ -20,7 +20,6 @@ class LoginPage extends StatelessWidget {
     final _loginBloc = BlocProvider.of<LoginBloc>(context);
 
     _onLoginButtonPressed() {
-      print("Login");
       _loginBloc.add(LoginInWithEmailButtonPressed(
           email: _emailController.text, password: _passwordController.text));
     }
@@ -28,7 +27,6 @@ class LoginPage extends StatelessWidget {
     LoginState state = _loginBloc.state;
 
     if (state is LoginLoading) {
-      
       return Center(
         child: CircularProgressIndicator(),
       );
@@ -72,30 +70,31 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.end,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Flexible(
                   child: Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 32, 0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ForgetPassword()),
-                          );
-                        },
-                        child: Text(
-                          'Forget password',
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: AppColors.BLUE_COLOR,
-                          ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgetPassword()),
+                        );
+                      },
+                      child: Text(
+                        'Forget password',
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: AppColors.BLUE_COLOR,
                         ),
                       ),
                     ),
                   ),
+                ),
               ],
             ),
             const SizedBox(
