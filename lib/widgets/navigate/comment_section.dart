@@ -9,28 +9,8 @@ class CommentSection extends StatelessWidget {
   Widget build(BuildContext context) {
     // Widget _getFAB() {
     //     if(Platform.isWindows){
-    //       return RaisedButton(
-    //         onPressed: () {},
-    //         color: AppColors.GOOGLE_BTN_COLOR,
-    //         shape: RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.all(Radius.circular(5.0))),
-    //         child: Text(
-    //           "Comment",
-    //           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
-    //         ),
-    //       );
-
+    //       return ;
     //     }else{
-    //       RaisedButton(
-    //         onPressed: () {},
-    //         color: AppColors.GOOGLE_BTN_COLOR,
-    //         shape: RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.all(Radius.circular(5.0))),
-    //         child: Text(
-    //           "Comment",
-    //           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
-    //         ),
-    //       );
     //     }
     //   }
 
@@ -54,7 +34,17 @@ class CommentSection extends StatelessWidget {
           ),
         ),
         SizedBox(height: 20),
-//        _getFAB(),
+        RaisedButton(
+          onPressed: () {},
+          color: AppColors.GOOGLE_BTN_COLOR,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+          child: Text(
+            "Comment",
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
       ],
     );
   }

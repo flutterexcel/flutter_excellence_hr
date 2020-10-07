@@ -20,23 +20,9 @@ class EnterPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     // Widget _getFAB() {
     //   if (Platform.isWindows) {
-    //     return RoundedLoadingButton(
-    //       color: AppColors.BTN_BLUE,
-    //       width: 150,
-    //       borderRadius: 10,
-    //       child: Text('Update Password', style: TextStyle(color: Colors.white)),
-    //       controller: _btnController,
-    //       onPressed: _doUpdate,
-    //     );
-    //   } else {
-    //     return RoundedLoadingButton(
-    //       color: AppColors.BTN_BLUE,
-    //       width: 150,
-    //       borderRadius: 10,
-    //       child: Text('Update Password', style: TextStyle(color: Colors.white)),
-    //       controller: _btnController,
-    //       onPressed: _doUpdate,
-    //     );
+    //    return ;
+    //  } else {
+    //     ;
     //   }
     // }
 
@@ -72,7 +58,15 @@ class EnterPassword extends StatelessWidget {
             Container(
               height: 35,
               margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
-//              child: _getFAB(),
+              child: RoundedLoadingButton(
+                color: AppColors.BTN_BLUE,
+                width: 150,
+                borderRadius: 10,
+                child: Text('Update Password',
+                    style: TextStyle(color: Colors.white)),
+                controller: _btnController,
+                onPressed: _doUpdate,
+              ),
             ),
           ],
         ),

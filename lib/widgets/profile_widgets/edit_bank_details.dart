@@ -34,29 +34,9 @@ class EditBankDetails extends StatelessWidget {
 
     // Widget _getFAB() {
     //   if (Platform.isWindows) {
-    //     return RoundedLoadingButton(
-    //       color: AppColors.BTN_BLUE,
-    //       width: 150,
-    //       borderRadius: 10,
-    //       child: Text('Update Bank Details',
-    //           style: TextStyle(color: Colors.white)),
-    //       controller: _btnControllerz,
-    //       onPressed: () async {
-    //         await _dosave();
-    //       },
-    //     );
-    //   } else {
-    //     return RoundedLoadingButton(
-    //       color: AppColors.BTN_BLUE,
-    //       width: 150,
-    //       borderRadius: 10,
-    //       child: Text('Update Bank Details',
-    //           style: TextStyle(color: Colors.white)),
-    //       controller: _btnControllerz,
-    //       onPressed: () async {
-    //         await _dosave();
-    //       },
-    //     );
+    // return ;
+    //    } else {
+    //     return ;
     //   }
     // }
 
@@ -163,7 +143,17 @@ class EditBankDetails extends StatelessWidget {
             Container(
               height: 35,
               margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
-//              child: _getFAB(),
+              child: RoundedLoadingButton(
+                color: AppColors.BTN_BLUE,
+                width: 150,
+                borderRadius: 10,
+                child: Text('Update Bank Details',
+                    style: TextStyle(color: Colors.white)),
+                controller: _btnControllerz,
+                onPressed: () async {
+                  await _dosave();
+                },
+              ),
             ),
           ],
         ),
