@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/login_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-
 import '../../services/login/forget_password_api.dart';
 
 class ForgetPassword extends StatelessWidget {
