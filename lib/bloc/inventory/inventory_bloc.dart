@@ -34,7 +34,10 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
     bool enablecomment = false;
     bool enableoverview = false;
     String comment;
-
+    bool enableInventory = false;
+    if (event.enableInventory != null) {
+      enableInventory = event.enableInventory;
+    }
     if (event.count != null) {
       count = event.count;
     } else {
@@ -63,13 +66,15 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
           break;
         }
         if (i == inventory.userMachine.length - 1) enableoverview = true;
+        if (enableInventory) enableoverview = false;
       }
       yield InventorySuccess(
           data: inventory,
           count: count,
           enablecomment: enablecomment,
           comment: comment,
-          enableoverview: enableoverview);
+          enableoverview: enableoverview,
+          showInventory: enableInventory);
     } on Exception catch (e) {} catch (err) {}
   }
 

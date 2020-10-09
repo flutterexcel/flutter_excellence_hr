@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_excellence_hr/model/inventory/history.dart';
 import 'package:flutter_excellence_hr/model/inventory/user_profile_detail.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import '../bloc/inventory/inventory.dart';
 import '../model/inventory/user_assign_machine.dart';
 import '../widgets/navigate/imp_notes_inventory.dart';
@@ -21,11 +22,13 @@ class ShowInventory extends StatelessWidget {
     return BlocBuilder<InventoryBloc, InventoryState>(
       builder: (context, state) {
         if (state is InventoryLoading) {
-          return Scaffold(backgroundColor: Colors.white,
-            body:
-           Center(
-            child: CircularProgressIndicator(backgroundColor: Colors.cyan,),
-           ),
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.cyan,
+              ),
+            ),
           );
         }
         if (state is InventoryInitial) {
@@ -34,20 +37,9 @@ class ShowInventory extends StatelessWidget {
 
         return Scaffold(
             appBar: AppBar(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('My Inventory',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                  CircleAvatar(
-                      radius: 20,
-                      backgroundImage: AssetImage('assets/images/person.jpg'))
-                ],
-              ),
-            ),
+                title: AppBarWidget(
+              pageName: "My Inventory",
+            )),
             drawer: Navigation(),
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {
@@ -66,7 +58,9 @@ class ShowInventory extends StatelessWidget {
                           : Column(
                               children: <Widget>[
                                 Center(
-                                  child: ImportantNotesInventory(),
+                                  child: state.showInventory
+                                      ? Center()
+                                      : ImportantNotesInventory(),
                                 ),
                                 ListView.builder(
                                   scrollDirection: Axis.vertical,

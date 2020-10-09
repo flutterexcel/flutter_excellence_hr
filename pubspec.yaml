@@ -20,7 +20,7 @@ dependencies:
   meta: ^1.1.8
   uuid: ^2.1.0
   intl: ^0.16.1
-  universal_io: 1.0.1
+  #universal_io: 1.0.1
   cupertino_icons: ^0.1.3
   string_validator: ^0.1.4
   dotted_border: 1.0.6

@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/salary/my_salary.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/salary/salary.dart';
 
-class Heading extends StatelessWidget {
+class Heading extends StatefulWidget {
+  @override
+  _HeadingState createState() => _HeadingState();
+}
+
+class _HeadingState extends State<Heading> {
+  MySalary api = new MySalary();
+  Salary salary;
+  bool salHeading = false;
+
+  _getHeading() async {
+    return await api.getSalary().then((value) {
+      salary = value;
+      setState(() {
+        salHeading = true;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getHeading();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,7 +38,7 @@ class Heading extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                  margin: EdgeInsets.only(top: 16, left: 8,bottom: 16),
+                  margin: EdgeInsets.only(top: 16, left: 8, bottom: 16),
                   child: Text(
                     'SALARY ',
                     style: TextStyle(
@@ -21,7 +47,7 @@ class Heading extends StatelessWidget {
                         color: AppColors.LIGHTBLACK_COLOR),
                   )),
               Container(
-                  margin: EdgeInsets.only(top: 16,bottom: 16),
+                  margin: EdgeInsets.only(top: 16, bottom: 16),
                   child: Text(
                     'DETAILS ',
                     style: TextStyle(
@@ -37,123 +63,125 @@ class Heading extends StatelessWidget {
         Container(
           color: Colors.grey[200],
           margin: EdgeInsets.only(left: 16, right: 16),
-          child: Column(children: <Widget>[
-            Row(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: 16, left: 8),
-                    child: Text(
-                      'Applicabel From: ',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'OpenSans',
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(top: 16),
-                    child: Text(
-                      '15-July-2020',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'SourceSans',
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: 8, left: 8),
-                    child: Text(
-                      'Applicabel Till: ',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'OpenSans',
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(top: 8),
-                    child: Text(
-                      '12 months (14-July-2021)',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'SourceSans',
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: 8, left: 8),
-                    child: Text(
-                      'Increment Amount: ',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'OpenSans',
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(top: 8),
-                    child: Text(
-                      '10000',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'SourceSans',
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: 8, left: 8),
-                    child: Text(
-                      'Leave Allocated: ',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'OpenSans',
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(top: 8),
-                    child: Text(
-                      '0.5',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'SourceSans',
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: 8, left: 8, bottom: 16),
-                    child: Text(
-                      'Updated On: ',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'OpenSans',
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(top: 8, bottom: 16),
-                    child: Text(
-                      '7th-September-2020',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'SourceSans',
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.LIGHTBLACK_COLOR),
-                    )),
-              ],
-            ),
-          ]),
+          child: salHeading
+              ? Column(children: <Widget>[
+                  Row(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 16, left: 8),
+                          child: Text(
+                            'Applicabel From: ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'OpenSans',
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(top: 16),
+                          child: Text(
+                            salary.data.salaryDetails[0].test.applicableFrom,
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'SourceSans',
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 8, left: 8),
+                          child: Text(
+                            'Applicabel Till: ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'OpenSans',
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(top: 8),
+                          child: Text(
+                            salary.data.salaryDetails[0].test.applicableTill,
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'SourceSans',
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 8, left: 8),
+                          child: Text(
+                            'Increment Amount: ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'OpenSans',
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(top: 8),
+                          child: Text(
+                            salary.data.salaryDetails[0].incrementAmount,
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'SourceSans',
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 8, left: 8),
+                          child: Text(
+                            'Leave Allocated: ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'OpenSans',
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(top: 8),
+                          child: Text(
+                            salary.data.salaryDetails[0].test.leavesAllocated,
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'SourceSans',
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 8, left: 8, bottom: 16),
+                          child: Text(
+                            'Updated On: ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'OpenSans',
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(top: 8, bottom: 16),
+                          child: Text(
+                            salary.data.salaryDetails[0].test.lastUpdatedOn,
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'SourceSans',
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.LIGHTBLACK_COLOR),
+                          )),
+                    ],
+                  ),
+                ])
+              : Center(),
         )
       ],
     );

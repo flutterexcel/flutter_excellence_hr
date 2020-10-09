@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_excellence_hr/bloc/bloc.dart';
+import 'package:flutter_excellence_hr/bloc/inventory/inventory.dart';
+import 'package:flutter_excellence_hr/bloc/inventory/inventory_bloc.dart';
 import 'package:flutter_excellence_hr/bloc/login/login_bloc.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/apply_leave/apply_leave.dart';
@@ -11,12 +13,11 @@ import 'package:flutter_excellence_hr/screens/my_salary/my_salary.dart';
 import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/screens/policy_documents/policy_documents.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
-import 'package:flutter_excellence_hr/screens/weekly_timesheet/weekly_timesheet.dart';
-import 'package:flutter_excellence_hr/services/storage_service.dart';
 
 class Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final _loginBloc = BlocProvider.of<LoginBloc>(context);
+    final _inventoryBloc = BlocProvider.of<InventoryBloc>(context);
     return Drawer(
       child: Container(
         color: Colors.white,
@@ -70,17 +71,6 @@ class Navigation extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.view_week, color: AppColors.LIGHTBLACK_COLOR),
-              title: Text('Weekly Time Sheet',
-                  style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => WeeklyTimeSheet()),
-                );
-              },
-            ),
-            ListTile(
               leading:
                   Icon(Icons.view_carousel, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('Apply Leave',
@@ -123,10 +113,7 @@ class Navigation extends StatelessWidget {
               title: Text('My Inventory',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ShowInventory()),
-                );
+                _inventoryBloc.add(LoadInventory(enableInventory: true));
               },
             ),
             ListTile(

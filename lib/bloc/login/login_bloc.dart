@@ -70,7 +70,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           event.email, event.password);
       if (user != null) {
         // push new login event
-
         this.add(UserLogIn(user: user));
         yield LoginSuccess();
       } else {
