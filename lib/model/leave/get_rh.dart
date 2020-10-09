@@ -1,12 +1,10 @@
-import 'dart:convert';
-
-class Holiday {
+class GetRhLeaves {
   int error;
   Data data;
 
-  Holiday({this.error, this.data});
+  GetRhLeaves({this.error, this.data});
 
-  Holiday.fromJson(Map<String, dynamic> json) {
+  GetRhLeaves.fromJson(Map<String, dynamic> json) {
     error = json['error'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
@@ -22,62 +20,60 @@ class Holiday {
 }
 
 class Data {
-  String message;
-  List<Holidays> holidays;
-  Data({this.message, this.holidays});
-  Data.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    if (json['holidays'] != null) {
-      holidays = new List<Holidays>();
+  List<RhList> rhList;
 
-      json['holidays'].forEach((v) {
-        holidays.add(new Holidays.fromJson(v));
-        holidays.sort((a, b) {
-          return a.date.compareTo(b.date);
-        });
+  Data({this.rhList});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    if (json['rh_list'] != null) {
+      rhList = new List<RhList>();
+      json['rh_list'].forEach((v) {
+        rhList.add(new RhList.fromJson(v));
       });
-      Comparator<Holidays> holidayComparator =
-          (a, b) => a.date.compareTo(b.date);
-      holidays.sort(holidayComparator);
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.holidays != null) {
-      data['holidays'] = this.holidays.map((v) => v.toJson()).toList();
+    if (this.rhList != null) {
+      data['rh_list'] = this.rhList.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Holidays {
+class RhList {
   String id;
   String name;
   String date;
   String type;
   String typeText;
+  String rawDate;
+  String day;
   String month;
-  String dayOfWeek;
+  String status;
 
-  Holidays(
+  RhList(
       {this.id,
       this.name,
       this.date,
       this.type,
       this.typeText,
+      this.rawDate,
+      this.day,
       this.month,
-      this.dayOfWeek});
+      this.status});
 
-  Holidays.fromJson(Map<String, dynamic> json) {
+  RhList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     date = json['date'];
     type = json['type'];
     typeText = json['type_text'];
+    rawDate = json['raw_date'];
+    day = json['day'];
     month = json['month'];
-    dayOfWeek = json['dayOfWeek'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -87,8 +83,10 @@ class Holidays {
     data['date'] = this.date;
     data['type'] = this.type;
     data['type_text'] = this.typeText;
+    data['raw_date'] = this.rawDate;
+    data['day'] = this.day;
     data['month'] = this.month;
-    data['dayOfWeek'] = this.dayOfWeek;
+    data['status'] = this.status;
     return data;
   }
 }

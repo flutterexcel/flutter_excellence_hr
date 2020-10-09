@@ -13,7 +13,7 @@ class Overview extends StatelessWidget {
             "heading": "All employee information at one page",
             "description": "Simple and intutive HR software that consolidates all of your employee information into a safe and serialized information store that is assible from anywhere.All your employee's data can easily be collected,imported and stored in database.",
             "feature":"FEATURE",
-             "employeepic":"images/employee.png"
+             "employeepic":"assets/images/employee.png"
         }],
         "emp":[{"heading":"Employee Management",
         "description":"All your employee information stored in one central location and accessible from anywhere"
@@ -21,32 +21,32 @@ class Overview extends StatelessWidget {
         "pay": [{
             "heading": "Payroll",
             "description": "HRMS payroll provides every possible option for allocation of employeeshare of PF or ESI all at one place.",
-             "imgpay":"images/payroll.png"
+             "imgpay":"assets/images/payroll.png"
         }],
         "inventory": [{
             "heading": "Inventory",
             "description": "Track every item or batch in your inventory with serial number.ALways keep a track on movement of items,in a single inventory management.",
-             "imginventory":"images/inventory.png"
+             "imginventory":"assets/images/inventory.png"
         }],
         "leave": [{
             "heading": "Leave Management",
             "description": "Customization leave  management system of your own.Approve multiple  request and manage applications with effective leave management.",
-             "imgleave":"images/leave.png"
+             "imgleave":"assets/images/leave.png"
         }],
         "document": [{
             "heading": "Document Management",
             "description": "Organize your online documents,create public folders for internal policy resources, and share confidential files with the right person.",
-             "imgdocument":"images/document.png"
+             "imgdocument":"assets/images/document.png"
         }],
         "policies": [{
             "heading": "Policies Management",
             "description": "Upload, organize and share public documents like policies and other senstive information. ",
-             "imgpolicy":"images/policy.png"
+             "imgpolicy":"assets/images/policy.png"
         }],
         "profile": [{
             "heading": "Profile",
             "description": "Let employes update their own information and be sure of getting the vital details.Set profile permissions so that employees can access right feild and keep all information up to date. ",
-             "imgprofile":"images/profile.png"
+             "imgprofile":"assets/images/profile.png"
         }]
         
         
