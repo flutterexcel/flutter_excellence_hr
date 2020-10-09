@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import "package:google_sign_in/google_sign_in.dart";
+//import "package:google_sign_in/google_sign_in.dart";
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 
-GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['profile', 'email']);
+//GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['profile', 'email']);
 
 class GoogleLogin extends StatefulWidget {
   @override
@@ -10,17 +10,17 @@ class GoogleLogin extends StatefulWidget {
 }
 
 class _GoogleLoginState extends State<GoogleLogin> {
-  GoogleSignInAccount _currentUser;
+  //GoogleSignInAccount _currentUser;
 
   @override
   void initState() {
-    super.initState();
-    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
-      setState(() {
-        _currentUser = account;
-      });
-    });
-    _googleSignIn.signInSilently();
+    // super.initState();
+    // _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
+    //   setState(() {
+    //     _currentUser = account;
+    //   });
+    // });
+    // _googleSignIn.signInSilently();
   }
 
   Widget build(BuildContext context) {
@@ -57,7 +57,11 @@ class _GoogleLoginState extends State<GoogleLogin> {
                               onPressed: _handleSignIn,
                               color: AppColors.GOOGLE_BTN_COLOR,
                               child: Text(
-                                  'Login with your company google account',style: TextStyle(color:Colors.white,fontFamily: 'SourceSans'),),
+                                'Login with your company google account',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'SourceSans'),
+                              ),
                             ),
                           ),
                         ),
@@ -73,7 +77,7 @@ class _GoogleLoginState extends State<GoogleLogin> {
 }
 
 Future<void> _handleSignIn() async {
-  try {
-    await _googleSignIn.signIn();
-  } catch (error) {}
+  // try {
+  //   await _googleSignIn.signIn();
+  // } catch (error) {}
 }

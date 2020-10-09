@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_excellence_hr/bloc/profile/profile_bloc.dart';
 import 'package:flutter_excellence_hr/model/profile/ProfileDetails.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:universal_io/io.dart';
+//import 'package:universal_io/io.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class EditBankDetails extends StatelessWidget {
@@ -32,33 +32,13 @@ class EditBankDetails extends StatelessWidget {
       _btnControllerz.success();
     }
 
-    Widget _getFAB() {
-      if (Platform.isWindows) {
-        return RoundedLoadingButton(
-          color: AppColors.BTN_BLUE,
-          width: 150,
-          borderRadius: 10,
-          child: Text('Update Bank Details',
-              style: TextStyle(color: Colors.white)),
-          controller: _btnControllerz,
-          onPressed: () async {
-            await _dosave();
-          },
-        );
-      } else {
-        return RoundedLoadingButton(
-          color: AppColors.BTN_BLUE,
-          width: 150,
-          borderRadius: 10,
-          child: Text('Update Bank Details',
-              style: TextStyle(color: Colors.white)),
-          controller: _btnControllerz,
-          onPressed: () async {
-            await _dosave();
-          },
-        );
-      }
-    }
+    // Widget _getFAB() {
+    //   if (Platform.isWindows) {
+    // return ;
+    //    } else {
+    //     return ;
+    //   }
+    // }
 
     return Column(
       children: <Widget>[
@@ -163,7 +143,17 @@ class EditBankDetails extends StatelessWidget {
             Container(
               height: 35,
               margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
-              child: _getFAB(),
+              child: RoundedLoadingButton(
+                color: AppColors.BTN_BLUE,
+                width: 150,
+                borderRadius: 10,
+                child: Text('Update Bank Details',
+                    style: TextStyle(color: Colors.white)),
+                controller: _btnControllerz,
+                onPressed: () async {
+                  await _dosave();
+                },
+              ),
             ),
           ],
         ),

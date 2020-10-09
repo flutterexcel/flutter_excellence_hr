@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/widgets/login/login.dart';
 import '../../bloc/bloc.dart';
 
 // class LoginPage extends StatefulWidget {
@@ -9,7 +10,7 @@ import '../../bloc/bloc.dart';
 // }
 
 class LoginPage extends StatelessWidget {
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+//  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   bool _autoValidate = false;
@@ -31,8 +32,8 @@ class LoginPage extends StatelessWidget {
       );
     }
     return Form(
-      key: _key,
-      autovalidate: _autoValidate,
+      //   key: _key,
+      //  autovalidate: _autoValidate,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -70,13 +71,18 @@ class LoginPage extends StatelessWidget {
               height: 16,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Expanded(
+                Flexible(
                   child: Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 32, 0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgetPassword()),
+                        );
                       },
                       child: Text(
                         'Forget password',
@@ -103,7 +109,10 @@ class LoginPage extends StatelessWidget {
                 color: AppColors.BTN_BLACK_COLOR,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child: Text('Login',style: TextStyle(fontFamily:'SourceSans'),),
+                child: Text(
+                  'Login',
+                  style: TextStyle(fontFamily: 'SourceSans'),
+                ),
                 onPressed:
                     state is LoginLoading ? () {} : _onLoginButtonPressed,
               ),

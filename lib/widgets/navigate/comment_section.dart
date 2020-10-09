@@ -1,37 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'dart:io';
-import 'package:universal_io/io.dart';
+
+//import 'package:universal_io/io.dart';
 class CommentSection extends StatelessWidget {
   final commentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Widget _getFAB() {
-        if(Platform.isWindows){
-          return RaisedButton(
-            onPressed: () {},
-            color: AppColors.GOOGLE_BTN_COLOR,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5.0))),
-            child: Text(
-              "Comment",
-              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
-            ),
-          );
-        
-        }else{
-          RaisedButton(
-            onPressed: () {},
-            color: AppColors.GOOGLE_BTN_COLOR,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5.0))),
-            child: Text(
-              "Comment",
-              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
-            ),
-          );
-        }
-      }
+    // Widget _getFAB() {
+    //     if(Platform.isWindows){
+    //       return ;
+    //     }else{
+    //     }
+    //   }
 
     return Column(
       children: <Widget>[
@@ -52,8 +33,18 @@ class CommentSection extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 20),          
-        _getFAB(),
+        SizedBox(height: 20),
+        RaisedButton(
+          onPressed: () {},
+          color: AppColors.GOOGLE_BTN_COLOR,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+          child: Text(
+            "Comment",
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
       ],
     );
   }
