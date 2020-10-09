@@ -5,7 +5,9 @@ import 'package:flutter_excellence_hr/services/leave/sal_info.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class StatisticsLeave extends StatefulWidget {
-  StatisticsLeave({Key key}) : super(key: key);
+  final Function(Future<dynamic>) onPayslipHistory;
+
+  const StatisticsLeave({Key key, this.onPayslipHistory}) : super(key: key);
 
   @override
   _StatisticsLeaveState createState() => _StatisticsLeaveState();
@@ -23,6 +25,7 @@ class _StatisticsLeaveState extends State<StatisticsLeave> {
   List<dynamic> numOf = [];
   double leaveTaken, totalLeave, percent;
   PayslipHistory usersalnfo;
+
   _getMyLeaveInfo() async {
     return await api.getSalInfo().then((value) {
       numOf.add(value.data.payslipHistory[0].allocatedLeaves + "/month");

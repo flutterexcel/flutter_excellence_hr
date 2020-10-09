@@ -1,19 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
 import '../post.dart';
-import '../../model/leave/rh_stats.dart';
+import '../../model/leave/get_rh.dart';
 import '../../app_config.dart';
 import '../storage_service.dart';
 
-class GetRhStats {
+class GetRh {
   Post _post = Post();
-  Future<RhStats> getRhStats() async {
+  Future<GetRhLeaves> getRh() async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     var token = StorageUtil.getUserToken();
     final apiUrl = prodUrl.baseUrl;
     var currDt = DateTime.now();
     Map data = {
-      "action": "get_user_rh_stats",
+      "action": "get_my_rh_leaves",
       "token": token,
       "year": currDt.year.toString(),
       "user_id": StorageUtil.getUserId()
@@ -23,7 +23,7 @@ class GetRhStats {
         .then((dynamic res) async {
       if (res["error"] >= 1) throw new Exception(res["data"]['message']);
 
-      return RhStats.fromJson(res);
+      return GetRhLeaves.fromJson(res);
     });
   }
 }

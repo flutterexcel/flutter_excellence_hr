@@ -1,65 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/leave/get_rh.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/leave/get_rh.dart';
 
-class RestrictedLeave extends StatelessWidget {
-  List<String> listOf = [
-    "Holiday : Lohri",
-    "Holiday : Mahashivaratri",
-    "Holiday : Buddha Purnima",
-    "Holiday : Idul-Fitr",
-    "Holiday : Idul-Zuha Bakrid"
-  ];
+class RestrictedLeave extends StatefulWidget {
+  @override
+  _RestrictedLeaveState createState() => _RestrictedLeaveState();
+}
 
-  List<String> dateOf = [
-    "Date : 13-January-2020",
-    "Date : 21-February-2020",
-    "Date : 07-May-2020",
-    "Date : 25-May-2020",
-    "Date : 02-August-2020",
-  ];
+class _RestrictedLeaveState extends State<RestrictedLeave> {
+  GetRh api = GetRh();
+
+  bool loadRh = false;
+  GetRhLeaves getRhLeaves;
+  _getMyRhInfo() async {
+    return await api.getRh().then((value) {
+      getRhLeaves = value;
+      setState(() {
+        loadRh = true;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    _getMyRhInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Row(
-          children: [
-            Container(
-                margin: EdgeInsets.only(top: 16, left: 16),
-                child: Text(
-                  'Restricted Holiday List ',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'SourceSans',
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.LIGHTBLACK_COLOR),
-                )),
-          ],
-        ),
-        Card(
-          margin: EdgeInsets.all(16),
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            separatorBuilder: (BuildContext context, int index) =>
-                Divider(height: 1, thickness: 1, color: Colors.grey[300]),
-            itemBuilder: (_, int index) => listRestrictLeave(
-              this.listOf[index],
-              this.dateOf[index],
-            ),
-            itemCount: this.listOf.length,
-          ),
-        )
-      ],
-    );
+    return loadRh
+        ? Column(
+            children: <Widget>[
+              Row(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(top: 16, left: 16),
+                      child: Text(
+                        'Restricted Holiday List ',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'SourceSans',
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.LIGHTBLACK_COLOR),
+                      )),
+                ],
+              ),
+              Card(
+                margin: EdgeInsets.all(16),
+                child: ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(height: 1, thickness: 1, color: Colors.grey[300]),
+                  itemBuilder: (_, int index) =>
+                      ListRestrictLeave(getRhLeaves.data.rhList[index]),
+                  itemCount: getRhLeaves.data.rhList.length,
+                ),
+              )
+            ],
+          )
+        : Center(child: CircularProgressIndicator());
   }
 }
 
-class listRestrictLeave extends StatelessWidget {
-  String itemName, itemNum, itemDate;
+class ListRestrictLeave extends StatelessWidget {
+  RhList list;
 
-  listRestrictLeave(this.itemName, this.itemDate);
+  ListRestrictLeave(this.list);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,18 +84,28 @@ class listRestrictLeave extends StatelessWidget {
           radius: 18,
         ),
         title: Text(
-          itemName,
+          list.name,
           style: TextStyle(fontSize: 14, fontFamily: 'SourceSans'),
         ),
         subtitle: Text(
-          itemDate,
+          list.date.toString(),
           style: TextStyle(fontSize: 14, fontFamily: 'SourceSans'),
         ),
-        trailing: Container(width: 70,height: 30,
-          child: RaisedButton( color: AppColors.NAVY_BLUE,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
-            onPressed: () {},child:Text("Apply",style:TextStyle(fontFamily: 'SourceSans',fontSize: 12,color: Colors.white))),
-        ),
+        // trailing: Container(
+        //   width: 70,
+        //   height: 30,
+        //   child: RaisedButton(
+        //       color: AppColors.NAVY_BLUE,
+        //       shape: RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.circular(10),
+        //       ),
+        //       onPressed: () {},
+        //       child: Text("Apply",
+        //           style: TextStyle(
+        //               fontFamily: 'SourceSans',
+        //               fontSize: 12,
+        //               color: Colors.white))),
+        // ),
       ),
     );
   }

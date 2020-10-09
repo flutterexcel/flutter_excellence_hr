@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_excellence_hr/model/user.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 import '../../services/authentication_services.dart';
@@ -35,17 +36,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _mapAppLoadToState(AppLoad event) async* {
     yield AuthenticationLoad(); // to display splash screen
     StorageUtil.getInstance();
+    User currentUser;
     try {
-      final currentUser = await _authenticationService.getCurrentUser();
+      await _authenticationService.getCurrentUser().then((value) {
+        currentUser = value;
+      });
 
       if (currentUser != null) {
-        this.add(UserLogIn(user: currentUser.user));
-        yield CheckAuthenticated(user: currentUser.user);
+        this.add(UserLogIn(user: currentUser));
+        yield LoginSuccess();
       } else {
         yield LoginFailure();
       }
     } catch (e) {
-      yield LoginFailure();
+      //yield LoginFailure();
     }
   }
 
@@ -64,7 +68,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       final user = await _authenticationService.signInWithEmailAndPassword(
           event.email, event.password);
-
       if (user != null) {
         // push new login event
 

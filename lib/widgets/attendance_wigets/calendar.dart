@@ -6,12 +6,13 @@ import 'package:flutter_excellence_hr/widgets/attendance_wigets/apply_attendance
 class CalendarScreen extends StatelessWidget {
   final MonthAttendance monthAttendance;
   CalendarScreen({this.monthAttendance});
-
+  
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
+     physics: NeverScrollableScrollPhysics(),   
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       itemBuilder: (_, index) => monthAttendance
