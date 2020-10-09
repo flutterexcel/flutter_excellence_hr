@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/bloc.dart';
+import 'package:flutter_excellence_hr/bloc/inventory/inventory.dart';
+import 'package:flutter_excellence_hr/bloc/inventory/inventory_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/login/login_bloc.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/apply_leave/apply_leave.dart';
 import 'package:flutter_excellence_hr/screens/attendance/my_attendance.dart';
@@ -11,6 +16,8 @@ import 'package:flutter_excellence_hr/screens/screens.dart';
 
 class Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
+    final _loginBloc = BlocProvider.of<LoginBloc>(context);
+    final _inventoryBloc = BlocProvider.of<InventoryBloc>(context);
     return Drawer(
       child: Container(
         color: Colors.white,
@@ -106,10 +113,7 @@ class Navigation extends StatelessWidget {
               title: Text('My Inventory',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ShowInventory()),
-                );
+                _inventoryBloc.add(LoadInventory(enableInventory: true));
               },
             ),
             ListTile(
@@ -153,6 +157,13 @@ class Navigation extends StatelessWidget {
                   Icon(Icons.exit_to_app, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('Logout',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+              onTap: () {
+                _loginBloc.add(UserLogOut());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
+              },
             ),
           ],
         ),

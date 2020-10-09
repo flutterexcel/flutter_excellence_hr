@@ -4,7 +4,7 @@ import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import 'package:flutter_excellence_hr/widgets/my_leaves_widgets/my_leaves_widgets.dart';
 
-class MyLeaves extends StatelessWidget { 
+class MyLeaves extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

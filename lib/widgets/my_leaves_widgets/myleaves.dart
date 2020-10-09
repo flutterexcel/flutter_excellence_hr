@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/leave/leave.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/leave/leaves.dart';
 import 'package:flutter_excellence_hr/widgets/my_leaves_widgets/my_leaves_widgets.dart';
 
+class MyLeavesList extends StatefulWidget {
+  @override
+  _MyLeavesListState createState() => _MyLeavesListState();
+}
 
-
-class MyLeavesList extends StatelessWidget {
+class _MyLeavesListState extends State<MyLeavesList> {
   List<String> listOf = [
     "Casual Leave",
     "Rh Compansation",
@@ -16,79 +21,97 @@ class MyLeavesList extends StatelessWidget {
     "Rh Compansation"
   ];
 
-  List<String> listLogo = ["CL", "Rh", "CL", "Rh", "CL", "Rh", "CL", "Rh"];
+  //List<String> listLogo = ["Restricted" : "CL"];
+  GetLeaves api = GetLeaves();
+  Leave leaves;
+  bool loadLeaves = false;
+  _getMyRhInfo() async {
+    return await api.getLeaves().then((value) {
+      leaves = value;
+      setState(() {
+        loadLeaves = true;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    _getMyRhInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Row(
-          children: [
-            Container(
-                margin: EdgeInsets.only(top: 16, left: 16, bottom: 16),
-                child: Text(
-                  'MY LEAVES ',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'SourceSans',
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.LIGHTBLACK_COLOR),
-                )),
-          ],
-        ),
-        Divider(height: 1, thickness: .5, color: Colors.grey[300]),
-        //              Container(height:300),
-        ListView.separated(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          separatorBuilder: (BuildContext context, int index) =>
+    return loadLeaves
+        ? Column(
+            children: <Widget>[
+              Row(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(top: 16, left: 16, bottom: 16),
+                      child: Text(
+                        'MY LEAVES ',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'SourceSans',
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.LIGHTBLACK_COLOR),
+                      )),
+                ],
+              ),
               Divider(height: 1, thickness: .5, color: Colors.grey[300]),
-          itemBuilder: (_, int index) =>
-              listLeaves(this.listOf[index], this.listLogo[index]),
-          itemCount: this.listOf.length,
-        ),
-      ],
-    );
+              //              Container(height:300),
+              ListView.separated(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                separatorBuilder: (BuildContext context, int index) =>
+                    Divider(height: 1, thickness: .5, color: Colors.grey[300]),
+                itemBuilder: (_, int index) =>
+                    ListLeaves(leaves.data.leaves[index]),
+                itemCount: leaves.data.leaves.length,
+              ),
+            ],
+          )
+        : Center(
+            child: CircularProgressIndicator(),
+          );
   }
 }
 
-
-
-class listLeaves extends StatelessWidget {
-  String leaveType, leaveIcon;
-  listLeaves(this.leaveType, this.leaveIcon);
+class ListLeaves extends StatelessWidget {
+  Leaves leaves;
+  ListLeaves(this.leaves);
   @override
   Widget build(BuildContext context) {
     customDialog() {
-    return showDialog(
-        context: context,
-        builder: (BuildContext c) {
-          return Dialog(
-            child: Container(
-              height: 245,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: <Widget>[
-                  UploadPic()
-                ],
+      return showDialog(
+          context: context,
+          builder: (BuildContext c) {
+            return Dialog(
+              child: Container(
+                height: 245,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: <Widget>[UploadPic()],
+                ),
               ),
-            ),
-          );
-        });
-  }
+            );
+          });
+    }
+
     return Container(
       margin: EdgeInsets.all(7),
       padding: EdgeInsets.fromLTRB(6, 0, 0, 6),
       child: Column(children: <Widget>[
         ListTile(
           leading: CircleAvatar(
-            child: Text(leaveIcon, style: TextStyle(fontSize: 10)),
+            child: Text('L', style: TextStyle(fontSize: 10)),
             backgroundColor: Colors.deepPurple[300],
             foregroundColor: Colors.white,
             radius: 14,
           ),
-          title: Text(leaveType,
+          title: Text(leaves.leaveType,
               style: TextStyle(
                   fontSize: 14,
                   fontFamily: 'SourceSans',
@@ -99,7 +122,7 @@ class listLeaves extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "From 08-September-2020 to 10-September-2020",
+                    "From " + leaves.fromDate + " to " + leaves.toDate,
                     style: TextStyle(
                       fontSize: 14,
                       fontFamily: 'SourceSans',
@@ -111,7 +134,7 @@ class listLeaves extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Applied On 29-September-2020",
+                  "Applied On " + leaves.appliedOn,
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'SourceSans',
@@ -122,7 +145,7 @@ class listLeaves extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Status: Approved",
+                  "Status: " + leaves.status,
                   style: TextStyle(
                     fontSize: 10,
                     fontFamily: 'SourceSans',
@@ -135,7 +158,7 @@ class listLeaves extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Reason: Checking backend API working n shown  on My leaves page",
+                    "Reason: " + leaves.reason,
                     style: TextStyle(
                       fontSize: 10,
                       fontFamily: 'SourceSans',
@@ -147,7 +170,7 @@ class listLeaves extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Leave Type: Casual Leave",
+                  "Leave Type: " + leaves.leaveType,
                   style: TextStyle(
                     fontSize: 10,
                     fontFamily: 'SourceSans',
@@ -160,7 +183,7 @@ class listLeaves extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Reason For Late Apply: It was urgent n not known prior",
+                    "Reason For Late Apply: " + leaves.lateReason,
                     style: TextStyle(
                       fontSize: 10,
                       fontFamily: 'SourceSans',
@@ -175,7 +198,9 @@ class listLeaves extends StatelessWidget {
                     color: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    onPressed: () {customDialog();},
+                    onPressed: () {
+                      customDialog();
+                    },
                     child: Text(
                       "Upload Leave Document",
                       style: TextStyle(
@@ -204,7 +229,7 @@ class listLeaves extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(5)),
                 color: Colors.blue),
             child: Text(
-              "3 Day",
+              leaves.noOfDays,
               style: TextStyle(
                   fontSize: 10, fontFamily: 'SourceSans', color: Colors.white),
             ),

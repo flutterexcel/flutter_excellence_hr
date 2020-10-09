@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_excellence_hr/screens/my_leaves/my_leaves.dart';
+import 'package:flutter_excellence_hr/services/storage_service.dart';
 import 'bloc/bloc.dart';
 import 'routes.dart';
 import 'screens/screens.dart';
@@ -14,6 +14,7 @@ void main() => runApp(
         // Injects the Authentication service
         RepositoryProvider<AuthenticationService>(
       create: (context) {
+        StorageUtil.getInstance();
         return LoginAuthenticationService();
       },
       // Injects the LoginBloc BLoC

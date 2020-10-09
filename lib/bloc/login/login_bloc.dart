@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_excellence_hr/model/user.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 import '../../services/authentication_services.dart';
@@ -19,6 +20,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginInWithEmailButtonPressed) {
       yield* _mapLoginWithEmailToState(event);
     }
+    if (event is LoginInWithGoogleButtonPressed) {
+      yield* _mapLoginWithGoogleToState(event);
+    }
     if (event is AppLoad) {
       yield* _mapAppLoadToState(event);
     }
@@ -35,18 +39,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _mapAppLoadToState(AppLoad event) async* {
     yield AuthenticationLoad(); // to display splash screen
     StorageUtil.getInstance();
-
+    User currentUser;
     try {
-      final currentUser = await _authenticationService.getCurrentUser();
+      await _authenticationService.getCurrentUser().then((value) {
+        currentUser = value;
+      });
 
       if (currentUser != null) {
-        this.add(UserLogIn(user: currentUser.user));
-        yield CheckAuthenticated(user: currentUser.user);
+        this.add(UserLogIn(user: currentUser));
+        yield LoginSuccess();
       } else {
         yield LoginFailure();
       }
     } catch (e) {
-      yield LoginFailure();
+      //yield LoginFailure();
     }
   }
 
@@ -65,7 +71,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       final user = await _authenticationService.signInWithEmailAndPassword(
           event.email, event.password);
+      if (user != null) {
+        // push new login event
+        this.add(UserLogIn(user: user));
+        yield LoginSuccess();
+      } else {
+        yield LoginFailure(error: 'Login failed');
+      }
+      // ignore: unused_catch_clause
+    } on Exception catch (e) {
+      yield LoginFailure(error: 'Login failed');
+    } catch (err) {
+      yield LoginFailure(error: 'Login failed');
+    }
+  }
 
+  Stream<LoginState> _mapLoginWithGoogleToState(
+      LoginInWithGoogleButtonPressed event) async* {
+    yield LoginLoading();
+    try {
+      print(event.googleToken);
+      final user = await _authenticationService
+          .signInWithGoogleAndPassword(event.googleToken);
       if (user != null) {
         // push new login event
         this.add(UserLogIn(user: user));

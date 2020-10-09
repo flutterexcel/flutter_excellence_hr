@@ -58,7 +58,9 @@ class ShowInventory extends StatelessWidget {
                           : Column(
                               children: <Widget>[
                                 Center(
-                                  child: ImportantNotesInventory(),
+                                  child: state.showInventory
+                                      ? Center()
+                                      : ImportantNotesInventory(),
                                 ),
                                 ListView.builder(
                                   scrollDirection: Axis.vertical,
