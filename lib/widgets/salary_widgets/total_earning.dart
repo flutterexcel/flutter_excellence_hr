@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/salary/my_salary.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/salary/salary.dart';
 
-class TotalEarning extends StatelessWidget {
-  List<String> listOf = [
-    "Basic",
-    "HRA",
-    "Conveyance",
-    "Medical Allowance",
-    "Special Allowance",
-  ];
+class TotalEarning extends StatefulWidget {
+  @override
+  _TotalEarningState createState() => _TotalEarningState();
+}
 
-  List<String> vaueOf = [
-    "7500",
-    "1500",
-    "1500",
-    "1500",
-    "3000",
-  ];
+class _TotalEarningState extends State<TotalEarning> {
+  MySalary api = new MySalary();
+  Salary salary;
+  bool yourSalary = false;
+  List<ListItem> earning = [];
+  _getSalary() async {
+    return await api.getSalary().then((value) {
+      salary = value;
+      earning.add(ListItem("Basic", salary.data.salaryDetails[0].basic));
+      earning.add(ListItem("HRA", salary.data.salaryDetails[0].hRA));
+      earning
+          .add(ListItem("Conveyance", salary.data.salaryDetails[0].conveyance));
+      earning.add(ListItem(
+          "Medical_Allowance", salary.data.salaryDetails[0].medicalAllowance));
+      earning.add(ListItem(
+          "Special Allowance", salary.data.salaryDetails[0].specialAllowance));
+      setState(() {
+        yourSalary = true;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getSalary();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,45 +75,58 @@ class TotalEarning extends StatelessWidget {
           padding: EdgeInsets.all(6),
           decoration: BoxDecoration(
               border: Border.all(width: 1, color: Colors.grey[300])),
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            separatorBuilder: (BuildContext context, int index) => Divider(
-              height: 1,
-              thickness: .5,
-              color: Colors.grey[300],
-            ),
-            itemBuilder: (_, int index) =>
-                listEarningItems(this.listOf[index], this.vaueOf[index]),
-            itemCount: this.listOf.length,
-          ),
+          child: yourSalary
+              ? ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(
+                    height: 1,
+                    thickness: .5,
+                    color: Colors.grey[300],
+                  ),
+                  itemBuilder: (_, int index) =>
+                      ListEarningItems(earning[index]),
+                  itemCount: earning.length,
+                )
+              : Center(),
         ),
       ],
     );
   }
 }
 
-class listEarningItems extends StatelessWidget {
-  String itemName, itemValue;
-  listEarningItems(this.itemName, this.itemValue);
+class ListEarningItems extends StatelessWidget {
+  ListItem itemName;
+  ListEarningItems(this.itemName);
   @override
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(6),
-        child: ListTile(
-          title: Text(
-            itemName,
-            style: TextStyle(
-                color: AppColors.LIGHTBLACK_COLOR,
-                fontSize: 14,
-                fontFamily: 'SourceSans'),
-          ),
-          trailing: Text(itemValue,
-              style: TextStyle(
-                  color: AppColors.LIGHTBLACK_COLOR,
-                  fontSize: 14,
-                  fontFamily: 'SourceSans')),
+        child: Column(
+          children: [
+            ListTile(
+              title: Text(
+                itemName.key,
+                style: TextStyle(
+                    color: AppColors.LIGHTBLACK_COLOR,
+                    fontSize: 14,
+                    fontFamily: 'SourceSans'),
+              ),
+              trailing: Text(itemName.value,
+                  style: TextStyle(
+                      color: AppColors.LIGHTBLACK_COLOR,
+                      fontSize: 14,
+                      fontFamily: 'SourceSans')),
+            ),
+          ],
         ));
   }
+}
+
+class ListItem {
+  String key;
+  String value;
+  ListItem(this.key, this.value);
 }

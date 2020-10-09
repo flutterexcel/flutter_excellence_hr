@@ -17,6 +17,7 @@ class MySalary extends StatelessWidget {
             Heading(),
             TotalEarning(),
             TotalDetuction(),
+            PaySlip(),
           ],
         ),
       )),

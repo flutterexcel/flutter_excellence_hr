@@ -8,7 +8,6 @@ import 'package:flutter_excellence_hr/screens/my_salary/my_salary.dart';
 import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/screens/policy_documents/policy_documents.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
-import 'package:flutter_excellence_hr/screens/weekly_timesheet/weekly_timesheet.dart';
 
 class Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -57,21 +56,10 @@ class Navigation extends StatelessWidget {
               leading: Icon(Icons.view_day, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('My Attendance',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-                onTap: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MyAttendance()),
-                );
-              },                  
-            ),
-            ListTile(
-              leading: Icon(Icons.view_week, color: AppColors.LIGHTBLACK_COLOR),
-              title: Text('Weekly Time Sheet',
-                  style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-            onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => WeeklyTimeSheet()),
                 );
               },
             ),
@@ -80,7 +68,7 @@ class Navigation extends StatelessWidget {
                   Icon(Icons.view_carousel, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('Apply Leave',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-                 onTap: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ApplyLeave()),
@@ -91,7 +79,7 @@ class Navigation extends StatelessWidget {
               leading: Icon(Icons.view_list, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('My Leaves',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-             onTap: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MyLeaves()),
@@ -103,7 +91,7 @@ class Navigation extends StatelessWidget {
                   color: AppColors.LIGHTBLACK_COLOR),
               title: Text('My Salary',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-             onTap: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MySalary()),
@@ -129,19 +117,19 @@ class Navigation extends StatelessWidget {
                   Icon(Icons.view_array, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('My Documents',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-             onTap: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MyDocuments()),
                 );
-              }, 
+              },
             ),
             ListTile(
               leading:
                   Icon(Icons.view_column, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('Policy Documents',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-             onTap: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => PolicyDocuments()),
@@ -152,7 +140,7 @@ class Navigation extends StatelessWidget {
               leading: Icon(Icons.bookmark, color: AppColors.LIGHTBLACK_COLOR),
               title: Text('Holidays',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
-            onTap: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => HolidayList()),
