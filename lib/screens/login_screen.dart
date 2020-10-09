@@ -52,7 +52,7 @@ class _AuthForm extends StatelessWidget {
             ),
             WelcomeScreen(),
             LoginPage(),
-            //      GoogleLogin(),
+            GoogleLogin(),
             LoginBottom(),
           ],
         ));

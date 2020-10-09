@@ -6,7 +6,7 @@ import 'package:flutter_excellence_hr/widgets/apply_leave_widgets/apply_leave_wi
 
 class ApplyLeave extends StatelessWidget {
   final from = TextEditingController();
-    final to = TextEditingController();
+  final to = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class ApplyLeave extends StatelessWidget {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(children: <Widget>[
-        LeaveCalendar(),           
+          LeaveCalendar(),
         ]),
       )),
     );
