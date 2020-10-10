@@ -5,12 +5,12 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:image_picker/image_picker.dart';
 
 
-class UploadPic extends StatefulWidget {
+class UploadDocumentPic extends StatefulWidget {
   @override
-  _UploadPicState createState() => _UploadPicState();
+  _UploadDocumentPicState createState() => _UploadDocumentPicState();
 }
 
-class _UploadPicState extends State<UploadPic> {
+class _UploadDocumentPicState extends State<UploadDocumentPic> {
    File _image;  
   Future getImage() async{
       final image = await ImagePicker.pickImage(source: ImageSource.gallery);

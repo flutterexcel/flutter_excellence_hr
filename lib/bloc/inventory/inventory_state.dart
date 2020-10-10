@@ -15,12 +15,14 @@ class InventorySuccess extends InventoryState {
   bool enablecomment = false;
   String comment;
   bool enableoverview = false;
+  bool showInventory = false;
   InventorySuccess(
       {this.data,
       this.count,
       this.enablecomment,
       this.comment,
-      this.enableoverview});
+      this.enableoverview,
+      this.showInventory});
   List<Object> get props => [count, enablecomment, comment, enableoverview];
 }
 

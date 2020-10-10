@@ -7,3 +7,4 @@ export 'required_document.dart';
 export 'document_list.dart';
 export 'document_dir.dart';
 export 'document_dropdown.dart';
+export 'upload_pic.dart';
