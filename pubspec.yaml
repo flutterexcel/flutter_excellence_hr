@@ -1,5 +1,5 @@
 name: flutter_excellence_hr
-description: A new Flutter project.
+description: Excellence HR Management.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -12,6 +12,8 @@ dependencies:
   flutter:
       sdk: flutter
   http: ^0.12.2
+  universal_html: ^1.2.1
+  flutter_socket_io: ^0.6.0
   shared_preferences: ^0.5.10
   hexcolor: ^1.0.4
   bloc: ^6.0.0
@@ -20,6 +22,7 @@ dependencies:
   meta: ^1.1.8
   uuid: ^2.1.0
   intl: ^0.16.1
+  google_sign_in: ^4.5.4
   #universal_io: 1.0.1
   cupertino_icons: ^0.1.3
   string_validator: ^0.1.4
