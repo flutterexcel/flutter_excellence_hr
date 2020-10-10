@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import '../post.dart';
 import '../../model/profile/ProfileDetails.dart';
 import '../../app_config.dart';
@@ -7,15 +8,16 @@ import '../storage_service.dart';
 
 class UploadImage {
   Post _post = Post();
-  Future<ProfileDetails> uploadImage(String type, String action) async {
-    final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
+  Future<ProfileDetails> uploadImage(
+      {String doctype, String action, File file}) async {
+    final prodUrl = await AppConfig.forEnvironment('prod', 'uploadUrl');
     var token = StorageUtil.getUserToken();
     final apiUrl = prodUrl.baseUrl;
     Map data = {
       "file_upload_action": action,
       "token": token,
-      "document_type": type,
-      "":
+      "document_type": doctype,
+      "file": file
     };
     return _post
         .post(apiUrl, body: json.encode(data))
