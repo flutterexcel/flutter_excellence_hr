@@ -16,9 +16,10 @@ class _UploadPicState extends State<UploadPic> {
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
+
     try {
       await api.uploadImage(
-          doctype: 'profile_pic', action: "profile_pic", file: image);
+          doctype: 'profile_pic', action: "profile_pic", file: _image);
     } catch (e) {
       print(e);
     }
