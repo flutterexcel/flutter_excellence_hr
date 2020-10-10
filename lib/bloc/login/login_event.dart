@@ -19,6 +19,15 @@ class LoginInWithEmailButtonPressed extends LoginEvent {
   List<Object> get props => [email, password];
 }
 
+class LoginInWithGoogleButtonPressed extends LoginEvent {
+  final String googleToken;
+
+  LoginInWithGoogleButtonPressed({@required this.googleToken});
+
+  @override
+  List<Object> get props => [googleToken];
+}
+
 // Fired just after the app is launched
 class AppLoad extends LoginEvent {}
 

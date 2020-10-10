@@ -1,60 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/leave/user_sal_info.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/leave/sal_info.dart';
 
-class BottomSection extends StatelessWidget {
-  List<String> listOf = [
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January",
-    "January"
-  ];
+class BottomSection extends StatefulWidget {
+  @override
+  _BottomSectionState createState() => _BottomSectionState();
+}
 
-  List<String> totalLeave = [
-    "1",
-    "2",
-    "4",
-    "2",
-    "3",
-    "1",
-    "2",
-    "1",
-    "3",
-    "4",
-    "1",
-    "2"
-  ];
+class _BottomSectionState extends State<BottomSection> {
+  GetSalInfo api = GetSalInfo();
+  UserSalaryInfo leave;
+  _getLeave() async {
+    await api.getSalInfo().then((value) {
+      leave = value;
+      setState(() {
+        showLeaves = true;
+      });
+    });
+  }
+
+  bool showLeaves = false;
+  @override
+  void initState() {
+    _getLeave();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-          itemCount: 5,
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return listDataItems(this.listOf[index], this.totalLeave[index]);
-          }),
-    );
+    return showLeaves
+        ? Container(
+            child: ListView.builder(
+                itemCount: leave.data.payslipHistory.length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return ListDataItems(leave.data.payslipHistory[index]);
+                }),
+          )
+        : Center();
   }
 }
 
-class listDataItems extends StatelessWidget {
-  String monthName, totalLeave;
-  listDataItems(this.monthName, this.totalLeave);
+class ListDataItems extends StatelessWidget {
+  Map<String, String> monthsInYear = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec"
+  };
+  PayslipHistory totalLeave;
+  ListDataItems(this.totalLeave);
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(6),
-      child: Row(children: <Widget>[
+      child:
+          Row(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
         SizedBox(width: 16),
         Container(
           padding: EdgeInsets.all(8),
@@ -116,6 +128,15 @@ class listDataItems extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.red[300]),
                 )),
+                Container(
+                    child: Text(
+                  'FINAL LEAVE BALANCE',
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'SourceSans',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red[300]),
+                )),
               ]),
         ),
         Container(
@@ -124,7 +145,7 @@ class listDataItems extends StatelessWidget {
           child: Column(children: <Widget>[
             Container(
                 child: Text(
-              monthName,
+              monthsInYear[totalLeave.month] + ", " + totalLeave.year,
               style: TextStyle(
                   fontSize: 12,
                   fontFamily: 'SourceSans',
@@ -132,7 +153,7 @@ class listDataItems extends StatelessWidget {
             )),
             Container(
                 child: Text(
-              totalLeave,
+              totalLeave.totalLeaveTaken,
               style: TextStyle(
                   fontSize: 12,
                   fontFamily: 'SourceSans',
@@ -140,7 +161,7 @@ class listDataItems extends StatelessWidget {
             )),
             Container(
                 child: Text(
-              '1',
+              totalLeave.leaveBalance,
               style: TextStyle(
                   fontSize: 12,
                   fontFamily: 'SourceSans',
@@ -148,7 +169,7 @@ class listDataItems extends StatelessWidget {
             )),
             Container(
                 child: Text(
-              '2',
+              totalLeave.allocatedLeaves,
               style: TextStyle(
                   fontSize: 12,
                   fontFamily: 'SourceSans',
@@ -156,7 +177,7 @@ class listDataItems extends StatelessWidget {
             )),
             Container(
                 child: Text(
-              '2',
+              totalLeave.paidLeaves,
               style: TextStyle(
                   fontSize: 12,
                   fontFamily: 'SourceSans',
@@ -164,125 +185,16 @@ class listDataItems extends StatelessWidget {
             )),
             Container(
                 child: Text(
-              '0',
+              totalLeave.unpaidLeaves,
               style: TextStyle(
                   fontSize: 12,
                   fontFamily: 'SourceSans',
                   fontWeight: FontWeight.bold,
                   color: AppColors.LIGHTBLACK_COLOR),
             )),
-          ]),
-        ),
-        SizedBox(width: 16),
-        Container(
-          padding: EdgeInsets.all(8),
-          color: AppColors.EDIT_TEXT_COLOR,
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                    child: Text(
-                  'MONTH',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'SourceSans',
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.GREEN_COLOR),
-                )),
-                Container(
-                    child: Text(
-                  'TOTAL LEAVE TAKEN',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'SourceSans',
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red[300]),
-                )),
-                Container(
-                    child: Text(
-                  'LEAVE BALANCE',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'SourceSans',
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple[300]),
-                )),
-                Container(
-                    child: Text(
-                  'ALLOACTED LEAVES',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'SourceSans',
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple[300]),
-                )),
-                Container(
-                    child: Text(
-                  'PAID LEAVES',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'SourceSans',
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.GREEN_COLOR),
-                )),
-                Container(
-                    child: Text(
-                  'UNPAID LEAVES',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'SourceSans',
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red[300]),
-                )),
-              ]),
-        ),
-        Container(
-          padding: EdgeInsets.all(8),
-          color: AppColors.EDIT_TEXT_COLOR,
-          child: Column(children: <Widget>[
             Container(
                 child: Text(
-              monthName,
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              totalLeave,
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              '1',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              '2',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              '2',
-              style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'SourceSans',
-                  color: AppColors.LIGHTBLACK_COLOR),
-            )),
-            Container(
-                child: Text(
-              '0',
+              totalLeave.finalLeaveBalance,
               style: TextStyle(
                   fontSize: 12,
                   fontFamily: 'SourceSans',
