@@ -20,6 +20,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginInWithEmailButtonPressed) {
       yield* _mapLoginWithEmailToState(event);
     }
+    if (event is LoginInWithGoogleButtonPressed) {
+      yield* _mapLoginWithGoogleToState(event);
+    }
     if (event is AppLoad) {
       yield* _mapAppLoadToState(event);
     }
@@ -68,6 +71,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       final user = await _authenticationService.signInWithEmailAndPassword(
           event.email, event.password);
+      if (user != null) {
+        // push new login event
+        this.add(UserLogIn(user: user));
+        yield LoginSuccess();
+      } else {
+        yield LoginFailure(error: 'Login failed');
+      }
+      // ignore: unused_catch_clause
+    } on Exception catch (e) {
+      yield LoginFailure(error: 'Login failed');
+    } catch (err) {
+      yield LoginFailure(error: 'Login failed');
+    }
+  }
+
+  Stream<LoginState> _mapLoginWithGoogleToState(
+      LoginInWithGoogleButtonPressed event) async* {
+    yield LoginLoading();
+    try {
+      print(event.googleToken);
+      final user = await _authenticationService
+          .signInWithGoogleAndPassword(event.googleToken);
       if (user != null) {
         // push new login event
         this.add(UserLogIn(user: user));

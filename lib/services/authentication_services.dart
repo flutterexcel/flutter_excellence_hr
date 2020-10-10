@@ -1,11 +1,13 @@
 import '../model/user.dart';
 import '../services/login.dart';
 import 'storage_service.dart';
+import 'package:flutter_excellence_hr/services/login/google_login.dart';
 
 abstract class AuthenticationService {
   Future<User> getCurrentUser();
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<void> signOut();
+  Future<User> signInWithGoogleAndPassword(String token);
 }
 
 class LoginAuthenticationService extends AuthenticationService {
@@ -25,6 +27,14 @@ class LoginAuthenticationService extends AuthenticationService {
   Future<User> signInWithEmailAndPassword(String email, String password) async {
     final Login api = Login();
     User user = await api.login(email, password);
+    return User(user: user.user, token: user.token, message: user.message);
+  }
+
+  Future<User> signInWithGoogleAndPassword(String token) async {
+    final LoginGoogle api = LoginGoogle();
+
+    User user = await api.loginGoogle(token);
+
     return User(user: user.user, token: user.token, message: user.message);
   }
 
