@@ -20,6 +20,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   final reason = TextEditingController();
   String leaveType, rhdate;
   ApplyLeave api = ApplyLeave();
+  
   Future _doApply({String leavetype, String rhdate = ''}) async {
     await api.applyLeave(
         fromDate: from.text,
