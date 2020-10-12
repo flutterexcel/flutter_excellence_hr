@@ -4,7 +4,16 @@ import 'package:flutter_excellence_hr/screens/navigate/navigate.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import 'package:flutter_excellence_hr/widgets/document_widgets/document_widgets.dart';
 
-class MyDocuments extends StatelessWidget {
+class MyDocuments extends StatefulWidget {
+  @override
+  _MyDocumentsState createState() => _MyDocumentsState();
+}
+
+class _MyDocumentsState extends State<MyDocuments> {
+  String document = "-";
+
+  bool showImgUpload = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +27,18 @@ class MyDocuments extends StatelessWidget {
             UploadDocuments(),
             DocNotice(),
             DocumentType(),
-            DropDown(),
-            UploadDocumentPic(),
-            CertifyDocuments(),
+            DropDown(onDocumentChange: (String value) {
+              //  print(value);
+              setState(() {
+                document = value;
+                showImgUpload = true;
+              });
+            }),
+            showImgUpload
+                ? UploadDocumentPic(
+                    document: document.toString(),
+                  )
+                : Center(),
             RequiredDocument(),
             DocumentList(),
             DocumentDirectory(),

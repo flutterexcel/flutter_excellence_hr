@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/profile/upload_image.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class UploadPic extends StatefulWidget {
   @override
@@ -11,10 +12,25 @@ class UploadPic extends StatefulWidget {
 }
 
 class _UploadPicState extends State<UploadPic> {
-   File _image;  
-  Future getImage() async{
-      final image = await ImagePicker.pickImage(source: ImageSource.gallery);
-      _image = image;
+  File _image;
+  var val;
+  UploadImage api = UploadImage();
+  UploadImg uploadImg;
+  Future getImage() async {
+    final image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    _image = image;
+
+    try {
+      await api
+          .uploadImage(
+              doctype: 'profile_pic', action: "profile_pic", file: _image)
+          .then((value) {
+        val = jsonDecode(value.body);
+        alertDialog();
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -40,7 +56,9 @@ class _UploadPicState extends State<UploadPic> {
                     Container(
                         margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
                         child: Image(
-                          image: (_image==null)? AssetImage('images/upload.png'): Image.file(_image),
+                          image: (_image == null)
+                              ? AssetImage('assets/images/upload.png')
+                              : Image.file(_image),
                           width: 50,
                           height: 50,
                         )),
@@ -56,5 +74,27 @@ class _UploadPicState extends State<UploadPic> {
             ),
           ),
         ));
+  }
+
+  void alertDialog() {
+    var alert = AlertDialog(
+      title: Text('Your Profile Pic'),
+      content: Text(val['message']),
+      actions: <Widget>[
+        FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'OK',
+              style: TextStyle(fontSize: 20),
+            ))
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext c) {
+          return alert;
+        });
   }
 }
