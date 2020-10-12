@@ -41,13 +41,13 @@ class ShowInventory extends StatelessWidget {
               pageName: "My Inventory",
             )),
             drawer: Navigation(),
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                // Add your onPressed code here!
-              },
-              label: Text('Assign Device'),
-              backgroundColor: AppColors.GREEN_COLOR,
-            ),
+            // floatingActionButton: FloatingActionButton.extended(
+            //   onPressed: () {
+            //     // Add your onPressed code here!
+            //   },
+            //   label: Text('Assign Device'),
+            //   backgroundColor: AppColors.GREEN_COLOR,
+            // ),
             body: SingleChildScrollView(
               child: Container(
                 child: Column(
