@@ -84,7 +84,7 @@ class ListLeaves extends StatelessWidget {
   ListLeaves(this.leaves);
   @override
   Widget build(BuildContext context) {
-    customDialog() {
+    customDialog(String leaveid) {
       return showDialog(
           context: context,
           builder: (BuildContext c) {
@@ -93,7 +93,11 @@ class ListLeaves extends StatelessWidget {
                 height: 245,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
-                  children: <Widget>[UploadPic()],
+                  children: <Widget>[
+                    UploadPic(
+                      leavid: leaveid,
+                    ),
+                  ],
                 ),
               ),
             );
@@ -199,7 +203,7 @@ class ListLeaves extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
                     onPressed: () {
-                      customDialog();
+                      customDialog(leaves.id);
                     },
                     child: Text(
                       "Upload Leave Document",
