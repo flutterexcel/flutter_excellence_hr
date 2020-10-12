@@ -28,7 +28,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   void initState() {
     super.initState();
-    //_getProfile();
+    _getProfile();
   }
 
   @override
