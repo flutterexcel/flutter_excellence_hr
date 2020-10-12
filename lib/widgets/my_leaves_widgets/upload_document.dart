@@ -40,7 +40,7 @@ class _UploadPicState extends State<UploadPic> {
                     Container(
                         margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
                         child: Image(
-                          image: (_image==null)? AssetImage('images/upload.png'): Image.file(_image),
+                          image: (_image==null)? AssetImage('assets/images/upload.png'): Image.file(_image),
                           width: 50,
                           height: 50,
                         )),
