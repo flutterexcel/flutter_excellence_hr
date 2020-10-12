@@ -1,19 +1,53 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/profile/upload_image.dart';
+import 'package:flutter_excellence_hr/widgets/document_widgets/document_dropdown.dart';
+import 'package:flutter_excellence_hr/widgets/document_widgets/document_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadDocumentPic extends StatefulWidget {
+  String document;
+
+  UploadDocumentPic({this.document});
   @override
-  _UploadDocumentPicState createState() => _UploadDocumentPicState();
+  _UploadDocumentPicState createState() =>
+      _UploadDocumentPicState(document: this.document);
 }
 
 class _UploadDocumentPicState extends State<UploadDocumentPic> {
+  String document;
+  bool checkBoxValue = false;
+  _UploadDocumentPicState({this.document});
   File _image;
+  var val;
+  UploadImage api = UploadImage();
+  UploadImg uploadImg;
+  DropDown dropDown = new DropDown();
+  bool uploading = true;
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
+    setState(() {
+      uploading = false;
+    });
+    try {
+      await api
+          .uploadImage(
+        doctype: document,
+        action: "user_document",
+        file: _image,
+      )
+          .then((value) {
+        val = jsonDecode(value.body);
+        print(val['message']);
+      });
+      alertDialog();
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -22,40 +56,92 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
         onTap: () {
           getImage();
         },
-        child: Container(
-          margin: EdgeInsets.all(8),
-          child: DottedBorder(
-            borderType: BorderType.RRect,
-            color: Colors.grey,
-            radius: Radius.circular(0),
-            padding: EdgeInsets.all(6),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              child: Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
-                        child: Image(
-                          image: (_image == null)
-                              ? AssetImage('assets/images/upload.png')
-                              : Image.file(_image),
-                          width: 50,
-                          height: 50,
-                        )),
-                    Text(
-                      "Drop a document or click to select file to upload",
-                      style: TextStyle(
-                          color: AppColors.MIDIUM_BLACK,
-                          fontFamily: 'OpenSans'),
-                    )
-                  ],
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(8),
+              child: DottedBorder(
+                borderType: BorderType.RRect,
+                color: Colors.grey,
+                radius: Radius.circular(0),
+                padding: EdgeInsets.all(6),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  child: Container(
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    child: uploading
+                        ? Column(
+                            children: <Widget>[
+                              // Container(
+                              //     margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
+                              //     child: Image(
+                              //       image: (_image == null)
+                              //           ? AssetImage('assets/images/upload.png')
+                              //           : Image.file(_image),
+                              //       width: 50,
+                              //       height: 50,
+                              //     )),
+                              Center(
+                                child: Text(
+                                  " Click to select file to upload Image",
+                                  style: TextStyle(
+                                      color: AppColors.MIDIUM_BLACK,
+                                      fontFamily: 'OpenSans'),
+                                ),
+                              )
+                            ],
+                          )
+                        : Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                  ),
                 ),
               ),
             ),
-          ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Checkbox(value: checkBoxValue, onChanged: (bool value) {}),
+                Flexible(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                    child: Text(
+                        'By uploading this document you certify that these documents are true and all information is correct',
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 12,
+                        )),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ));
+  }
+
+  void alertDialog() {
+    var alert = AlertDialog(
+      title: Text('Your Document Uploaded'),
+      content: Text(val['message']),
+      actions: <Widget>[
+        FlatButton(
+            onPressed: () {
+              setState(() {
+                uploading = true;
+                Navigator.of(context).pop();
+              });
+            },
+            child: Text(
+              'OK',
+              style: TextStyle(fontSize: 20),
+            ))
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext c) {
+          return alert;
+        });
   }
 }

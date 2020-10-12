@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +13,21 @@ class UploadPic extends StatefulWidget {
 
 class _UploadPicState extends State<UploadPic> {
   File _image;
+  var val;
   UploadImage api = UploadImage();
+  UploadImg uploadImg;
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
 
     try {
-      await api.uploadImage(
-          doctype: 'profile_pic', action: "profile_pic", file: _image);
+      await api
+          .uploadImage(
+              doctype: 'profile_pic', action: "profile_pic", file: _image)
+          .then((value) {
+        val = jsonDecode(value.body);
+        alertDialog();
+      });
     } catch (e) {
       print(e);
     }
@@ -66,5 +74,27 @@ class _UploadPicState extends State<UploadPic> {
             ),
           ),
         ));
+  }
+
+  void alertDialog() {
+    var alert = AlertDialog(
+      title: Text('Your Profile Pic'),
+      content: Text(val['message']),
+      actions: <Widget>[
+        FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'OK',
+              style: TextStyle(fontSize: 20),
+            ))
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext c) {
+          return alert;
+        });
   }
 }
