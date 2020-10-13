@@ -16,6 +16,7 @@ class DocumentList extends StatelessWidget {
     "Qualification Certificate",
     "Other Documents"
   ];
+
   List<String> listNum = [
     "1",
     "2",
@@ -30,6 +31,7 @@ class DocumentList extends StatelessWidget {
     "11",
     "12"
   ];
+
   @override
   Widget build(BuildContext context) {
     return Card(

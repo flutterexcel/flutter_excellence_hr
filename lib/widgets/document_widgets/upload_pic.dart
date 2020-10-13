@@ -73,15 +73,6 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
                     child: uploading
                         ? Column(
                             children: <Widget>[
-                              // Container(
-                              //     margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
-                              //     child: Image(
-                              //       image: (_image == null)
-                              //           ? AssetImage('assets/images/upload.png')
-                              //           : Image.file(_image),
-                              //       width: 50,
-                              //       height: 50,
-                              //     )),
                               Center(
                                 child: Text(
                                   " Click to select file to upload Image",
