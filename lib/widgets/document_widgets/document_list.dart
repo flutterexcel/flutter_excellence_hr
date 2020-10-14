@@ -3,7 +3,12 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/document/mydocument.dart';
 import '../../model/document/document_list.dart';
 
-class DocumentLists extends StatelessWidget {
+class DocumentLists extends StatefulWidget {
+  @override
+  _DocumentListsState createState() => _DocumentListsState();
+}
+
+class _DocumentListsState extends State<DocumentLists> {
   List<String> listOf = [
     "CV",
     "PAN Card",
@@ -18,20 +23,88 @@ class DocumentLists extends StatelessWidget {
     "Qualification Certificate",
     "Other Documents"
   ];
-  List<String> listNum = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12"
+
+  MyDocument api = MyDocument();
+  DocumentList documentList;
+  bool show = false;
+  List<ListDocument> list = [];
+
+  List<bool> listBool = [
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
   ];
+
+  _getDocumentList() async {
+    return await api.getDocument().then((value) {
+      documentList = value;
+      print("Your value $value");
+      int i = 0;
+
+      // documentList.data.userDocumentInfo[0].documentType.contains("CV")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[1].documentType.contains("PAN Card")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[2].documentType
+      //         .contains("Address Proof")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[3].documentType
+      //         .contains("Offer Letter")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[4].documentType
+      //         .contains("Appointment Letter")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[5].documentType
+      //         .contains("Previous Company Experience Letter")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[6].documentType
+      //         .contains("Previous Company Offer Letter")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[7].documentType
+      //         .contains("Previous Company Salary Slip")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[8].documentType
+      //         .contains("Previous Company Other Documents")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[9].documentType
+      //         .contains("Qualification Certificate")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[10].documentType
+      //         .contains("Other Documents")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+      // documentList.data.userDocumentInfo[11].documentType
+      //         .contains("Other Documents")
+      //     ? listBool.add(true)
+      //     : listBool.add(false);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getDocumentList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -43,7 +116,7 @@ class DocumentLists extends StatelessWidget {
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (_, int index) =>
-              ListDocument(this.listOf[index], this.listNum[index]),
+              ListDocument(this.listOf[index], this.listBool[index]),
           itemCount: this.listOf.length,
         ),
       ),
@@ -52,36 +125,18 @@ class DocumentLists extends StatelessWidget {
 }
 
 class ListDocument extends StatefulWidget {
-  String itemDoc, srNum;
-  ListDocument(this.itemDoc, this.srNum);
+  String itemDoc;
+  bool checkValue = false;
+  ListDocument(this.itemDoc, this.checkValue);
   @override
   _ListDocumentState createState() =>
-      _ListDocumentState(itemDoc: itemDoc, srNum: srNum);
+      _ListDocumentState(itemDoc: itemDoc, checkValue: checkValue);
 }
 
 class _ListDocumentState extends State<ListDocument> {
-  MyDocument api = MyDocument();
-  DocumentList documentList;
-  bool show = false;
-  List<ListDoc> docUploaded = [];
+  String itemDoc;
   bool checkValue = false;
-  _getDocumentList() async {
-    return await api.getDocument().then((value) {
-      documentList = value;
-      if (documentList.data.userDocumentInfo.contains("CV")) checkValue = true;
-    });
-  }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _getDocumentList();
-  // }
-
-  String itemDoc, srNum;
-
-  _ListDocumentState({this.itemDoc, this.srNum});
-
+  _ListDocumentState({this.itemDoc, this.checkValue});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -94,7 +149,7 @@ class _ListDocumentState extends State<ListDocument> {
           value: this.checkValue,
           onChanged: (bool value) {
             setState(() {
-              this.checkValue = value;
+              //    this.checkValue = value;
             });
           },
         ),
@@ -108,9 +163,4 @@ class _ListDocumentState extends State<ListDocument> {
       ]),
     );
   }
-}
-
-class ListDoc {
-  String docType;
-  ListDoc(this.docType);
 }

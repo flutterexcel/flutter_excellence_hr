@@ -39,7 +39,8 @@ class _MyDocumentsState extends State<MyDocuments> {
                   )
                 : Center(),
             RequiredDocument(),
-            // DocumentLists(),
+            DocumentListing(),
+            //    DocumentLists(),
             DocumentDirectory(),
           ],
         ),
