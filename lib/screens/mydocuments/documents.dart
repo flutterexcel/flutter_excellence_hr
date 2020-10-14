@@ -11,7 +11,6 @@ class MyDocuments extends StatefulWidget {
 
 class _MyDocumentsState extends State<MyDocuments> {
   String document = "-";
-
   bool showImgUpload = false;
 
   @override
@@ -40,7 +39,7 @@ class _MyDocumentsState extends State<MyDocuments> {
                   )
                 : Center(),
             RequiredDocument(),
-            DocumentList(),
+            // DocumentLists(),
             DocumentDirectory(),
           ],
         ),

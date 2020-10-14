@@ -19,7 +19,7 @@ class UploadDocumentPic extends StatefulWidget {
 
 class _UploadDocumentPicState extends State<UploadDocumentPic> {
   String document;
-  bool checkBoxValue = false;
+  bool valuefirst = false;
   _UploadDocumentPicState({this.document});
   File _image;
   var val;
@@ -72,23 +72,14 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
                     width: MediaQuery.of(context).size.width,
                     child: uploading
                         ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              // Container(
-                              //     margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
-                              //     child: Image(
-                              //       image: (_image == null)
-                              //           ? AssetImage('assets/images/upload.png')
-                              //           : Image.file(_image),
-                              //       width: 50,
-                              //       height: 50,
-                              //     )),
-                              Center(
-                                child: Text(
-                                  " Click to select file to upload Image",
-                                  style: TextStyle(
-                                      color: AppColors.MIDIUM_BLACK,
-                                      fontFamily: 'OpenSans'),
-                                ),
+                              Text(
+                                " Click to select file to upload Image",
+                                style: TextStyle(
+                                    color: AppColors.MIDIUM_BLACK,
+                                    fontFamily: 'OpenSans'),
                               )
                             ],
                           )
@@ -102,7 +93,16 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Checkbox(value: checkBoxValue, onChanged: (bool value) {}),
+                Checkbox(
+                  checkColor: Colors.red,
+                  activeColor: Colors.greenAccent,
+                  value: this.valuefirst,
+                  onChanged: (bool value) {
+                    setState(() {
+                      this.valuefirst = value;
+                    });
+                  },
+                ),
                 Flexible(
                   child: Container(
                     margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
