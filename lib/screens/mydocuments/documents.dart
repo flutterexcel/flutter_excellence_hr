@@ -27,20 +27,17 @@ class _MyDocumentsState extends State<MyDocuments> {
             DocNotice(),
             DocumentType(),
             DropDown(onDocumentChange: (String value) {
-              //  print(value);
               setState(() {
                 document = value;
+                print("Selected document is $document");
                 showImgUpload = true;
               });
             }),
             showImgUpload
-                ? UploadDocumentPic(
-                    document: document.toString(),
-                  )
+                ? UploadDocumentPic(document: document.toString())
                 : Center(),
             RequiredDocument(),
             DocumentListing(),
-            //    DocumentLists(),
             DocumentDirectory(),
           ],
         ),

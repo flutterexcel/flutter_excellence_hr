@@ -13,6 +13,7 @@ class _DocumentListingState extends State<DocumentListing> {
   MyDocument api = new MyDocument();
   DocumentList documentList;
   bool documentLists = false;
+
   List<String> listAll = [
     "CV",
     "PAN Card",
@@ -65,49 +66,57 @@ class _DocumentListingState extends State<DocumentListing> {
   @override
   Widget build(BuildContext context) {
     //listOf.add("CV");
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(6, 6, 6, 4),
-          padding: EdgeInsets.all(6),
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            separatorBuilder: (BuildContext context, int index) => Divider(
-              height: 1,
-              thickness: .5,
-              color: Colors.grey[300],
-            ),
-            itemBuilder: (_, int index) => ListRequiredDocument(result[index]),
-            itemCount: result.length,
-          ),
-        ),
-        Divider(
-          color: Colors.grey[300],
-          height: 1,
-          thickness: .5,
-          indent: 12,
-          endIndent: 12,
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(6, 1, 6, 6),
-          padding: EdgeInsets.all(6),
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            separatorBuilder: (BuildContext context, int index) => Divider(
-              height: 1,
-              thickness: .5,
-              color: Colors.grey[300],
-            ),
-            itemBuilder: (_, int index) => ListNotUploadedDocument(diff[index]),
-            itemCount: diff.length,
-          ),
-        ),
-      ],
-    );
+    return documentLists
+        ? Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.fromLTRB(6, 6, 6, 4),
+                padding: EdgeInsets.all(6),
+                child: ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(
+                    height: 1,
+                    thickness: .5,
+                    color: Colors.grey[300],
+                  ),
+                  itemBuilder: (_, int index) =>
+                      ListRequiredDocument(result[index]),
+                  itemCount: result.length,
+                ),
+              ),
+              Divider(
+                color: Colors.grey[300],
+                height: 1,
+                thickness: .5,
+                indent: 12,
+                endIndent: 12,
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(6, 1, 6, 6),
+                padding: EdgeInsets.all(6),
+                child: ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(
+                    height: 1,
+                    thickness: .5,
+                    color: Colors.grey[300],
+                  ),
+                  itemBuilder: (_, int index) =>
+                      ListNotUploadedDocument(diff[index]),
+                  itemCount: diff.length,
+                ),
+              ),
+            ],
+          )
+        : Center(
+            child: CircularProgressIndicator(),
+          );
   }
 }
 

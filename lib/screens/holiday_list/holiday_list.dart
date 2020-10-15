@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/holiday/holiday.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
@@ -15,7 +14,8 @@ class _HolidayListState extends State<HolidayList> {
   Holiday holidays;
   String yearSelect;
   bool getHoldays = false;
-    
+  bool show = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +36,7 @@ class _HolidayListState extends State<HolidayList> {
                 setState(() {
                   holidays = value;
                   getHoldays = true;
+                  show = true;
                 });
               });
             },
@@ -43,70 +44,10 @@ class _HolidayListState extends State<HolidayList> {
           if (getHoldays) ...{
             Card(
                 margin: EdgeInsets.fromLTRB(8, 8, 8, 32),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                            child: Container(
-                                margin: EdgeInsets.fromLTRB(8, 16, 16, 16),
-                                child: Text(
-                                  "Holiday " + yearSelect,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'SourceSans',
-                                      fontWeight: FontWeight.bold),
-                                ))),
-                        Expanded(
-                            child: Container(
-                                margin: EdgeInsets.fromLTRB(8, 16, 16, 16),
-                                child: Text(
-                                  "MONTH",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'SourceSans',
-                                      fontWeight: FontWeight.bold),
-                                ))),
-                        Expanded(
-                            child: Container(
-                                margin: EdgeInsets.fromLTRB(8, 16, 16, 16),
-                                child: Text(
-                                  "DATE",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'SourceSans',
-                                      fontWeight: FontWeight.bold),
-                                ))),
-                        Expanded(
-                            child: Container(
-                                margin: EdgeInsets.fromLTRB(8, 16, 16, 16),
-                                child: Text(
-                                  "DAY",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'SourceSans',
-                                      fontWeight: FontWeight.bold),
-                                ))),
-                        Expanded(
-                            child: Container(
-                                margin: EdgeInsets.fromLTRB(8, 16, 8, 16),
-                                child: Text(
-                                  "TYPE",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: 'SourceSans',
-                                      fontWeight: FontWeight.bold),
-                                ))),
-                      ],
-                    ),
-                    ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: holidays.data.holidays.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Row(
+                child: show
+                    ? Column(
+                        children: [
+                          Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
@@ -114,55 +55,129 @@ class _HolidayListState extends State<HolidayList> {
                                       margin:
                                           EdgeInsets.fromLTRB(8, 16, 16, 16),
                                       child: Text(
-                                        holidays.data.holidays[index].name,
+                                        "Holiday " + yearSelect,
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'SourceSans'),
+                                            fontSize: 16,
+                                            fontFamily: 'SourceSans',
+                                            fontWeight: FontWeight.bold),
                                       ))),
                               Expanded(
                                   child: Container(
                                       margin:
                                           EdgeInsets.fromLTRB(8, 16, 16, 16),
                                       child: Text(
-                                        holidays.data.holidays[index].month,
+                                        "MONTH",
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'SourceSans'),
+                                            fontSize: 16,
+                                            fontFamily: 'SourceSans',
+                                            fontWeight: FontWeight.bold),
                                       ))),
                               Expanded(
                                   child: Container(
                                       margin:
                                           EdgeInsets.fromLTRB(8, 16, 16, 16),
                                       child: Text(
-                                        holidays.data.holidays[index].date,
+                                        "DATE",
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'SourceSans'),
+                                            fontSize: 16,
+                                            fontFamily: 'SourceSans',
+                                            fontWeight: FontWeight.bold),
                                       ))),
                               Expanded(
                                   child: Container(
                                       margin:
                                           EdgeInsets.fromLTRB(8, 16, 16, 16),
                                       child: Text(
-                                        holidays.data.holidays[index].dayOfWeek,
+                                        "DAY",
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'SourceSans'),
+                                            fontSize: 16,
+                                            fontFamily: 'SourceSans',
+                                            fontWeight: FontWeight.bold),
                                       ))),
                               Expanded(
                                   child: Container(
                                       margin: EdgeInsets.fromLTRB(8, 16, 8, 16),
                                       child: Text(
-                                        holidays.data.holidays[index].typeText,
+                                        "TYPE",
                                         style: TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'SourceSans'),
+                                            fontSize: 16,
+                                            fontFamily: 'SourceSans',
+                                            fontWeight: FontWeight.bold),
                                       ))),
                             ],
-                          );
-                        }),
-                  ],
-                ))
+                          ),
+                          ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: holidays.data.holidays.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                        child: Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                8, 16, 16, 16),
+                                            child: Text(
+                                              holidays
+                                                  .data.holidays[index].name,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'SourceSans'),
+                                            ))),
+                                    Expanded(
+                                        child: Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                8, 16, 16, 16),
+                                            child: Text(
+                                              holidays
+                                                  .data.holidays[index].month,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'SourceSans'),
+                                            ))),
+                                    Expanded(
+                                        child: Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                8, 16, 16, 16),
+                                            child: Text(
+                                              holidays
+                                                  .data.holidays[index].date,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'SourceSans'),
+                                            ))),
+                                    Expanded(
+                                        child: Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                8, 16, 16, 16),
+                                            child: Text(
+                                              holidays.data.holidays[index]
+                                                  .dayOfWeek,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'SourceSans'),
+                                            ))),
+                                    Expanded(
+                                        child: Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                8, 16, 8, 16),
+                                            child: Text(
+                                              holidays.data.holidays[index]
+                                                  .typeText,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: 'SourceSans'),
+                                            ))),
+                                  ],
+                                );
+                              }),
+                        ],
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      ))
           }
         ]),
       )),

@@ -52,16 +52,9 @@ class _UploadPicState extends State<UploadPic> {
                 height: 200,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // Container(
-                    //     margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
-                    //     child: Image(
-                    //       image: (_image == null)
-                    //           ? AssetImage('assets/images/upload.png')
-                    //           : Image.file(_image),
-                    //       width: 50,
-                    //       height: 50,
-                    //     )),
                     Text(
                       "Drop a document or click to select file to upload",
                       style: TextStyle(

@@ -11,6 +11,9 @@ import 'package:image_picker/image_picker.dart';
 class UploadDocumentPic extends StatefulWidget {
   String document;
 
+  DocumentListing documentListing = new DocumentListing();
+  //bool requiredDoc = documentListing.documentLists;
+
   UploadDocumentPic({this.document});
   @override
   _UploadDocumentPicState createState() =>
@@ -26,7 +29,9 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
   UploadImage api = UploadImage();
   UploadImg uploadImg;
   DropDown dropDown = new DropDown();
+  DocumentListing documentListing;
   bool uploading = true;
+
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
@@ -42,8 +47,9 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
       )
           .then((value) {
         val = jsonDecode(value.body);
-        print(val['message']);
+        if (val['error'] == 0) {}
       });
+
       alertDialog();
     } catch (e) {
       print(e);
