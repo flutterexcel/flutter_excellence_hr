@@ -10,9 +10,9 @@ class TimeCompensate extends StatelessWidget {
   TimeCompensate({this.monthAttendance});
   @override
   Widget build(BuildContext context) {
-    final double pendingPercent =
-        (monthAttendance.data.compensationSummary.secondsToBeCompensate /
-            monthAttendance.data.monthSummary.secondsActualWorkingHours);
+    final double pendingPercent = .9;
+    //(monthAttendance.data.compensationSummary.secondsToBeCompensate /
+    //        monthAttendance.data.monthSummary.secondsActualWorkingHours);
 
     if (monthAttendance.data.compensationSummary.secondsToBeCompensate >= 1) {
       showCompensate = true;

@@ -8,12 +8,11 @@ class CompletePending extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final completePercent = (monthSummary.secondsCompletedWorkingHours) /
-         (monthSummary.secondsActualWorkingHours)>.9?0:(monthSummary.secondsCompletedWorkingHours) /
-         (monthSummary.secondsActualWorkingHours);
-     final pendingPercent = (monthSummary.secondsPendingWorkingHours) /
-         (monthSummary.secondsActualWorkingHours)>.9?0:(monthSummary.secondsPendingWorkingHours) /
-         (monthSummary.secondsActualWorkingHours);
+    final completePercent = .9;
+    // (monthSummary.secondsCompletedWorkingHours) /
+    //     (monthSummary.secondsActualWorkingHours);
+    final pendingPercent = .9; //(monthSummary.secondsPendingWorkingHours) /
+   // (monthSummary.secondsActualWorkingHours);
     return Card(
       margin: EdgeInsets.fromLTRB(8, 16, 8, 16),
       child: Column(
