@@ -56,15 +56,13 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
 
       alertDialog();
     } catch (e) {
-      print(e);
+      
     }
   }
 
   mytest() {
-    print('from' + document);
     setState(() {
       onImgUpload(document);
-      print('xxdddx');
     });
   }
 

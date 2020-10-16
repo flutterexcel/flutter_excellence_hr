@@ -53,7 +53,7 @@ class _DocumentListingState extends State<DocumentListing> {
           diff.add(element);
         }
       });
-      //  print("Document need to be uploaded $diff");
+    
       setState(() {
         documentLists = true;
       });

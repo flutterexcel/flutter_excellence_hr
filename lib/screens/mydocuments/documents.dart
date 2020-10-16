@@ -30,7 +30,7 @@ class _MyDocumentsState extends State<MyDocuments> {
             DropDown(onDocumentChange: (String value) {
               setState(() {
                 documents = value;
-                print("Selected document is $documents");
+
                 showImgUpload = true;
               });
             }),
@@ -39,11 +39,9 @@ class _MyDocumentsState extends State<MyDocuments> {
                     document: documents,
                     onImgUpload: (String val) {
                       documents = val;
-                      print(val + 'retrun');
+
                       setState(() {
-                        print("This doc uploaded $documents");
                         check = val;
-                        print(check + 'set state');
                       });
                     },
                   )

@@ -29,7 +29,7 @@ class _UploadPicState extends State<UploadPic> {
         alertDialog();
       });
     } catch (e) {
-      print(e);
+    
     }
   }
 
