@@ -33,46 +33,48 @@ class _PolicyDocumentsState extends State<PolicyDocuments> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.BACKGROUND_COLOR,
-      appBar:
-          AppBar(title: AppBarWidget(pageName: 'Policy Documents directory')),
-      drawer: Navigation(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: show
-              ? Column(children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.fromLTRB(8, 32, 8, 32),
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                        border: Border(
-                            left: BorderSide(width: 1, color: Colors.grey[300]),
-                            right:
-                                BorderSide(width: 1, color: Colors.grey[300]),
-                            top: BorderSide(width: 2, color: Colors.grey[300]),
-                            bottom:
-                                BorderSide(width: 1, color: Colors.grey[300]))),
-                    child: ListView.separated(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      separatorBuilder: (BuildContext context, int index) =>
-                          Divider(
-                        height: 1,
-                        thickness: .5,
-                        color: Colors.grey[300],
-                      ),
-                      itemBuilder: (_, int index) =>
-                          ListDataItems(policy.data[index]),
-                      itemCount: policy.data.length,
+    return show
+        ? Scaffold(
+            backgroundColor: AppColors.BACKGROUND_COLOR,
+            appBar: AppBar(
+                title: AppBarWidget(pageName: 'Policy Documents directory')),
+            drawer: Navigation(),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                  child: Column(children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(8, 32, 8, 32),
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      border: Border(
+                          left: BorderSide(width: 1, color: Colors.grey[300]),
+                          right: BorderSide(width: 1, color: Colors.grey[300]),
+                          top: BorderSide(width: 2, color: Colors.grey[300]),
+                          bottom:
+                              BorderSide(width: 1, color: Colors.grey[300]))),
+                  child: ListView.separated(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        Divider(
+                      height: 1,
+                      thickness: .5,
+                      color: Colors.grey[300],
                     ),
+                    itemBuilder: (_, int index) =>
+                        ListDataItems(policy.data[index]),
+                    itemCount: policy.data.length,
                   ),
-                ])
-              : Center(child: CircularProgressIndicator()),
-        ),
-      ),
-    );
+                ),
+              ])),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+                child: CircularProgressIndicator(backgroundColor: Colors.cyan)),
+          );
   }
 }
 

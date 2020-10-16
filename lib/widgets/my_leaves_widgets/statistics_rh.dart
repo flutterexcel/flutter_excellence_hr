@@ -127,9 +127,7 @@ class _StatisticsRHState extends State<StatisticsRH> {
               ),
             ],
           )
-        : Center(
-            child: CircularProgressIndicator(),
-          );
+        : Center();
   }
 }
 

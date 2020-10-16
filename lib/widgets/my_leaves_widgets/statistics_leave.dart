@@ -123,9 +123,7 @@ class _StatisticsLeaveState extends State<StatisticsLeave> {
               ),
             ],
           )
-        : Center(
-            child: CircularProgressIndicator(),
-          );
+        : Center();
   }
 }
 

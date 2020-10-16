@@ -23,7 +23,7 @@ class MyAttendance extends StatelessWidget {
               child: CircularProgressIndicator(backgroundColor: Colors.cyan)),
         );
       }
-      
+
       if (state is AttendanceInitial) {
         var date = new DateTime.now().toString();
         var dateParse = DateTime.parse(date);
