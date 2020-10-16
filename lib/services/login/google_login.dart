@@ -11,7 +11,7 @@ class LoginGoogle {
   Future<User> loginGoogle(String token) async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     final loginUrl = prodUrl.baseUrl;
-    print(loginUrl);
+
     Map data = {"token": apiKey, "action": "login", "googleAuthToken": token};
     return _post
         .post(loginUrl, body: json.encode(data))

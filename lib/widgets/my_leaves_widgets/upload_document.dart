@@ -33,12 +33,10 @@ class _UploadPicState extends State<UploadPic> {
               leaveId: leavid)
           .then((value) {
         val = jsonDecode(value.body);
-        print(val['message']);
+
         alertDialog();
       });
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   @override
@@ -61,15 +59,15 @@ class _UploadPicState extends State<UploadPic> {
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: <Widget>[
-                    Container(
-                        margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
-                        child: Image(
-                          image: (_image == null)
-                              ? AssetImage('assets/images/upload.png')
-                              : Image.file(_image),
-                          width: 50,
-                          height: 50,
-                        )),
+                    // Container(
+                    //     margin: EdgeInsets.fromLTRB(0, 60, 0, 16),
+                    //     child: Image(
+                    //       image: (_image == null)
+                    //           ? AssetImage('assets/images/upload.png')
+                    //           : Image.file(_image),
+                    //       width: 50,
+                    //       height: 50,
+                    //     )),
                     Text(
                       "Drop a document or click to select file to upload",
                       style: TextStyle(

@@ -10,7 +10,6 @@ class RestrictedLeave extends StatefulWidget {
 
 class _RestrictedLeaveState extends State<RestrictedLeave> {
   GetRh api = GetRh();
-
   bool loadRh = false;
   GetRhLeaves getRhLeaves;
   _getMyRhInfo() async {
@@ -62,7 +61,10 @@ class _RestrictedLeaveState extends State<RestrictedLeave> {
               )
             ],
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(
+            child: CircularProgressIndicator(
+            backgroundColor: Colors.cyan,
+          ));
   }
 }
 

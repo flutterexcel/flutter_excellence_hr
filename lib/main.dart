@@ -10,7 +10,6 @@ import 'bloc/profile/profile_bloc.dart';
 import 'bloc/attendance/attendance_bloc.dart';
 
 void main() => runApp(
-
         // Injects the Authentication service
         RepositoryProvider<AuthenticationService>(
       create: (context) {
@@ -24,7 +23,6 @@ void main() => runApp(
             create: (context) {
               final authService =
                   RepositoryProvider.of<AuthenticationService>(context);
-
               return LoginBloc(authService)..add(AppLoad());
             },
           ),
