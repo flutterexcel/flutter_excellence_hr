@@ -25,8 +25,8 @@ class AttendanceBloc extends Bloc<AttendanceEvent, AttendanceState> {
           event.month, event.year, event.userid);
       yield AttendanceSuccess(data: attendance);
     } catch (e, s) {
-      print("Caught: $e");
-      print("Stack: $s");
+    
+    
       yield AttendanceFailure();
     }
   }

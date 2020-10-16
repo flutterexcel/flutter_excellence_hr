@@ -73,9 +73,7 @@ class _MyLeavesListState extends State<MyLeavesList> {
               ),
             ],
           )
-        : Center(
-            child: CircularProgressIndicator(),
-          );
+        : Center();
   }
 }
 

@@ -9,24 +9,31 @@ import 'package:flutter_excellence_hr/widgets/document_widgets/document_widgets.
 import 'package:image_picker/image_picker.dart';
 
 class UploadDocumentPic extends StatefulWidget {
-  String document;
+  String document = '-';
+  final Function(String) onImgUpload;
 
-  UploadDocumentPic({this.document});
+  UploadDocumentPic({this.document, this.onImgUpload});
   @override
-  _UploadDocumentPicState createState() =>
-      _UploadDocumentPicState(document: this.document);
+  _UploadDocumentPicState createState() => _UploadDocumentPicState(
+      document: this.document,
+      onImgUpload: (String val) {
+        onImgUpload(val);
+      });
 }
 
 class _UploadDocumentPicState extends State<UploadDocumentPic> {
-  String document;
-  bool checkBoxValue = false;
-  _UploadDocumentPicState({this.document});
+  String document = '-';
+  bool valuefirst = false;
+  final Function(String) onImgUpload;
+  _UploadDocumentPicState({this.document, this.onImgUpload});
   File _image;
   var val;
   UploadImage api = UploadImage();
   UploadImg uploadImg;
   DropDown dropDown = new DropDown();
+  DocumentListing documentListing;
   bool uploading = true;
+
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
@@ -42,12 +49,21 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
       )
           .then((value) {
         val = jsonDecode(value.body);
-        print(val['message']);
+        if (val['error'] == 0) {
+          onImgUpload(widget.document);
+        }
       });
+
       alertDialog();
     } catch (e) {
-      print(e);
+      
     }
+  }
+
+  mytest() {
+    setState(() {
+      onImgUpload(document);
+    });
   }
 
   @override
@@ -55,6 +71,7 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
     return InkWell(
         onTap: () {
           getImage();
+          //mytest();
         },
         child: Column(
           children: [
@@ -72,14 +89,14 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
                     width: MediaQuery.of(context).size.width,
                     child: uploading
                         ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Center(
-                                child: Text(
-                                  " Click to select file to upload Image",
-                                  style: TextStyle(
-                                      color: AppColors.MIDIUM_BLACK,
-                                      fontFamily: 'OpenSans'),
-                                ),
+                              Text(
+                                " Click to select file to upload Image",
+                                style: TextStyle(
+                                    color: AppColors.MIDIUM_BLACK,
+                                    fontFamily: 'OpenSans'),
                               )
                             ],
                           )
@@ -93,7 +110,16 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Checkbox(value: checkBoxValue, onChanged: (bool value) {}),
+                Checkbox(
+                  checkColor: Colors.red,
+                  activeColor: Colors.greenAccent,
+                  value: this.valuefirst,
+                  onChanged: (bool value) {
+                    setState(() {
+                      this.valuefirst = value;
+                    });
+                  },
+                ),
                 Flexible(
                   child: Container(
                     margin: EdgeInsets.fromLTRB(0, 8, 0, 0),

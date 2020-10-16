@@ -127,10 +127,10 @@ class LoginPage extends StatelessWidget {
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text('Login ....')));
                   }
-                  if (state is LoginFailure) {
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text('Invalid username and password.')));
-                  }
+                  // if (state is LoginFailure) {
+                  //   Scaffold.of(context).showSnackBar(SnackBar(
+                  //       content: Text('Invalid username and password.')));
+                  // }
                   if (state is LoginSuccess) {
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text('Login Success')));

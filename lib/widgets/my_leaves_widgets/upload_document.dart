@@ -33,12 +33,10 @@ class _UploadPicState extends State<UploadPic> {
               leaveId: leavid)
           .then((value) {
         val = jsonDecode(value.body);
-        print(val['message']);
+
         alertDialog();
       });
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   @override
