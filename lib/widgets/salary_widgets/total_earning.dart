@@ -4,6 +4,7 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/salary/salary.dart';
 
 class TotalEarning extends StatefulWidget {
+  
   @override
   _TotalEarningState createState() => _TotalEarningState();
 }
@@ -24,6 +25,7 @@ class _TotalEarningState extends State<TotalEarning> {
           "Medical_Allowance", salary.data.salaryDetails[0].medicalAllowance));
       earning.add(ListItem(
           "Special Allowance", salary.data.salaryDetails[0].specialAllowance));
+          
       setState(() {
         yourSalary = true;
       });
@@ -38,62 +40,68 @@ class _TotalEarningState extends State<TotalEarning> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.only(left: 16, right: 16),
-          decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Colors.grey[300]),
-            color: AppColors.GREEN_COLOR,
-          ),
-          child: Row(
-            children: [
+    return yourSalary
+        ? Column(
+            children: <Widget>[
               Container(
-                  margin: EdgeInsets.only(top: 16, left: 8, bottom: 16),
-                  child: Text(
-                    'Total ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'OpenSans',
-                        color: Colors.white),
-                  )),
+                margin: EdgeInsets.only(left: 16, right: 16),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Colors.grey[300]),
+                  color: AppColors.GREEN_COLOR,
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                        margin: EdgeInsets.only(top: 16, left: 8, bottom: 16),
+                        child: Text(
+                          'Total ',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'OpenSans',
+                              color: Colors.white),
+                        )),
+                    Container(
+                        margin: EdgeInsets.only(top: 16, bottom: 16),
+                        child: Text(
+                          'Earnings ',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'SourceSans',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        )),
+                  ],
+                ),
+              ),
               Container(
-                  margin: EdgeInsets.only(top: 16, bottom: 16),
-                  child: Text(
-                    'Earnings ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'SourceSans',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  )),
+                margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.grey[300])),
+                child: yourSalary
+                    ? ListView.separated(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            Divider(
+                          height: 1,
+                          thickness: .5,
+                          color: Colors.grey[300],
+                        ),
+                        itemBuilder: (_, int index) =>
+                            ListEarningItems(earning[index]),
+                        itemCount: earning.length,
+                      )
+                    : Center(),
+              ),
             ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
-          padding: EdgeInsets.all(6),
-          decoration: BoxDecoration(
-              border: Border.all(width: 1, color: Colors.grey[300])),
-          child: yourSalary
-              ? ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      Divider(
-                    height: 1,
-                    thickness: .5,
-                    color: Colors.grey[300],
-                  ),
-                  itemBuilder: (_, int index) =>
-                      ListEarningItems(earning[index]),
-                  itemCount: earning.length,
-                )
-              : Center(),
-        ),
-      ],
-    );
+          )
+        : Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.cyan,
+            ),
+          );
   }
 }
 

@@ -90,7 +90,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginInWithGoogleButtonPressed event) async* {
     // yield LoginLoading();
     try {
-      print(event.googleToken);
+      
       final user = await _authenticationService
           .signInWithGoogleAndPassword(event.googleToken);
       if (user != null) {

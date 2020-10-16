@@ -15,6 +15,7 @@ class DropDown extends StatefulWidget {
 class _DropDownState extends State<DropDown> {
   final Function(String) onDocumentChange;
   _DropDownState({this.onDocumentChange});
+
   List<ListItem> _dropdownItems = [
     ListItem("-", "--select Doc type--"),
     ListItem("CV", "CV"),
