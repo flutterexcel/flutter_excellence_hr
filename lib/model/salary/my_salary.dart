@@ -85,7 +85,7 @@ class SalaryDetails {
   String hRA;
   String basic;
   String arrears;
-  String incrementAmount;
+  String incrementAmount = '-';
   String tDS;
   String miscDeductions;
   String advance;
@@ -125,7 +125,8 @@ class SalaryDetails {
     hRA = json['HRA'];
     basic = json['Basic'];
     arrears = json['Arrears'];
-    incrementAmount = json['Increment_Amount'];
+    incrementAmount =
+        json.containsKey('Increment_Amount') ? json['Increment_Amount'] : '-';
     tDS = json['TDS'];
     miscDeductions = json['Misc_Deductions'];
     advance = json['Advance'];

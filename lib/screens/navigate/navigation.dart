@@ -113,6 +113,11 @@ class Navigation extends StatelessWidget {
               title: Text('My Inventory',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShowInventory()),
+                );
+
                 _inventoryBloc.add(LoadInventory(enableInventory: true));
               },
             ),

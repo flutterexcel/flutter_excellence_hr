@@ -10,7 +10,7 @@ import '../../bloc/bloc.dart';
 // }
 
 class LoginPage extends StatelessWidget {
-//  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   bool _autoValidate = false;
@@ -26,28 +26,28 @@ class LoginPage extends StatelessWidget {
 
     LoginState state = _loginBloc.state;
 
-    if (state is LoginLoading) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
     return Form(
-      //   key: _key,
-      //  autovalidate: _autoValidate,
+      key: _key,
+      // autovalidate: _autoValidate,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              height: 40,
               color: AppColors.EDIT_TEXT_COLOR,
               //To make
               margin: EdgeInsets.fromLTRB(32, 10, 32, 12),
               child: TextFormField(
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter username';
+                  }
+                  return null;
+                },
                 controller: _emailController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Usename',
+                  labelText: 'Username',
                 ),
               ),
             ),
@@ -55,10 +55,15 @@ class LoginPage extends StatelessWidget {
               height: 12,
             ),
             Container(
-              height: 40,
               color: AppColors.EDIT_TEXT_COLOR,
               margin: EdgeInsets.fromLTRB(32, 0, 32, 8),
               child: TextFormField(
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter password';
+                  }
+                  return null;
+                },
                 obscureText: true,
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -113,8 +118,24 @@ class LoginPage extends StatelessWidget {
                   'Login',
                   style: TextStyle(fontFamily: 'SourceSans'),
                 ),
-                onPressed:
-                    state is LoginLoading ? () {} : _onLoginButtonPressed,
+                onPressed: () {
+                  // Validate returns true if the form is valid, otherwise false.
+                  if (_key.currentState.validate()) {
+                    // If the form is valid, display a snackbar. In the real world,
+                    // you'd often call a server or save the information in a database.
+                    _onLoginButtonPressed();
+                    Scaffold.of(context)
+                        .showSnackBar(SnackBar(content: Text('Login ....')));
+                  }
+                  if (state is LoginFailure) {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text('Invalid username and password.')));
+                  }
+                  if (state is LoginSuccess) {
+                    Scaffold.of(context)
+                        .showSnackBar(SnackBar(content: Text('Login Success')));
+                  }
+                },
               ),
             ),
           ],

@@ -21,6 +21,18 @@ class StorageUtil {
     _preferences = await SharedPreferences.getInstance();
   }
 
+//get profileImg
+  static String getProfileImg({String defValue = ''}) {
+    if (_preferences == null) return defValue;
+    return _preferences.getString('profileImg') ?? defValue;
+  }
+
+  //set profileImg
+  static Future<bool> setProfileImg(String value) async {
+    if (_preferences == null) return null;
+    return _preferences.setString('profileImg', value);
+  }
+
   //get usertoken
   static String getUserToken({String defValue = ''}) {
     if (_preferences == null) return defValue;
