@@ -9,21 +9,23 @@ import 'package:flutter_excellence_hr/widgets/document_widgets/document_widgets.
 import 'package:image_picker/image_picker.dart';
 
 class UploadDocumentPic extends StatefulWidget {
-  String document;
+  String document = '-';
+  final Function(String) onImgUpload;
 
-  DocumentListing documentListing = new DocumentListing();
-  //bool requiredDoc = documentListing.documentLists;
-
-  UploadDocumentPic({this.document});
+  UploadDocumentPic({this.document, this.onImgUpload});
   @override
-  _UploadDocumentPicState createState() =>
-      _UploadDocumentPicState(document: this.document);
+  _UploadDocumentPicState createState() => _UploadDocumentPicState(
+      document: this.document,
+      onImgUpload: (String val) {
+        onImgUpload(val);
+      });
 }
 
 class _UploadDocumentPicState extends State<UploadDocumentPic> {
-  String document;
+  String document = '-';
   bool valuefirst = false;
-  _UploadDocumentPicState({this.document});
+  final Function(String) onImgUpload;
+  _UploadDocumentPicState({this.document, this.onImgUpload});
   File _image;
   var val;
   UploadImage api = UploadImage();
@@ -47,7 +49,9 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
       )
           .then((value) {
         val = jsonDecode(value.body);
-        if (val['error'] == 0) {}
+        if (val['error'] == 0) {
+          onImgUpload(widget.document);
+        }
       });
 
       alertDialog();
@@ -56,11 +60,20 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
     }
   }
 
+  mytest() {
+    print('from' + document);
+    setState(() {
+      onImgUpload(document);
+      print('xxdddx');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
           getImage();
+          //mytest();
         },
         child: Column(
           children: [

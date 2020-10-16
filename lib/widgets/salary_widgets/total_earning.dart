@@ -4,6 +4,7 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/salary/salary.dart';
 
 class TotalEarning extends StatefulWidget {
+  
   @override
   _TotalEarningState createState() => _TotalEarningState();
 }
@@ -24,6 +25,7 @@ class _TotalEarningState extends State<TotalEarning> {
           "Medical_Allowance", salary.data.salaryDetails[0].medicalAllowance));
       earning.add(ListItem(
           "Special Allowance", salary.data.salaryDetails[0].specialAllowance));
+          
       setState(() {
         yourSalary = true;
       });

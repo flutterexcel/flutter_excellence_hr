@@ -2,17 +2,23 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/document/mydocument.dart';
+import 'package:flutter_excellence_hr/widgets/document_widgets/document_widgets.dart';
 import '../../model/document/document_list.dart';
 
 class DocumentListing extends StatefulWidget {
+  String document;
+  DocumentListing({this.document});
   @override
-  _DocumentListingState createState() => _DocumentListingState();
+  _DocumentListingState createState() =>
+      _DocumentListingState(document: this.document);
 }
 
 class _DocumentListingState extends State<DocumentListing> {
   MyDocument api = new MyDocument();
   DocumentList documentList;
   bool documentLists = false;
+  String document;
+  _DocumentListingState({this.document});
 
   List<String> listAll = [
     "CV",
@@ -35,10 +41,7 @@ class _DocumentListingState extends State<DocumentListing> {
   _getDocumentList() async {
     return await api.getDocument().then((value) {
       documentList = value;
-      print("Document list is $value");
       int i = 0;
-      // creates an empty array of length 5
-      // assignig values to all the indices
       while (i < documentList.data.userDocumentInfo.length) {
         listOf
             .add(documentList.data.userDocumentInfo[i].documentType.toString());
@@ -50,7 +53,7 @@ class _DocumentListingState extends State<DocumentListing> {
           diff.add(element);
         }
       });
-      print("Document need to be uploaded $diff");
+      //  print("Document need to be uploaded $diff");
       setState(() {
         documentLists = true;
       });
@@ -65,7 +68,6 @@ class _DocumentListingState extends State<DocumentListing> {
 
   @override
   Widget build(BuildContext context) {
-    //listOf.add("CV");
     return documentLists
         ? Column(
             children: <Widget>[
@@ -83,7 +85,7 @@ class _DocumentListingState extends State<DocumentListing> {
                     color: Colors.grey[300],
                   ),
                   itemBuilder: (_, int index) =>
-                      ListRequiredDocument(result[index]),
+                      ListRequiredDocument(result[index], widget.document),
                   itemCount: result.length,
                 ),
               ),
@@ -108,7 +110,7 @@ class _DocumentListingState extends State<DocumentListing> {
                     color: Colors.grey[300],
                   ),
                   itemBuilder: (_, int index) =>
-                      ListNotUploadedDocument(diff[index]),
+                      ListNotUploadedDocument(diff[index], widget.document),
                   itemCount: diff.length,
                 ),
               ),
@@ -121,8 +123,8 @@ class _DocumentListingState extends State<DocumentListing> {
 }
 
 class ListRequiredDocument extends StatelessWidget {
-  String itemName;
-  ListRequiredDocument(this.itemName);
+  String itemName, document;
+  ListRequiredDocument(this.itemName, this.document);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -130,7 +132,8 @@ class ListRequiredDocument extends StatelessWidget {
         child: ListTile(
           leading: Icon(
             Icons.done_all,
-            color: Colors.greenAccent,
+            color:
+                itemName == document ? Colors.pinkAccent : Colors.greenAccent,
           ),
           title: Text(
             itemName,
@@ -141,8 +144,8 @@ class ListRequiredDocument extends StatelessWidget {
 }
 
 class ListNotUploadedDocument extends StatelessWidget {
-  String itemName;
-  ListNotUploadedDocument(this.itemName);
+  String itemName, document;
+  ListNotUploadedDocument(this.itemName, this.document);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -150,7 +153,9 @@ class ListNotUploadedDocument extends StatelessWidget {
         child: ListTile(
           leading: Icon(
             Icons.done_all,
-            color: AppColors.LIGHTBLACK_COLOR,
+            color: (itemName == document)
+                ? Colors.greenAccent
+                : (AppColors.LIGHTBLACK_COLOR),
           ),
           title: Text(
             itemName,

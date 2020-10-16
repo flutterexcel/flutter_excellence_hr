@@ -21,18 +21,18 @@ class _PaySlipState extends State<PaySlip> {
       while (i < salary.data.payslipHistory.length) {
         slips.add(ListItemPay(
             "PAY DATE",
-            salary.data.payslipHistory[0].month +
+            salary.data.payslipHistory[i].month +
                 ", " +
-                salary.data.payslipHistory[0].year));
+                salary.data.payslipHistory[i].year));
         slips.add(ListItemPay("TOTAL EARNINGS (Rs.)",
             salary.data.payslipHistory[0].totalEarnings));
 
         slips.add(
-            ListItemPay("TAXES", salary.data.payslipHistory[0].totalTaxes));
+            ListItemPay("TAXES", salary.data.payslipHistory[i].totalTaxes));
         slips.add(ListItemPay("TOTAL DEDUCTIONS (Rs.)",
             salary.data.payslipHistory[0].totalDeductions));
         slips.add(ListItemPay(
-            "NET SALARY", salary.data.payslipHistory[0].totalNetSalary));
+            "NET SALARY", salary.data.payslipHistory[i].totalNetSalary));
         i++;
       }
 

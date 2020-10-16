@@ -10,8 +10,9 @@ class MyDocuments extends StatefulWidget {
 }
 
 class _MyDocumentsState extends State<MyDocuments> {
-  String document = "-";
+  String documents = "-";
   bool showImgUpload = false;
+  String check = "-";
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +29,27 @@ class _MyDocumentsState extends State<MyDocuments> {
             DocumentType(),
             DropDown(onDocumentChange: (String value) {
               setState(() {
-                document = value;
-                print("Selected document is $document");
+                documents = value;
+                print("Selected document is $documents");
                 showImgUpload = true;
               });
             }),
             showImgUpload
-                ? UploadDocumentPic(document: document.toString())
+                ? UploadDocumentPic(
+                    document: documents,
+                    onImgUpload: (String val) {
+                      documents = val;
+                      print(val + 'retrun');
+                      setState(() {
+                        print("This doc uploaded $documents");
+                        check = val;
+                        print(check + 'set state');
+                      });
+                    },
+                  )
                 : Center(),
             RequiredDocument(),
-            DocumentListing(),
+            DocumentListing(document: check),
             DocumentDirectory(),
           ],
         ),

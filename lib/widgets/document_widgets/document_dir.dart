@@ -5,17 +5,19 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../model/document/document_list.dart';
 
 class DocumentDirectory extends StatefulWidget {
+  final Function function;
+  DocumentDirectory({Key key, this.function}) : super(key: key);
   @override
-  _DocumentDirectoryState createState() => _DocumentDirectoryState();
+  DocumentDirectoryState createState() => DocumentDirectoryState();
 }
 
-class _DocumentDirectoryState extends State<DocumentDirectory> {
+class DocumentDirectoryState extends State<DocumentDirectory> {
   MyDocument api = new MyDocument();
   DocumentList documentList;
   bool yourDocuments = false;
   List<ListItemDoc> documents = [];
 
-  _getDocument() async {
+  getDocument() async {
     return await api.getDocument().then((value) {
       documentList = value;
       int i = 0;
@@ -28,13 +30,14 @@ class _DocumentDirectoryState extends State<DocumentDirectory> {
       setState(() {
         yourDocuments = true;
       });
+      
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _getDocument();
+    getDocument();
   }
 
   @override
