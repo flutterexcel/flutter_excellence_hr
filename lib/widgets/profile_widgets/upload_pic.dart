@@ -16,9 +16,13 @@ class _UploadPicState extends State<UploadPic> {
   var val;
   UploadImage api = UploadImage();
   UploadImg uploadImg;
+  bool uploading = true;
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
+    setState(() {
+      uploading = false;
+    });
 
     try {
       await api
@@ -28,9 +32,7 @@ class _UploadPicState extends State<UploadPic> {
         val = jsonDecode(value.body);
         alertDialog();
       });
-    } catch (e) {
-    
-    }
+    } catch (e) {}
   }
 
   @override
