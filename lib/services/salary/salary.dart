@@ -5,7 +5,7 @@ import '../../model/salary/my_salary.dart';
 import '../../app_config.dart';
 import '../storage_service.dart';
 
-class MySalary {
+class SalaryService {
   Post _post = Post();
   Future<Salary> getSalary() async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'salUrl');

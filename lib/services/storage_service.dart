@@ -68,4 +68,9 @@ class StorageUtil {
     if (_preferences == null) return null;
     return _preferences.setBool('islogged', value);
   }
+
+  static Future<bool> clear(bool value) async {
+    if (_preferences == null) return null;
+    return _preferences.clear();
+  }
 }

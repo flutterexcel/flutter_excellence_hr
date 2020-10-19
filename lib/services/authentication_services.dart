@@ -1,3 +1,5 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../model/user.dart';
 import '../services/login.dart';
 import 'storage_service.dart';
@@ -40,9 +42,7 @@ class LoginAuthenticationService extends AuthenticationService {
 
   @override
   Future<void> signOut() {
-    StorageUtil.setLoggedIn(false);
-    StorageUtil.setUserId('');
-    StorageUtil.setUserToken('');
-    return null;
+    StorageUtil.clear(true);
+    //return null;
   }
 }
