@@ -53,7 +53,7 @@ class _DocumentListingState extends State<DocumentListing> {
           diff.add(element);
         }
       });
-    
+
       setState(() {
         documentLists = true;
       });
@@ -133,7 +133,7 @@ class ListRequiredDocument extends StatelessWidget {
           leading: Icon(
             Icons.done_all,
             color:
-                itemName == document ? Colors.pinkAccent : Colors.greenAccent,
+                itemName == document ? Colors.greenAccent : Colors.greenAccent,
           ),
           title: Text(
             itemName,

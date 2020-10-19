@@ -78,6 +78,7 @@ class _UploadPicState extends State<UploadPic> {
       actions: <Widget>[
         FlatButton(
             onPressed: () {
+              uploading = true;
               Navigator.of(context).pop();
             },
             child: Text(

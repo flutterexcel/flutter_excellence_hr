@@ -21,9 +21,14 @@ class _UploadPicState extends State<UploadPic> {
   _UploadPicState({this.leavid});
   UploadImage api = UploadImage();
   UploadImg uploadImg;
+  bool uploading = false;
+
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
+    setState(() {
+      uploading = false;
+    });
     try {
       await api
           .uploadImage(
@@ -33,7 +38,6 @@ class _UploadPicState extends State<UploadPic> {
               leaveId: leavid)
           .then((value) {
         val = jsonDecode(value.body);
-
         alertDialog();
       });
     } catch (e) {}
@@ -89,6 +93,7 @@ class _UploadPicState extends State<UploadPic> {
       actions: <Widget>[
         FlatButton(
             onPressed: () {
+              uploading = true;
               Navigator.of(context).pop();
             },
             child: Text(
