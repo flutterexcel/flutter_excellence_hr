@@ -28,7 +28,7 @@ class _UploadPicState extends State<UploadPic> {
       await api
           .uploadImage(
               doctype: 'leave_doc',
-              action: "profile_pic",
+              action: "upload_leave_document",
               file: _image,
               leaveId: leavid)
           .then((value) {
@@ -103,5 +103,4 @@ class _UploadPicState extends State<UploadPic> {
           return alert;
         });
   }
-
 }
