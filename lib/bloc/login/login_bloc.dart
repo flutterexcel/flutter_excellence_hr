@@ -67,7 +67,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithEmailToState(
       LoginInWithEmailButtonPressed event) async* {
-    //yield LoginLoading();
+    StorageUtil.clear(true);
+
     try {
       final user = await _authenticationService.signInWithEmailAndPassword(
           event.email, event.password);
@@ -88,9 +89,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithGoogleToState(
       LoginInWithGoogleButtonPressed event) async* {
-    // yield LoginLoading();
+    StorageUtil.clear(true);
     try {
-      
       final user = await _authenticationService
           .signInWithGoogleAndPassword(event.googleToken);
       if (user != null) {

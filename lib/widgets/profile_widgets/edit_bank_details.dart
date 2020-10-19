@@ -40,124 +40,127 @@ class EditBankDetails extends StatelessWidget {
     //   }
     // }
 
-    return Column(
-      children: <Widget>[
-        Row(
-          children: [
-            Container(
-                margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: Text(
-                  "Bank Account Number",
-                  style: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: 18,
-                      color: AppColors.MIDIUM_BLACK),
-                )),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
-          child: TextFormField(
-            controller: acNum
-              ..text = profileDetails.data.userBankDetail.bankAccountNo,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-                margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: Text(
-                  "Bank Name",
-                  style: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: 18,
-                      color: AppColors.MIDIUM_BLACK),
-                )),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
-          child: TextFormField(
-            controller: bnkName
-              ..text = profileDetails.data.userBankDetail.bankName,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-                margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: Text(
-                  "Bank Address",
-                  style: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: 18,
-                      color: AppColors.MIDIUM_BLACK),
-                )),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
-          child: TextFormField(
-            controller: bnkAddress
-              ..text = profileDetails.data.userBankDetail.bankAddress,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            Container(
-                margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: Text(
-                  "IFSC Code",
-                  style: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: 18,
-                      color: AppColors.MIDIUM_BLACK),
-                )),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
-          child: TextFormField(
-            controller: ifsc..text = profileDetails.data.userBankDetail.ifsc,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              height: 35,
-              margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
-              child: RoundedLoadingButton(
-                color: AppColors.BTN_BLUE,
-                width: 150,
-                borderRadius: 10,
-                child: Text('Update Bank Details',
-                    style: TextStyle(color: Colors.white)),
-                controller: _btnControllerz,
-                onPressed: () async {
-                  await _dosave();
-                },
+    return profileDetails.data.userBankDetail != null
+        ? Column(
+            children: <Widget>[
+              Row(
+                children: [
+                  Container(
+                      margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      child: Text(
+                        "Bank Account Number",
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontSize: 18,
+                            color: AppColors.MIDIUM_BLACK),
+                      )),
+                ],
               ),
-            ),
-          ],
-        ),
-      ],
-    );
+              Container(
+                margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                height: 35,
+                child: TextFormField(
+                  controller: acNum
+                    ..text = profileDetails.data.userBankDetail.bankAccountNo,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                      margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      child: Text(
+                        "Bank Name",
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontSize: 18,
+                            color: AppColors.MIDIUM_BLACK),
+                      )),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                height: 35,
+                child: TextFormField(
+                  controller: bnkName
+                    ..text = profileDetails.data.userBankDetail.bankName,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                      margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      child: Text(
+                        "Bank Address",
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontSize: 18,
+                            color: AppColors.MIDIUM_BLACK),
+                      )),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                height: 35,
+                child: TextFormField(
+                  controller: bnkAddress
+                    ..text = profileDetails.data.userBankDetail.bankAddress,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                      margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      child: Text(
+                        "IFSC Code",
+                        style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontSize: 18,
+                            color: AppColors.MIDIUM_BLACK),
+                      )),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                height: 35,
+                child: TextFormField(
+                  controller: ifsc
+                    ..text = profileDetails.data.userBankDetail.ifsc,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 35,
+                    margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                    child: RoundedLoadingButton(
+                      color: AppColors.BTN_BLUE,
+                      width: 150,
+                      borderRadius: 10,
+                      child: Text('Update Bank Details',
+                          style: TextStyle(color: Colors.white)),
+                      controller: _btnControllerz,
+                      onPressed: () async {
+                        await _dosave();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )
+        : Center();
   }
 }

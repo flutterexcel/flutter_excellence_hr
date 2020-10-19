@@ -49,7 +49,7 @@ class UserDocumentInfo {
   String documentType;
   String link1;
   String readStatus;
-  UpdatedBy updatedBy;
+  //UpdatedBy updatedBy;
   String lastModified;
   String docLink;
 
@@ -59,7 +59,7 @@ class UserDocumentInfo {
       this.documentType,
       this.link1,
       this.readStatus,
-      this.updatedBy,
+      //this.updatedBy,
       this.lastModified,
       this.docLink});
 
@@ -69,9 +69,9 @@ class UserDocumentInfo {
     documentType = json['document_type'];
     link1 = json['link_1'];
     readStatus = json['read_status'];
-    updatedBy = json['updated_by'] != null
-        ? new UpdatedBy.fromJson(json['updated_by'])
-        : null;
+    // updatedBy = json['updated_by'] != null
+    //     ? new UpdatedBy.fromJson(json['updated_by'])
+    //     : null;
     lastModified = json['last_modified'];
     docLink = json['doc_link'];
   }
@@ -83,9 +83,9 @@ class UserDocumentInfo {
     data['document_type'] = this.documentType;
     data['link_1'] = this.link1;
     data['read_status'] = this.readStatus;
-    if (this.updatedBy != null) {
-      data['updated_by'] = this.updatedBy.toJson();
-    }
+    // if (this.updatedBy != null) {
+    //   data['updated_by'] = this.updatedBy.toJson();
+    // }
     data['last_modified'] = this.lastModified;
     data['doc_link'] = this.docLink;
     return data;
