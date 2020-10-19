@@ -17,23 +17,22 @@ class _PaySlipState extends State<PaySlip> {
   _getSlip() async {
     return await api.getSalary().then((value) {
       salary = value;
-      int i = 0;
-      while (i < salary.data.payslipHistory.length) {
+
+      for (int i = 0; i < salary.data.payslipHistory.length; i++) {
         slips.add(ListItemPay(
             "PAY DATE",
             salary.data.payslipHistory[i].month +
                 ", " +
                 salary.data.payslipHistory[i].year));
         slips.add(ListItemPay("TOTAL EARNINGS (Rs.)",
-            salary.data.payslipHistory[0].totalEarnings));
+            salary.data.payslipHistory[i].totalEarnings));
 
         slips.add(
             ListItemPay("TAXES", salary.data.payslipHistory[i].totalTaxes));
         slips.add(ListItemPay("TOTAL DEDUCTIONS (Rs.)",
-            salary.data.payslipHistory[0].totalDeductions));
+            salary.data.payslipHistory[i].totalDeductions));
         slips.add(ListItemPay(
             "NET SALARY", salary.data.payslipHistory[i].totalNetSalary));
-        i++;
       }
 
       setState(() {

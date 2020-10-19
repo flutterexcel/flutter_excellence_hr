@@ -3,6 +3,7 @@ import 'package:flutter_excellence_hr/model/leave/leave.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/leave/leaves.dart';
 import 'package:flutter_excellence_hr/widgets/my_leaves_widgets/my_leaves_widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyLeavesList extends StatefulWidget {
   @override
@@ -21,10 +22,10 @@ class _MyLeavesListState extends State<MyLeavesList> {
     "Rh Compansation"
   ];
 
-  //List<String> listLogo = ["Restricted" : "CL"];
   GetLeaves api = GetLeaves();
   Leave leaves;
   bool loadLeaves = false;
+
   _getMyRhInfo() async {
     return await api.getLeaves().then((value) {
       leaves = value;
@@ -60,7 +61,6 @@ class _MyLeavesListState extends State<MyLeavesList> {
                 ],
               ),
               Divider(height: 1, thickness: .5, color: Colors.grey[300]),
-              //              Container(height:300),
               ListView.separated(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -77,9 +77,33 @@ class _MyLeavesListState extends State<MyLeavesList> {
   }
 }
 
+// class ListLeaves extends StatefulWidget {
+//   @override
+//   _ListLeavesState createState() => _ListLeavesState();
+// }
+
+// class _ListLeavesState extends State<ListLeaves> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+
+//     );
+//   }
+// }
+
 class ListLeaves extends StatelessWidget {
   Leaves leaves;
   ListLeaves(this.leaves);
+  bool openLink = false;
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     customDialog(String leaveid) {
@@ -195,6 +219,7 @@ class ListLeaves extends StatelessWidget {
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 RaisedButton(
                     color: Colors.deepPurple,
@@ -207,7 +232,27 @@ class ListLeaves extends StatelessWidget {
                       "Upload Leave Document",
                       style: TextStyle(
                           color: Colors.white, fontFamily: 'SourceSans'),
-                    ))
+                    )),
+                leaves.docLink.contains("N/A")
+                    ? Center()
+                    : Flexible(
+                        child: Container(
+                          margin: EdgeInsets.only(left: 16),
+                          child: RaisedButton(
+                              color: Colors.lightBlueAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                              onPressed: () {
+                                _launchURL(leaves.docLink);
+                              },
+                              child: Text(
+                                "View",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'SourceSans'),
+                              )),
+                        ),
+                      ),
               ],
             ),
             Row(
