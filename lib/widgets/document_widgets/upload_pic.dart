@@ -43,7 +43,7 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
     try {
       await api
           .uploadImage(
-        doctype: document,
+        doctype: widget.document,
         action: "user_document",
         file: _image,
       )
