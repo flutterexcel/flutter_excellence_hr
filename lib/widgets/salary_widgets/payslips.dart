@@ -4,20 +4,20 @@ import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/salary/salary.dart';
 
 class PaySlip extends StatefulWidget {
+  Salary salary;
+  PaySlip({this.salary});
   @override
-  _PaySlipState createState() => _PaySlipState();
+  _PaySlipState createState() => _PaySlipState(salary: salary);
 }
 
 class _PaySlipState extends State<PaySlip> {
-  MySalary api = new MySalary();
   Salary salary;
+  _PaySlipState({this.salary});
   bool yourSlips = false;
   List<ListItemPay> slips = [];
 
-  _getSlip() async {
-    return await api.getSalary().then((value) {
-      salary = value;
-
+  _getSlip() {
+    if (salary.data.payslipHistory != null) {
       for (int i = 0; i < salary.data.payslipHistory.length; i++) {
         slips.add(ListItemPay(
             "PAY DATE",
@@ -34,10 +34,10 @@ class _PaySlipState extends State<PaySlip> {
         slips.add(ListItemPay(
             "NET SALARY", salary.data.payslipHistory[i].totalNetSalary));
       }
+    }
 
-      setState(() {
-        yourSlips = true;
-      });
+    setState(() {
+      yourSlips = true;
     });
   }
 

@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/salary/my_salary.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:flutter_excellence_hr/services/salary/salary.dart';
 
 class Heading extends StatefulWidget {
+  Salary salary;
+  Heading({this.salary});
   @override
-  _HeadingState createState() => _HeadingState();
+  _HeadingState createState() => _HeadingState(salary: salary);
 }
 
 class _HeadingState extends State<Heading> {
-  MySalary api = new MySalary();
   Salary salary;
-  bool salHeading = false;
-
-  _getHeading() async {
-    return await api.getSalary().then((value) {
-      salary = value;
-      setState(() {
-        salHeading = true;
-      });
-    });
-  }
+  _HeadingState({this.salary});
+  bool salHeading = true;
 
   @override
   void initState() {
     super.initState();
-    _getHeading();
   }
 
   @override
