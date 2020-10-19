@@ -54,7 +54,6 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
           onImgUpload(widget.document);
         }
       });
-
       alertDialog();
     } catch (e) {}
   }
