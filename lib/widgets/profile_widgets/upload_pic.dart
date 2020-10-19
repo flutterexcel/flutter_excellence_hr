@@ -16,9 +16,13 @@ class _UploadPicState extends State<UploadPic> {
   var val;
   UploadImage api = UploadImage();
   UploadImg uploadImg;
+  bool uploading = true;
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
+    setState(() {
+      uploading = false;
+    });
 
     try {
       await api
@@ -28,9 +32,7 @@ class _UploadPicState extends State<UploadPic> {
         val = jsonDecode(value.body);
         alertDialog();
       });
-    } catch (e) {
-    
-    }
+    } catch (e) {}
   }
 
   @override
@@ -51,18 +53,22 @@ class _UploadPicState extends State<UploadPic> {
               child: Container(
                 height: 200,
                 width: MediaQuery.of(context).size.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Drop a document or click to select file to upload",
-                      style: TextStyle(
-                          color: AppColors.MIDIUM_BLACK,
-                          fontFamily: 'OpenSans'),
-                    )
-                  ],
-                ),
+                child: uploading
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Drop a document or click to select file to upload",
+                            style: TextStyle(
+                                color: AppColors.MIDIUM_BLACK,
+                                fontFamily: 'OpenSans'),
+                          )
+                        ],
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(
+                            backgroundColor: Colors.cyan)),
               ),
             ),
           ),
@@ -76,7 +82,10 @@ class _UploadPicState extends State<UploadPic> {
       actions: <Widget>[
         FlatButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              setState(() {
+                uploading = true;
+                Navigator.of(context).pop();
+              });
             },
             child: Text(
               'OK',

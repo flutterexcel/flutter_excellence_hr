@@ -80,9 +80,8 @@ class _PolicyDocumentsState extends State<PolicyDocuments> {
 
 class ListDataItems extends StatelessWidget {
   Data data;
-
   ListDataItems(this.data);
-
+  
   _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
