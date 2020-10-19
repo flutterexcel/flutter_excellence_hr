@@ -38,7 +38,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapAppLoadToState(AppLoad event) async* {
     yield AuthenticationLoad(); // to display splash screen
-    StorageUtil.getInstance();
+    StorageUtil.clear(true);
+
     User currentUser;
     try {
       await _authenticationService.getCurrentUser().then((value) {
@@ -49,10 +50,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         this.add(UserLogIn(user: currentUser));
         yield LoginSuccess();
       } else {
-        yield LoginFailure();
+        yield LoginFailure(error: 'Login failed');
       }
     } catch (e) {
-      //yield LoginFailure();
+      yield LoginFailure(error: 'Login failed');
     }
   }
 
@@ -61,27 +62,31 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapUserLogOutToState(UserLogOut event) async* {
+    StorageUtil.clear(true);
     await _authenticationService.signOut();
+    yield AuthenticationLoad();
     yield LoginFailure();
   }
 
   Stream<LoginState> _mapLoginWithEmailToState(
       LoginInWithEmailButtonPressed event) async* {
     StorageUtil.clear(true);
-
+    User user;
     try {
-      final user = await _authenticationService.signInWithEmailAndPassword(
-          event.email, event.password);
-      if (user != null) {
-        // push new login event
+      await _authenticationService
+          .signInWithEmailAndPassword(event.email, event.password)
+          .then((value) {
+        if (value.token != null) {
+          user = value;
+        }
+      });
+
+      if (user.token != null) {
         this.add(UserLogIn(user: user));
         yield LoginSuccess();
       } else {
         yield LoginFailure(error: 'Login failed');
       }
-      // ignore: unused_catch_clause
-    } on Exception catch (e) {
-      yield LoginFailure(error: 'Login failed');
     } catch (err) {
       yield LoginFailure(error: 'Login failed');
     }
@@ -100,9 +105,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } else {
         yield LoginFailure(error: 'Login failed');
       }
-      // ignore: unused_catch_clause
-    } on Exception catch (e) {
-      yield LoginFailure(error: 'Login failed');
     } catch (err) {
       yield LoginFailure(error: 'Login failed');
     }
