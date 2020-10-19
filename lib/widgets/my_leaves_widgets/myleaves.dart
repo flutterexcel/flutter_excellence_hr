@@ -77,20 +77,6 @@ class _MyLeavesListState extends State<MyLeavesList> {
   }
 }
 
-// class ListLeaves extends StatefulWidget {
-//   @override
-//   _ListLeavesState createState() => _ListLeavesState();
-// }
-
-// class _ListLeavesState extends State<ListLeaves> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-
-//     );
-//   }
-// }
-
 class ListLeaves extends StatelessWidget {
   Leaves leaves;
   ListLeaves(this.leaves);
