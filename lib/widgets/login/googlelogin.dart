@@ -40,15 +40,13 @@ class GoogleLogin extends StatelessWidget {
                 .contains("excellencetechnologies")) {
               _loginBloc.add(LoginInWithGoogleButtonPressed(
                   googleToken: googleKey.accessToken));
-              
             } else {
               alertDialog(context);
+              _googleSignIn.signOut();
             }
           }).catchError((err) {});
         }).catchError((err) {});
-      } catch (err) {
-        
-      }
+      } catch (err) {}
     }
 
     return Column(
