@@ -16,7 +16,7 @@ class _UploadPicState extends State<UploadPic> {
   var val;
   UploadImage api = UploadImage();
   UploadImg uploadImg;
-  bool uploading = true;
+  bool uploading = false;
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
