@@ -50,7 +50,8 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
             count: count,
             enablecomment: event.enablecomment,
             comment: event.comment,
-            enableoverview: event.enableoverview);
+            enableoverview: event.enableoverview,
+            showInventory: enableInventory);
         return;
       }
       final inventory = await invapi.inventory();
@@ -75,7 +76,7 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
           comment: comment,
           enableoverview: enableoverview,
           showInventory: enableInventory);
-    } on Exception catch (e) {} catch (err) {}
+    } catch (err) {}
   }
 
   void checkInventory(String inventory) {}

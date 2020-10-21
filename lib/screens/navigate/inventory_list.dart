@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/bloc/inventory/inventory.dart';
+import 'package:flutter_excellence_hr/model/inventory/audit_current_month.dart';
 import 'package:flutter_excellence_hr/model/inventory/history.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +16,8 @@ class InventoryList extends StatelessWidget {
     final _inventoryBloc = BlocProvider.of<InventoryBloc>(context);
     final itemHistory = usermachine.history[0];
     History machinehistory = History.fromJson(itemHistory.toJson());
+    AuditCurrentMonthStatus auditStatus = AuditCurrentMonthStatus.fromJson(
+        usermachine.auditCurrentMonthStatus.toJson());
     var machinehistorymonth = DateTime.parse(machinehistory.updatedAt);
     var currDt = DateTime.now();
 
@@ -26,7 +29,7 @@ class InventoryList extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        child: machinehistorymonth.month < currDt.month
+        child: !auditStatus.status
             ? InkWell(
                 onTap: () {
                   _inventoryBloc.add(LoadInventory(
