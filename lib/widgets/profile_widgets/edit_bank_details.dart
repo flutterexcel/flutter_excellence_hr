@@ -18,6 +18,7 @@ class EditBankDetails extends StatelessWidget {
   final RoundedLoadingButtonController _btnControllerz =
       new RoundedLoadingButtonController();
   EditBankDetails({this.profileDetails});
+  
   @override
   Widget build(BuildContext context) {
     final _proflieBloc = BlocProvider.of<ProfileBloc>(context);

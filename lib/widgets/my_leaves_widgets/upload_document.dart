@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/profile/upload_image.dart';
+import 'package:flutter_excellence_hr/widgets/my_leaves_widgets/myleaves.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadPic extends StatefulWidget {
@@ -22,12 +23,12 @@ class _UploadPicState extends State<UploadPic> {
   UploadImage api = UploadImage();
   UploadImg uploadImg;
   bool uploading = true;
-  
+
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
     setState(() {
-      uploading = false;
+      if (_image.path.isNotEmpty) uploading = false;
     });
     try {
       await api
@@ -38,7 +39,6 @@ class _UploadPicState extends State<UploadPic> {
               leaveId: leavid)
           .then((value) {
         val = jsonDecode(value.body);
-
         alertDialog();
       });
     } catch (e) {}
@@ -85,7 +85,6 @@ class _UploadPicState extends State<UploadPic> {
         ));
   }
 
-
   void alertDialog() {
     var alert = AlertDialog(
       title: Text('Your Leave Document'),
@@ -95,7 +94,15 @@ class _UploadPicState extends State<UploadPic> {
             onPressed: () {
               setState(() {
                 uploading = true;
-                Navigator.of(context).pop();
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => MyLeavesList()),
+                // );
+
+                //         Navigator.push(
+                // context,
+                // MaterialPageRoute(builder: (context) => MyLeavesList());
+                     Navigator.of(context).pop();
               });
             },
             child: Text(

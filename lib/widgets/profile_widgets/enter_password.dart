@@ -22,7 +22,7 @@ class EnterPassword extends StatelessWidget {
   void _doUpdate() async {
     await api.updatePassword(password.text).then((value) {
       if (value.error == 0) _btnController.success();
-      _doReset();
+      _btnController.reset();
     });
   }
 
@@ -77,7 +77,7 @@ class EnterPassword extends StatelessWidget {
                 controller: _btnController,
                 onPressed: () {
                   _doUpdate();
-                  // _doReset();
+                  //  _doReset();
                 },
               ),
             ),

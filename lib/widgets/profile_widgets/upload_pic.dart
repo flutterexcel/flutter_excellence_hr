@@ -22,14 +22,12 @@ class _UploadPicState extends State<UploadPic> {
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
-    
+
     setState(() {
       if (_image.path.isNotEmpty) uploading = false;
     });
 
     try {
-      if (!uploading) return;
-      print("Image not found");
       await api
           .uploadImage(
               doctype: 'profile_pic', action: "profile_pic", file: _image)
