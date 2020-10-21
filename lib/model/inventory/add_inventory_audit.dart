@@ -23,7 +23,7 @@ class AddInventoryAuditModel extends Equatable {
       auditCommentType: json["data"]["auditCommentType"],
       token: json["data"]["token"],
       auditMessage: json["data"]["auditMessage"],
-      doRefreshToken: json["datga"]["doRefreshToken"],
+      doRefreshToken: json["data"]["doRefreshToken"],
       inventoryId: json["data"]["inventorId"],
     );
   }

@@ -8,19 +8,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class InventoryList extends StatelessWidget {
   final usermachine;
   int index;
-  final data;
+  final state;
 
-  InventoryList(this.usermachine, this.index, this.data);
+  InventoryList(this.usermachine, this.index, this.state);
   @override
   Widget build(BuildContext context) {
     final _inventoryBloc = BlocProvider.of<InventoryBloc>(context);
-    final itemHistory = usermachine.history[0];
-    History machinehistory = History.fromJson(itemHistory.toJson());
     AuditCurrentMonthStatus auditStatus = AuditCurrentMonthStatus.fromJson(
         usermachine.auditCurrentMonthStatus.toJson());
-    var machinehistorymonth = DateTime.parse(machinehistory.updatedAt);
-    var currDt = DateTime.now();
-
+    if (state.showInventory) {
+      auditStatus.status = false;
+    }
     return Container(
       margin: EdgeInsets.all(8),
       child: Card(
@@ -33,10 +31,11 @@ class InventoryList extends StatelessWidget {
             ? InkWell(
                 onTap: () {
                   _inventoryBloc.add(LoadInventory(
-                      data: data,
+                      data: state.data,
                       count: index,
                       enablecomment: false,
-                      enableoverview: false));
+                      enableoverview: false,
+                      enableInventory: state.showInventory));
                 },
                 child: Column(
                   children: <Widget>[
