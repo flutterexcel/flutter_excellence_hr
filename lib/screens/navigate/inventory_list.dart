@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/bloc/inventory/inventory.dart';
+import 'package:flutter_excellence_hr/model/inventory/audit_current_month.dart';
 import 'package:flutter_excellence_hr/model/inventory/history.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,17 +8,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class InventoryList extends StatelessWidget {
   final usermachine;
   int index;
-  final data;
+  final state;
 
-  InventoryList(this.usermachine, this.index, this.data);
+  InventoryList(this.usermachine, this.index, this.state);
   @override
   Widget build(BuildContext context) {
     final _inventoryBloc = BlocProvider.of<InventoryBloc>(context);
-    final itemHistory = usermachine.history[0];
-    History machinehistory = History.fromJson(itemHistory.toJson());
-    var machinehistorymonth = DateTime.parse(machinehistory.updatedAt);
-    var currDt = DateTime.now();
-
+    AuditCurrentMonthStatus auditStatus = AuditCurrentMonthStatus.fromJson(
+        usermachine.auditCurrentMonthStatus.toJson());
+    if (state.showInventory) {
+      auditStatus.status = false;
+    }
     return Container(
       margin: EdgeInsets.all(8),
       child: Card(
@@ -26,14 +27,15 @@ class InventoryList extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        child: machinehistorymonth.month < currDt.month
+        child: !auditStatus.status
             ? InkWell(
                 onTap: () {
                   _inventoryBloc.add(LoadInventory(
-                      data: data,
+                      data: state.data,
                       count: index,
                       enablecomment: false,
-                      enableoverview: false));
+                      enableoverview: false,
+                      enableInventory: state.showInventory));
                 },
                 child: Column(
                   children: <Widget>[

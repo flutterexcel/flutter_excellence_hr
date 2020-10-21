@@ -41,13 +41,6 @@ class ShowInventory extends StatelessWidget {
               pageName: "My Inventory",
             )),
             drawer: Navigation(),
-            // floatingActionButton: FloatingActionButton.extended(
-            //   onPressed: () {
-            //     // Add your onPressed code here!
-            //   },
-            //   label: Text('Assign Device'),
-            //   backgroundColor: AppColors.GREEN_COLOR,
-            // ),
             body: SingleChildScrollView(
               child: Container(
                 child: Column(
@@ -65,6 +58,7 @@ class ShowInventory extends StatelessWidget {
                                 ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
                                   // Let the ListView know how many items it needs to build.
                                   itemCount: state.data.userMachine.length,
                                   // Provide a builder function. This is where the magic happens.
@@ -73,17 +67,8 @@ class ShowInventory extends StatelessWidget {
                                     final item = state.data.userMachine[index];
                                     UserAssignMachine usermachine =
                                         UserAssignMachine.fromJson(item);
-                                    return AnimationConfiguration.staggeredList(
-                                        position: index,
-                                        duration:
-                                            const Duration(milliseconds: 1000),
-                                        child: SlideAnimation(
-                                          verticalOffset: 50.0,
-                                          child: FadeInAnimation(
-                                            child: InventoryList(
-                                                usermachine, index, state.data),
-                                          ),
-                                        ));
+                                    return InventoryList(
+                                        usermachine, index, state);
                                   },
                                 ),
                                 SizedBox(

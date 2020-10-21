@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_excellence_hr/model/inventory/inventory_success.dart';
 import '../post.dart';
-import '../../model/inventory/add_inventory_audit.dart';
 import '../../app_config.dart';
 import '../storage_service.dart';
 
 class AddInventoryAudit {
   Post _post = Post();
-  Future<AddInventoryAuditModel> addinventory(
+  Future<InventorySuccess> addinventory(
       String auditCommentType, String auditMessage, String inventoryId) async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     final auditUrl = prodUrl.baseUrl;
@@ -24,11 +24,11 @@ class AddInventoryAudit {
     return _post
         .post(auditUrl, body: json.encode(data))
         .then((dynamic res) async {
-      if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
+      //if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
       if (res["error"] == 0) {
         //StorageUtil.setUserToken(res["data"]["token"]);
       }
-      return AddInventoryAuditModel.fromJson(res);
+      return InventorySuccess.fromJson(res);
     });
   }
 }
