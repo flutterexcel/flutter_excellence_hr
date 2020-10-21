@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_excellence_hr/model/inventory/audit_current_month.dart';
 import 'package:flutter_excellence_hr/model/inventory/history.dart';
 import 'package:flutter_excellence_hr/model/inventory/user_assign_machine.dart';
 import 'inventory_event.dart';
@@ -50,24 +51,26 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
             count: count,
             enablecomment: event.enablecomment,
             comment: event.comment,
-            enableoverview: event.enableoverview);
+            enableoverview: event.enableoverview,
+            showInventory: enableInventory);
         return;
       }
       final inventory = await invapi.inventory();
       for (var i = 0; i < inventory.userMachine.length; i++) {
         final item = inventory.userMachine[i];
         UserAssignMachine usermachine = UserAssignMachine.fromJson(item);
-        final itemHistory = usermachine.history[0];
-        History machinehistory = History.fromJson(itemHistory.toJson());
-        var machinehistorymonth = DateTime.parse(machinehistory.updatedAt);
-        var currDt = DateTime.now();
-        if (machinehistorymonth.month < currDt.month) {
+        AuditCurrentMonthStatus auditStatus = AuditCurrentMonthStatus.fromJson(
+            usermachine.auditCurrentMonthStatus.toJson());
+        if (auditStatus.status) {
+          enableoverview = true;
+        } else {
+          enableoverview = false;
           count = i;
           break;
         }
-        if (i == inventory.userMachine.length - 1) enableoverview = true;
-        if (enableInventory) enableoverview = false;
       }
+      if (enableInventory) enableoverview = false;
+
       yield InventorySuccess(
           data: inventory,
           count: count,
@@ -75,7 +78,7 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
           comment: comment,
           enableoverview: enableoverview,
           showInventory: enableInventory);
-    } on Exception catch (e) {} catch (err) {}
+    } catch (err) {}
   }
 
   void checkInventory(String inventory) {}
