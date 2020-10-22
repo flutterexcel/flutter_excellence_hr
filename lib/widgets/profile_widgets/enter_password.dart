@@ -11,15 +11,6 @@ class EnterPassword extends StatefulWidget {
   _EnterPasswordState createState() => _EnterPasswordState();
 }
 
-// class _EnterPasswordState extends State<EnterPassword> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-
-//     );
-//   }
-// }
-
 class _EnterPasswordState extends State<EnterPassword> {
   final password = TextEditingController();
   final RoundedLoadingButtonController _btnController =
@@ -102,7 +93,6 @@ class _EnterPasswordState extends State<EnterPassword> {
                 onPressed: () {
                   validateTextField(password.text);
                   _doUpdate();
-                  //  _doReset();
                 },
               ),
             ),
