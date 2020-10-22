@@ -18,7 +18,7 @@ class EditBankDetails extends StatelessWidget {
   final RoundedLoadingButtonController _btnControllerz =
       new RoundedLoadingButtonController();
   EditBankDetails({this.profileDetails});
-  
+
   @override
   Widget build(BuildContext context) {
     final _proflieBloc = BlocProvider.of<ProfileBloc>(context);
@@ -29,8 +29,8 @@ class EditBankDetails extends StatelessWidget {
       });
     }
 
-    _dosave() async { 
-       _proflieBloc.add(SaveProfile(
+    _dosave() async {
+      _proflieBloc.add(SaveProfile(
           acNum: acNum.text,
           bnkAddress: bnkAddress.text,
           bnkName: bnkName.text,
