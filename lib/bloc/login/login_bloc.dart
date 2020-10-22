@@ -37,8 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapAppLoadToState(AppLoad event) async* {
-    yield AuthenticationLoad(); // to display splash screen
-    StorageUtil.clear(true);
+    // yield AuthenticationLoad(); // to display splash screen
 
     User currentUser;
     try {
@@ -62,15 +61,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapUserLogOutToState(UserLogOut event) async* {
-    StorageUtil.clear(true);
     await _authenticationService.signOut();
-    yield AuthenticationLoad();
     yield LoginFailure();
   }
 
   Stream<LoginState> _mapLoginWithEmailToState(
       LoginInWithEmailButtonPressed event) async* {
-    StorageUtil.clear(true);
+    //StorageUtil.clear(true);
     User user;
     try {
       await _authenticationService
@@ -94,7 +91,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithGoogleToState(
       LoginInWithGoogleButtonPressed event) async* {
-    StorageUtil.clear(true);
+    //StorageUtil.clear(true);
     try {
       final user = await _authenticationService
           .signInWithGoogleAndPassword(event.googleToken);

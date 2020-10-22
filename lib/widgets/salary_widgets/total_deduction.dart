@@ -17,13 +17,15 @@ class _TotalDetuctionState extends State<TotalDetuction> {
   List<ListItemDeduct> detuction = [];
 
   _getDeduction() {
+    var index = salary.data.salaryDetails.length - 1;
     detuction.add(ListItemDeduct("Holding Amount",
-        salary.data.salaryDetails[0].totalHoldingAmount.toString()));
-    detuction.add(ListItemDeduct("EPF", salary.data.salaryDetails[0].ePF));
-    detuction.add(ListItemDeduct("Loan", salary.data.salaryDetails[0].loan));
+        salary.data.salaryDetails[index].totalHoldingAmount.toString()));
+    detuction.add(ListItemDeduct("EPF", salary.data.salaryDetails[index].ePF));
+    detuction
+        .add(ListItemDeduct("Loan", salary.data.salaryDetails[index].loan));
     detuction.add(ListItemDeduct(
-        "Misc Deductions", salary.data.salaryDetails[0].miscDeductions));
-    detuction.add(ListItemDeduct("TDS", salary.data.salaryDetails[0].tDS));
+        "Misc Deductions", salary.data.salaryDetails[index].miscDeductions));
+    detuction.add(ListItemDeduct("TDS", salary.data.salaryDetails[index].tDS));
     setState(() {
       yourDetuction = true;
     });
@@ -37,6 +39,7 @@ class _TotalDetuctionState extends State<TotalDetuction> {
 
   @override
   Widget build(BuildContext context) {
+    var index = salary.data.salaryDetails.length - 1;
     return Column(
       children: <Widget>[
         Container(
@@ -131,7 +134,7 @@ class _TotalDetuctionState extends State<TotalDetuction> {
                       child: Container(
                           margin: EdgeInsets.only(top: 6, bottom: 6),
                           child: Text(
-                            salary.data.salaryDetails[0].totalEarning
+                            salary.data.salaryDetails[index].totalEarning
                                 .toString(),
                             style: TextStyle(
                                 fontSize: 12,
@@ -143,7 +146,7 @@ class _TotalDetuctionState extends State<TotalDetuction> {
                         child: Container(
                             margin: EdgeInsets.only(top: 6, bottom: 6),
                             child: Text(
-                                salary.data.salaryDetails[0].totalDeduction
+                                salary.data.salaryDetails[index].totalDeduction
                                     .toString(),
                                 style: TextStyle(
                                     fontSize: 12,
@@ -153,7 +156,7 @@ class _TotalDetuctionState extends State<TotalDetuction> {
                         child: Container(
                             margin: EdgeInsets.only(top: 6, bottom: 6),
                             child: Text(
-                                salary.data.salaryDetails[0].totalNetSalary
+                                salary.data.salaryDetails[index].totalNetSalary
                                     .toString(),
                                 style: TextStyle(
                                     fontSize: 12,
