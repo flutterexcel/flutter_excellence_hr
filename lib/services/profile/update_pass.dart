@@ -19,7 +19,7 @@ class UpdatePassword {
     return _post
         .post(apiUrl, body: json.encode(data))
         .then((dynamic res) async {
-       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
+      //  if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
 
       return ProfileDetails.fromJson(res);
     });
