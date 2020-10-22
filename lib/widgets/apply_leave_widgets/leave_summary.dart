@@ -87,7 +87,24 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
           DateTime(_currentDate.year, _currentDate.month, _currentDate.day);
       difference = _lastDate.difference(currentTime).inDays + 1;
     }
-
+   void alertDialog(BuildContext context) {
+    var alert = AlertDialog(
+      title: Text('Alert Dialog'),
+      content: Text('Select Leave Type From List'),
+      actions: <Widget>[
+        FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK',style: TextStyle(fontSize:20 ),))
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext c) {
+          return alert;
+        });
+  }
     return Column(
       children: [
         Row(
@@ -322,11 +339,15 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
             borderRadius: 10,
             controller: _btnController,
             onPressed: () async {
-              await _doApply(leavetype: leaveType, rhdate: rhdate)
-                  .then((value) {
-                _btnController.success();
-                _doReset();
-              });
+              if (leaveType == "Leave Option") {
+
+              } else {
+                await _doApply(leavetype: leaveType, rhdate: rhdate)
+                    .then((value) {
+                  _btnController.success();
+                  _doReset();
+                });
+              }
             },
             child: Text('Apply Leave', style: TextStyle(color: Colors.white)),
           ),
