@@ -147,6 +147,5 @@ class _DropDownState extends State<DropDown> {
 class ListItem {
   int value;
   String name;
-  String color;
   ListItem(this.value, this.name);
 }

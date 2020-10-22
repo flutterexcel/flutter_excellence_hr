@@ -20,7 +20,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   final reason = TextEditingController();
   String leaveType, rhdate;
   ApplyLeave api = ApplyLeave();
-  
+
   Future _doApply({String leavetype, String rhdate = ''}) async {
     await api.applyLeave(
         fromDate: from.text,
@@ -29,6 +29,12 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         reason: reason.text,
         leaveType: leavetype,
         rhDates: [rhdate]);
+  }
+
+  void _doReset() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
   }
 
   final RoundedLoadingButtonController _btnController =
@@ -311,13 +317,16 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         SizedBox(
           width: MediaQuery.of(context).size.width * .9,
           child: RoundedLoadingButton(
-            color: AppColors.BLUE_COLOR,
+            color: AppColors.BTN_BLACK_COLOR,
             width: 150,
             borderRadius: 10,
             controller: _btnController,
             onPressed: () async {
               await _doApply(leavetype: leaveType, rhdate: rhdate)
-                  .then((value) => _btnController.success());
+                  .then((value) {
+                _btnController.success();
+                _doReset();
+              });
             },
             child: Text('Apply Leave', style: TextStyle(color: Colors.white)),
           ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/attendance/month_attendance.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
@@ -22,7 +24,16 @@ class ApplyAttendance extends StatelessWidget {
     await api
         .manualEntry(entry.text, exit.text, reason.text,
             monthAttendance.data.attendance[index].fullDate)
-        .then((value) => _btnController.success());
+        .then((value) {
+      _btnController.success();
+      // _doReset();
+    });
+  }
+
+  void _doReset() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
   }
 
   @override
@@ -40,7 +51,7 @@ class ApplyAttendance extends StatelessWidget {
                   child: Container(
                       margin: EdgeInsets.fromLTRB(16, 24, 16, 16),
                       child: Text(
-                        "Shakti Tripathi Your Day Summary of 2020-09-18",
+                        "Your Day Summary of 2020-09-18",
                         style: TextStyle(
                             color: AppColors.THEME_COLOR,
                             fontSize: 16,
@@ -97,16 +108,19 @@ class ApplyAttendance extends StatelessWidget {
                 Expanded(
                     flex: 2,
                     child: Column(children: <Widget>[
-                      DateTimeField(
-                        format: format,
-                        controller: entry,
-                        onShowPicker: (context, currentValue) async {
-                          final time = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay(hour: 09, minute: 00),
-                          );
-                          return DateTimeField.convert(time);
-                        },
+                      Container(
+                        margin: EdgeInsets.only(right: 16),
+                        child: DateTimeField(
+                          format: format,
+                          controller: entry,
+                          onShowPicker: (context, currentValue) async {
+                            final time = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay(hour: 09, minute: 00),
+                            );
+                            return DateTimeField.convert(time);
+                          },
+                        ),
                       ),
                     ]))
               ],
@@ -124,16 +138,19 @@ class ApplyAttendance extends StatelessWidget {
                 Expanded(
                     flex: 2,
                     child: Column(children: <Widget>[
-                      DateTimeField(
-                        format: format,
-                        controller: exit,
-                        onShowPicker: (context, currentValue) async {
-                          final time = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay(hour: 09, minute: 00),
-                          );
-                          return DateTimeField.convert(time);
-                        },
+                      Container(
+                        margin: EdgeInsets.only(right: 16),
+                        child: DateTimeField(
+                          format: format,
+                          controller: exit,
+                          onShowPicker: (context, currentValue) async {
+                            final time = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay(hour: 09, minute: 00),
+                            );
+                            return DateTimeField.convert(time);
+                          },
+                        ),
                       ),
                     ])),
               ],
@@ -172,12 +189,15 @@ class ApplyAttendance extends StatelessWidget {
               margin: EdgeInsets.all(8),
               width: 80,
               child: RoundedLoadingButton(
-                color: AppColors.BLUE_COLOR,
+                color: AppColors.BTN_BLACK_COLOR,
                 width: 110,
                 borderRadius: 10,
                 controller: _btnController,
-                onPressed: () async {
-                  await _doUpdate().then((value) => Navigator.pop(context));
+                onPressed: () {
+                  _doUpdate();
+                  Timer(Duration(seconds: 5), () {
+                    Navigator.pop(context);
+                  });
                 },
                 child: Text('Update', style: TextStyle(color: Colors.white)),
               ),
