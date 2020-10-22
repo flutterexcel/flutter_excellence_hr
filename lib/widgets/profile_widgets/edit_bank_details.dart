@@ -40,9 +40,6 @@ class EditBankDetails extends StatelessWidget {
       _doReset();
     }
 
-    // Timer(Duration(seconds: 3), () {
-    //   print("Yeah, this line is printed after 3 seconds");
-    // });
     // Widget _getFAB() {
     //   if (Platform.isWindows) {
     // return ;
