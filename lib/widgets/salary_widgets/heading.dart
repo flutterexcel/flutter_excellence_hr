@@ -21,6 +21,7 @@ class _HeadingState extends State<Heading> {
 
   @override
   Widget build(BuildContext context) {
+    var index = salary.data.salaryDetails.length - 1;
     return Column(
       children: <Widget>[
         Container(
@@ -70,7 +71,8 @@ class _HeadingState extends State<Heading> {
                       Container(
                           margin: EdgeInsets.only(top: 16),
                           child: Text(
-                            salary.data.salaryDetails[0].test.applicableFrom,
+                            salary
+                                .data.salaryDetails[index].test.applicableFrom,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'SourceSans',
@@ -93,7 +95,8 @@ class _HeadingState extends State<Heading> {
                       Container(
                           margin: EdgeInsets.only(top: 8),
                           child: Text(
-                            salary.data.salaryDetails[0].test.applicableTill,
+                            salary
+                                .data.salaryDetails[index].test.applicableTill,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'SourceSans',
@@ -116,7 +119,7 @@ class _HeadingState extends State<Heading> {
                       Container(
                           margin: EdgeInsets.only(top: 8),
                           child: Text(
-                            salary.data.salaryDetails[0].incrementAmount,
+                            salary.data.salaryDetails[index].incrementAmount,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'SourceSans',
@@ -139,7 +142,8 @@ class _HeadingState extends State<Heading> {
                       Container(
                           margin: EdgeInsets.only(top: 8),
                           child: Text(
-                            salary.data.salaryDetails[0].test.leavesAllocated,
+                            salary
+                                .data.salaryDetails[index].test.leavesAllocated,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'SourceSans',
@@ -162,7 +166,7 @@ class _HeadingState extends State<Heading> {
                       Container(
                           margin: EdgeInsets.only(top: 8, bottom: 16),
                           child: Text(
-                            salary.data.salaryDetails[0].test.lastUpdatedOn,
+                            salary.data.salaryDetails[index].test.lastUpdatedOn,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'SourceSans',
