@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/screens/my_leaves/my_leaves.dart';
+import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/services/profile/upload_image.dart';
 import 'package:flutter_excellence_hr/widgets/my_leaves_widgets/myleaves.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,6 +18,7 @@ class UploadPic extends StatefulWidget {
 }
 
 class _UploadPicState extends State<UploadPic> {
+  final GlobalKey<MyLeavesListState> _key = GlobalKey();
   File _image;
   var val;
   String leavid;
@@ -94,15 +97,9 @@ class _UploadPicState extends State<UploadPic> {
             onPressed: () {
               setState(() {
                 uploading = true;
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => MyLeavesList()),
-                // );
-
-                //         Navigator.push(
-                // context,
-                // MaterialPageRoute(builder: (context) => MyLeavesList());
-                     Navigator.of(context).pop();
+                var nav = Navigator.of(context);
+                nav.pop();
+                nav.pop();
               });
             },
             child: Text(

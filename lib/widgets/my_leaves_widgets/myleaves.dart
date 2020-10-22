@@ -7,10 +7,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MyLeavesList extends StatefulWidget {
   @override
-  _MyLeavesListState createState() => _MyLeavesListState();
+  MyLeavesListState createState() => MyLeavesListState();
 }
 
-class _MyLeavesListState extends State<MyLeavesList> {
+class MyLeavesListState extends State<MyLeavesList> {
   List<String> listOf = [
     "Casual Leave",
     "Rh Compansation",
@@ -104,6 +104,7 @@ class ListLeaves extends StatelessWidget {
                   children: <Widget>[
                     UploadPic(
                       leavid: leaveid,
+                    
                     ),
                   ],
                 ),

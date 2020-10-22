@@ -49,7 +49,7 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
       )
           .then((value) {
         val = jsonDecode(value.body);
-        print("The value " + val);
+      
         if (val['error'] == 0) {
           onImgUpload(widget.document);
         }

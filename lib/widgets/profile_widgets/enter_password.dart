@@ -14,7 +14,6 @@ class EnterPassword extends StatelessWidget {
 
   void _doReset() async {
     Timer(Duration(seconds: 2), () {
-      print("reset the btn");
       _btnController.reset();
     });
   }
