@@ -38,7 +38,7 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
     setState(() {
-      uploading = false;
+      if (_image.path.isNotEmpty) uploading = false;
     });
     try {
       await api
@@ -49,7 +49,7 @@ class _UploadDocumentPicState extends State<UploadDocumentPic> {
       )
           .then((value) {
         val = jsonDecode(value.body);
-        print("The value " + val);
+      
         if (val['error'] == 0) {
           onImgUpload(widget.document);
         }

@@ -12,16 +12,19 @@ class UploadPic extends StatefulWidget {
 }
 
 class _UploadPicState extends State<UploadPic> {
+
   File _image;
   var val;
   UploadImage api = UploadImage();
   UploadImg uploadImg;
   bool uploading = true;
+
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
+
     setState(() {
-      uploading = false;
+      if (_image.path.isNotEmpty) uploading = false;
     });
 
     try {

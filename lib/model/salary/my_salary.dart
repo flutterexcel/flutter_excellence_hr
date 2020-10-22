@@ -53,9 +53,15 @@ class Data {
     }
     if (json['payslip_history'] != null) {
       payslipHistory = new List<PayslipHistory>();
-      json['payslip_history'].forEach((v) {
-        payslipHistory.add(new PayslipHistory.fromJson(v));
-      });
+      if (json['payslip_history'] is List) {
+        json['payslip_history'].forEach((v) {
+          payslipHistory.add(new PayslipHistory.fromJson(v));
+        });
+      } else {
+        json['payslip_history'].forEach((key, value) {
+          payslipHistory.add(new PayslipHistory.fromJson(value));
+        });
+      }
     }
   }
 

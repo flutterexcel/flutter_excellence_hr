@@ -7,10 +7,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MyLeavesList extends StatefulWidget {
   @override
-  _MyLeavesListState createState() => _MyLeavesListState();
+  MyLeavesListState createState() => MyLeavesListState();
 }
 
-class _MyLeavesListState extends State<MyLeavesList> {
+class MyLeavesListState extends State<MyLeavesList> {
   List<String> listOf = [
     "Casual Leave",
     "Rh Compansation",
@@ -69,7 +69,7 @@ class _MyLeavesListState extends State<MyLeavesList> {
                     Divider(height: 1, thickness: .5, color: Colors.grey[300]),
                 itemBuilder: (_, int index) =>
                     ListLeaves(leaves.data.leaves[index]),
-                itemCount: leaves.data.leaves.length,
+                itemCount: 15, //leaves.data.leaves.length,
               ),
             ],
           )
@@ -104,6 +104,7 @@ class ListLeaves extends StatelessWidget {
                   children: <Widget>[
                     UploadPic(
                       leavid: leaveid,
+                    
                     ),
                   ],
                 ),

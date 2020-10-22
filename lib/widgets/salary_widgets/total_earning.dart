@@ -15,14 +15,15 @@ class _TotalEarningState extends State<TotalEarning> {
   bool yourSalary = false;
   List<ListItem> earning = [];
   _getSalary() {
-    earning.add(ListItem("Basic", salary.data.salaryDetails[0].basic));
-    earning.add(ListItem("HRA", salary.data.salaryDetails[0].hRA));
-    earning
-        .add(ListItem("Conveyance", salary.data.salaryDetails[0].conveyance));
-    earning.add(ListItem(
-        "Medical_Allowance", salary.data.salaryDetails[0].medicalAllowance));
-    earning.add(ListItem(
-        "Special Allowance", salary.data.salaryDetails[0].specialAllowance));
+    var index = salary.data.salaryDetails.length - 1;
+    earning.add(ListItem("Basic", salary.data.salaryDetails[index].basic));
+    earning.add(ListItem("HRA", salary.data.salaryDetails[index].hRA));
+    earning.add(
+        ListItem("Conveyance", salary.data.salaryDetails[index].conveyance));
+    earning.add(ListItem("Medical_Allowance",
+        salary.data.salaryDetails[index].medicalAllowance));
+    earning.add(ListItem("Special Allowance",
+        salary.data.salaryDetails[index].specialAllowance));
 
     setState(() {
       yourSalary = true;

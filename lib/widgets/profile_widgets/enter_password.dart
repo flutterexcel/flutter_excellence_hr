@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'dart:io';
@@ -5,17 +6,31 @@ import 'dart:io';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../services/profile/update_pass.dart';
 
-class EnterPassword extends StatelessWidget {
+class EnterPassword extends StatefulWidget {
+  @override
+  _EnterPasswordState createState() => _EnterPasswordState();
+}
+
+class _EnterPasswordState extends State<EnterPassword> {
   final password = TextEditingController();
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
   UpdatePassword api = UpdatePassword();
-  void _doUpdate() async {
-    await api
-        .updatePassword(password.text)
-        .then((value) => _btnController.success());
+
+  void _doReset() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
   }
 
+  void _doUpdate() async {
+    await api.updatePassword(password.text).then((value) {
+      if (value.error == 0) _btnController.success();
+      _btnController.reset();
+    });
+  }
+
+  bool userNameValidate = false;
   @override
   Widget build(BuildContext context) {
     // Widget _getFAB() {
@@ -25,6 +40,18 @@ class EnterPassword extends StatelessWidget {
     //     ;
     //   }
     // }
+    bool validateTextField(String userInput) {
+      if (userInput.isEmpty) {
+        setState(() {
+          userNameValidate = true;
+        });
+        return false;
+      }
+      setState(() {
+        userNameValidate = false;
+      });
+      return true;
+    }
 
     return Column(
       children: <Widget>[
@@ -43,12 +70,11 @@ class EnterPassword extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
           child: TextFormField(
             controller: password,
-            obscureText: true,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
+              errorText: userNameValidate ? "Please can't be blank" : null,
             ),
           ),
         ),
@@ -56,16 +82,18 @@ class EnterPassword extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              height: 35,
               margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
               child: RoundedLoadingButton(
-                color: AppColors.BTN_BLUE,
+                color: AppColors.BTN_BLACK_COLOR,
                 width: 150,
                 borderRadius: 10,
                 child: Text('Update Password',
                     style: TextStyle(color: Colors.white)),
                 controller: _btnController,
-                onPressed: _doUpdate,
+                onPressed: () {
+                  validateTextField(password.text);
+                  _doUpdate();
+                },
               ),
             ),
           ],

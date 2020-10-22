@@ -4,6 +4,7 @@ import 'package:flutter_excellence_hr/bloc/bloc.dart';
 import 'package:flutter_excellence_hr/bloc/inventory/inventory.dart';
 import 'package:flutter_excellence_hr/bloc/inventory/inventory_bloc.dart';
 import 'package:flutter_excellence_hr/bloc/login/login_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/profile/profile_bloc.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/apply_leave/apply_leave.dart';
 import 'package:flutter_excellence_hr/screens/attendance/my_attendance.dart';
@@ -18,6 +19,7 @@ class Navigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final _loginBloc = BlocProvider.of<LoginBloc>(context);
     final _inventoryBloc = BlocProvider.of<InventoryBloc>(context);
+    final _profileBloc = BlocProvider.of<ProfileBloc>(context);
     return Drawer(
       child: Container(
         color: Colors.white,
@@ -163,11 +165,10 @@ class Navigation extends StatelessWidget {
               title: Text('Logout',
                   style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
               onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, "/", (route) => false);
+
                 _loginBloc.add(UserLogOut());
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
               },
             ),
           ],
