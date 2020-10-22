@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'dart:io';
@@ -10,10 +11,18 @@ class EnterPassword extends StatelessWidget {
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
   UpdatePassword api = UpdatePassword();
+
+  void _doReset() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
+  }
+
   void _doUpdate() async {
-    await api
-        .updatePassword(password.text)
-        .then((value) => _btnController.success());
+    await api.updatePassword(password.text).then((value) {
+      if (value.error == 0) _btnController.success();
+      _btnController.reset();
+    });
   }
 
   @override
@@ -59,13 +68,16 @@ class EnterPassword extends StatelessWidget {
               height: 35,
               margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
               child: RoundedLoadingButton(
-                color: AppColors.BTN_BLUE,
+                color: AppColors.BTN_BLACK_COLOR,
                 width: 150,
                 borderRadius: 10,
                 child: Text('Update Password',
                     style: TextStyle(color: Colors.white)),
                 controller: _btnController,
-                onPressed: _doUpdate,
+                onPressed: () {
+                  _doUpdate();
+                  //  _doReset();
+                },
               ),
             ),
           ],

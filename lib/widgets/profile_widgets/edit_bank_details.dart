@@ -18,18 +18,26 @@ class EditBankDetails extends StatelessWidget {
   final RoundedLoadingButtonController _btnControllerz =
       new RoundedLoadingButtonController();
   EditBankDetails({this.profileDetails});
+  
   @override
   Widget build(BuildContext context) {
     final _proflieBloc = BlocProvider.of<ProfileBloc>(context);
     ProfileState state = _proflieBloc.state;
-    _dosave() async {
-      _proflieBloc.add(SaveProfile(
+    void _doReset() async {
+      Timer(Duration(seconds: 2), () {
+        _btnControllerz.reset();
+      });
+    }
+
+    _dosave() async { 
+       _proflieBloc.add(SaveProfile(
           acNum: acNum.text,
           bnkAddress: bnkAddress.text,
           bnkName: bnkName.text,
           ifsc: ifsc.text,
           data: this.profileDetails));
       _btnControllerz.success();
+      _doReset();
     }
 
     // Widget _getFAB() {
@@ -146,14 +154,14 @@ class EditBankDetails extends StatelessWidget {
                     height: 35,
                     margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
                     child: RoundedLoadingButton(
-                      color: AppColors.BTN_BLUE,
+                      color: AppColors.BTN_BLACK_COLOR,
                       width: 150,
                       borderRadius: 10,
                       child: Text('Update Bank Details',
                           style: TextStyle(color: Colors.white)),
                       controller: _btnControllerz,
-                      onPressed: () async {
-                        await _dosave();
+                      onPressed: () {
+                        _dosave();
                       },
                     ),
                   ),
