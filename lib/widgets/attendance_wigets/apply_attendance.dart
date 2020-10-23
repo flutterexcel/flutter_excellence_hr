@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/attendance/month_attendance.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
@@ -8,10 +7,23 @@ import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class ApplyAttendance extends StatelessWidget {
-  final MonthAttendance monthAttendance;
+class ApplyAttendance extends StatefulWidget {
+  MonthAttendance monthAttendance;
   int index;
   ApplyAttendance({this.monthAttendance, this.index});
+  @override
+  _ApplyAttendanceState createState() =>
+      _ApplyAttendanceState(monthAttendance: monthAttendance, index: index);
+}
+
+class _ApplyAttendanceState extends State<ApplyAttendance> {
+  final MonthAttendance monthAttendance;
+  int index;
+  bool reasonValidate = false;
+  bool entryValidate = false;
+  bool exitValidate = false;
+
+  _ApplyAttendanceState({this.monthAttendance, this.index});
   final reason = TextEditingController();
   final entry = TextEditingController();
   final exit = TextEditingController();
@@ -26,7 +38,7 @@ class ApplyAttendance extends StatelessWidget {
             monthAttendance.data.attendance[index].fullDate)
         .then((value) {
       _btnController.success();
-      // _doReset();
+      _doReset();
     });
   }
 
@@ -34,6 +46,45 @@ class ApplyAttendance extends StatelessWidget {
     Timer(Duration(seconds: 2), () {
       _btnController.reset();
     });
+  }
+
+  bool validateTextField(String manualEntry) {
+    if (manualEntry.isEmpty) {
+      setState(() {
+        reasonValidate = true;
+      });
+      return false;
+    }
+    setState(() {
+      reasonValidate = false;
+    });
+    return true;
+  }
+
+  bool validateEntryField(String entryTime) {
+    if (entryTime.toString().isEmpty) {
+      setState(() {
+        entryValidate = true;
+      });
+      return false;
+    }
+    setState(() {
+      entryValidate = false;
+    });
+    return true;
+  }
+
+  bool validateExitField(String exitTime) {
+    if (exitTime.toString().isEmpty) {
+      setState(() {
+        exitValidate = true;
+      });
+      return false;
+    }
+    setState(() {
+      exitValidate = false;
+    });
+    return true;
   }
 
   @override
@@ -113,6 +164,9 @@ class ApplyAttendance extends StatelessWidget {
                         child: DateTimeField(
                           format: format,
                           controller: entry,
+                          decoration: InputDecoration(
+                              errorText:
+                                  entryValidate ? "Select entry time" : null),
                           onShowPicker: (context, currentValue) async {
                             final time = await showTimePicker(
                               context: context,
@@ -125,6 +179,7 @@ class ApplyAttendance extends StatelessWidget {
                     ]))
               ],
             ),
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -143,6 +198,9 @@ class ApplyAttendance extends StatelessWidget {
                         child: DateTimeField(
                           format: format,
                           controller: exit,
+                          decoration: InputDecoration(
+                              errorText:
+                                  exitValidate ? "Select exit time" : null),
                           onShowPicker: (context, currentValue) async {
                             final time = await showTimePicker(
                               context: context,
@@ -155,6 +213,7 @@ class ApplyAttendance extends StatelessWidget {
                     ])),
               ],
             ),
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -169,13 +228,14 @@ class ApplyAttendance extends StatelessWidget {
                   flex: 3,
                   child: Container(
                     margin: EdgeInsets.fromLTRB(16, 12, 16, 0),
-                    height: 35,
                     child: TextFormField(
                       enabled: true,
                       controller: reason,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: "",
+                          errorText:
+                              reasonValidate ? "Reason Can not be empty" : null,
                           labelStyle: TextStyle(
                               color: Colors.black,
                               fontFamily: 'OpenSans',
@@ -185,6 +245,7 @@ class ApplyAttendance extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 20),
             Container(
               margin: EdgeInsets.all(8),
               width: 80,
@@ -194,10 +255,18 @@ class ApplyAttendance extends StatelessWidget {
                 borderRadius: 10,
                 controller: _btnController,
                 onPressed: () {
-                  _doUpdate();
-                  Timer(Duration(seconds: 5), () {
-                    Navigator.pop(context);
-                  });
+                  if (!validateTextField(reason.text))
+                    _btnController.stop();
+                  else if (!validateEntryField(entry.text))
+                    _btnController.stop();
+                  else if (!validateExitField(exit.text))
+                    _btnController.stop();
+                  else {
+                    _doUpdate();
+                    Timer(Duration(seconds: 5), () {
+                      Navigator.pop(context);
+                    });
+                  }
                 },
                 child: Text('Update', style: TextStyle(color: Colors.white)),
               ),

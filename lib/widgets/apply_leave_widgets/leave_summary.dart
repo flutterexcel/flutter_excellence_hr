@@ -20,7 +20,9 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   final reason = TextEditingController();
   String leaveType, rhdate;
   ApplyLeave api = ApplyLeave();
-
+  bool reasonValidate = false;
+  bool leaveColor = false;
+  
   Future _doApply({String leavetype, String rhdate = ''}) async {
     await api.applyLeave(
         fromDate: from.text,
@@ -61,6 +63,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
 
   Future<Null> _secondDate(BuildContext context) async {
     var today = DateTime.now();
+
     final DateTime _selDate = await showDatePicker(
         context: context,
         initialDate: _currentDate,
@@ -87,24 +90,42 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
           DateTime(_currentDate.year, _currentDate.month, _currentDate.day);
       difference = _lastDate.difference(currentTime).inDays + 1;
     }
-   void alertDialog(BuildContext context) {
-    var alert = AlertDialog(
-      title: Text('Alert Dialog'),
-      content: Text('Select Leave Type From List'),
-      actions: <Widget>[
-        FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('OK',style: TextStyle(fontSize:20 ),))
-      ],
-    );
-    showDialog(
-        context: context,
-        builder: (BuildContext c) {
-          return alert;
+
+    bool validateTextField(String leaveReason) {
+      if (leaveReason.isEmpty) {
+        setState(() {
+          reasonValidate = true;
         });
-  }
+        return false;
+      }
+      setState(() {
+        reasonValidate = false;
+      });
+      return true;
+    }
+
+    void alertDialog(BuildContext context) {
+      var alert = AlertDialog(
+        title: Text('Alert Dialog'),
+        content: Text('Select Leave Type From List'),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'OK',
+                style: TextStyle(fontSize: 20),
+              ))
+        ],
+      );
+      showDialog(
+          context: context,
+          builder: (BuildContext c) {
+            return alert;
+          });
+    }
+
     return Column(
       children: [
         Row(
@@ -209,6 +230,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                 height: 55,
                 child: DropDown(
                   onLeaveChange: (String leave) {
+                    setState(() {});
                     leaveType = leave;
                   },
                   onRHChange: (String rh) {
@@ -325,6 +347,8 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Give Reason",
+                    errorText:
+                        reasonValidate ? "Reason Can not be empty" : null,
                   ),
                 ),
               ),
@@ -333,20 +357,33 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * .9,
+          // child: RaisedButton(
+          //   onPressed: () {
+          //     alertDialog(context);
+          //   },
+          // ),
           child: RoundedLoadingButton(
             color: AppColors.BTN_BLACK_COLOR,
             width: 150,
             borderRadius: 10,
             controller: _btnController,
             onPressed: () async {
-              if (leaveType == "Leave Option") {
-
+              if (leaveType == null) {
+                validateTextField(reason.text);
+                 alertDialog(context);
+                _btnController.stop();
               } else {
-                await _doApply(leavetype: leaveType, rhdate: rhdate)
-                    .then((value) {
-                  _btnController.success();
-                  _doReset();
-                });
+                {
+                  if (!validateTextField(reason.text))
+                    _btnController.stop();
+                  else {
+                    await _doApply(leavetype: leaveType, rhdate: rhdate)
+                        .then((value) {
+                      _btnController.success();
+                      _doReset();
+                    });
+                  }
+                }
               }
             },
             child: Text('Apply Leave', style: TextStyle(color: Colors.white)),

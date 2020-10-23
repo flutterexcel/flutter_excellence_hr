@@ -27,6 +27,8 @@ class _DropDownState extends State<DropDown> {
     ListItem(4, "RH Compansation")
   ];
   bool showRH = false;
+  bool borderColor = false;
+
   List<DropdownMenuItem<ListItem>> _dropdownMenuItems;
   ListItem _selectedItem;
   bool showRh = false;
@@ -71,8 +73,9 @@ class _DropDownState extends State<DropDown> {
               padding: const EdgeInsets.only(left: 10.0, right: 10.0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  //color: Colors.cyan,
-                  border: Border.all(width: 1, color: AppColors.DARK_GREY),
+                  border: borderColor
+                      ? Border.all(width: 1, color: Colors.redAccent)
+                      : Border.all(width: 1, color: AppColors.DARK_GREY),
                   color: AppColors.EDIT_TEXT_COLOR),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<ListItem>(
@@ -88,6 +91,10 @@ class _DropDownState extends State<DropDown> {
                     }
                     setState(() {
                       _selectedItem = value;
+                      if (value.name == "Leave Option")
+                        borderColor = true;
+                      else
+                        borderColor = false;
                       onLeaveChange(value.name);
                       showRh = false;
                       if (value.name == 'RH Compansation') {
