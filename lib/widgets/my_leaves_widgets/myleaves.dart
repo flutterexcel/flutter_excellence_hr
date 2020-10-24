@@ -104,7 +104,6 @@ class ListLeaves extends StatelessWidget {
                   children: <Widget>[
                     UploadPic(
                       leavid: leaveid,
-                    
                     ),
                   ],
                 ),
@@ -216,7 +215,7 @@ class ListLeaves extends StatelessWidget {
                       customDialog(leaves.id);
                     },
                     child: Text(
-                      "Upload Leave Document",
+                      "Upload Document",
                       style: TextStyle(
                           color: Colors.white, fontFamily: 'SourceSans'),
                     )),
