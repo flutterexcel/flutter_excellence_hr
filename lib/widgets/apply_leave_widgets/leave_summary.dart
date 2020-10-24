@@ -358,11 +358,6 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * .9,
-          // child: RaisedButton(
-          //   onPressed: () {
-          //     alertDialog(context);
-          //   },
-          // ),
           child: RoundedLoadingButton(
             color: AppColors.BTN_BLACK_COLOR,
             width: 150,
