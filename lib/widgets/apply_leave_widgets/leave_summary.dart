@@ -22,7 +22,8 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   ApplyLeave api = ApplyLeave();
   bool reasonValidate = false;
   bool leaveColor = false;
-  
+  bool type = false;
+
   Future _doApply({String leavetype, String rhdate = ''}) async {
     await api.applyLeave(
         fromDate: from.text,
@@ -369,8 +370,9 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
             controller: _btnController,
             onPressed: () async {
               if (leaveType == null) {
+                print("Leave is null");
                 validateTextField(reason.text);
-                 alertDialog(context);
+                alertDialog(context);
                 _btnController.stop();
               } else {
                 {
