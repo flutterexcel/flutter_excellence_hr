@@ -364,8 +364,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
             borderRadius: 10,
             controller: _btnController,
             onPressed: () async {
-              if (leaveType == null) {
-                print("Leave is null");
+              if (leaveType == "Leave Option") {
                 validateTextField(reason.text);
                 alertDialog(context);
                 _btnController.stop();
