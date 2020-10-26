@@ -15,7 +15,12 @@ import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/screens/policy_documents/policy_documents.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
 
-class Navigation extends StatelessWidget {
+class Navigation extends StatefulWidget {
+  @override
+  _NavigationState createState() => _NavigationState();
+}
+
+class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     final _loginBloc = BlocProvider.of<LoginBloc>(context);
     final _inventoryBloc = BlocProvider.of<InventoryBloc>(context);
@@ -175,5 +180,11 @@ class Navigation extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }
