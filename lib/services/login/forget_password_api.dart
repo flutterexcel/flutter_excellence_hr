@@ -13,7 +13,6 @@ class UpdateForgetPassword {
     return _post
         .post(apiUrl, body: json.encode(data))
         .then((dynamic res) async {
-      
       return ProfileDetails.fromJson(res);
     });
   }
