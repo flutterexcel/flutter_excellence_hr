@@ -81,5 +81,7 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
     } catch (err) {}
   }
 
-  void checkInventory(String inventory) {}
+  clearInventory() async* {
+    yield InventoryInitial();
+  }
 }
