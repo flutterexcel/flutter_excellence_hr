@@ -9,9 +9,12 @@ class RestrictedLeave extends StatefulWidget {
 }
 
 class _RestrictedLeaveState extends State<RestrictedLeave> {
+
+
   GetRh api = GetRh();
   bool loadRh = false;
   GetRhLeaves getRhLeaves;
+
   _getMyRhInfo() async {
     return await api.getRh().then((value) {
       getRhLeaves = value;

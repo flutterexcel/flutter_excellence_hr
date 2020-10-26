@@ -12,6 +12,9 @@ class AttendanceBloc extends Bloc<AttendanceEvent, AttendanceState> {
   Stream<AttendanceState> mapEventToState(
     AttendanceEvent event,
   ) async* {
+    if (event is AttendanceInit) {
+      yield AttendanceInitial();
+    }
     if (event is LoadAttendance) {
       yield* _mapUserAttendanceToState(event);
     }
@@ -25,8 +28,6 @@ class AttendanceBloc extends Bloc<AttendanceEvent, AttendanceState> {
           event.month, event.year, event.userid);
       yield AttendanceSuccess(data: attendance);
     } catch (e, s) {
-    
-    
       yield AttendanceFailure();
     }
   }

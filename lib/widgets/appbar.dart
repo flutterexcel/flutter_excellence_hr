@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/attendance/attendance_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/inventory/inventory_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/inventory/inventory_event.dart';
+import 'package:flutter_excellence_hr/bloc/profile/profile_bloc.dart';
 import 'package:flutter_excellence_hr/model/profile/ProfileDetails.dart';
 import 'package:flutter_excellence_hr/services/profile/profile.dart';
 import 'package:flutter_excellence_hr/services/storage_service.dart';
@@ -32,6 +37,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   void initState() {
     super.initState();
     if (StorageUtil.getProfileImg() == "") {
+      BlocProvider.of<InventoryBloc>(context).add(UserInventory());
+      BlocProvider.of<ProfileBloc>(context).add(ProfileInit());
+      BlocProvider.of<AttendanceBloc>(context).add(AttendanceInit());
       _getProfile();
     } else {
       setState(() {
