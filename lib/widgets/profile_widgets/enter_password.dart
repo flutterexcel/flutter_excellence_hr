@@ -78,7 +78,7 @@ class _EnterPasswordState extends State<EnterPassword> {
             controller: password,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              errorText: userNameValidate ? "Please can't be blank" : null,
+              errorText: userNameValidate ? "Password can't be blank" : null,
             ),
           ),
         ),
@@ -95,11 +95,17 @@ class _EnterPasswordState extends State<EnterPassword> {
                     style: TextStyle(color: Colors.white)),
                 controller: _btnController,
                 onPressed: () {
-                  validateTextField(password.text);
-                  _doUpdate();
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, "/", (route) => false);
-                  _loginBloc.add(UserLogOut());
+                  if (password.text.isEmpty) {
+                    (!validateTextField(password.text));
+                    _btnController.reset();
+                    return;
+                  } else {
+                    validateTextField(password.text);
+                    _doUpdate();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/", (route) => false);
+                    _loginBloc.add(UserLogOut());
+                  }
                 },
               ),
             ),
