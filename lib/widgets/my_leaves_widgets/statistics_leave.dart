@@ -37,6 +37,14 @@ class _StatisticsLeaveState extends State<StatisticsLeave> {
       totalLeave = double.parse(value.data.payslipHistory[0].leaveBalance) +
           double.parse(value.data.payslipHistory[0].allocatedLeaves);
       percent = (leaveTaken / totalLeave);
+      
+      if (percent < 0) {
+        percent = 0.0;
+      }
+      if (percent > 1) {
+        percent = 0.9;
+      }
+
       setState(() {
         loadLeaveStat = true;
       });
