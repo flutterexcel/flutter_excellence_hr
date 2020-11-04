@@ -2,7 +2,6 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
 import 'login_success.dart';
-import 'loginvalidationtest.dart';
 
 void main() {
   group('Hr App/', () {
@@ -17,6 +16,5 @@ void main() {
     });
 
     loginSuccess(driver);
-    loginValidation(driver);
   });
 }
