@@ -36,26 +36,27 @@ class _MySalaryState extends State<MySalary> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: AppBarWidget(pageName: "My Salary")),
-      drawer: Navigation(),
-      body: SafeArea(
-          child: SingleChildScrollView(
-              child: salInfo
-                  ? Column(
-                      children: [
-                        Heading(salary: salary),
-                        TotalEarning(salary: salary),
-                        TotalDetuction(salary: salary),
-                        PaySlip(salary: salary),
-                      ],
-                    )
-                  : Center(
-                      child: noSalInfo
-                          ? CircularProgressIndicator(
-                              backgroundColor: Colors.cyan)
-                          : Text('No Salary Details available.'),
-                    ))),
-    );
+    return salInfo
+        ? Scaffold(
+            appBar: AppBar(title: AppBarWidget(pageName: "My Salary")),
+            drawer: Navigation(),
+            body: SafeArea(
+                child: SingleChildScrollView(
+                    child: Column(
+              children: [
+                Heading(salary: salary),
+                TotalEarning(salary: salary),
+                TotalDetuction(salary: salary),
+                PaySlip(salary: salary),
+              ],
+            ))),
+          )
+        : Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.cyan,
+              ),
+            ),
+          );
   }
 }

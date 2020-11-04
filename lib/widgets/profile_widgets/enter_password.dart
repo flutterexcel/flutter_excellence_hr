@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/login/login_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/login/login_event.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'dart:io';
 //import 'package:universal_io/io.dart';
@@ -40,6 +43,7 @@ class _EnterPasswordState extends State<EnterPassword> {
     //     ;
     //   }
     // }
+    final _loginBloc = BlocProvider.of<LoginBloc>(context);
     bool validateTextField(String userInput) {
       if (userInput.isEmpty) {
         setState(() {
@@ -93,6 +97,9 @@ class _EnterPasswordState extends State<EnterPassword> {
                 onPressed: () {
                   validateTextField(password.text);
                   _doUpdate();
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, "/", (route) => false);
+                  _loginBloc.add(UserLogOut());
                 },
               ),
             ),

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/bloc/login/login.dart';
 import 'package:flutter_excellence_hr/model/profile/ProfileDetails.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/login_screen.dart';
@@ -47,6 +49,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   @override
   Widget build(BuildContext context) {
+    final _loginBloc = BlocProvider.of<LoginBloc>(context);
     bool validateTextField(String userInput) {
       if (userInput.isEmpty) {
         setState(() {
@@ -127,6 +130,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   onPressed: () {
                     validateTextField(_passwordController.text);
                     _doUpdate();
+                    _loginBloc.add(UserLogOut());
                   },
                 ),
               ),

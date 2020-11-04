@@ -40,7 +40,12 @@ void main() => runApp(
       ),
     ));
 
-class HrApp extends StatelessWidget {
+class HrApp extends StatefulWidget {
+  @override
+  _HrAppState createState() => _HrAppState();
+}
+
+class _HrAppState extends State<HrApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,5 +68,12 @@ class HrApp extends StatelessWidget {
       ),
       routes: routes,
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    super.dispose();
   }
 }

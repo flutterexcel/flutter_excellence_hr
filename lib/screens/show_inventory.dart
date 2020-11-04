@@ -11,7 +11,12 @@ import '../widgets/navigate/imp_notes_inventory.dart';
 import '../screens/navigate/navigate.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class ShowInventory extends StatelessWidget {
+class ShowInventory extends StatefulWidget {
+  @override
+  _ShowInventoryState createState() => _ShowInventoryState();
+}
+
+class _ShowInventoryState extends State<ShowInventory> {
   //final Inventory api = Inventory();
   final commentController = TextEditingController();
 
@@ -156,5 +161,11 @@ class ShowInventory extends StatelessWidget {
             ));
       },
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

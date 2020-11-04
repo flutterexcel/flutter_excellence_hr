@@ -15,6 +15,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> mapEventToState(
     ProfileEvent event,
   ) async* {
+    if (event is ProfileInit) {
+      yield ProfileInitial();
+    }
     if (event is ProfileLoading) {
       yield* _mapProfileToState(event);
     }

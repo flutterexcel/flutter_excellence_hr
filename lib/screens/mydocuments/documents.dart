@@ -30,7 +30,6 @@ class _MyDocumentsState extends State<MyDocuments> {
             DropDown(onDocumentChange: (String value) {
               setState(() {
                 documents = value;
-
                 showImgUpload = true;
               });
             }),

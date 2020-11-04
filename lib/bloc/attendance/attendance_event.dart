@@ -7,6 +7,8 @@ abstract class AttendanceEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class AttendanceInit extends AttendanceEvent {}
+
 class LoadAttendance extends AttendanceEvent {
   String month, year, userid;
 
