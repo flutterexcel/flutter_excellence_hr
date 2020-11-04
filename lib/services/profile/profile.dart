@@ -8,9 +8,9 @@ import '../storage_service.dart';
 class Profile {
   Post _post = Post();
   Future<ProfileDetails> getprofile() async {
-    final prodUrl = await AppConfig.forEnvironment('prod', 'salUrl');
-    var token = StorageUtil.getUserToken();
-    final apiUrl = prodUrl.baseUrl;
+    //final prodUrl = await AppConfig.forEnvironment('prod', 'salUrl');
+      var token = StorageUtil.getUserToken();
+    final apiUrl = "https://apistaginghr.excellencetechnologies.in/attendance/sal_info/api.php";
     Map data = {"action": "get_user_profile_detail", "token": token};
     return _post
         .post(apiUrl, body: json.encode(data))
