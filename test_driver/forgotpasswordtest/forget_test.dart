@@ -17,13 +17,13 @@ void main() {
     });
 
     test('Forget Screen/', () async {
-      await driver.tap(find.text('Username'));
+      await driver.tap(find.byValueKey('ResetPassword'));
       await driver.enterText('shakti');
       await driver.tap(find.text('Reset Password'));
     });
 
     test('Login Button Press', () async {
-      await driver.tap(find.text('Login'));
+      await driver.tap(find.text('Login') );
       });
 
     
