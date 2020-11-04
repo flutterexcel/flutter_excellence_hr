@@ -59,10 +59,9 @@ class _HrAppState extends State<HrApp> {
       home: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           if (state is CheckAuthenticated) {
-            // show home page
             return ShowInventory();
           }
-          // otherwise show login page
+          
           return LoginScreen();
         },
       ),
