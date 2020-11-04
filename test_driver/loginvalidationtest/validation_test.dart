@@ -1,8 +1,8 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
-void main(FlutterDriver driver) {
-  
+void main() {
+  FlutterDriver driver;
   group('Login Validations/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
@@ -12,20 +12,11 @@ void main(FlutterDriver driver) {
         driver.close();
       }
     });
-    
-    // test('Form Fill Empty/', () async {
-    //   await driver.tap(find.byValueKey('Username'));
-    //   await driver.enterText('');
-    //   await Future.delayed(Duration(seconds: 2));
-    //   await driver.tap(find.byValueKey('Password'));
-    //   await driver.enterText('');
-    //   await Future.delayed(Duration(seconds: 2));
-    // });
 
     test('Login Button Press/', () async {
       await driver.tap(find.text('Login'));
       await Future.delayed(Duration(seconds: 2));
-      await driver.waitFor(find.text('Please enter'));
+      await driver.waitFor(find.text('Please enter username'));
     });
 
     test('Form Fill Empty Password/', () async {
@@ -41,21 +32,6 @@ void main(FlutterDriver driver) {
       await driver.tap(find.text('Login'));
       await Future.delayed(Duration(seconds: 2));
       await driver.waitFor(find.text('Please enter password'));
-    });
-
-    test('Form Fill Empty Username/', () async {
-      // await driver.tap(find.byValueKey('Username'));
-      // await driver.enterText('');
-      // await Future.delayed(Duration(seconds: 2));
-      await driver.tap(find.byValueKey('Password'));
-      await driver.enterText('CMJ97');
-      await Future.delayed(Duration(seconds: 2));
-    });
-
-    test('Login Button Press/', () async {
-      await driver.tap(find.text('Login'));
-      await Future.delayed(Duration(seconds: 2));
-      await driver.waitFor(find.text('Please enter email'));
     });
   });
 }
