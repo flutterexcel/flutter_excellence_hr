@@ -23,9 +23,6 @@ void main() {
       await driver.tap(find.byValueKey('Username'));
       await driver.enterText('kartikjabreba');
       await Future.delayed(Duration(seconds: 2));
-      // await driver.tap(find.byValueKey('Password'));
-      // await driver.enterText('');
-      // await Future.delayed(Duration(seconds: 2));
     });
 
     test('Login Button Press/', () async {
