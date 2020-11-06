@@ -13,6 +13,7 @@ abstract class AuthenticationService {
 }
 
 class LoginAuthenticationService extends AuthenticationService {
+  Login api;
   @override
   Future<User> getCurrentUser() async {
     StorageUtil.getInstance();
@@ -27,7 +28,7 @@ class LoginAuthenticationService extends AuthenticationService {
 
   @override
   Future<User> signInWithEmailAndPassword(String email, String password) async {
-    final Login api = Login();
+    api = Login();
     User user = await api.login(email, password);
     return User(user: user.user, token: user.token, message: user.message);
   }

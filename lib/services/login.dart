@@ -27,7 +27,8 @@ class Login {
         StorageUtil.setUserId(res["data"]["userid"]);
         StorageUtil.setLoggedIn(true);
       }
-      return User.fromJson(res);
+      var user = User.fromJson(res);
+      return user;
     });
   }
 }
