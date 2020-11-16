@@ -2,11 +2,11 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
 import '../logintest.dart';
+import '../logouttest.dart';
 
 void main() {
   FlutterDriver driver;
-
-  group('check login success using valid inputs/', () {
+  group('check logout/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -16,5 +16,6 @@ void main() {
       }
     });
     loginTest(driver);
+    logOut(driver);
   });
 }

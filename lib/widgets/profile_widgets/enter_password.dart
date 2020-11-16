@@ -75,6 +75,7 @@ class _EnterPasswordState extends State<EnterPassword> {
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
           child: TextFormField(
+            key: Key('updatePassword'),
             controller: password,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
