@@ -38,6 +38,7 @@ class LoginPage extends StatelessWidget {
               //To make
               margin: EdgeInsets.fromLTRB(32, 10, 32, 12),
               child: TextFormField(
+                key: Key('Username'),
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Please enter username';
@@ -58,6 +59,7 @@ class LoginPage extends StatelessWidget {
               color: AppColors.EDIT_TEXT_COLOR,
               margin: EdgeInsets.fromLTRB(32, 0, 32, 8),
               child: TextFormField(
+                key: Key('Password'),
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Please enter password';

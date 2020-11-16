@@ -103,6 +103,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 color: AppColors.EDIT_TEXT_COLOR,
                 margin: EdgeInsets.fromLTRB(16, 0, 16, 12),
                 child: TextFormField(
+                  key: Key('ResetPassword'),
                   controller: _passwordController,
                   decoration: InputDecoration(
                     isDense: true,
