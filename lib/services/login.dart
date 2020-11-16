@@ -12,6 +12,7 @@ class Login {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     final loginUrl = prodUrl.baseUrl;
 
+
     Map data = {
       "token": apiKey,
       "action": "login",
@@ -27,8 +28,9 @@ class Login {
         StorageUtil.setUserId(res["data"]["userid"]);
         StorageUtil.setLoggedIn(true);
       }
-      var user = User.fromJson(res);
-      return user;
+      return User.fromJson(res);
     });
   }
 }
+
+

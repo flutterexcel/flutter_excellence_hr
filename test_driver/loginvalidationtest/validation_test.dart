@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   FlutterDriver driver;
-  group('Login Validations/', () {
+  group('check login validations/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -13,19 +13,16 @@ void main() {
       }
     });
 
-    test('Login Button Press/', () async {
+    test('check login validations with empty inputs/', () async {
       await driver.tap(find.text('Login'));
       await Future.delayed(Duration(seconds: 2));
       await driver.waitFor(find.text('Please enter username'));
     });
 
-    test('Form Fill Empty Password/', () async {
+    test('check login with one empty input/', () async {
       await driver.tap(find.byValueKey('Username'));
       await driver.enterText('kartikjabreba');
       await Future.delayed(Duration(seconds: 2));
-    });
-
-    test('Login Button Press/', () async {
       await driver.tap(find.text('Login'));
       await Future.delayed(Duration(seconds: 2));
       await driver.waitFor(find.text('Please enter password'));
