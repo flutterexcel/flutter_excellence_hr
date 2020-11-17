@@ -7,7 +7,7 @@ import '../logouttest.dart';
 void main() {
   FlutterDriver driver;
 
-  group('check login success using valid inputs/', () {
+  group('check app flow/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
