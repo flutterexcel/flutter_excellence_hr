@@ -11,14 +11,12 @@ class Post {
     var checkAction = json.decode(body);
     String action = checkAction['action'];
     print(action);
-
     if (testingActive) {
-      if (testingActive) {
         final contents = await rootBundle.loadString(
-          'assets/config/$action.json',
+          'assets/config/test/$action.json',
         );
          return _decoder.convert(contents);
-      }
+      
     } else {
       return http
           .post(url, body: body, headers: headers, encoding: encoding)
