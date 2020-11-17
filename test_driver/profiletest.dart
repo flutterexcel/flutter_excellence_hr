@@ -23,39 +23,30 @@ void profileTest(FlutterDriver driver) {
       await driver.waitFor(find.text('kartikjabreba'));
     });
 
-    // test('check for update bank detail/', () async {
-    //   await driver.waitFor(find.byValueKey('BankAccountNumber'));
-    //   //await driver.tap(find.byValueKey('BankAccountNumber'));
-    //   // await driver.enterText('123412341234');
-    //   await driver.tap(find.byValueKey('BankName'));
-    //   // await driver.enterText('ICICI Bank');
-    //   await driver.tap(find.byValueKey('IfscCode'));
-    //   // await driver.enterText('ICICI2020');
-    //   // await driver.tap(find.text('Update Bank Details'));
-    // });
-    test('update password/ 1', () async {
-      
-      await driver.scrollUntilVisible(
-        find.text('Bank Account Number'),
-        find.byValueKey('BankAccountNumber'),
-
-        dyScroll: -300.0,);
-      // await driver.enterText('abcd');
-      // await driver.tap(find.text('Update Password'));
+    test('check for update bank detail/', () async {
+      await driver.scrollIntoView(find.byValueKey('BankAccountNumber'));
+      await driver.tap(find.byValueKey('BankAccountNumber'));
+      await driver.enterText('123412341234');
+      await driver.scrollIntoView(find.byValueKey('BankName'));
+      await driver.tap(find.byValueKey('BankName'));
+      await driver.enterText('ICICI Bank');
+      await driver.scrollIntoView(find.byValueKey('IfscCode'));
+      await driver.tap(find.byValueKey('IfscCode'));
+      await driver.enterText('ICICI2020');
+      await driver.scrollIntoView(find.text('Update Bank Details'));
+      await driver.tap(find.text('Update Bank Details'));
     });
-    test('update password/ 2', () async {
-     // await driver.tap(find.byValueKey('updatePassword'));
+
+    test('update password/', () async {
+      await driver.scrollIntoView(find.byValueKey('updatePassword'));
+      await driver.tap(find.byValueKey('updatePassword'));
       await driver.enterText('abcd');
-      //await driver.tap(find.text('Update Password'));
+      await driver.scrollIntoView(find.byValueKey('update'));
+      await driver.tap(find.byValueKey('update'));
     });
-    test('update password 3/', () async {
-      // await driver.tap(find.byValueKey('updatePassword'));
-      // await driver.enterText('abcd');
-      await driver.tap(find.text('Update Password'));
+      
+      test('switch loginscreen after update password/', () async {
+        await driver.waitFor(find.text('Login'));
+      });
     });
-
-    // test('switch loginscreen after update password/', () async {
-    //   await driver.waitFor(find.text('Login'));
-    // });
-  });
 }

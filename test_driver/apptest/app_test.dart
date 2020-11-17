@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 
 import '../logintest.dart';
 import '../logouttest.dart';
+import '../profiletest.dart';
 
 void main() {
   FlutterDriver driver;
@@ -16,6 +17,8 @@ void main() {
         driver.close();
       }
     });
+    loginTest(driver);
+    profileTest(driver);
     loginTest(driver);
     logOut(driver);
   });

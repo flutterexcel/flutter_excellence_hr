@@ -87,6 +87,7 @@ class _EnterPasswordState extends State<EnterPassword> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
+              key: Key('update'),
               margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
               child: RoundedLoadingButton(
                 color: AppColors.BTN_BLACK_COLOR,
