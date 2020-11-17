@@ -48,7 +48,7 @@ class ShowProfile extends StatelessWidget {
                           itemCount: 1,
                           itemBuilder: (context, index) {
                             ProfileDetails profileDetails =
-                                ProfileDetails.fromJson(state.data.toJson() );
+                                ProfileDetails.fromJson(state.data.toJson());
                             return Column(
                               children: <Widget>[
                                 EditNotice(),
