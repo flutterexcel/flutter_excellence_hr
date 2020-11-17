@@ -10,6 +10,7 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      key: Key('leavekey'),
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
      physics: NeverScrollableScrollPhysics(),   
@@ -66,10 +67,13 @@ class CalendarScreen extends StatelessWidget {
             )
           : monthAttendance.data.attendance[index].adminAlert == 1
               ? InkWell(
+               
                   onTap: () {
                     _popupDialog(context, index);
                   },
                   child: Container(
+                     key: Key('$index'),
+                     
                       margin: EdgeInsets.all(2),
                       height: 90,
                       decoration: BoxDecoration(

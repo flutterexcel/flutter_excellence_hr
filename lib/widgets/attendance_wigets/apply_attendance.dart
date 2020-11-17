@@ -102,7 +102,7 @@ class _ApplyAttendanceState extends State<ApplyAttendance> {
                   child: Container(
                       margin: EdgeInsets.fromLTRB(16, 24, 16, 16),
                       child: Text(
-                        "Your Day Summary of 2020-09-18",
+                        "Your Day Summary",
                         style: TextStyle(
                             color: AppColors.THEME_COLOR,
                             fontSize: 16,
