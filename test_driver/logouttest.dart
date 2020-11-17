@@ -21,7 +21,5 @@ void logOut(FlutterDriver driver) {
     test('login screen/', () async {
       await driver.waitFor(find.text('Login'));
     });
-
-    
   });
 }

@@ -10,10 +10,9 @@ class Post {
   Future<dynamic> post(String url, {Map headers, body, encoding}) async {
     var checkAction = json.decode(body);
     String action = checkAction['action'];
-    print(action);
-    if (testingActive) {
+      if (testingActive) {
         final contents = await rootBundle.loadString(
-          'assets/config/test/$action.json',
+          'assets/test/$action.json',
         );
          return _decoder.convert(contents);
       
