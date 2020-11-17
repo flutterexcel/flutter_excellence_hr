@@ -1,8 +1,8 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
-void logOut(FlutterDriver driver) {
-  group('check logout /', () {
+void inventorytest(FlutterDriver driver) {
+  group('check inventory page/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -11,15 +11,15 @@ void logOut(FlutterDriver driver) {
         driver.close();
       }
     });
-    test('tap naviagation drawer/', () async {
+
+    test('switch to inventory/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
       await driver.tap(locateDrawer);
-      await driver.tap(find.text('Logout'));
+      await driver.tap(find.text('My Inventory'));
+     // await driver.scrollIntoView(find.text('Kartik Jabreba'));
+      await driver.waitFor(find.text('Acer'));
     });
-
-    test('login screen/', () async {
-      await driver.waitFor(find.text('Login'));
-    });
+    
   });
 }

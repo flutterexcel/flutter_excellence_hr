@@ -3,7 +3,6 @@ import 'package:test/test.dart';
 
 void loginTest(FlutterDriver driver) {
 
-
   group('check login success using valid inputs/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
