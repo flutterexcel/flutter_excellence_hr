@@ -66,4 +66,12 @@
             "id":"345",
             "machine_type":"laptop",
             "machine_name":"Acer Aspire A315-51 Laptop",
-            "mac_address":"","serial_number":"NXGNPSI008739031427600","bill_number":"LAP004","user_Id":"540","assign_date":"2020-10-08"}]}}
+            "mac_address":"",
+            "serial_number":"NXGNPSI008739031427600",
+            "bill_number":"LAP004",
+            "user_Id":"540",
+            "assign_date":"2020-10-08"
+            }
+        ]
+    }
+}

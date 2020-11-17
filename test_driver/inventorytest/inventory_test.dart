@@ -1,14 +1,12 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
+import '../inventorytest.dart';
 import '../logintest.dart';
-import '../logouttest.dart';
-import '../profiletest.dart';
 
 void main() {
   FlutterDriver driver;
-
-  group('check app flow/', () {
+  group('check inventory page/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -18,9 +16,6 @@ void main() {
       }
     });
     loginTest(driver);
-    profileTest(driver);
-    loginTest(driver);
-    
-    logOut(driver);
+    inventorytest(driver);
   });
 }
