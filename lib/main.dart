@@ -9,7 +9,7 @@ import 'bloc/inventory/inventory.dart';
 import 'bloc/profile/profile_bloc.dart';
 import 'bloc/attendance/attendance_bloc.dart';
 
-void main() => runApp(
+void main() {runApp(
         // Injects the Authentication service
         RepositoryProvider<AuthenticationService>(
       create: (context) {
@@ -38,7 +38,7 @@ void main() => runApp(
         ],
         child: HrApp(),
       ),
-    ));
+    ));}
 
 class HrApp extends StatefulWidget {
   @override
@@ -59,10 +59,9 @@ class _HrAppState extends State<HrApp> {
       home: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           if (state is CheckAuthenticated) {
-            // show home page
             return ShowInventory();
           }
-          // otherwise show login page
+          
           return LoginScreen();
         },
       ),
