@@ -40,25 +40,23 @@ void attendancetest(FlutterDriver driver) {
     test('apply for entry time', () async {
       await driver.waitFor(find.byValueKey('entryTimeKey'));
       driver.tap(find.byValueKey('entryTimeKey'));
-     
+      await driver.waitFor(find.byType("DateTimeField"));
+      driver.tap(find.text('10'));
+      driver.tap(find.text('OK'));
     });
 
     test('apply for exit time', () async {
       await driver.waitFor(find.byValueKey('exitTimeKey'));
-      driver.tap(find.byValueKey('entryTimeKey'));
+      driver.tap(find.byValueKey('exitTimeKey'));
       await driver.waitFor(find.byType("DateTimeField"));
-      driver.tap(find.text('10'));
+      driver.tap(find.text('08'));
       driver.tap(find.text('OK'));
-     
     });
 
     test('enter reason', () async {
       await driver.waitFor(find.byValueKey('reasonKey'));
       driver.tap(find.byValueKey('reasonKey'));
-      await driver.waitFor(find.byType("DateTimeField"));
-      driver.tap(find.text('08'));
-      driver.tap(find.text('OK'));
-      
+      await driver.enterText('FOR TESTING');
     });
 
     test('apply leave button press', () async {
