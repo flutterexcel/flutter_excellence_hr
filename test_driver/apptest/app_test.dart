@@ -1,6 +1,7 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
+import '../attendancetest.dart';
 import '../inventorytest.dart';
 import '../logintest.dart';
 import '../logouttest.dart';
@@ -21,6 +22,7 @@ void main() {
     loginTest(driver);
     profileTest(driver);
     loginTest(driver);
+    attendancetest(driver);
     inventorytest(driver);
     logOut(driver);
   });

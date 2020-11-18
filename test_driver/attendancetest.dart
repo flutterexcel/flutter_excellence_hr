@@ -26,15 +26,14 @@ void attendancetest(FlutterDriver driver) {
     });
 
     test('tap for manual attendance', () async {
-      final itemFinder = find.byValueKey('16');
+      final itemFinder = find.text('04');
       final listFinder = find.byValueKey('leavekey');
-      await driver.scrollUntilVisible(listFinder, itemFinder, dyScroll: -300.0);
-      expect(await driver.getText(itemFinder), '16');
+      await driver.scrollUntilVisible(listFinder, itemFinder, dyScroll: -100.0);
+      expect(await driver.getText(itemFinder), '04');
     });
 
-    // test('apply for manual attendance', () async {
-      //await driver.scrollIntoView(find.byValueKey('applyLeaveKey16'));
-    //   await driver.tap(find.byValueKey('applyLeaveKey16'));
-    // });
+    test('apply for manual attendance', () async {
+      await driver.tap(find.byValueKey('3'));
+    });
   });
 }
