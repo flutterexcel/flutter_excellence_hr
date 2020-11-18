@@ -21,19 +21,49 @@ void attendancetest(FlutterDriver driver) {
       await driver.tap(find.text('My Attendance'));
     });
 
-    test('naviagate to attendance page ', () async {
+    test('naviagate to attendance page/ ', () async {
       await driver.waitFor(find.text('Kartik Jabreba'));
     });
 
-    test('tap for manual attendance', () async {
+    test('tap for manual attendance/', () async {
       final itemFinder = find.text('04');
       final listFinder = find.byValueKey('leavekey');
       await driver.scrollUntilVisible(listFinder, itemFinder, dyScroll: -100.0);
       expect(await driver.getText(itemFinder), '04');
     });
 
-    test('apply for manual attendance', () async {
+    test('apply for manual attendance/', () async {
       await driver.tap(find.byValueKey('3'));
+      driver.waitFor(find.text('Your Day Summary'));
+    });
+
+    test('apply for entry time', () async {
+      await driver.waitFor(find.byValueKey('entryTimeKey'));
+      driver.tap(find.byValueKey('entryTimeKey'));
+     
+    });
+
+    test('apply for exit time', () async {
+      await driver.waitFor(find.byValueKey('exitTimeKey'));
+      driver.tap(find.byValueKey('entryTimeKey'));
+      await driver.waitFor(find.byType("DateTimeField"));
+      driver.tap(find.text('10'));
+      driver.tap(find.text('OK'));
+     
+    });
+
+    test('enter reason', () async {
+      await driver.waitFor(find.byValueKey('reasonKey'));
+      driver.tap(find.byValueKey('reasonKey'));
+      await driver.waitFor(find.byType("DateTimeField"));
+      driver.tap(find.text('08'));
+      driver.tap(find.text('OK'));
+      
+    });
+
+    test('apply leave button press', () async {
+      await driver.scrollIntoView(find.text('Update'));
+      driver.tap(find.text('Update'));
     });
   });
 }
