@@ -162,6 +162,7 @@ class _ApplyAttendanceState extends State<ApplyAttendance> {
                       Container(
                         margin: EdgeInsets.only(right: 16),
                         child: DateTimeField(
+                          key: Key('entryTimeKey'),
                           format: format,
                           controller: entry,
                           decoration: InputDecoration(
@@ -196,6 +197,7 @@ class _ApplyAttendanceState extends State<ApplyAttendance> {
                       Container(
                         margin: EdgeInsets.only(right: 16),
                         child: DateTimeField(
+                          key: Key('exitTimeKey'),
                           format: format,
                           controller: exit,
                           decoration: InputDecoration(
@@ -229,6 +231,7 @@ class _ApplyAttendanceState extends State<ApplyAttendance> {
                   child: Container(
                     margin: EdgeInsets.fromLTRB(16, 12, 16, 0),
                     child: TextFormField(
+                      key: Key('reasonKey'),
                       enabled: true,
                       controller: reason,
                       decoration: InputDecoration(
