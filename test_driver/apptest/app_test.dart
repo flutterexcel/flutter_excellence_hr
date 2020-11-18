@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 
 import '../applyleavetest.dart';
 import '../attendancetest.dart';
+import '../documenttest.dart';
 import '../inventorytest.dart';
 import '../leavetest.dart';
 import '../logintest.dart';
@@ -30,6 +31,7 @@ void main() {
     leaveTest(driver);
     salaryTest(driver);
     inventorytest(driver);
+    documentTest(driver);
     logOut(driver);
   });
 }
