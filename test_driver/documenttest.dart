@@ -32,7 +32,7 @@ void documentTest(FlutterDriver driver) {
     });
 
     test('check for document list', () async {
-      await driver.scrollIntoView(find.text('PAN CARD'));
+      await driver.waitFor(find.text('PAN Card'));
     });
   });
 }

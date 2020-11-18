@@ -4,10 +4,12 @@ import 'package:test/test.dart';
 import '../applyleavetest.dart';
 import '../attendancetest.dart';
 import '../documenttest.dart';
+import '../holidaystest.dart';
 import '../inventorytest.dart';
 import '../leavetest.dart';
 import '../logintest.dart';
 import '../logouttest.dart';
+import '../policytest.dart';
 import '../profiletest.dart';
 import '../salarytest.dart';
 
@@ -32,6 +34,8 @@ void main() {
     salaryTest(driver);
     inventorytest(driver);
     documentTest(driver);
+    policyTest(driver);
+    holidaysTest(driver);
     logOut(driver);
   });
 }

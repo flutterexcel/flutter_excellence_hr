@@ -1,11 +1,13 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
-import '../documenttest.dart';
+
 import '../logintest.dart';
+import '../policytest.dart';
 
 void main() {
   FlutterDriver driver;
-  group('check my document page/', () {
+
+  group('check policy page/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -15,6 +17,6 @@ void main() {
       }
     });
     loginTest(driver);
-    documentTest(driver);
+    policyTest(driver);
   });
 }

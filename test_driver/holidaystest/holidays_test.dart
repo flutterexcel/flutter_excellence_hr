@@ -1,11 +1,12 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
-import '../documenttest.dart';
+
+import '../holidaystest.dart';
 import '../logintest.dart';
 
 void main() {
   FlutterDriver driver;
-  group('check my document page/', () {
+  group('check holidays page/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -15,6 +16,6 @@ void main() {
       }
     });
     loginTest(driver);
-    documentTest(driver);
+    holidaysTest(driver);
   });
 }
