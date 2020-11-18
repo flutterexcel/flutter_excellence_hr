@@ -1,3 +1,3 @@
 library my_prj.globals;
 
-bool testingActive = false;
+bool testingActive = true;
