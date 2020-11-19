@@ -14,9 +14,9 @@ void salaryTest(FlutterDriver driver) {
     test('tap naviagation drawer/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
-      await driver.tap(locateDrawer);
+       driver.tap(locateDrawer);
       await driver.waitFor(find.text('My Salary'));
-      await driver.tap(find.text('My Salary'));
+       driver.tap(find.text('My Salary'));
     });
     test('check my slary page/', () async {
       final SerializableFinder salaryPageHeader = find.text('My Salary');

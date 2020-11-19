@@ -15,8 +15,7 @@ void leaveTest(FlutterDriver driver) {
     test('tap naviagation drawer/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
-      await driver.tap(locateDrawer);
-      await driver.waitFor(find.text('My Leaves'));
+       driver.tap(locateDrawer);
       await driver.tap(find.text('My Leaves'));
     });
 

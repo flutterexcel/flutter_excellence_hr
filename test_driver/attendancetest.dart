@@ -18,7 +18,7 @@ void attendancetest(FlutterDriver driver) {
           find.byTooltip('Open navigation menu');
       await driver.tap(locateDrawer);
       await driver.waitFor(find.text('My Attendance'));
-      await driver.tap(find.text('My Attendance'));
+            driver.tap(find.text('My Attendance'));
     });
 
     test('naviagate to attendance page/ ', () async {
@@ -56,7 +56,7 @@ void attendancetest(FlutterDriver driver) {
     test('enter reason', () async {
       await driver.waitFor(find.byValueKey('reasonKey'));
       driver.tap(find.byValueKey('reasonKey'));
-      await driver.enterText('FOR TESTING');
+      driver.enterText('FOR TESTING');
     });
 
     test('apply leave button press', () async {

@@ -15,9 +15,9 @@ void documentTest(FlutterDriver driver) {
     test('tap naviagation drawer/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
-      await driver.tap(locateDrawer);
+       driver.tap(locateDrawer);
       await driver.waitFor(find.text('My Documents'));
-      await driver.tap(find.text('My Documents'));
+       driver.tap(find.text('My Documents'));
     });
 
     test('test navigate to My Documents page', () async {

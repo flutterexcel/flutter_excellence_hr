@@ -14,15 +14,15 @@ void policyTest(FlutterDriver driver){
      test('tap naviagation drawer/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
-      await driver.tap(locateDrawer);
+       driver.tap(locateDrawer);
       await driver.waitFor(find.text('Policy Documents'));
-      await driver.tap(find.text('Policy Documents'));
+       driver.tap(find.text('Policy Documents'));
     });
 
     test('test policy documnets screen/', ()async{
       final SerializableFinder policyHeader =
           find.text('Policy Documents directory');
-      await driver.waitFor(policyHeader);
+       driver.waitFor(policyHeader);
 
     });
   });

@@ -15,9 +15,8 @@ void inventorytest(FlutterDriver driver) {
     test('switch to inventory/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
-      await driver.tap(locateDrawer);
+       driver.tap(locateDrawer);
       await driver.tap(find.text('My Inventory'));
-     // await driver.scrollIntoView(find.text('Kartik Jabreba'));
       await driver.waitFor(find.text('Acer'));
     });
     

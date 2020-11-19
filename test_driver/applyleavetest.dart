@@ -16,7 +16,7 @@ void applyLeaveTest(FlutterDriver driver) {
           find.byTooltip('Open navigation menu');
       await driver.tap(locateDrawer);
       await driver.waitFor(find.text('Apply Leave'));
-      await driver.tap(find.text('Apply Leave'));
+            driver.tap(find.text('Apply Leave'));
     });
 
     test('check apply leave screen/', () async {
@@ -46,14 +46,14 @@ void applyLeaveTest(FlutterDriver driver) {
 
     test('check input reason for leave/', () async {
       await driver.waitFor(find.byValueKey('reasonKey'));
-      await driver.tap(find.byValueKey('reasonKey'));
-      await driver.enterText('FOR TESTING');
+            driver.tap(find.byValueKey('reasonKey'));
+            driver.enterText('FOR TESTING');
     });
 
     test('check button for apply leave', ()async{
 
       await driver.waitFor(find.byType("RoundedLoadingButton"));
-      await driver.tap(find.byType("RoundedLoadingButton"));
+            driver.tap(find.byType("RoundedLoadingButton"));
     });
   });
 }

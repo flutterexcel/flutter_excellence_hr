@@ -14,7 +14,7 @@ void logOut(FlutterDriver driver) {
     test('tap naviagation drawer/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
-      await driver.tap(locateDrawer);
+       driver.tap(locateDrawer);
       await driver.tap(find.text('Logout'));
     });
 

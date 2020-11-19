@@ -2,7 +2,7 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
 void holidaysTest(FlutterDriver driver) {
-  group('check holidays page', () {
+  group('check holidays page/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -15,9 +15,9 @@ void holidaysTest(FlutterDriver driver) {
     test('tap naviagation drawer/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
-      await driver.tap(locateDrawer);
+       driver.tap(locateDrawer);
       await driver.waitFor(find.text('Holidays'));
-      await driver.tap(find.text('Holidays'));
+       driver.tap(find.text('Holidays'));
     });
 
     test('check year change function from 2020 to 2019', () async {

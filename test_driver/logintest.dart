@@ -14,9 +14,9 @@ void loginTest(FlutterDriver driver) {
     });
     test('check form Fill/', () async {
       await driver.tap(find.byValueKey('Username'));
-      await driver.enterText('kartikjabreba');
+       driver.enterText('kartikjabreba');
       await driver.tap(find.byValueKey('Password'));
-      await driver.enterText('CMJ97');
+       driver.enterText('CMJ97');
       await driver.tap(find.text('Login'));
 
     });
