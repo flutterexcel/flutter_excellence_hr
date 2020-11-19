@@ -1,10 +1,10 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
-import '../forgettest.dart';
+import '../forgotPasswordTest.dart';
 
 void main() {
-  group('check forgetpassword/', () {
+  group('check forgotpassword/', () {
     FlutterDriver driver;
     setUpAll(() async {
       driver = await FlutterDriver.connect();
@@ -14,6 +14,6 @@ void main() {
         driver.close();
       }
     });
-    forgettest(driver);
+    forgotPasswordTest(driver);
   });
 }

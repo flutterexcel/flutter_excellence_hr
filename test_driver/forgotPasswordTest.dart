@@ -1,8 +1,8 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
-void forgettest(FlutterDriver driver) {
-  group('check forgetpassword/', () {
+void forgotPasswordTest(FlutterDriver driver) {
+  group('check forgotpassword/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -17,8 +17,15 @@ void forgettest(FlutterDriver driver) {
 
     test('check forget screen/', () async {
       await driver.tap(find.byValueKey('ResetPassword'));
-      await driver.enterText('kartikjabreba');
+      await driver.enterText('TestUser');
       await driver.tap(find.text('Reset Password'));
+    });
+
+    test('for user Login screen', () async {
+      await driver.scrollIntoView(find.text('Login'));
+      driver.tap(find.text('Login'));
+      await driver.scrollIntoView(find.text('Login'));
+      
     });
   });
 }
