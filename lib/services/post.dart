@@ -11,11 +11,20 @@ class Post {
     var checkAction = json.decode(body);
     String action = checkAction['action'];
       if (testingActive) {
-        final contents = await rootBundle.loadString(
+       if(loginActive){
+          final contents = await rootBundle.loadString(
           'assets/test/$action.json',
         );
          return _decoder.convert(contents);
       
+       }
+       else{
+          final contents = await rootBundle.loadString(
+          'assets/test/login_fail.json',
+        );
+         return _decoder.convert(contents);
+      
+       }
     } else {
       return http
           .post(url, body: body, headers: headers, encoding: encoding)
