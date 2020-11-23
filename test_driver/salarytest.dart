@@ -1,8 +1,8 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
-void inventorytest(FlutterDriver driver) {
-  group('check inventory page/', () {
+void salaryTest(FlutterDriver driver) {
+  group('check salary page/', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -11,14 +11,16 @@ void inventorytest(FlutterDriver driver) {
         driver.close();
       }
     });
-
-    test('switch to inventory/', () async {
+    test('tap naviagation drawer/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
        driver.tap(locateDrawer);
-      await driver.tap(find.text('My Inventory'));
-      await driver.waitFor(find.text('Acer'));
+      await driver.waitFor(find.text('My Salary'));
+       driver.tap(find.text('My Salary'));
     });
-    
+    test('check my slary page/', () async {
+      final SerializableFinder salaryPageHeader = find.text('My Salary');
+      await driver.waitFor(salaryPageHeader);
+    });
   });
 }
