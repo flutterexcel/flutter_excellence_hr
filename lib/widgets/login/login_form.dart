@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
                   }
                   return null;
                 },
-                obscureText: true,
+                //obscureText: true,
                 controller: _passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),

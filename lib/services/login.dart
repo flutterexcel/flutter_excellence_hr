@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_session/flutter_session.dart';
+
 import 'post.dart';
 import '../model/user.dart';
 import '../app_config.dart';
@@ -12,13 +14,13 @@ class Login {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     final loginUrl = prodUrl.baseUrl;
 
-
     Map data = {
       "token": apiKey,
       "action": "login",
       "username": username,
       "password": password
     };
+
     return _post
         .post(loginUrl, body: json.encode(data))
         .then((dynamic res) async {
@@ -32,5 +34,3 @@ class Login {
     });
   }
 }
-
-

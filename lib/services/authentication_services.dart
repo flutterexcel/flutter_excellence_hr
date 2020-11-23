@@ -1,3 +1,4 @@
+import 'package:flutter_excellence_hr/globals.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/user.dart';
@@ -10,12 +11,13 @@ abstract class AuthenticationService {
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<void> signOut();
   Future<User> signInWithGoogleAndPassword(String token);
+  
 }
 
 class LoginAuthenticationService extends AuthenticationService {
+  
   @override
   Future<User> getCurrentUser() async {
-    print('get current user');
     StorageUtil.getInstance();
     bool islogin = StorageUtil.getLoggedIn();
 
@@ -28,7 +30,6 @@ class LoginAuthenticationService extends AuthenticationService {
 
   @override
   Future<User> signInWithEmailAndPassword(String email, String password) async {
-    print('sign in with emial and password');
     final Login api = Login();
     User user = await api.login(email, password);
     return User(user: user.user, token: user.token, message: user.message);
@@ -44,8 +45,8 @@ class LoginAuthenticationService extends AuthenticationService {
 
   @override
   Future<void> signOut() {
-    print('sign out user');
     StorageUtil.clear(true);
+    shareData.setBool('login', false);
     //return null;
   }
 }
