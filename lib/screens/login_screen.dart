@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
 class _AuthForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final authService = RepositoryProvider.of<AuthenticationService>(context);
+   final authService = RepositoryProvider.of<AuthenticationService>(context);
 
     return Container(
         alignment: Alignment.center,

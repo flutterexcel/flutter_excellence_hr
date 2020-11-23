@@ -40,6 +40,7 @@ class LoginPage extends StatelessWidget {
               child: TextFormField(
                 key: Key('Username'),
                 validator: (value) {
+
                   if (value.isEmpty) {
                     return 'Please enter username';
                   }
