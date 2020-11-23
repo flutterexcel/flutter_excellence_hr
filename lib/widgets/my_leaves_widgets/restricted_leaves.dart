@@ -64,10 +64,12 @@ class _RestrictedLeaveState extends State<RestrictedLeave> {
               )
             ],
           )
-        : Center(
-            child: CircularProgressIndicator(
-            backgroundColor: Colors.cyan,
-          ));
+        : Padding(
+          padding: const EdgeInsets.only(top: 200),
+          child: CircularProgressIndicator(
+              backgroundColor: Colors.cyan,
+            ),
+        );
   }
 }
 

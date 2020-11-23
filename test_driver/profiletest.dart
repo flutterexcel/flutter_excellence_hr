@@ -14,7 +14,7 @@ void profileTest(FlutterDriver driver) {
     test('tap naviagation drawer/', () async {
       final SerializableFinder locateDrawer =
           find.byTooltip('Open navigation menu');
-      await driver.tap(locateDrawer);
+       driver.tap(locateDrawer);
       await driver.waitFor(find.text('My Profile'));
     });
 
@@ -25,16 +25,16 @@ void profileTest(FlutterDriver driver) {
 
     test('check for update bank detail/', () async {
       await driver.scrollIntoView(find.byValueKey('BankAccountNumber'));
-      await driver.tap(find.byValueKey('BankAccountNumber'));
-      await driver.enterText('123412341234');
+            driver.tap(find.byValueKey('BankAccountNumber'));
+            driver.enterText('123412341234');
       await driver.scrollIntoView(find.byValueKey('BankName'));
-      await driver.tap(find.byValueKey('BankName'));
-      await driver.enterText('ICICI Bank');
+            driver.tap(find.byValueKey('BankName'));
+            driver.enterText('ICICI Bank');
       await driver.scrollIntoView(find.byValueKey('IfscCode'));
-      await driver.tap(find.byValueKey('IfscCode'));
-      await driver.enterText('ICICI2020');
+            driver.tap(find.byValueKey('IfscCode'));
+            driver.enterText('ICICI2020');
       await driver.scrollIntoView(find.text('Update Bank Details'));
-      await driver.tap(find.text('Update Bank Details'));
+            driver.tap(find.text('Update Bank Details'));
     });
 
     test('update password/', () async {
