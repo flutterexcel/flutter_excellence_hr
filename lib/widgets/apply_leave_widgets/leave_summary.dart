@@ -160,6 +160,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
                   height: 35,
                   child: TextFormField(
+                    key: Key('fromDateKey'),
                     enabled: false,
                     controller: from
                       ..text = DateFormat("yyyy-MM-dd")
@@ -198,6 +199,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
                   height: 35,
                   child: TextFormField(
+                    key: Key('toDateKey'),
                     enabled: false,
                     controller: to
                       ..text =
@@ -342,6 +344,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                 margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
                 height: 100,
                 child: TextFormField(
+                  key: Key('reasonKey'),
                   enabled: true,
                   maxLines: 5,
                   controller: reason,

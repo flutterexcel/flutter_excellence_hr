@@ -6,20 +6,24 @@ import 'package:flutter_excellence_hr/widgets/attendance_wigets/apply_attendance
 class CalendarScreen extends StatelessWidget {
   final MonthAttendance monthAttendance;
   CalendarScreen({this.monthAttendance});
-  
+  Key _key;
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      key: Key('leavekey'),
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-     physics: NeverScrollableScrollPhysics(),   
+      physics: NeverScrollableScrollPhysics(),
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       itemBuilder: (_, index) => monthAttendance
                   .data.attendance[index].dayType ==
               'NON_WORKING_DAY'
           ? InkWell(
-              onTap: () {},
+              onTap: () {
+                print('tap-23');
+              },
               child: Container(
                   margin: EdgeInsets.all(2),
                   height: 90,
@@ -70,6 +74,7 @@ class CalendarScreen extends StatelessWidget {
                     _popupDialog(context, index);
                   },
                   child: Container(
+                      key: Key('leavekey-$index'),
                       margin: EdgeInsets.all(2),
                       height: 90,
                       decoration: BoxDecoration(
@@ -253,6 +258,7 @@ class CalendarScreen extends StatelessWidget {
                         _popupDialog(context, index);
                       },
                       child: Container(
+                        key: Key('$index'),
                         margin: EdgeInsets.all(2),
                         height: 90,
                         decoration: BoxDecoration(

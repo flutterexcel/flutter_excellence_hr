@@ -5,6 +5,8 @@ class AppConfig {
   String baseUrl;
 
   AppConfig({this.baseUrl});
+
+  AppConfig.withMocks({this.baseUrl});
   static Future<AppConfig> forEnvironment(String env, String url) async {
     // set default to dev if nothing was passed
     env = env ?? 'dev';

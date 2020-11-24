@@ -208,6 +208,7 @@ class ListLeaves extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 RaisedButton(
+                  key: Key('uploadDocumentKey'),
                     color: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),

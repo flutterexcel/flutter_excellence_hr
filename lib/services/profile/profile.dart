@@ -9,7 +9,7 @@ class Profile {
   Post _post = Post();
   Future<ProfileDetails> getprofile() async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'salUrl');
-    var token = StorageUtil.getUserToken();
+      var token = StorageUtil.getUserToken();
     final apiUrl = prodUrl.baseUrl;
     Map data = {"action": "get_user_profile_detail", "token": token};
     return _post
