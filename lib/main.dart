@@ -12,37 +12,37 @@ import 'bloc/profile/profile_bloc.dart';
 import 'bloc/attendance/attendance_bloc.dart';
 
 void main() {
-  checkAlreadyLogin() async {
-    shareData = await SharedPreferences.getInstance();
-    if(shareData.get('userid')==null){
-      shareData.setBool('newuser',true);
-      }
-      else shareData.setBool('newuser',false);
-    
-  }
+  // Future<bool> isNewUserLogin() async {
+  //   bool result=false;
+  //   shareData = await SharedPreferences.getInstance();
+  //   //shareData.setString('userid', '222');
+  //   try {
+  //     shareData.get('userid');
+  //   } catch (e) {
+     
+  //     result = true;
+  //     //shareData.setBool('newuser', true);
+  //   }
+  //   return result;
+  // }
 
   runApp(
+
       // Injects the Authentication service
       RepositoryProvider<AuthenticationService>(
     create: (context) {
-      checkAlreadyLogin();
-      bool newuser = shareData.get('newuser');
+      
       StorageUtil.getInstance();
       return LoginAuthenticationService();
     },
     // Injects the LoginBloc BLoC
     child: MultiBlocProvider(
       providers: [
-      
         BlocProvider<LoginBloc>(
           create: (context) {
-            if(shareData.get('newuser')){
-              final authService =
+            final authService =
                 RepositoryProvider.of<AuthenticationService>(context);
             return LoginBloc(authService)..add(AppLoad());
-            }
-            
-            
           },
         ),
         BlocProvider<InventoryBloc>(

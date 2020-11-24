@@ -11,11 +11,9 @@ abstract class AuthenticationService {
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<void> signOut();
   Future<User> signInWithGoogleAndPassword(String token);
-  
 }
 
 class LoginAuthenticationService extends AuthenticationService {
-  
   @override
   Future<User> getCurrentUser() async {
     StorageUtil.getInstance();
@@ -46,7 +44,8 @@ class LoginAuthenticationService extends AuthenticationService {
   @override
   Future<void> signOut() {
     StorageUtil.clear(true);
-    shareData.setBool('login', false);
+    shareData.clear();
+    // shareData.clear();
     //return null;
   }
 }

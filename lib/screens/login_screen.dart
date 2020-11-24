@@ -55,6 +55,21 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 class _AuthForm extends StatelessWidget {
+  bool test=false;
+  Future<bool> isNewUserLogin() async {
+    bool result = false;
+    shareData = await SharedPreferences.getInstance();
+    //shareData.setString('userid', '222');
+    try {
+      shareData.get('userid');
+    } catch (e) {
+      result = true;
+      //shareData.setBool('newuser', true);
+    }
+    test = result;
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     final authService = RepositoryProvider.of<AuthenticationService>(context);
@@ -72,10 +87,9 @@ class _AuthForm extends StatelessWidget {
               ],
             ),
             WelcomeScreen(),
-            // Container(
-            //   child: shareData.get('userid')==null?Text('usernameeee'):Text(shareData.get('userid')) ,
-            // ),
-
+            Container(
+              child: Text(test?'new user':'old user'),
+            ),
             LoginPage(),
             GoogleLogin(),
             LoginBottom(),

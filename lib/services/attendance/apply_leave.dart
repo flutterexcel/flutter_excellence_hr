@@ -21,6 +21,7 @@ class ApplyLeave {
       "token": token,
       "from_date": fromDate,
       "to_date": toDate,
+      "reason":"FOR_TESTING",
       "late_reason": reason,
       "leave_type": leaveType,
       "no_of_days": noOfDays,
