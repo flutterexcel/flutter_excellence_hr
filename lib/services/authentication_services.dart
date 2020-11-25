@@ -44,8 +44,8 @@ class LoginAuthenticationService extends AuthenticationService {
 
   @override
   Future<void> signOut() {
-    print('sign out user');
     StorageUtil.clear(true);
+    
     //return null;
   }
 }
