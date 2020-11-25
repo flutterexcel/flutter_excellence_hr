@@ -186,6 +186,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.11"
+  flutter_session:
+    dependency: "direct main"
+    description:
+      name: flutter_session
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   flutter_socket_io:
     dependency: "direct main"
     description:
@@ -368,7 +375,7 @@ packages:
       name: node_interop
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   node_io:
     dependency: transitive
     description:
@@ -475,7 +482,7 @@ packages:
     source: hosted
     version: "4.0.0-nullsafety.4"
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
       url: "https://pub.dartlang.org"

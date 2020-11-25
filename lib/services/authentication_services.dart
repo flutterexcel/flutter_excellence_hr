@@ -1,3 +1,4 @@
+import 'package:flutter_excellence_hr/globals.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/user.dart';
@@ -17,7 +18,6 @@ class LoginAuthenticationService extends AuthenticationService {
   Future<User> getCurrentUser() async {
     StorageUtil.getInstance();
     bool islogin = StorageUtil.getLoggedIn();
-
     if (islogin) {
       return User(
           user: StorageUtil.getUserId(), token: StorageUtil.getUserToken());

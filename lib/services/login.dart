@@ -1,8 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../globals.dart';
 import 'post.dart';
 import '../model/user.dart';
 import '../app_config.dart';
@@ -21,6 +18,7 @@ class Login {
       "username": username,
       "password": password
     };
+
     return _post
         .post(loginUrl, body: json.encode(data))
         .then((dynamic res) async {

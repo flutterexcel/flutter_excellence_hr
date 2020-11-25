@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter_excellence_hr/globals.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
@@ -56,24 +59,28 @@ class StorageUtil {
   //get usertoken
   static String getUserToken({String defValue = ''}) {
     if (_preferences == null) return defValue;
+    
     return _preferences.getString('usertoken') ?? defValue;
   }
 
   //set usertoken
   static Future<bool> setUserToken(String value) async {
     if (_preferences == null) return null;
+   
     return _preferences.setString('usertoken', value);
   }
 
   //get userid
   static String getUserId({String defValue = ''}) {
     if (_preferences == null) return defValue;
+
     return _preferences.getString('userid') ?? defValue;
   }
 
   //set userid
   static Future<bool> setUserId(String value) async {
     if (_preferences == null) return null;
+    
     return _preferences.setString('userid', value);
   }
 
@@ -86,6 +93,7 @@ class StorageUtil {
   //set isLoggedIn
   static Future<bool> setLoggedIn(bool value) async {
     if (_preferences == null) return null;
+
     return _preferences.setBool('islogged', value);
   }
 
