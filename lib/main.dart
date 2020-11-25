@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_excellence_hr/services/storage_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/bloc.dart';
-import 'globals.dart';
 import 'routes.dart';
 import 'screens/screens.dart';
 import 'services/authentication_services.dart';
@@ -11,20 +9,14 @@ import 'bloc/inventory/inventory.dart';
 import 'bloc/profile/profile_bloc.dart';
 import 'bloc/attendance/attendance_bloc.dart';
 
-void main() {
-
-
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageUtil.getInstance();
+ 
   runApp(
-    
-
       // Injects the Authentication service
       RepositoryProvider<AuthenticationService>(
     create: (context) {
-      
-    
-
-      StorageUtil.getInstance();
-     
       return LoginAuthenticationService();
     },
     // Injects the LoginBloc BLoC

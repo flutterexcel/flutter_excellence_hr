@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter_excellence_hr/globals.dart';
-import 'package:flutter_session/flutter_session.dart';
 
 import 'post.dart';
 import '../model/user.dart';
@@ -28,12 +26,9 @@ class Login {
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
       if (res["error"] == 0) {
         StorageUtil.setUserToken(res["data"]["token"]);
-        shareData.setString('usertoken', res["data"]["token"]);
         StorageUtil.setUserId(res["data"]["userid"]);
-        shareData.setString('userid', res["data"]["userid"]);
         StorageUtil.setLoggedIn(true);
       }
-      print('>>>>>>>>>>>>>>>>>>>>>${shareData.getString('userid')}');
       return User.fromJson(res);
     });
   }
