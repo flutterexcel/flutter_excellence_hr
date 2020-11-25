@@ -9,7 +9,11 @@ import 'bloc/inventory/inventory.dart';
 import 'bloc/profile/profile_bloc.dart';
 import 'bloc/attendance/attendance_bloc.dart';
 
-void main() {runApp(
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageUtil.getInstance();
+  
+  runApp(
         // Injects the Authentication service
         RepositoryProvider<AuthenticationService>(
       create: (context) {

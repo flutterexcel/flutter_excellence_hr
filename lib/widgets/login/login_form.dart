@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/services/storage_service.dart';
 import 'package:flutter_excellence_hr/widgets/login/login.dart';
 import '../../bloc/bloc.dart';
 
@@ -11,8 +12,8 @@ import '../../bloc/bloc.dart';
 
 class LoginPage extends StatelessWidget {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  final _passwordController = TextEditingController(text: 'CMJ97');
-  final _emailController = TextEditingController(text: 'kartikjabreba');
+  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
   bool _autoValidate = false;
 
   @override
@@ -130,11 +131,11 @@ class LoginPage extends StatelessWidget {
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text('Login ....')));
                   }
-                  if (state is LoginFailure) {
+                  if (StorageUtil.getLoggedIn()==false) {
                     Scaffold.of(context).showSnackBar(SnackBar(
                         content: Text('Invalid username and password.')));
                   }
-                  if (state is LoginSuccess) {
+                  if (StorageUtil.getLoggedIn()) {
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text('Login Success')));
                   }
