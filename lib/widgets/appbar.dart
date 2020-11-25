@@ -37,10 +37,10 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   void initState() {
     super.initState();
     if (StorageUtil.getProfileImg() == "") {
-      BlocProvider.of<InventoryBloc>(context).add(UserInventory());
+     _getProfile();
+     BlocProvider.of<InventoryBloc>(context).add(UserInventory());
       BlocProvider.of<ProfileBloc>(context).add(ProfileInit());
       BlocProvider.of<AttendanceBloc>(context).add(AttendanceInit());
-      _getProfile();
     } else {
       setState(() {
         profileImg = true;

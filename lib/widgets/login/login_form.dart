@@ -11,8 +11,8 @@ import '../../bloc/bloc.dart';
 
 class LoginPage extends StatelessWidget {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  final _passwordController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController(text: 'CMJ97');
+  final _emailController = TextEditingController(text: 'kartikjabreba');
   bool _autoValidate = false;
 
   @override
@@ -25,6 +25,7 @@ class LoginPage extends StatelessWidget {
     }
 
     LoginState state = _loginBloc.state;
+    print('>>>>>>>>>>>>>>>>>>>$state');
 
     return Form(
       key: _key,
@@ -40,7 +41,6 @@ class LoginPage extends StatelessWidget {
               child: TextFormField(
                 key: Key('Username'),
                 validator: (value) {
-
                   if (value.isEmpty) {
                     return 'Please enter username';
                   }
