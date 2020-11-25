@@ -12,6 +12,7 @@ class ApplyLeave {
       String reason,
       String leaveType,
       String noOfDays,
+      String lateReason,
       List rhDates}) async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     var token = StorageUtil.getUserToken();
@@ -21,8 +22,8 @@ class ApplyLeave {
       "token": token,
       "from_date": fromDate,
       "to_date": toDate,
-      "reason":"FOR_TESTING",
-      "late_reason": reason,
+      'reason':reason,
+      "late_reason": lateReason,
       "leave_type": leaveType,
       "no_of_days": noOfDays,
       "day_status": "",
