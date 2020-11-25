@@ -39,12 +39,14 @@ class StorageUtil {
   //get usertoken
   static String getUserToken({String defValue = ''}) {
     if (_preferences == null) return defValue;
+    
     return _preferences.getString('usertoken') ?? defValue;
   }
 
   //set usertoken
   static Future<bool> setUserToken(String value) async {
     if (_preferences == null) return null;
+   
     return _preferences.setString('usertoken', value);
   }
 
@@ -58,7 +60,7 @@ class StorageUtil {
   //set userid
   static Future<bool> setUserId(String value) async {
     if (_preferences == null) return null;
-    shareData.setString('userid', value);
+    
     return _preferences.setString('userid', value);
   }
 
@@ -71,6 +73,7 @@ class StorageUtil {
   //set isLoggedIn
   static Future<bool> setLoggedIn(bool value) async {
     if (_preferences == null) return null;
+
     return _preferences.setBool('islogged', value);
   }
 

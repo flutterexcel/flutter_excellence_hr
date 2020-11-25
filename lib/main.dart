@@ -12,27 +12,19 @@ import 'bloc/profile/profile_bloc.dart';
 import 'bloc/attendance/attendance_bloc.dart';
 
 void main() {
-  // Future<bool> isNewUserLogin() async {
-  //   bool result=false;
-  //   shareData = await SharedPreferences.getInstance();
-  //   //shareData.setString('userid', '222');
-  //   try {
-  //     shareData.get('userid');
-  //   } catch (e) {
-     
-  //     result = true;
-  //     //shareData.setBool('newuser', true);
-  //   }
-  //   return result;
-  // }
+
 
   runApp(
+    
 
       // Injects the Authentication service
       RepositoryProvider<AuthenticationService>(
     create: (context) {
       
+    
+
       StorageUtil.getInstance();
+     
       return LoginAuthenticationService();
     },
     // Injects the LoginBloc BLoC
