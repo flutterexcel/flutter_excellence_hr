@@ -21,6 +21,26 @@ class StorageUtil {
     _preferences = await SharedPreferences.getInstance();
   }
 
+  static Future<bool> setUserName(String value) async {
+    if (_preferences == null) return null;
+    return _preferences.setString('username', value);
+  }
+
+  static String getUserName({String defValue = ''}) {
+    if (_preferences == null) return defValue;
+    return _preferences.getString('username') ?? defValue;
+  }
+
+  static Future<bool> setPassword(String value) async {
+    if (_preferences == null) return null;
+    return _preferences.setString('password', value);
+  }
+
+  static String getPassword({String defValue = ''}) {
+    if (_preferences == null) return defValue;
+    return _preferences.getString('password') ?? defValue;
+  }
+
 //get profileImg
   static String getProfileImg({String defValue = ''}) {
     if (_preferences == null) return defValue;
@@ -70,7 +90,14 @@ class StorageUtil {
   }
 
   static Future<bool> clear(bool value) async {
-    if (_preferences == null) return null;
-    return _preferences.clear();
+    if (_preferences == null)
+      return null;
+    else {
+      _preferences.remove('profileImg');
+      _preferences.remove('usertoken');
+      _preferences.remove('userid');
+      _preferences.remove('islogged');
+      return null;
+    }
   }
 }

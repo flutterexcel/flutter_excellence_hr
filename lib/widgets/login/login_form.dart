@@ -12,8 +12,8 @@ import '../../bloc/bloc.dart';
 
 class LoginPage extends StatelessWidget {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  final _passwordController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController(text: StorageUtil.getPassword());
+  final _emailController = TextEditingController(text: StorageUtil.getUserName());
   bool _autoValidate = false;
 
   @override
@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
                   }
                   return null;
                 },
-                obscureText: true,
+                //obscureText: true,
                 controller: _passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),

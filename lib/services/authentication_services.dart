@@ -43,6 +43,7 @@ class LoginAuthenticationService extends AuthenticationService {
   @override
   Future<void> signOut() {
     StorageUtil.clear(true);
+    
     //return null;
   }
 }

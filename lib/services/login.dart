@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../globals.dart';
 import 'post.dart';
 import '../model/user.dart';
 import '../app_config.dart';
@@ -12,7 +15,6 @@ class Login {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     final loginUrl = prodUrl.baseUrl;
 
-
     Map data = {
       "token": apiKey,
       "action": "login",
@@ -24,6 +26,8 @@ class Login {
         .then((dynamic res) async {
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
       if (res["error"] == 0) {
+        StorageUtil.setUserName(username);
+        StorageUtil.setPassword(password);
         StorageUtil.setUserToken(res["data"]["token"]);
         StorageUtil.setUserId(res["data"]["userid"]);
         StorageUtil.setLoggedIn(true);
@@ -32,5 +36,3 @@ class Login {
     });
   }
 }
-
-

@@ -65,7 +65,7 @@ class _HrAppState extends State<HrApp> {
           if (state is CheckAuthenticated) {
             return ShowInventory();
           }
-          
+
           return LoginScreen();
         },
       ),
