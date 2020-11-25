@@ -36,16 +36,16 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   void initState() {
     super.initState();
-    if (StorageUtil.getProfileImg() == "") {
+   if (StorageUtil.getProfileImg() == "") {
      _getProfile();
      BlocProvider.of<InventoryBloc>(context).add(UserInventory());
       BlocProvider.of<ProfileBloc>(context).add(ProfileInit());
       BlocProvider.of<AttendanceBloc>(context).add(AttendanceInit());
-    } else {
+   } else {
       setState(() {
         profileImg = true;
       });
-    }
+  }
   }
 
   @override

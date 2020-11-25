@@ -49,9 +49,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         this.add(UserLogIn(user: currentUser));
         yield LoginSuccess();
       } else {
+        print('>>>>>>>>>>>Line 52/loginbloc');
         yield LoginFailure(error: 'Login failed');
       }
     } catch (e) {
+       print('>>>>>>>>>>>Line 56/loginbloc');
       yield LoginFailure(error: 'Login failed');
     }
   }
