@@ -36,8 +36,8 @@ class GoogleLogin extends StatelessWidget {
       try {
         await _googleSignIn.signIn().then((result) {
           result.authentication.then((googleKey) {
-            if (_googleSignIn.currentUser.displayName
-                .contains("excellencetechnologies")) {
+            if (_googleSignIn.currentUser.email
+                .contains("@excellencetechnologies")) {
               _loginBloc.add(LoginInWithGoogleButtonPressed(
                   googleToken: googleKey.accessToken));
             } else {
