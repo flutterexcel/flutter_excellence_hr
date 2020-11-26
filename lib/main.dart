@@ -9,40 +9,45 @@ import 'bloc/inventory/inventory.dart';
 import 'bloc/profile/profile_bloc.dart';
 import 'bloc/attendance/attendance_bloc.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageUtil.getInstance();
-  
+
   runApp(
-        // Injects the Authentication service
-        RepositoryProvider<AuthenticationService>(
-      create: (context) {
-        StorageUtil.getInstance();
-        return LoginAuthenticationService();
-      },
-      // Injects the LoginBloc BLoC
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<LoginBloc>(
-            create: (context) {
-              final authService =
-                  RepositoryProvider.of<AuthenticationService>(context);
-              return LoginBloc(authService)..add(AppLoad());
-            },
-          ),
-          BlocProvider<InventoryBloc>(
-            create: (BuildContext context) => InventoryBloc(InventoryInitial()),
-          ),
-          BlocProvider<ProfileBloc>(
-            create: (BuildContext context) => ProfileBloc(),
-          ),
-          BlocProvider<AttendanceBloc>(
-            create: (BuildContext context) => AttendanceBloc(),
-          ),
-        ],
-        child: HrApp(),
-      ),
-    ));}
+    
+      // Injects the Authentication service
+      RepositoryProvider<AuthenticationService>(
+        
+    create: (context) {
+      StorageUtil.getInstance();
+      return LoginAuthenticationService();
+    },
+    // Injects the LoginBloc BLoC
+    child: MultiBlocProvider(
+      providers: [
+        BlocProvider<LoginBloc>(
+          create: (context) {
+            
+            
+            final authService =
+                RepositoryProvider.of<AuthenticationService>(context);
+            return LoginBloc(authService)..add(AppLoad());
+          },
+        ),
+        BlocProvider<InventoryBloc>(
+          create: (BuildContext context) => InventoryBloc(InventoryInitial()),
+        ),
+        BlocProvider<ProfileBloc>(
+          create: (BuildContext context) => ProfileBloc(),
+        ),
+        BlocProvider<AttendanceBloc>(
+          create: (BuildContext context) => AttendanceBloc(),
+        ),
+      ],
+      child: HrApp(),
+    ),
+  ));
+}
 
 class HrApp extends StatefulWidget {
   @override

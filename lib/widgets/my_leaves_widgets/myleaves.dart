@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/leave/cancel_leave.dart';
 import 'package:flutter_excellence_hr/model/leave/leave.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/leave/cancel_leave.dart';
 import 'package:flutter_excellence_hr/services/leave/leaves.dart';
 import 'package:flutter_excellence_hr/widgets/my_leaves_widgets/my_leaves_widgets.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyLeavesList extends StatefulWidget {
@@ -23,7 +28,9 @@ class MyLeavesListState extends State<MyLeavesList> {
   ];
 
   GetLeaves api = GetLeaves();
+
   Leave leaves;
+
   bool loadLeaves = false;
 
   _getMyRhInfo() async {
@@ -81,6 +88,10 @@ class ListLeaves extends StatelessWidget {
   Leaves leaves;
   ListLeaves(this.leaves);
   bool openLink = false;
+  CancelMyLeave cancelMyLeave = CancelMyLeave();
+  CancelLeave cancelLeave;
+  final RoundedLoadingButtonController _btnController =
+      new RoundedLoadingButtonController();
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -88,6 +99,29 @@ class ListLeaves extends StatelessWidget {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  _cancelLeave(String date) async {
+    try {
+      return await cancelMyLeave.cancelMyLeave(date).then((value) {
+        if (value.error == 1) {
+          _btnController.error();
+        } else if (value.error == 0) {
+          cancelLeave = value;
+          _btnController.success();
+        }
+        _doReset();
+      });
+    } catch (e) {
+      _btnController.error();
+      _doReset();
+    }
+  }
+
+  void _doReset() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
   }
 
   @override
@@ -208,7 +242,7 @@ class ListLeaves extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 RaisedButton(
-                  key: Key('uploadDocumentKey'),
+                    key: Key('uploadDocumentKey'),
                     color: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
@@ -242,6 +276,20 @@ class ListLeaves extends StatelessWidget {
                       ),
               ],
             ),
+            RoundedLoadingButton(
+                errorColor: Colors.blue,
+                // padding: EdgeInsets.symmetric(horizontal: 50),
+                color: Colors.red[600],
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(5)),
+                onPressed: () {
+                  _cancelLeave(leaves.fromDate.toString());
+                },
+                child: Text(
+                  "Cancel Leave",
+                  style:
+                      TextStyle(color: Colors.white, fontFamily: 'SourceSans'),
+                )),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

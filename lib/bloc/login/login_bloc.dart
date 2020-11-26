@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_excellence_hr/model/user.dart';
+import 'package:flutter_excellence_hr/services/inventory/get_inventory.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 import '../../services/authentication_services.dart';
@@ -17,6 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
+    
     if (event is LoginInWithEmailButtonPressed) {
       yield* _mapLoginWithEmailToState(event);
     }
@@ -41,10 +43,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     User currentUser;
     try {
+      await Inventory().inventory();
       await _authenticationService.getCurrentUser().then((value) {
         currentUser = value;
       });
-
       if (currentUser != null) {
         this.add(UserLogIn(user: currentUser));
         yield LoginSuccess();
@@ -57,7 +59,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapUserLogInToState(UserLogIn event) async* {
-    yield CheckAuthenticated(user: event.user);
+    if (event.user.token == StorageUtil.getUserToken()) {
+      yield CheckAuthenticated(user: event.user);
+    } else {
+      yield LoginFailure();
+    }
   }
 
   Stream<LoginState> _mapUserLogOutToState(UserLogOut event) async* {
