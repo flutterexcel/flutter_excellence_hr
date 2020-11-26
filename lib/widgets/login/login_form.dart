@@ -26,8 +26,7 @@ class LoginPage extends StatelessWidget {
     }
 
     LoginState state = _loginBloc.state;
-    print('>>>>>>>>>>>>>>>>>>>$state');
-
+   
     return Form(
       key: _key,
       // autovalidate: _autoValidate,
@@ -68,7 +67,7 @@ class LoginPage extends StatelessWidget {
                   }
                   return null;
                 },
-                //obscureText: true,
+                obscureText: true,
                 controller: _passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
