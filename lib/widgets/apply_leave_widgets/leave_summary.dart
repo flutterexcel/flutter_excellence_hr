@@ -18,9 +18,11 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   final to = TextEditingController();
   final noOfDay = TextEditingController();
   final reason = TextEditingController();
+  final lateReason = TextEditingController();
   String leaveType, rhdate;
   ApplyLeave api = ApplyLeave();
   bool reasonValidate = false;
+  bool lateReasonValidate = false;
   bool leaveColor = false;
   bool type = false;
 
@@ -30,6 +32,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         toDate: to.text,
         noOfDays: noOfDay.text,
         reason: reason.text,
+        lateReason: lateReason.text,
         leaveType: leavetype,
         rhDates: [rhdate]);
   }
@@ -90,6 +93,14 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
       DateTime currentTime =
           DateTime(_currentDate.year, _currentDate.month, _currentDate.day);
       difference = _lastDate.difference(currentTime).inDays + 1;
+      DateTime dateTime = DateTime.now();
+      int _curr_diff = _lastDate.difference(dateTime).inDays;
+      setState(() {
+        if (_curr_diff <= 0) {
+          lateReasonValidate = true;
+        } else
+          lateReasonValidate = false;
+      });
     }
 
     bool validateTextField(String leaveReason) {
@@ -351,6 +362,35 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Give Reason",
+                    errorText:
+                        reasonValidate ? "Reason Can not be empty" : null,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Container(
+                  margin: EdgeInsets.all(8),
+                  child: Text("Late Reason",
+                      style: TextStyle(fontFamily: 'OpenSans', fontSize: 16))),
+            ),
+            Expanded(
+              flex: 4,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                height: 100,
+                child: TextFormField(
+                  enabled: lateReasonValidate,
+                  maxLines: 5,
+                  controller: lateReason,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Give Late Reason",
                     errorText:
                         reasonValidate ? "Reason Can not be empty" : null,
                   ),

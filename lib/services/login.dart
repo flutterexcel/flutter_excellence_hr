@@ -12,18 +12,20 @@ class Login {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     final loginUrl = prodUrl.baseUrl;
 
-
     Map data = {
       "token": apiKey,
       "action": "login",
       "username": username,
       "password": password
     };
+
     return _post
         .post(loginUrl, body: json.encode(data))
         .then((dynamic res) async {
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
       if (res["error"] == 0) {
+        StorageUtil.setUserName(username);
+        StorageUtil.setPassword(password);
         StorageUtil.setUserToken(res["data"]["token"]);
         StorageUtil.setUserId(res["data"]["userid"]);
         StorageUtil.setLoggedIn(true);
@@ -32,5 +34,3 @@ class Login {
     });
   }
 }
-
-
