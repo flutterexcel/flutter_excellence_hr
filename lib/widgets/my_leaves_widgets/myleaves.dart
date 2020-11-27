@@ -84,9 +84,17 @@ class MyLeavesListState extends State<MyLeavesList> {
   }
 }
 
-class ListLeaves extends StatelessWidget {
-  Leaves leaves;
+class ListLeaves extends StatefulWidget {
+  var leaves;
   ListLeaves(this.leaves);
+  @override
+  _ListLeavesState createState() => _ListLeavesState(leaves);
+}
+
+class _ListLeavesState extends State<ListLeaves> {
+  _ListLeavesState(this.leaves);
+  Leaves leaves;
+  //ListLeaves(this.leaves);
   bool openLink = false;
   CancelMyLeave cancelMyLeave = CancelMyLeave();
   CancelLeave cancelLeave;
@@ -102,20 +110,16 @@ class ListLeaves extends StatelessWidget {
   }
 
   _cancelLeave(String date) async {
-    try {
-      return await cancelMyLeave.cancelMyLeave(date).then((value) {
-        if (value.error == 1) {
-          _btnController.error();
-        } else if (value.error == 0) {
-          cancelLeave = value;
-          _btnController.success();
-        }
-        _doReset();
-      });
-    } catch (e) {
-      _btnController.error();
+    return await cancelMyLeave.cancelMyLeave(date).then((value) {
+      if (value.error == 1) {
+        print('failed');
+        _btnController.error();
+      } else if (value.error == 0) {
+        print('success');
+        _btnController.success();
+      }
       _doReset();
-    }
+    });
   }
 
   void _doReset() async {
@@ -276,20 +280,6 @@ class ListLeaves extends StatelessWidget {
                       ),
               ],
             ),
-            RoundedLoadingButton(
-                errorColor: Colors.blue,
-                // padding: EdgeInsets.symmetric(horizontal: 50),
-                color: Colors.red[600],
-                // shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(5)),
-                onPressed: () {
-                  _cancelLeave(leaves.fromDate.toString());
-                },
-                child: Text(
-                  "Cancel Leave",
-                  style:
-                      TextStyle(color: Colors.white, fontFamily: 'SourceSans'),
-                )),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -304,6 +294,23 @@ class ListLeaves extends StatelessWidget {
                 ),
               ],
             ),
+            leaves.status.contains('Pending')?
+            RoundedLoadingButton(
+                borderRadius: 5,
+                height: 40,
+                width: 100,
+                errorColor: Colors.blue,
+                color: Colors.red[600],
+                controller: _btnController,
+                onPressed: () {
+                  _cancelLeave(leaves.fromDate);
+                },
+                child: Text(
+                  "Cancel Leave",
+                  style:
+                      TextStyle(color: Colors.white, fontFamily: 'SourceSans'),
+                )):
+                Center(),
           ]),
           trailing: Container(
             padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
