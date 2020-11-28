@@ -29,7 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
 
     if (event is UserLogIn) {
-      yield* _mapUserLogInToState(event);z
+      yield* _mapUserLogInToState(event);
     }
 
     if (event is UserLogOut) {
