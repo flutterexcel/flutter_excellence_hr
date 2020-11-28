@@ -285,23 +285,19 @@ class CalendarScreen extends StatelessWidget {
                                   color: Colors.white10,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Column(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
+                                    Expanded(
+                                      child: Text(
+                                        monthAttendance
+                                                .data.attendance[index].inTime +
+                                            " - " +
                                             monthAttendance
-                                                    .data.attendance[index].inTime +
-                                                " - " +
-                                                monthAttendance
-                                                    .data.attendance[index].outTime,
-                                            style: TextStyle(
-                                                fontSize: 11, color: Colors.black),
-                                          ),
-                                        ),
-                                      ],
+                                                .data.attendance[index].outTime,
+                                        style: TextStyle(
+                                            fontSize: 11, color: Colors.black),
+                                      ),
                                     ),
                                   ],
                                 )),
