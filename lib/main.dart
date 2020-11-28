@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/storage_service.dart';
 import 'bloc/bloc.dart';
 import 'routes.dart';
@@ -14,10 +15,9 @@ void main() async {
   await StorageUtil.getInstance();
 
   runApp(
-    
+
       // Injects the Authentication service
       RepositoryProvider<AuthenticationService>(
-        
     create: (context) {
       StorageUtil.getInstance();
       return LoginAuthenticationService();
@@ -27,8 +27,6 @@ void main() async {
       providers: [
         BlocProvider<LoginBloc>(
           create: (context) {
-            
-            
             final authService =
                 RepositoryProvider.of<AuthenticationService>(context);
             return LoginBloc(authService)..add(AppLoad());
@@ -67,6 +65,17 @@ class _HrAppState extends State<HrApp> {
       // and build an appropriate widget based on the state.
       home: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
+          if (state.toString().contains('null')) {
+            return Scaffold(
+              backgroundColor: AppColors.BACKGROUND_COLOR,
+                          body: Center(
+                
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.cyan,
+                ),
+              ),
+            );
+          }
           if (state is CheckAuthenticated) {
             return ShowInventory();
           }

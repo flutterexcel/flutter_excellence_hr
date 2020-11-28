@@ -255,6 +255,7 @@ class CalendarScreen extends StatelessWidget {
                     )
                   : InkWell(
                       onTap: () {
+                        
                         _popupDialog(context, index);
                       },
                       child: Container(
@@ -284,29 +285,33 @@ class CalendarScreen extends StatelessWidget {
                                   color: Colors.white10,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                child: Column(
                                   children: [
-                                    Expanded(
-                                      child: Text(
-                                        monthAttendance
-                                                .data.attendance[index].inTime +
-                                            " - " +
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
                                             monthAttendance
-                                                .data.attendance[index].outTime,
-                                        style: TextStyle(
-                                            fontSize: 11, color: Colors.black),
-                                      ),
+                                                    .data.attendance[index].inTime +
+                                                " - " +
+                                                monthAttendance
+                                                    .data.attendance[index].outTime,
+                                            style: TextStyle(
+                                                fontSize: 11, color: Colors.black),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 )),
-                            Divider(
-                              height: 2,
-                              endIndent: 4,
-                              indent: 4,
-                              thickness: 1,
-                              color: Colors.blue[200],
-                            ),
+                            // Divider(
+                            //   height: 1,
+                            //   endIndent: 1,
+                            //   indent: 1,
+                            //   thickness: 1,
+                            //   color: Colors.blue[200],
+                            // ),
                             Container(
                                 padding: EdgeInsets.all(4),
                                 decoration: BoxDecoration(

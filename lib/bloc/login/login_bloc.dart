@@ -18,7 +18,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    
     if (event is LoginInWithEmailButtonPressed) {
       yield* _mapLoginWithEmailToState(event);
     }
@@ -30,7 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
 
     if (event is UserLogIn) {
-      yield* _mapUserLogInToState(event);
+      yield* _mapUserLogInToState(event);z
     }
 
     if (event is UserLogOut) {
