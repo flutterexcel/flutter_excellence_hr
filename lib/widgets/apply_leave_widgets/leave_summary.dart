@@ -96,7 +96,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
       DateTime dateTime = DateTime.now();
       int _curr_diff = _currentDate.difference(dateTime).inDays;
       setState(() {
-        if (_curr_diff <= 0) {
+        if (_curr_diff < 0) {
           lateReasonValidate = true;
         } else
           lateReasonValidate = false;
@@ -110,7 +110,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
       DateTime dateTime = DateTime.now();
       int _curr_diff = _currentDate.difference(dateTime).inDays;
       setState(() {
-        if (_curr_diff <= 0) {
+        if (_curr_diff < 0) {
           lateReasonValidate = true;
         } else
           lateReasonValidate = false;
