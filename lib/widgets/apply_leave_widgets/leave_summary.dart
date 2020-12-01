@@ -94,13 +94,28 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
           DateTime(_currentDate.year, _currentDate.month, _currentDate.day);
       difference = _lastDate.difference(currentTime).inDays + 1;
       DateTime dateTime = DateTime.now();
-      int _curr_diff = _lastDate.difference(dateTime).inDays;
+      int _curr_diff = _currentDate.difference(dateTime).inDays;
       setState(() {
         if (_curr_diff <= 0) {
           lateReasonValidate = true;
         } else
           lateReasonValidate = false;
       });
+      print(lateReasonValidate);
+    } else if (DateFormat("yyyy-MM-dd").format(_lastDate).toString() ==
+        DateFormat("yyyy-MM-dd").format(_currentDate).toString()) {
+      DateTime currentTime =
+          DateTime(_currentDate.year, _currentDate.month, _currentDate.day);
+      difference = _lastDate.difference(currentTime).inDays + 1;
+      DateTime dateTime = DateTime.now();
+      int _curr_diff = _currentDate.difference(dateTime).inDays;
+      setState(() {
+        if (_curr_diff <= 0) {
+          lateReasonValidate = true;
+        } else
+          lateReasonValidate = false;
+      });
+      print(lateReasonValidate);
     }
 
     bool validateTextField(String leaveReason) {

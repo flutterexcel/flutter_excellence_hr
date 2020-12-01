@@ -65,11 +65,11 @@ class _HrAppState extends State<HrApp> {
       // and build an appropriate widget based on the state.
       home: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
+          print(state);
           if (state.toString().contains('null')) {
             return Scaffold(
               backgroundColor: AppColors.BACKGROUND_COLOR,
-                          body: Center(
-                
+              body: Center(
                 child: CircularProgressIndicator(
                   backgroundColor: Colors.cyan,
                 ),
