@@ -255,6 +255,7 @@ class CalendarScreen extends StatelessWidget {
                     )
                   : InkWell(
                       onTap: () {
+                        
                         _popupDialog(context, index);
                       },
                       child: Container(
@@ -300,13 +301,13 @@ class CalendarScreen extends StatelessWidget {
                                     ),
                                   ],
                                 )),
-                            Divider(
-                              height: 2,
-                              endIndent: 4,
-                              indent: 4,
-                              thickness: 1,
-                              color: Colors.blue[200],
-                            ),
+                            // Divider(
+                            //   height: 1,
+                            //   endIndent: 1,
+                            //   indent: 1,
+                            //   thickness: 1,
+                            //   color: Colors.blue[200],
+                            // ),
                             Container(
                                 padding: EdgeInsets.all(4),
                                 decoration: BoxDecoration(
