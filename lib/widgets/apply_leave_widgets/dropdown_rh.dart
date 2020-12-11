@@ -82,12 +82,13 @@ class _DropDownState extends State<DropDown> {
                   value: _selectedItem,
                   items: _dropdownMenuItems,
                   onChanged: (value) async {
-                    if (value.name == 'RH Compansation') {
+                    if (value.name == 'RH Compensation') {
                       showRh = true;
                       var today = DateTime.now();
                       await api
                           .getRh(today.year.toString())
                           .then((value) => _data = value.data);
+                      print('>>>>>>>>>>> line 91 dropdown${value.name}');
                     }
                     setState(() {
                       _selectedItem = value;

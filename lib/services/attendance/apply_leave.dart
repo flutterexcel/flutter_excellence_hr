@@ -22,7 +22,7 @@ class ApplyLeave {
       "token": token,
       "from_date": fromDate,
       "to_date": toDate,
-      'reason':reason,
+      'reason': reason,
       "late_reason": lateReason,
       "leave_type": leaveType,
       "no_of_days": noOfDays,
@@ -31,11 +31,13 @@ class ApplyLeave {
       "rh_dates": rhDates,
       "userid": StorageUtil.getUserId()
     };
-    return await _post
-        .post(apiUrl, body: json.encode(data))
-        .then((dynamic res) async {
-      if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
-      return res;
-    });
+    print('>>>>>>>>${data["leave_type"]}');
+    return null;
+    // return await _post
+    //     .post(apiUrl, body: json.encode(data))
+    //     .then((dynamic res) async {
+    //   if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
+    //   return res;
+    // });
   }
 }

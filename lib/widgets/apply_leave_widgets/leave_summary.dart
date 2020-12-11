@@ -431,6 +431,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   if (!validateTextField(reason.text))
                     _btnController.stop();
                   else {
+                   
                     await _doApply(leavetype: leaveType, rhdate: rhdate)
                         .then((value) {
                       _btnController.success();
@@ -439,6 +440,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   }
                 }
               }
+              _btnController.stop();
             },
             child: Text('Apply Leave', style: TextStyle(color: Colors.white)),
           ),
