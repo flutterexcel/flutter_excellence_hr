@@ -43,7 +43,8 @@ class WeeklyTimeSheet extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
-                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Container(
@@ -54,7 +55,8 @@ class WeeklyTimeSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Container(
@@ -75,7 +77,8 @@ class WeeklyTimeSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Container(
@@ -86,9 +89,10 @@ class WeeklyTimeSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Expanded(         
+                          Expanded(
                             child: Container(
                               margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
                               height: 100,
@@ -105,19 +109,24 @@ class WeeklyTimeSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      
-                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Container(
                                 margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
                                 height: 45,
                                 child: Text(
-                                    'Its better if you put your detail reports on tms and HR system will automatically fetch it for you',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+                                  'Its better if you put your detail reports on tms and HR system will automatically fetch it for you',
+                                  style: TextStyle(
+                                      color: AppColors.LIGHTBLACK_COLOR,
+                                      fontWeight: FontWeight.bold),
+                                )),
                           ),
                         ],
                       ),
-                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Container(
@@ -128,7 +137,8 @@ class WeeklyTimeSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Container(
@@ -139,14 +149,14 @@ class WeeklyTimeSheet extends StatelessWidget {
                         ],
                       ),
                       RoundedLoadingButton(
-                        color: AppColors.GREEN_COLOR,
+                        color: AppColors.BTN_BLACK_COLOR,
                         width: 150,
                         borderRadius: 10,
                         onPressed: () {},
                         child: Text('Submit',
                             style: TextStyle(color: Colors.white)),
                       ),
-                      SizedBox(height:30)
+                      SizedBox(height: 30)
                     ],
                   ),
                 ),
@@ -160,12 +170,11 @@ class WeeklyTimeSheet extends StatelessWidget {
       appBar: AppBar(title: AppBarWidget(pageName: "Weekly Timesheet")),
       drawer: Navigation(),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
-        label: Text('Submit Weekly Timesheet'),
-        backgroundColor: AppColors.GREEN_COLOR,
-      ),
+          onPressed: () {
+            // Add your onPressed code here!
+          },
+          label: Text('Submit Weekly Timesheet'),
+          backgroundColor: AppColors.BTN_BLACK_COLOR),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(children: <Widget>[

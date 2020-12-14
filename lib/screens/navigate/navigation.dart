@@ -14,6 +14,7 @@ import 'package:flutter_excellence_hr/screens/my_salary/my_salary.dart';
 import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/screens/policy_documents/policy_documents.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
+import 'package:flutter_excellence_hr/screens/weekly_timesheet/weekly_timesheet.dart';
 
 class Navigation extends StatefulWidget {
   @override
@@ -74,6 +75,17 @@ class _NavigationState extends State<Navigation> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MyAttendance()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.view_day, color: AppColors.LIGHTBLACK_COLOR),
+              title: Text('Weekly Timesheet',
+                  style: TextStyle(color: AppColors.LIGHTBLACK_COLOR)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WeeklyTimeSheet()),
                 );
               },
             ),

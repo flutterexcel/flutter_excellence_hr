@@ -13,7 +13,7 @@ class Header extends StatelessWidget {
             color: Colors.white,
           ),
           title: Text(
-            'WEEK 4 (SEPTEMBER)',
+            'WEEK 4 (DECEMBER)',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontFamily: 'OpenSans'),
           ),
