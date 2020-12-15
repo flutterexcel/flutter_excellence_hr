@@ -11,11 +11,14 @@ class ApplyRhLeave extends StatelessWidget {
   String _message;
   ApplyRhLeave(this.rhName, this.date);
   ApplyRh _api = ApplyRh();
+  var _error;
   Future _applyLeave() async {
     await _api.applyRhLeave(date, date, reason.text).then((value) {
+      _error = value.error;
+      _message = value.data.message;
       _btnController.success();
+
       _doReset();
-      return value;
     });
   }
 
@@ -33,16 +36,62 @@ class ApplyRhLeave extends StatelessWidget {
               child: Container(
             height: 300,
             width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: Text(
-                _message,
+            child: _error==1?
+            Column(
+              children: <Widget>[
+              
+              SizedBox(height: 20),
+              CircleAvatar(
+                backgroundColor: Colors.red,
+                radius:40,
+                child: Icon(Icons.clear,size: 60, ),
+                ),
+              SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.only(left: 30),
+                child: Text(
+                    _message,
+                    style: TextStyle(
+                        color: AppColors.THEME_COLOR,
+                        fontSize: 26,
+                        fontFamily: 'OpenSans',
+                        fontWeight: FontWeight.bold),
+                  ),
+              ),
+              
+              
+            ],)
+            :Column(children: <Widget>[
+              SizedBox(height: 20),
+              CircleAvatar(
+                backgroundColor: Colors.red,
+                radius:40,
+                child: Icon(
+                  Icons.done,
+                  size: 60.0,),
+                ),
+              SizedBox(height: 20),
+              Text(
+                'Leave Applied Succesfully',
                 style: TextStyle(
                     color: AppColors.THEME_COLOR,
-                    fontSize: 16,
+                    fontSize: 26,
                     fontFamily: 'OpenSans',
                     fontWeight: FontWeight.bold),
               ),
-            ),
+              SizedBox(height: 10),
+              Text(
+                  _message,
+                  style: TextStyle(
+                      color: AppColors.THEME_COLOR,
+                      fontSize: 26,
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.bold),
+                ),
+              
+              
+            ],)
+            
           ));
         });
   }
@@ -109,7 +158,9 @@ class ApplyRhLeave extends StatelessWidget {
                 borderRadius: 10,
                 controller: _btnController,
                 onPressed: () {
-                  _applyLeave();
+                  _applyLeave().whenComplete(() {
+                    _popupDialog(context);
+                  });
                 },
                 child: Text('Apply Rh', style: TextStyle(color: Colors.white)),
               ),
