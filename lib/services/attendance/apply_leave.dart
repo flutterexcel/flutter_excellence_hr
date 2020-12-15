@@ -31,7 +31,6 @@ class ApplyLeave {
       "rh_dates": rhDates,
       "userid": StorageUtil.getUserId()
     };
-    print('>>>>>>>>${data["leave_type"]}');
     return null;
     // return await _post
     //     .post(apiUrl, body: json.encode(data))

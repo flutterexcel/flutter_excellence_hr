@@ -8,12 +8,14 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 class ApplyRhLeave extends StatelessWidget {
   String rhName;
   String date;
+  String _message;
   ApplyRhLeave(this.rhName, this.date);
   ApplyRh _api = ApplyRh();
   Future _applyLeave() async {
-    await _api.applyRhLeave(date,date,reason.text).then((value) {
+    await _api.applyRhLeave(date, date, reason.text).then((value) {
       _btnController.success();
       _doReset();
+      return value;
     });
   }
 
@@ -21,6 +23,28 @@ class ApplyRhLeave extends StatelessWidget {
     Timer(Duration(seconds: 2), () {
       _btnController.reset();
     });
+  }
+
+  void _popupDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              child: Container(
+            height: 300,
+            width: MediaQuery.of(context).size.width,
+            child: Center(
+              child: Text(
+                _message,
+                style: TextStyle(
+                    color: AppColors.THEME_COLOR,
+                    fontSize: 16,
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ));
+        });
   }
 
   final reason = TextEditingController();
@@ -86,18 +110,6 @@ class ApplyRhLeave extends StatelessWidget {
                 controller: _btnController,
                 onPressed: () {
                   _applyLeave();
-                  // if (!validateTextField(reason.text))
-                  //   _btnController.stop();
-                  // else if (!validateEntryField(entry.text))
-                  //   _btnController.stop();
-                  // else if (!validateExitField(exit.text))
-                  //   _btnController.stop();
-                  // else {
-                  //   _doUpdate();
-                  //   Timer(Duration(seconds: 5), () {
-                  //     Navigator.pop(context);
-                  //   });
-                  // }
                 },
                 child: Text('Apply Rh', style: TextStyle(color: Colors.white)),
               ),

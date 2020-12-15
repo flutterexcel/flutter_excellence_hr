@@ -101,7 +101,6 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         } else
           lateReasonValidate = false;
       });
-      print(lateReasonValidate);
     } else if (DateFormat("yyyy-MM-dd").format(_lastDate).toString() ==
         DateFormat("yyyy-MM-dd").format(_currentDate).toString()) {
       DateTime currentTime =
@@ -115,7 +114,6 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         } else
           lateReasonValidate = false;
       });
-      print(lateReasonValidate);
     }
 
     bool validateTextField(String leaveReason) {

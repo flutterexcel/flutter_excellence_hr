@@ -88,7 +88,7 @@ class _DropDownState extends State<DropDown> {
                       await api
                           .getRh(today.year.toString())
                           .then((value) => _data = value.data);
-                      print('>>>>>>>>>>> line 91 dropdown${value.name}');
+                      
                     }
                     setState(() {
                       _selectedItem = value;

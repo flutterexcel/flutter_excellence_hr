@@ -10,11 +10,6 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(monthAttendance.data.attendance[8].dayType.toString());
-    print(monthAttendance.data.attendance[8].inTime.toString());
-    print(monthAttendance.data.attendance[8].outTime.toString());
-    print(
-        monthAttendance.data.attendance[8].secondsActualWorkedTime.toString());
     return GridView.builder(
       key: Key('leavekey'),
       scrollDirection: Axis.vertical,
@@ -27,7 +22,6 @@ class CalendarScreen extends StatelessWidget {
               'NON_WORKING_DAY'
           ? InkWell(
               onTap: () {
-                print('tap-23');
               },
               child: Container(
                   margin: EdgeInsets.all(2),
