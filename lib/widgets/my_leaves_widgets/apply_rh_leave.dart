@@ -1,11 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/leave/apply_rh.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class ApplyRhLeave extends StatelessWidget {
   String rhName;
   String date;
   ApplyRhLeave(this.rhName, this.date);
+  ApplyRh _api = ApplyRh();
+  Future _applyLeave() async {
+    await _api.applyRhLeave(date,date,reason.text).then((value) {
+      _btnController.success();
+      _doReset();
+    });
+  }
+
+  void _doReset() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
+  }
+
   final reason = TextEditingController();
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
@@ -13,7 +30,7 @@ class ApplyRhLeave extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-         height: 300,
+        height: 300,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
@@ -24,8 +41,7 @@ class ApplyRhLeave extends StatelessWidget {
                   color: AppColors.THEME_COLOR,
                   fontSize: 16,
                   fontFamily: 'OpenSans',
-                  fontWeight: FontWeight.bold
-                  ),
+                  fontWeight: FontWeight.bold),
             ),
             Text(
               "Date: $date",
@@ -39,7 +55,6 @@ class ApplyRhLeave extends StatelessWidget {
             Text(
               "Reason for RH: ",
               style: TextStyle(
-                
                   color: AppColors.THEME_COLOR,
                   fontSize: 16,
                   fontFamily: 'OpenSans',
@@ -70,6 +85,7 @@ class ApplyRhLeave extends StatelessWidget {
                 borderRadius: 10,
                 controller: _btnController,
                 onPressed: () {
+                  _applyLeave();
                   // if (!validateTextField(reason.text))
                   //   _btnController.stop();
                   // else if (!validateEntryField(entry.text))
@@ -86,7 +102,6 @@ class ApplyRhLeave extends StatelessWidget {
                 child: Text('Apply Rh', style: TextStyle(color: Colors.white)),
               ),
             ),
-
           ],
         ),
       ),
