@@ -31,12 +31,11 @@ class ApplyLeave {
       "rh_dates": rhDates,
       "userid": StorageUtil.getUserId()
     };
-    return null;
-    // return await _post
-    //     .post(apiUrl, body: json.encode(data))
-    //     .then((dynamic res) async {
-    //   if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
-    //   return res;
-    // });
+    return await _post
+        .post(apiUrl, body: json.encode(data))
+        .then((dynamic res) async {
+      if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
+      return res;
+    });
   }
 }
