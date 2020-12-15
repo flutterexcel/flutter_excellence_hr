@@ -28,11 +28,8 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
 
   _getTimeSheet() async {
     return await api.getTimesheet().then((value) {
-      print(value.data.toString());
       timeSheet = value;
-      print("The day is " + timeSheet.data[0].username);
-      print("Your timesheet is $timeSheet");
-      // timeSheet.data[0].day;
+      print("The full time date " + timeSheet.data[0].fullDate);
       setState(() {
         yourTimesheet = true;
       });
@@ -42,7 +39,6 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
   _getTMSReport() async {
     return await apireport.getTMSComment().then((value) {
       tmsReport = value;
-      print("Your tmscmt is $tmsReport");
       setState(() {
         yourTMSReport = true;
       });
@@ -140,7 +136,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                                 controller: comment,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  hintText: "",
+                                  // hintText: tmsReport.data.report,
                                 ),
                               ),
                             ),
@@ -225,7 +221,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                         child: Text(
-                          'Monday',
+                          timeSheet.data[0].day,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -236,7 +232,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                         child: Text(
-                          'Tuesday',
+                          timeSheet.data[1].day,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -247,7 +243,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                         child: Text(
-                          'Wednesday',
+                          timeSheet.data[2].day,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -268,7 +264,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                       color: Colors.grey[300],
                       margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
                       padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                      child: Text('21',
+                      child: Text(timeSheet.data[0].date,
                           style:
                               TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
                 )),
@@ -277,7 +273,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         color: Colors.grey[300],
                         margin: EdgeInsets.fromLTRB(1, 8, 1, 1),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('22',
+                        child: Text(timeSheet.data[1].date,
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
                 Expanded(
@@ -285,7 +281,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         color: Colors.grey[300],
                         margin: EdgeInsets.fromLTRB(1, 8, 8, 1),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('23',
+                        child: Text(timeSheet.data[2].date,
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
               ],
@@ -301,7 +297,9 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                   child: Container(
                       margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
                       padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                      child: Text('9 - Total Hours',
+                      child: Text(
+                          timeSheet.data[0].totalHours.toString() +
+                              " - Total Hours",
                           style:
                               TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
                 )),
@@ -309,14 +307,18 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(1, 0, 1, 8),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('9 - Total Hours',
+                        child: Text(
+                            timeSheet.data[1].totalHours.toString() +
+                                " - Total Hours",
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
                 Expanded(
                     child: Container(
                         margin: EdgeInsets.fromLTRB(1, 0, 8, 8),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('9 - Total Hours',
+                        child: Text(
+                            timeSheet.data[2].totalHours.toString() +
+                                " - Total Hours",
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
               ],
@@ -329,7 +331,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                         child: Text(
-                          'Thusday',
+                          timeSheet.data[3].day,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -340,7 +342,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                         child: Text(
-                          'Friday',
+                          timeSheet.data[4].day,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -351,7 +353,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                     child: Container(
                         margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                         child: Text(
-                          'Saturday',
+                          timeSheet.data[5].day,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
@@ -368,7 +370,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         color: Colors.grey[300],
                         margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('24',
+                        child: Text(timeSheet.data[3].date,
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
                 Expanded(
@@ -376,7 +378,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         color: Colors.grey[300],
                         margin: EdgeInsets.fromLTRB(1, 8, 1, 1),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('25',
+                        child: Text(timeSheet.data[4].date,
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
                 Expanded(
@@ -384,7 +386,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         color: Colors.grey[300],
                         margin: EdgeInsets.fromLTRB(1, 8, 8, 1),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('26',
+                        child: Text(timeSheet.data[5].date,
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
               ],
@@ -397,7 +399,9 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         color: Colors.grey[300],
                         margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('0 - Total Hours',
+                        child: Text(
+                            timeSheet.data[3].totalHours.toString() +
+                                " - Total Hours",
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
                 Expanded(
@@ -405,7 +409,9 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         color: Colors.grey[300],
                         margin: EdgeInsets.fromLTRB(1, 0, 1, 8),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('0 - Total Hours',
+                        child: Text(
+                            timeSheet.data[4].totalHours.toString() +
+                                " - Total Hours",
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
                 Expanded(
@@ -413,7 +419,9 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         color: Colors.grey[300],
                         margin: EdgeInsets.fromLTRB(1, 0, 8, 8),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text('0 - Total Hours',
+                        child: Text(
+                            timeSheet.data[5].totalHours.toString() +
+                                " - Total Hours",
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))),
               ],
@@ -425,7 +433,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                   child: Container(
                       margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                       child: Text(
-                        'Sunday',
+                        timeSheet.data[6].day,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: 'SourceSans',
@@ -436,22 +444,19 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                 Expanded(flex: 2, child: Container())
               ],
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Container(
-                      color: Colors.yellowAccent,
-                      height: 70,
-                      margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
-                      padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                      child: Text('26',
-                          style:
-                              TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
-                ),
-                Expanded(flex: 2, child: Container()),
-              ],
-            ),
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Expanded(
+                child: Container(
+                    color: Colors.yellowAccent,
+                    height: 70,
+                    margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
+                    padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                    child: Text(timeSheet.data[6].date,
+                        style:
+                            TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
+              ),
+              Expanded(flex: 2, child: Container())
+            ]),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

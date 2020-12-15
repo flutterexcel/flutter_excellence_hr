@@ -7,6 +7,8 @@ import '../storage_service.dart';
 
 class TimeSheetService {
   Post _post = Post();
+  // String fromDate;
+  // TimeSheetService({this.fromDate});
   Future<TimeSheet> getTimesheet() async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     var token = StorageUtil.getUserToken();
@@ -21,7 +23,6 @@ class TimeSheetService {
     return _post
         .post(apiUrl, body: json.encode(data))
         .then((dynamic res) async {
-      print(apiUrl);
       if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
       return TimeSheet.fromJson(res);
     });

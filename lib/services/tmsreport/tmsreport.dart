@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:html';
 import '../post.dart';
 import '../../model/tmsreport/tmsreport.dart';
 import '../../app_config.dart';
@@ -11,13 +10,13 @@ class TMSReportService {
   Future<TMSReport> getTMSComment() async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     var token = StorageUtil.getUserToken();
-    String date ;
+    String date = "2020-12-14";
     final apiUrl = prodUrl.baseUrl;
     Map data = {
       "action": "get_user_tms_report",
-      "token": token,
       "date": date,
-      "user_id": StorageUtil.getUserName()
+      "token": token,
+      "username": StorageUtil.getUserName()
     };
     return _post
         .post(apiUrl, body: json.encode(data))
