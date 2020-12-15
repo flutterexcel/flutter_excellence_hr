@@ -15,11 +15,6 @@ class ApplyRh {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     var token = StorageUtil.getUserToken();
     final apiUrl = prodUrl.baseUrl;
-    print('>>>>>>>>>$apiUrl');
-    print('>>>>>>>>>$fromDate');
-    print('>>>>>>>>>$reason');
-    print('>>>>>>>>>$toDate');
-    
     Map data = {
       "action": "apply_leave",
       "day_status": "",
