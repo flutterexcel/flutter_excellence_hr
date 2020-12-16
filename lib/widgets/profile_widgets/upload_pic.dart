@@ -28,7 +28,7 @@ class _UploadPicState extends State<UploadPic> {
     });
 
     try {
-      await api
+      await api   
           .uploadImage(
               doctype: 'profile_pic', action: "profile_pic", file: _image)
           .then((value) {

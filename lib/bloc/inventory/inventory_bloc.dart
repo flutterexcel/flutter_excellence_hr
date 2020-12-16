@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_excellence_hr/model/inventory/audit_current_month.dart';
-import 'package:flutter_excellence_hr/model/inventory/history.dart';
 import 'package:flutter_excellence_hr/model/inventory/user_assign_machine.dart';
 import 'inventory_event.dart';
 import 'inventory_state.dart';

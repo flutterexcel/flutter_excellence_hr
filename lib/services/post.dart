@@ -10,29 +10,25 @@ class Post {
   Future<dynamic> post(String url, {Map headers, body, encoding}) async {
     var checkAction = json.decode(body);
     String action = checkAction['action'];
-      if (testingActive) {
-       if(loginActive){
-          final contents = await rootBundle.loadString(
+    if (testingActive) {
+      if (loginActive) {
+        final contents = await rootBundle.loadString(
           'assets/test/$action.json',
         );
-         return _decoder.convert(contents);
-      
-       }
-       else{
-          final contents = await rootBundle.loadString(
+        return _decoder.convert(contents);
+      } else {
+        final contents = await rootBundle.loadString(
           'assets/test/login_fail.json',
         );
-         return _decoder.convert(contents);
-      
-       }
+        return _decoder.convert(contents);
+      }
     } else {
       return http
           .post(url, body: body, headers: headers, encoding: encoding)
           .then((http.Response response) {
         final String res = response.body;
         final int statusCode = response.statusCode;
-
-        if (statusCode < 200 || statusCode > 400 || json == null) {
+       if (statusCode < 200 || statusCode > 400 || json == null) {
           throw new Exception("Error while fetching data");
         }
         return _decoder.convert(res);

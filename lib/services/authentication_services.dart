@@ -16,7 +16,6 @@ class LoginAuthenticationService extends AuthenticationService {
   Future<User> getCurrentUser() async {
     StorageUtil.getInstance();
     bool islogin = StorageUtil.getLoggedIn();
-
     if (islogin) {
       return User(
           user: StorageUtil.getUserId(), token: StorageUtil.getUserToken());
@@ -42,6 +41,7 @@ class LoginAuthenticationService extends AuthenticationService {
   @override
   Future<void> signOut() {
     StorageUtil.clear(true);
+    
     //return null;
   }
 }

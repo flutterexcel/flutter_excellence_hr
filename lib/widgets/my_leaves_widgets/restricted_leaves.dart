@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/leave/get_rh.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/services/leave/get_rh.dart';
+import 'package:flutter_excellence_hr/widgets/my_leaves_widgets/apply_rh_leave.dart';
+import 'package:intl/intl.dart';
 
 class RestrictedLeave extends StatefulWidget {
   @override
@@ -9,8 +11,6 @@ class RestrictedLeave extends StatefulWidget {
 }
 
 class _RestrictedLeaveState extends State<RestrictedLeave> {
-
-
   GetRh api = GetRh();
   bool loadRh = false;
   GetRhLeaves getRhLeaves;
@@ -65,55 +65,68 @@ class _RestrictedLeaveState extends State<RestrictedLeave> {
             ],
           )
         : Padding(
-          padding: const EdgeInsets.only(top: 200),
-          child: CircularProgressIndicator(
+            padding: const EdgeInsets.only(top: 200),
+            child: CircularProgressIndicator(
               backgroundColor: Colors.cyan,
             ),
-        );
+          );
   }
 }
 
 class ListRestrictLeave extends StatelessWidget {
   RhList list;
+  DateTime _currentDate = DateTime.now();
+  DateFormat dateFormat = new DateFormat.MMMM('en_US'); //yMMMM('en_US');
 
   ListRestrictLeave(this.list);
+  void _popupDialog(BuildContext context, String rhName, String date) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ApplyRhLeave(rhName,date);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
-        leading: CircleAvatar(
-          child: Text(
-            "1",
-            style: TextStyle(fontSize: 10),
+          leading: CircleAvatar(
+            child: Text(
+              "1",
+              style: TextStyle(fontSize: 10),
+            ),
+            backgroundColor: AppColors.GREEN_COLOR,
+            foregroundColor: Colors.white,
+            radius: 18,
           ),
-          backgroundColor: AppColors.GREEN_COLOR,
-          foregroundColor: Colors.white,
-          radius: 18,
-        ),
-        title: Text(
-          list.name,
-          style: TextStyle(fontSize: 14, fontFamily: 'SourceSans'),
-        ),
-        subtitle: Text(
-          list.date.toString(),
-          style: TextStyle(fontSize: 14, fontFamily: 'SourceSans'),
-        ),
-        // trailing: Container(
-        //   width: 70,
-        //   height: 30,
-        //   child: RaisedButton(
-        //       color: AppColors.NAVY_BLUE,
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(10),
-        //       ),
-        //       onPressed: () {},
-        //       child: Text("Apply",
-        //           style: TextStyle(
-        //               fontFamily: 'SourceSans',
-        //               fontSize: 12,
-        //               color: Colors.white))),
-        // ),
-      ),
+          title: Text(
+            list.name,
+            style: TextStyle(fontSize: 14, fontFamily: 'SourceSans'),
+          ),
+          subtitle: Text(
+            list.date.toString(),
+            style: TextStyle(fontSize: 14, fontFamily: 'SourceSans'),
+          ),
+          trailing: list.date.contains(dateFormat.format(_currentDate))
+              ? Container(
+                  width: 70,
+                  height: 30,
+                  child: RaisedButton(
+                      color: AppColors.NAVY_BLUE,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      onPressed: () {
+                        _popupDialog(context,list.name,list.date.toString());
+                      },
+                      child: Text("Apply",
+                          style: TextStyle(
+                              fontFamily: 'SourceSans',
+                              fontSize: 12,
+                              color: Colors.white))),
+                )
+              : null),
     );
   }
 }

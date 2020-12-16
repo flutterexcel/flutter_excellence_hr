@@ -38,6 +38,8 @@ dependencies:
   js: ^0.6.2
   mime_type: ^0.3.2
   get_it: ^3.0.3
+  provider: ^4.3.2+2
+  flutter_session: ^0.1.1
   
 dev_dependencies:
   flutter_driver:
