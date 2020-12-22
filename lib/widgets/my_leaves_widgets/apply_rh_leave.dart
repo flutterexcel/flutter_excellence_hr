@@ -64,7 +64,7 @@ class ApplyRhLeave extends StatelessWidget {
             :Column(children: <Widget>[
               SizedBox(height: 20),
               CircleAvatar(
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.green,
                 radius:40,
                 child: Icon(
                   Icons.done,
