@@ -55,8 +55,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
   void _getDailyreport() async {
     return await apidaily.getDailyTimesheet().then((value) {
       submitDailyReport = value;
-      print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +
-          submitDailyReport.toString());
+      print(">>>>>>>>>>>>>>>>" + submitDailyReport.toString());
       _btnController.success();
       setState(() {
         yourDailyReport = true;
