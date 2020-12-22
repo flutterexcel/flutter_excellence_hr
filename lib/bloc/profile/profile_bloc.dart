@@ -33,7 +33,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final profile = await profileApi.getprofile();
       yield ProfileSuccess(
           data: profile, profileSaved: false, profileError: false);
-    } on Exception {} catch (err) {}
+    } on Exception {} catch (err) {
+      print('exception herer');
+      print(err);
+    }
   }
 
   Stream<ProfileState> _mapSaveProfileToState(SaveProfile event) async* {

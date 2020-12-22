@@ -18,7 +18,7 @@ class IdCard extends StatelessWidget {
                 CircleAvatar(
                     radius: 30,
                     backgroundImage: NetworkImage(
-                        profileDetails.data.userProfileDetail.profileImage)),
+                        "https:\/\/avatars.slack-edge.com\/2020-09-28\/1376753482199_32256eaf8e5287495618_original.jpg")),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

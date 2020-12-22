@@ -16,6 +16,7 @@ class ShowProfile extends StatelessWidget {
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
+        print('in profile screen' + state.toString());
         if (state is ProfileLoad) {
           return Scaffold(
             backgroundColor: Colors.white,

@@ -34,10 +34,12 @@ class PersonAddress extends StatelessWidget {
           ],
         ),
         Container(
+          
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
+          //height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
+            
             enabled: false,
             controller: empName
               ..text = profileDetails.data.userProfileDetail.name,
@@ -89,9 +91,10 @@ class PersonAddress extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
           height: 70,
           color: AppColors.EDIT_TEXT_COLOR,
+          
           child: TextFormField(
             enabled: false,
-            controller: (profileDetails.data.userProfileDetail.address2) != null
+                        controller: (profileDetails.data.userProfileDetail.address2) != null
                 ? (currAddress
                   ..text = profileDetails.data.userProfileDetail.address1 +
                       profileDetails.data.userProfileDetail.address2)
