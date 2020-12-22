@@ -1,13 +1,18 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/timesheet/submit_daily_report.dart';
 import 'package:flutter_excellence_hr/model/timesheet/timesheet.dart';
+import 'package:flutter_excellence_hr/model/timesheet/timesheetupdated.dart';
 import 'package:flutter_excellence_hr/model/tmsreport/tmsreport.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigation.dart';
+import 'package:flutter_excellence_hr/services/timesheet/submit_timesheet_daily.dart';
 import 'package:flutter_excellence_hr/services/timesheet/timesheet.dart';
+import 'package:flutter_excellence_hr/services/timesheet/updatetimesheet.dart';
 import 'package:flutter_excellence_hr/services/tmsreport/tmsreport.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
-import 'package:flutter_excellence_hr/widgets/profile_widgets/profile_widgets.dart';
 import 'package:flutter_excellence_hr/widgets/timesheet_widgets/timesheet_widgets.dart';
+import 'package:flutter_excellence_hr/widgets/timesheet_widgets/upoad_tracker.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
@@ -23,16 +28,40 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
   TMSReport tmsReport;
   TimeSheetService api = TimeSheetService();
   TimeSheet timeSheet;
+  TimeSheetDailyService apidaily = TimeSheetDailyService();
+
+  SubmitDailyReport submitDailyReport;
+  TimeSheetUpdateService apiUpdateTimeSheet = TimeSheetUpdateService();
+  TimeSheetUpdated timeSheetUpdated;
+  final RoundedLoadingButtonController _btnController =
+      new RoundedLoadingButtonController();
   bool yourTimesheet = false;
   bool yourTMSReport = false;
+  bool yourDailyReport = false;
 
   _getTimeSheet() async {
     return await api.getTimesheet().then((value) {
       timeSheet = value;
       print("The full time date " + timeSheet.data[0].fullDate);
+      // print("The status is  " + timeSheet.data[0].status);
+      // print("The comments are " + timeSheet.data[0].comments);
+      print("Total time " + timeSheet.data[0].totalHours.toString());
       setState(() {
         yourTimesheet = true;
       });
+    });
+  }
+
+  void _getDailyreport() async {
+    return await apidaily.getDailyTimesheet().then((value) {
+      submitDailyReport = value;
+      print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +
+          submitDailyReport.toString());
+      _btnController.success();
+      setState(() {
+        yourDailyReport = true;
+      });
+      _doReset();
     });
   }
 
@@ -45,11 +74,24 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
     });
   }
 
+  _getUpdatedTimesheet() async {
+    return await apiUpdateTimeSheet.getDailyTimesheetUpdated().then((value) {
+      timeSheetUpdated = value;
+    });
+  }
+
+  void _doReset() async {
+    Timer(Duration(seconds: 2), () {
+      _btnController.reset();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _getTimeSheet();
     _getTMSReport();
+    // _getDailyreport();
   }
 
   @override
@@ -136,7 +178,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                                 controller: comment,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  // hintText: tmsReport.data.report,
+                                  hintText: tmsReport.data.report,
                                 ),
                               ),
                             ),
@@ -177,16 +219,19 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-                              child: UploadPic(),
+                              child: UploadTracker(),
                             ),
                           ),
                         ],
                       ),
                       RoundedLoadingButton(
+                        controller: _btnController,
                         color: AppColors.BTN_BLACK_COLOR,
                         width: 150,
                         borderRadius: 10,
-                        onPressed: () {},
+                        onPressed: () {
+                          _getDailyreport();
+                        },
                         child: Text('Submit',
                             style: TextStyle(color: Colors.white)),
                       ),
@@ -269,209 +314,212 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                               TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
                 )),
                 Expanded(
-                    child: Container(
-                        color: Colors.grey[300],
-                        margin: EdgeInsets.fromLTRB(1, 8, 1, 1),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(timeSheet.data[1].date,
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-                Expanded(
-                    child: Container(
-                        color: Colors.grey[300],
-                        margin: EdgeInsets.fromLTRB(1, 8, 8, 1),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(timeSheet.data[2].date,
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+                    child: InkWell(
+                        onTap: () => customDialog(),
+                        child: Container(
+                            color: Colors.grey[300],
+                            margin: EdgeInsets.fromLTRB(1, 8, 1, 1),
+                            padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                            child: Text(timeSheet.data[1].date,
+                                style: TextStyle(
+                                    fontFamily: 'OpenSans', fontSize: 14))))),
                 Expanded(
                     child: InkWell(
-                  onTap: () {
-                    customDialog();
-                  },
+                  onTap: () => customDialog(),
                   child: Container(
-                      margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
+                      color: Colors.grey[300],
+                      margin: EdgeInsets.fromLTRB(1, 8, 8, 1),
                       padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                      child: Text(
-                          timeSheet.data[0].totalHours.toString() +
-                              " - Total Hours",
+                      child: Text(timeSheet.data[2].date,
                           style:
                               TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
                 )),
-                Expanded(
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(1, 0, 1, 8),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(
-                            timeSheet.data[1].totalHours.toString() +
-                                " - Total Hours",
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-                Expanded(
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(1, 0, 8, 8),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(
-                            timeSheet.data[2].totalHours.toString() +
-                                " - Total Hours",
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
               ],
             ),
-            SaveStates(),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                        child: Text(
-                          timeSheet.data[3].day,
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Expanded(
+                  child: InkWell(
+                onTap: () {
+                  customDialog();
+                },
+                child: Container(
+                    margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
+                    padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                    child: Text(
+                        timeSheet.data[0].totalHours.toString() +
+                            " - Total Hours",
+                        style:
+                            TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
+              )),
+              Expanded(
+                  child: InkWell(
+                onTap: () => customDialog(),
+                child: Container(
+                    margin: EdgeInsets.fromLTRB(1, 0, 1, 8),
+                    padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                    child: Text(
+                        timeSheet.data[1].totalHours.toString() +
+                            " - Total Hours",
+                        style:
+                            TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
+              )),
+              Expanded(
+                  child: InkWell(
+                onTap: () => customDialog(),
+                child: Container(
+                    margin: EdgeInsets.fromLTRB(1, 0, 8, 8),
+                    padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                    child: Text(
+                        timeSheet.data[2].totalHours.toString() +
+                            " - Total Hours",
+                        style:
+                            TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
+              ))
+            ]),
+            SaveStates(tmsReport: tmsReport),
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Expanded(
+                  child: Container(
+                      margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                      child: Text(timeSheet.data[3].day,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'SourceSans',
                               fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ))),
-                Expanded(
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                        child: Text(
-                          timeSheet.data[4].day,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'SourceSans',
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ))),
-                Expanded(
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                        child: Text(
-                          timeSheet.data[5].day,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'SourceSans',
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ))),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: Container(
-                        color: Colors.grey[300],
-                        margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(timeSheet.data[3].date,
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-                Expanded(
-                    child: Container(
-                        color: Colors.grey[300],
-                        margin: EdgeInsets.fromLTRB(1, 8, 1, 1),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(timeSheet.data[4].date,
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-                Expanded(
-                    child: Container(
-                        color: Colors.grey[300],
-                        margin: EdgeInsets.fromLTRB(1, 8, 8, 1),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(timeSheet.data[5].date,
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: Container(
-                        color: Colors.grey[300],
-                        margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(
-                            timeSheet.data[3].totalHours.toString() +
-                                " - Total Hours",
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-                Expanded(
-                    child: Container(
-                        color: Colors.grey[300],
-                        margin: EdgeInsets.fromLTRB(1, 0, 1, 8),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(
-                            timeSheet.data[4].totalHours.toString() +
-                                " - Total Hours",
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-                Expanded(
-                    child: Container(
-                        color: Colors.grey[300],
-                        margin: EdgeInsets.fromLTRB(1, 0, 8, 8),
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                        child: Text(
-                            timeSheet.data[5].totalHours.toString() +
-                                " - Total Hours",
-                            style: TextStyle(
-                                fontFamily: 'OpenSans', fontSize: 14)))),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
+                              fontWeight: FontWeight.bold)))),
+              Expanded(
                   child: Container(
                       margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                       child: Text(
-                        timeSheet.data[6].day,
+                        timeSheet.data[4].day,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: 'SourceSans',
                             fontSize: 14,
                             fontWeight: FontWeight.bold),
-                      )),
-                ),
-                Expanded(flex: 2, child: Container())
-              ],
-            ),
+                      ))),
+              Expanded(
+                  child: Container(
+                      margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                      child: Text(timeSheet.data[5].day,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'SourceSans',
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold))))
+            ]),
             Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
               Expanded(
-                child: Container(
-                    color: Colors.yellowAccent,
-                    height: 70,
-                    margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
-                    padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                    child: Text(timeSheet.data[6].date,
-                        style:
-                            TextStyle(fontFamily: 'OpenSans', fontSize: 14))),
-              ),
+                  child: InkWell(
+                      onTap: () => customDialog(),
+                      child: Container(
+                          color: Colors.grey[300],
+                          margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
+                          padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                          child: Text(timeSheet.data[3].date,
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans', fontSize: 14))))),
+              Expanded(
+                  child: InkWell(
+                      onTap: () => customDialog(),
+                      child: Container(
+                          color: Colors.grey[300],
+                          margin: EdgeInsets.fromLTRB(1, 8, 1, 1),
+                          padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                          child: Text(timeSheet.data[4].date,
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans', fontSize: 14))))),
+              Expanded(
+                  child: InkWell(
+                      onTap: () => customDialog(),
+                      child: Container(
+                          color: Colors.grey[300],
+                          margin: EdgeInsets.fromLTRB(1, 8, 8, 1),
+                          padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                          child: Text(timeSheet.data[5].date,
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans', fontSize: 14)))))
+            ]),
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Expanded(
+                  child: InkWell(
+                      onTap: () => customDialog(),
+                      child: Container(
+                          color: Colors.grey[300],
+                          margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
+                          padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                          child: Text(
+                              timeSheet.data[3].totalHours.toString() +
+                                  " - Total Hours",
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans', fontSize: 14))))),
+              Expanded(
+                  child: InkWell(
+                      onTap: () => customDialog(),
+                      child: Container(
+                          color: Colors.grey[300],
+                          margin: EdgeInsets.fromLTRB(1, 0, 1, 8),
+                          padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                          child: Text(
+                              timeSheet.data[4].totalHours.toString() +
+                                  " - Total Hours",
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans', fontSize: 14))))),
+              Expanded(
+                  child: InkWell(
+                      onTap: () => customDialog(),
+                      child: Container(
+                          color: Colors.grey[300],
+                          margin: EdgeInsets.fromLTRB(1, 0, 8, 8),
+                          padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                          child: Text(
+                              timeSheet.data[5].totalHours.toString() +
+                                  " - Total Hours",
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans', fontSize: 14)))))
+            ]),
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Expanded(
+                  child: InkWell(
+                      onTap: () => customDialog(),
+                      child: Container(
+                          margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                          child: Text(
+                            timeSheet.data[6].day,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'SourceSans',
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold),
+                          )))),
               Expanded(flex: 2, child: Container())
             ]),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Expanded(
+                  child: InkWell(
+                      onTap: () => customDialog(),
+                      child: Container(
+                          color: Colors.yellowAccent,
+                          height: 70,
+                          margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
+                          padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
+                          child: Text(timeSheet.data[6].date,
+                              style: TextStyle(
+                                  fontFamily: 'OpenSans', fontSize: 14))))),
+              Expanded(flex: 2, child: Container())
+            ]),
+            Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Expanded(
                   child: Container(
                       color: Colors.yellowAccent,
                       height: 16,
                       padding: EdgeInsets.all(1),
                       margin: EdgeInsets.fromLTRB(8, 0, 1, 1),
                       child: Text('Weekends of',
-                          style: TextStyle(fontSize: 12, color: Colors.black))),
-                ),
-                Expanded(flex: 2, child: Container()),
-              ],
-            ),
+                          style:
+                              TextStyle(fontSize: 12, color: Colors.black)))),
+              Expanded(flex: 2, child: Container())
+            ])
           ]),
         ),
       )),

@@ -36,7 +36,7 @@ class Data {
   // int totalTime;
   // int extraTime;
   // String text;
-  var adminAlert;
+  //var adminAlert;
   // String adminAlertMessage;
   // int orignalTotalTime;
   // String extraTimeStatus;
@@ -47,8 +47,8 @@ class Data {
   String userid;
   String username;
   int totalHours;
-  // String comments;
-  // String status;
+  String comments;
+  String status;
   // String fileId;
   // String file;
 
@@ -64,7 +64,7 @@ class Data {
     // this.totalTime,
     // this.extraTime,
     // this.text,
-    this.adminAlert,
+    //this.adminAlert,
     // this.adminAlertMessage,
     // this.orignalTotalTime,
     // this.extraTimeStatus,
@@ -75,8 +75,8 @@ class Data {
     this.userid,
     this.username,
     this.totalHours,
-    // this.comments,
-    // this.status,
+    this.comments,
+    this.status,
     // this.fileId,
     // this.file
   });
@@ -93,7 +93,7 @@ class Data {
     // totalTime = json['total_time'];
     // extraTime = json['extra_time'];
     // text = json['text'];
-    adminAlert = json['admin_alert'];
+    //adminAlert = json['admin_alert'];
     // adminAlertMessage = json['admin_alert_message'];
     // orignalTotalTime = json['orignal_total_time'];
     // extraTimeStatus = json['extra_time_status'];
@@ -104,8 +104,8 @@ class Data {
     userid = json['userid'];
     username = json['username'];
     totalHours = json['total_hours'];
-    // comments = json['comments'];
-    // status = json['status'];
+    comments = json['comments'];
+    status = json['status'];
     // fileId = json['fileId'];
     // file = json['file'];
   }
@@ -120,10 +120,10 @@ class Data {
     // data['day_text'] = this.dayText;
     // data['in_time'] = this.inTime;
     // data['out_time'] = this.outTime;
-    // data['total_time'] = this.totalTime;
+    //data['total_time'] = this.totalTime;
     // data['extra_time'] = this.extraTime;
     // data['text'] = this.text;
-    data['admin_alert'] = this.adminAlert;
+    //data['admin_alert'] = this.adminAlert;
     // data['admin_alert_message'] = this.adminAlertMessage;
     // data['orignal_total_time'] = this.orignalTotalTime;
     // data['extra_time_status'] = this.extraTimeStatus;
@@ -134,8 +134,8 @@ class Data {
     data['userid'] = this.userid;
     data['username'] = this.username;
     data['total_hours'] = this.totalHours;
-    // data['comments'] = this.comments;
-    // data['status'] = this.status;
+    data['comments'] = this.comments;
+    data['status'] = this.status;
     // data['fileId'] = this.fileId;
     // data['file'] = this.file;
     return data;
