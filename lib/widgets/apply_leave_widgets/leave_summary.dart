@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/services/apply_leave/applyLeave.dart';
 import 'package:flutter_excellence_hr/services/attendance/apply_leave.dart';
 import 'package:flutter_excellence_hr/widgets/apply_leave_widgets/dropdown_rh.dart';
 import 'package:intl/intl.dart';
@@ -19,14 +20,17 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   final noOfDay = TextEditingController();
   final reason = TextEditingController();
   final lateReason = TextEditingController();
-  String leaveType, rhdate;
+  String leaveType;
+  List<String> rhdate;
   ApplyLeave api = ApplyLeave();
   bool reasonValidate = false;
   bool lateReasonValidate = false;
   bool leaveColor = false;
   bool type = false;
+  ApplyLeaveDate applyLeaveDate = ApplyLeaveDate();
+  int _noOfDays = 1;
 
-  Future _doApply({String leavetype, String rhdate = ''}) async {
+  Future _doApply({String leavetype, List<String> rhdate}) async {
     await api.applyLeave(
         fromDate: from.text,
         toDate: to.text,
@@ -35,6 +39,14 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         lateReason: lateReason.text,
         leaveType: leavetype,
         rhDates: [rhdate]);
+  }
+
+  Future _applyLeaveDate(String startDate, String endDate) async {
+    await applyLeaveDate.applyLeaveDate(startDate, endDate).then((value) {
+      setState(() {
+        _noOfDays = value.data.workingDays;
+      });
+    });
   }
 
   void _doReset() async {
@@ -81,6 +93,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         _lastDate = _selDate;
       });
     }
+    print('>>>>>>>>>>>>>>>> lastdate' + _lastDate.toString());
   }
 
   @override
@@ -178,7 +191,10 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
               child: InkWell(
                 onTap: () {
                   _btnController.reset();
-                  _selectedDate(context);
+                  _selectedDate(context).whenComplete(() {
+                    _applyLeaveDate(
+                        _currentDate.toString(), _lastDate.toString());
+                  });
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -217,7 +233,10 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
               child: InkWell(
                 onTap: () {
                   _btnController.reset();
-                  _secondDate(context);
+                  _secondDate(context).whenComplete(() {
+                    _applyLeaveDate(
+                        _currentDate.toString(), _lastDate.toString());
+                  });
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -260,7 +279,8 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                     setState(() {});
                     leaveType = leave;
                   },
-                  onRHChange: (String rh) {
+                  onRHChange: (List<String> rh) {
+                    print('>>>>>>>>>>>>>>>>>> ' + rh.toString());
                     rhdate = rh;
                   },
                 ),
@@ -284,7 +304,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                 height: 35,
                 child: TextFormField(
                   enabled: false,
-                  controller: noOfDay..text = "$difference",
+                  controller: noOfDay..text = _noOfDays.toString(),
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "$difference",
@@ -420,6 +440,8 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
             borderRadius: 10,
             controller: _btnController,
             onPressed: () async {
+              print(rhdate.length);
+              print(leaveType);
               if (leaveType == "Leave Option" || leaveType == null) {
                 validateTextField(reason.text);
                 alertDialog(context);
@@ -429,7 +451,6 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                   if (!validateTextField(reason.text))
                     _btnController.stop();
                   else {
-                   
                     await _doApply(leavetype: leaveType, rhdate: rhdate)
                         .then((value) {
                       _btnController.success();
