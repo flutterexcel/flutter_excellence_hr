@@ -35,12 +35,19 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
     bool enableoverview = false;
     String comment;
     bool enableInventory = false;
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>Load INverntory Evenet');
+    print(event.data);
+    print(event.comment);
+    print(event.count);
+    print(event.enableInventory);
+    print(event.enableoverview);
     if (event.enableInventory != null) {
       enableInventory = event.enableInventory;
     }
     if (event.count != null) {
       count = event.count;
-    } else {
+    }
+    else {
       yield InventoryLoading();
     }
     try {
@@ -54,7 +61,20 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
             showInventory: enableInventory);
         return;
       }
+      if(event.data==null){
+         yield InventorySuccess(
+          data: event.data,
+          count: event.count,
+          enablecomment: event.enablecomment,
+          comment: event.comment,
+          enableoverview: true,
+          showInventory: false);
+      }
+      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Inventory');
+
       final inventory = await invapi.inventory();
+     print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Inventory');
+      print(inventory.userMachine.toString());
       for (var i = 0; i < inventory.userMachine.length; i++) {
         final item = inventory.userMachine[i];
         UserAssignMachine usermachine = UserAssignMachine.fromJson(item);
@@ -77,7 +97,9 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
           comment: comment,
           enableoverview: enableoverview,
           showInventory: enableInventory);
-    } catch (err) {}
+    } catch (err) {
+      print('>>>>>>>> catch bloc' + err.toString());
+    }
   }
 
   clearInventory() async* {
