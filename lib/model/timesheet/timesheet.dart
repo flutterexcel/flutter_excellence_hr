@@ -49,37 +49,36 @@ class Data {
   int totalHours;
   String comments;
   String status;
-  // String fileId;
-  // String file;
+  String fileId;
+  String file;
 
-  Data({
-    this.fullDate,
-    this.date,
-    this.day,
-    this.officeWorkingHours,
-    this.dayType,
-    // this.dayText,
-    // this.inTime,
-    // this.outTime,
-    // this.totalTime,
-    // this.extraTime,
-    // this.text,
-    //this.adminAlert,
-    // this.adminAlertMessage,
-    // this.orignalTotalTime,
-    // this.extraTimeStatus,
-    // this.secondsActualWorkingTime,
-    // this.secondsActualWorkedTime,
-    // this.secondsExtraTime,
-    // this.officeTimeInside,
-    this.userid,
-    this.username,
-    this.totalHours,
-    this.comments,
-    this.status,
-    // this.fileId,
-    // this.file
-  });
+  Data(
+      {this.fullDate,
+      this.date,
+      this.day,
+      this.officeWorkingHours,
+      this.dayType,
+      // this.dayText,
+      // this.inTime,
+      // this.outTime,
+      // this.totalTime,
+      // this.extraTime,
+      // this.text,
+      //this.adminAlert,
+      // this.adminAlertMessage,
+      // this.orignalTotalTime,
+      // this.extraTimeStatus,
+      // this.secondsActualWorkingTime,
+      // this.secondsActualWorkedTime,
+      // this.secondsExtraTime,
+      // this.officeTimeInside,
+      this.userid,
+      this.username,
+      this.totalHours,
+      this.comments,
+      this.status,
+      this.fileId,
+      this.file});
 
   Data.fromJson(Map<String, dynamic> json) {
     fullDate = json['full_date'];
@@ -106,8 +105,8 @@ class Data {
     totalHours = json['total_hours'];
     comments = json['comments'];
     status = json['status'];
-    // fileId = json['fileId'];
-    // file = json['file'];
+    fileId = json['fileId'];
+    file = json['file'];
   }
 
   Map<String, dynamic> toJson() {
@@ -136,8 +135,8 @@ class Data {
     data['total_hours'] = this.totalHours;
     data['comments'] = this.comments;
     data['status'] = this.status;
-    // data['fileId'] = this.fileId;
-    // data['file'] = this.file;
+    data['fileId'] = this.fileId;
+    data['file'] = this.file;
     return data;
   }
 }
