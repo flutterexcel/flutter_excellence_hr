@@ -38,7 +38,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         reason: reason.text,
         lateReason: lateReason.text,
         leaveType: leavetype,
-        rhDates: [rhdate]);
+        rhDates: rhdate);
   }
 
   Future _applyLeaveDate(String startDate, String endDate) async {

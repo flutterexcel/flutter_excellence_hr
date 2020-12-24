@@ -113,11 +113,11 @@ class _DropDownState extends State<DropDown> {
                             setState(() {
                               if (_boolList[index]) {
                                 _boolList[index] = false;
-                                _selectedRhDates.remove(_data[index].date);
+                                _selectedRhDates.remove(_data[index].rawDate);
                                 onRHChange(_selectedRhDates);
                               } else if (!_boolList[index]) {
                                 _boolList[index] = true;
-                                _selectedRhDates.add(_data[index].date);
+                                _selectedRhDates.add(_data[index].rawDate);
                                 onRHChange(_selectedRhDates);
                               }
                             });
