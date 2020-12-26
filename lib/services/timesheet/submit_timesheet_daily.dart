@@ -13,12 +13,14 @@ class TimeSheetDailyService {
     String fromDate = '2020-12-14';
     final apiUrl = prodUrl.baseUrl;
     Map data = {
-      "action": "get_user_timesheet",
+      "action": "user_timesheet_entry",
       "token": token,
-      "from_date": fromDate,
+      "date": fromDate,
+      "comments":
+          " * worked on flutter sensor app, write native code for speaker sensor(incomplete).↵ * resolve issue in HRMS App for new joinee.",
       "user_id": StorageUtil.getUserId()
     };
-
+    
     return _post
         .post(apiUrl, body: json.encode(data))
         .then((dynamic res) async {
