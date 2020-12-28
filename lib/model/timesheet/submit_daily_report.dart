@@ -29,8 +29,8 @@ class Data {
   String date;
   String day;
 //   String officeWorkingHours;
-//   String dayType;
-//   String dayText;
+  String dayType;
+  String dayText;
 //   String inTime;
 //   String outTime;
 //   String totalTime;
@@ -52,8 +52,8 @@ class Data {
     this.date,
     this.day,
     //     this.officeWorkingHours,
-    //     this.dayType,
-    //     this.dayText,
+    this.dayType,
+    this.dayText,
     //     this.inTime,
     //     this.outTime,
     //     this.totalTime,
@@ -76,8 +76,8 @@ class Data {
     date = json['date'];
     day = json['day'];
     //   officeWorkingHours = json['office_working_hours'];
-    //   dayType = json['day_type'];
-    //   dayText = json['day_text'];
+    dayType = json['day_type'];
+    dayText = json['day_text'];
     //   inTime = json['in_time'];
     //   outTime = json['out_time'];
     //   totalTime = json['total_time'];
@@ -101,8 +101,8 @@ class Data {
     data['date'] = this.date;
     data['day'] = this.day;
     //   data['office_working_hours'] = this.officeWorkingHours;
-    //   data['day_type'] = this.dayType;
-    //   data['day_text'] = this.dayText;
+    data['day_type'] = this.dayType;
+    data['day_text'] = this.dayText;
     //   data['in_time'] = this.inTime;
     //   data['out_time'] = this.outTime;
     //   data['total_time'] = this.totalTime;

@@ -31,8 +31,8 @@ class Data {
   String date;
   String day;
 //   String officeWorkingHours;
-//   String dayType;
-//   String dayText;
+  String dayType;
+  String dayText;
 //   String inTime;
 //   String outTime;
 //   String totalTime;
