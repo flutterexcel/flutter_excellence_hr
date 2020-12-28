@@ -41,8 +41,8 @@ class Data {
 //   int orignalTotalTime;
 //   String userid;
 //   String username;
-//   String totalHours;
-//   String comments;
+  var totalHours;
+  String comments;
 //   String status;
 //   String fileId;
 //   String file;
@@ -64,8 +64,8 @@ class Data {
     //     this.orignalTotalTime,
     //     this.userid,
     //     this.username,
-    //     this.totalHours,
-    //     this.comments,
+    this.totalHours,
+    this.comments,
     //     this.status,
     //     this.fileId,
     //     this.file
@@ -88,8 +88,8 @@ class Data {
     //   orignalTotalTime = json['orignal_total_time'];
     //   userid = json['userid'];
     //   username = json['username'];
-    //   totalHours = json['total_hours'];
-    //   comments = json['comments'];
+    totalHours = json['total_hours'];
+    comments = json['comments'];
     //   status = json['status'];
     //   fileId = json['fileId'];
     //   file = json['file'];
@@ -113,8 +113,8 @@ class Data {
     //   data['orignal_total_time'] = this.orignalTotalTime;
     //   data['userid'] = this.userid;
     //   data['username'] = this.username;
-    //   data['total_hours'] = this.totalHours;
-    //   data['comments'] = this.comments;
+    data['total_hours'] = this.totalHours;
+    data['comments'] = this.comments;
     //   data['status'] = this.status;
     //   data['fileId'] = this.fileId;
     //   data['file'] = this.file;

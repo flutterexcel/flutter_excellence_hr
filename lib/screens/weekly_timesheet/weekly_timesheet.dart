@@ -45,7 +45,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
       print("The full time date " + timeSheet.data[0].fullDate);
       // print("The status is  " + timeSheet.data[0].status);
       // print("The comments are " + timeSheet.data[0].comments);
-      print("Total time " + timeSheet.data[0].totalHours.toString());
+      // print("Total time " + timeSheet.data[0].totalHours.toString());
       setState(() {
         yourTimesheet = true;
       });
@@ -53,7 +53,9 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
   }
 
   void _getDailyreport() async {
-    return await apidaily.getDailyTimesheet().then((value) {
+    return await apidaily
+        .getDailyTimesheet(totalHour: totalTime.text, comment: comment.text)
+        .then((value) {
       submitDailyReport = value;
       print(">>>>>>>>>>>>>>>>" + submitDailyReport.toString());
       _btnController.success();
@@ -173,7 +175,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                                 controller: comment,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  hintText: tmsReport.data.report,
+                                  // hintText: tmsReport.data.report,
                                 ),
                               ),
                             ),
@@ -374,7 +376,6 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                                   fontFamily: 'OpenSans', fontSize: 14))),
                     ))
                   ]),
-                  SaveStates(tmsReport: tmsReport),
                   Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                     Expanded(
                         child: Container(
@@ -477,11 +478,12 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                                 padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
                                 child: Text(
                                     timeSheet.data[5].totalHours.toString() +
-                                        " - Total Hours",
+                                        "0 - Total Hours",
                                     style: TextStyle(
                                         fontFamily: 'OpenSans',
                                         fontSize: 14)))))
                   ]),
+                  // SaveStates(tmsReport: tmsReport),
                   Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                     Expanded(
                         child: InkWell(

@@ -10,7 +10,7 @@ class TMSReportService {
   Future<TMSReport> getTMSComment() async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     var token = StorageUtil.getUserToken();
-    String date = "2020-12-14";
+    String date = "2020-12-04";
     final apiUrl = prodUrl.baseUrl;
     Map data = {
       "action": "get_user_tms_report",
