@@ -18,7 +18,7 @@ class IdCard extends StatelessWidget {
                 CircleAvatar(
                     radius: 30,
                     backgroundImage: NetworkImage(
-                        "https:\/\/avatars.slack-edge.com\/2020-09-28\/1376753482199_32256eaf8e5287495618_original.jpg")),
+                       profileDetails.data.userProfileDetail.image)),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +27,7 @@ class IdCard extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         child: Text(
-                          profileDetails.data.userProfileDetail.username,
+                          profileDetails.data.userProfileDetail.name,
                           style: TextStyle(
                             fontSize: 18,
                             fontFamily: 'SourceSans',

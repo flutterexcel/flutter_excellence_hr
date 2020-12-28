@@ -25,7 +25,6 @@ class _ShowInventoryState extends State<ShowInventory> {
 
     return BlocBuilder<InventoryBloc, InventoryState>(
       builder: (context, state) {
-        print('>>>>>>>>>>>>>>>>>>>>>>>> in inventory page' + state.toString());
         if (state is InventoryLoading) {
           return Scaffold(
             backgroundColor: Colors.white,
