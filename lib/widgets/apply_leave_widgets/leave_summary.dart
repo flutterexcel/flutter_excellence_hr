@@ -31,6 +31,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
   int _noOfDays = 1;
 
   Future _doApply({String leavetype, List<String> rhdate}) async {
+   
     await api.applyLeave(
         fromDate: from.text,
         toDate: to.text,
@@ -93,7 +94,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
         _lastDate = _selDate;
       });
     }
-    print('>>>>>>>>>>>>>>>> lastdate' + _lastDate.toString());
+    
   }
 
   @override
@@ -280,7 +281,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
                     leaveType = leave;
                   },
                   onRHChange: (List<String> rh) {
-                    print('>>>>>>>>>>>>>>>>>> ' + rh.toString());
+                   
                     rhdate = rh;
                   },
                 ),
@@ -440,8 +441,7 @@ class _LeaveCalendarState extends State<LeaveCalendar> {
             borderRadius: 10,
             controller: _btnController,
             onPressed: () async {
-              print(rhdate.length);
-              print(leaveType);
+            
               if (leaveType == "Leave Option" || leaveType == null) {
                 validateTextField(reason.text);
                 alertDialog(context);

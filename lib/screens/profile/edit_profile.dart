@@ -16,16 +16,12 @@ class ShowProfile extends StatelessWidget {
 
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        print('in profile screen' + state.toString());
         if (state is ProfileLoad) {
           return Scaffold(
             backgroundColor: Colors.white,
             body: Center(
                 child: CircularProgressIndicator(backgroundColor: Colors.cyan)),
           );
-          // return Center(
-          //   child: CircularProgressIndicator(),
-          // );
         }
         if (state is ProfileInitial) {
           _proflieBloc.add(ProfileLoading());
