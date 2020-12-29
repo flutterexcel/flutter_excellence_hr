@@ -112,13 +112,21 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      Row(children: [
-                        Container(
-                            margin: EdgeInsets.all(16),
-                            child: Text("Monday Time Sheet",
-                                style: TextStyle(
-                                    fontSize: 18, fontFamily: 'OpenSans')))
-                      ]),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.all(16),
+                                child: Text("Monday Time Sheet",
+                                    style: TextStyle(
+                                        fontSize: 18, fontFamily: 'OpenSans'))),
+                            InkWell(
+                              onTap: () => Navigator.of(context).pop(),
+                              child: Container(
+                                  margin: EdgeInsets.only(right: 8),
+                                  child: Icon(Icons.clear)),
+                            )
+                          ]),
                       Divider(height: 1, thickness: .5, color: Colors.grey),
                       SizedBox(height: 16),
                       Row(
@@ -229,6 +237,11 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                         onPressed: () {
                           _getDailyreport();
                           _getTimeSheet();
+                          Timer(Duration(seconds: 5), () {
+                            Navigator.pop(context);
+                            totalTime.text = "";
+                            comment.text = "";
+                          });
                         },
                         child: Text('Submit',
                             style: TextStyle(color: Colors.white)),
@@ -478,7 +491,7 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
                                 padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
                                 child: Text(
                                     timeSheet.data[5].totalHours.toString() +
-                                        "0 - Total Hours",
+                                        " - Total Hours",
                                     style: TextStyle(
                                         fontFamily: 'OpenSans',
                                         fontSize: 14)))))
