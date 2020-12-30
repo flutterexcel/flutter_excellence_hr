@@ -36,15 +36,15 @@ class UploadTrackerScreen {
       "user_id": StorageUtil.getUserId()
     };
     //request.fields.addAll(headers);
-    return _post
-        .post(apiUrl, body: json.encode(data))
-        .then((dynamic res) async {
-      if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
-      return UploadTrac.fromJson(res);
-    });
-    // return await request.send().then((result) async {
-    //   return await http.Response.fromStream(result);
+    // return _post
+    //     .post(apiUrl, body: json.encode(data))
+    //     .then((dynamic res) async {
+    //   if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
+    //   return UploadTrac.fromJson(res);
     // });
+    return await request.send().then((result) async {
+      return await http.Response.fromStream(result);
+    });
   }
 }
 
