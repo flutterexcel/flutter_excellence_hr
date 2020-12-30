@@ -43,6 +43,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
     return await api.getTimesheet().then((value) {
       timeSheet = value;
       print("The full time date " + timeSheet.data[0].fullDate);
+      print("the data text is: " + timeSheet.data[6].dayType);
       // print("The status is  " + timeSheet.data[0].status);
       // print("The comments are " + timeSheet.data[0].comments);
       // print("Total time " + timeSheet.data[0].totalHours.toString());
@@ -236,12 +237,12 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                         borderRadius: 10,
                         onPressed: () {
                           _getDailyreport();
-                          _getTimeSheet();
                           Timer(Duration(seconds: 5), () {
                             Navigator.pop(context);
                             totalTime.text = "";
                             comment.text = "";
                           });
+                          _getTimeSheet();
                         },
                         child: Text('Submit',
                             style: TextStyle(color: Colors.white)),
@@ -271,8 +272,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
               child: StickyHeader(
                 header: Header(),
                 content: Container(
-                    height: MediaQuery.of(context).size.width,
-                    color: Colors.blueGrey,
+                    height: MediaQuery.of(context).size.height,
                     padding: EdgeInsets.all(16.0),
                     child: GridView.builder(
                       itemCount: timeSheet.data.length,
@@ -284,7 +284,8 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                         return Column(
                           children: [
                             Container(
-                                margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                                width: MediaQuery.of(context).size.width * .25,
+                                //  margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                                 child: Text(
                                   timeSheet.data[index].day,
                                   textAlign: TextAlign.center,
@@ -293,35 +294,65 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold),
                                 )),
-                            InkWell(
-                              onTap: () {
-                                customDialog();
-                              },
-                              child: Container(
-                                  color: Colors.grey[300],
-                                  margin: EdgeInsets.fromLTRB(8, 8, 1, 1),
-                                  padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                                  child: Text(timeSheet.data[index].date,
-                                      style: TextStyle(
-                                          fontFamily: 'OpenSans',
-                                          fontSize: 14))),
-                            ),
-                            Expanded(
-                                child: InkWell(
-                              onTap: () {
-                                customDialog();
-                              },
-                              child: Container(
-                                  margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
-                                  padding: EdgeInsets.fromLTRB(8, 8, 8, 16),
-                                  child: Text(
-                                      timeSheet.data[index].totalHours
-                                              .toString() +
-                                          " - Total Hours",
-                                      style: TextStyle(
-                                          fontFamily: 'OpenSans',
-                                          fontSize: 14))),
-                            )),
+                            (timeSheet.data[index].dayType == "NON_WORKING_DAY")
+                                ? Container(
+                                    color: Colors.yellowAccent,
+                                    width:
+                                        MediaQuery.of(context).size.width * .25,
+                                    margin: EdgeInsets.fromLTRB(0, 1, 0, 1),
+                                    padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                    child: Text(timeSheet.data[index].date,
+                                        style: TextStyle(
+                                            fontFamily: 'OpenSans',
+                                            fontSize: 14)))
+                                : InkWell(
+                                    onTap: () {
+                                      customDialog();
+                                    },
+                                    child: Container(
+                                        color: Colors.grey[300],
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .25,
+                                        margin: EdgeInsets.fromLTRB(0, 1, 0, 1),
+                                        padding:
+                                            EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                        child: Text(timeSheet.data[index].date,
+                                            style: TextStyle(
+                                                fontFamily: 'OpenSans',
+                                                fontSize: 14))),
+                                  ),
+                            (timeSheet.data[index].dayType == "NON_WORKING_DAY")
+                                ? Container(
+                                    color: Colors.yellowAccent,
+                                    width:
+                                        MediaQuery.of(context).size.width * .25,
+                                    //  margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
+                                    padding: EdgeInsets.fromLTRB(8, 0, 0, 8),
+                                    child: Text(timeSheet.data[index].dayText,
+                                        style: TextStyle(
+                                            fontFamily: 'OpenSans',
+                                            fontSize: 14)))
+                                : InkWell(
+                                    onTap: () {
+                                      customDialog();
+                                    },
+                                    child: Container(
+                                        color: Colors.grey[300],
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .25,
+                                        //  margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
+                                        padding:
+                                            EdgeInsets.fromLTRB(8, 0, 0, 8),
+                                        child: Text(
+                                            timeSheet.data[index].totalHours
+                                                    .toString() +
+                                                " - Hours",
+                                            style: TextStyle(
+                                                fontFamily: 'OpenSans',
+                                                fontSize: 14))),
+                                  ),
                           ],
                         );
                       },

@@ -11,7 +11,7 @@ import 'package:mime_type/mime_type.dart';
 import 'package:http_parser/http_parser.dart';
 
 class UploadTrackerScreen {
-  Post _post = Post();
+  // Post _post = Post();
   Future<http.Response> uploadTrackerScreen(
       {String docs, String action, File file, String submit}) async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'uploadUrl');
@@ -28,14 +28,13 @@ class UploadTrackerScreen {
     var multipartFile = new http.MultipartFile('link_1', fileStream, length,
         filename: basename(file.path), contentType: MediaType(mimee, type));
     request.files.add(multipartFile);
-    Map data = {
+    Map<String, String> headers = {
       "file_upload_action": action,
       "token": token,
       "docs": docs,
-      "submit": submit,
       "user_id": StorageUtil.getUserId()
     };
-    //request.fields.addAll(headers);
+    request.fields.addAll(headers);
     // return _post
     //     .post(apiUrl, body: json.encode(data))
     //     .then((dynamic res) async {

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:flutter_excellence_hr/services/profile/upload_image.dart';
 import 'package:flutter_excellence_hr/widgets/timesheet_widgets/timesheet_widgets.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -27,18 +26,18 @@ class _UploadPicState extends State<UploadTracker> {
     setState(() {
       if (_image.path.isNotEmpty) uploading = false;
     });
-
     try {
       await api
           .uploadTrackerScreen(
-              docs: '(binary)',
-              action: "timesheet_docs",
-              file: _image,
-              submit: "Upload")
+        docs: '(binary)',
+        action: "timesheet_docs",
+        file: _image,
+      )
           .then((value) {
         uploadTrac = jsonDecode(value.body);
-        print("your tracker msg  " +uploadTrac.message.toString());
+        print("your tracker msg  " + uploadTrac.message.toString());
         val = jsonDecode(value.body);
+        print(" Your value is  " + val);
         alertDialog();
       });
     } catch (e) {}
@@ -87,7 +86,7 @@ class _UploadPicState extends State<UploadTracker> {
   void alertDialog() {
     var alert = AlertDialog(
       title: Text('Your Traker Pic'),
-      content: Text(val[uploadTrac.message.toString()]),
+      content: Text(val["message"]),
       actions: <Widget>[
         FlatButton(
             onPressed: () {

@@ -86,7 +86,7 @@ class _NavigationState extends State<Navigation> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => WeeklyTimeSheet()),
+                  MaterialPageRoute(builder: (context) => TimeSheetUI()),
                 );
               },
             ),
