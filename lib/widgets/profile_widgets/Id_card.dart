@@ -71,7 +71,7 @@ class IdCard extends StatelessWidget {
                                     style: TextStyle(
                                         fontFamily: 'SourceSans',
                                         fontSize: 14,
-                                        color: Colors.black)))),
+                                        color: AppColors.BTN_BLACK_COLOR)))),
                           ),
                         ],
                       )

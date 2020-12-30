@@ -63,7 +63,7 @@ class PersonAddress extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
+          //height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
@@ -81,7 +81,7 @@ class PersonAddress extends StatelessWidget {
                 child: Text(
                   "Current Address",
                   style: TextStyle(
-                      fontFamily: 'SourceSans',
+                      fontFamily: 'OpenSans',
                       fontSize: 18,
                       color: AppColors.MIDIUM_BLACK),
                 )),
@@ -89,15 +89,15 @@ class PersonAddress extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 70,
+          //height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           
           child: TextFormField(
+            
             enabled: false,
-                        controller: (profileDetails.data.userProfileDetail.address2) != null
+                        controller: (profileDetails.data.userProfileDetail.currentAddress) != null
                 ? (currAddress
-                  ..text = profileDetails.data.userProfileDetail.address1 +
-                      profileDetails.data.userProfileDetail.address2)
+                  ..text = profileDetails.data.userProfileDetail.currentAddress)
                 : profileDetails.data.userProfileDetail.address1,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
@@ -122,7 +122,7 @@ class PersonAddress extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 70,
+          //height: 70,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
@@ -151,7 +151,7 @@ class PersonAddress extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
+          //height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
@@ -177,12 +177,12 @@ class PersonAddress extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
+          //height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
             controller: emergencyContact
-              ..text = profileDetails.data.userProfileDetail.emergencyPh1,
+              ..text = profileDetails.data.userProfileDetail.emergencyPh2,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
@@ -203,7 +203,7 @@ class PersonAddress extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
+          //height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
@@ -229,7 +229,7 @@ class PersonAddress extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 35,
+          //height: 35,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
@@ -255,7 +255,7 @@ class PersonAddress extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          height: 70,
+          //height: 70,
           color: AppColors.EDIT_TEXT_COLOR,
           child: TextFormField(
             enabled: false,
