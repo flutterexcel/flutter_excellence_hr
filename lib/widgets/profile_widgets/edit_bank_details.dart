@@ -94,6 +94,7 @@ class EditBankDetails extends StatelessWidget {
                 height: 35,
                 child: TextFormField(
                   key: Key('BankName'),
+                  keyboardType: TextInputType.multiline,
                   controller: bnkName
                     ..text = profileDetails.data.userBankDetail.bankName,
                   decoration: InputDecoration(
@@ -116,7 +117,7 @@ class EditBankDetails extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                height: 35,
+                //height: 35,
                 child: TextFormField(
                   controller: bnkAddress
                     ..text = profileDetails.data.userBankDetail.bankAddress,
