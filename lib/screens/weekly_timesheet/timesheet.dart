@@ -17,8 +17,11 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class TimeSheetUI extends StatefulWidget {
+  DateTime firstDayOfTheweek;
+  TimeSheetUI({this.firstDayOfTheweek});
   @override
-  _WeeklyTimeSheetState createState() => _WeeklyTimeSheetState();
+  _WeeklyTimeSheetState createState() =>
+      _WeeklyTimeSheetState(firstDayOfTheweek);
 }
 
 class _WeeklyTimeSheetState extends State<TimeSheetUI> {
@@ -26,6 +29,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   final comment = TextEditingController();
   TMSReportService apireport = TMSReportService();
   TMSReport tmsReport;
+
   TimeSheetService api = TimeSheetService();
   TimeSheet timeSheet;
   TimeSheetDailyService apidaily = TimeSheetDailyService();
@@ -38,6 +42,9 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   bool yourTimesheet = false;
   bool yourTMSReport = false;
   bool yourDailyReport = false;
+  DateTime now = DateTime.now();
+  DateTime firstDayOfTheweek;
+  _WeeklyTimeSheetState(this.firstDayOfTheweek);
 
   _getTimeSheet() async {
     return await api.getTimesheet().then((value) {
@@ -98,6 +105,9 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
 
   @override
   Widget build(BuildContext context) {
+    //   firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
+    // print("First Week in timesheet screen>>>>>>> " +
+    //     firstDayOfTheweek.toString());
     customDialog() {
       return showDialog(
           context: context,
