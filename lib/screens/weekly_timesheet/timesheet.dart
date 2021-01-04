@@ -20,10 +20,11 @@ import 'package:sticky_headers/sticky_headers.dart';
 
 class TimeSheetUI extends StatefulWidget {
   DateTime firstDayOfTheweek;
-  TimeSheetUI({this.firstDayOfTheweek});
+  int index;
+  TimeSheetUI({this.firstDayOfTheweek,this.index});
   @override
   _WeeklyTimeSheetState createState() =>
-      _WeeklyTimeSheetState(firstDayOfTheweek);
+      _WeeklyTimeSheetState(firstDayOfTheweek,index);
 }
 
 class _WeeklyTimeSheetState extends State<TimeSheetUI> {
@@ -35,6 +36,9 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   TimeSheetService api = TimeSheetService();
   TimeSheet timeSheet;
   TimeSheetDailyService apidaily = TimeSheetDailyService();
+  bool totalTimeValidate = false;
+  bool commentValidate = false;
+
 
   SubmitDailyReport submitDailyReport;
   TimeSheetUpdateService apiUpdateTimeSheet = TimeSheetUpdateService();
@@ -46,7 +50,8 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   bool yourDailyReport = false;
   DateTime now = DateTime.now();
   DateTime firstDayOfTheweek;
-  _WeeklyTimeSheetState(this.firstDayOfTheweek);
+ int index;
+  _WeeklyTimeSheetState(this.firstDayOfTheweek,this.index);
 
   _getTimeSheet() async {
      firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
@@ -59,12 +64,11 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
     });
   }
 
-  void _getDailyreport() async {
+  void _getDailyreport({String fullDate}) async {
     return await apidaily
-        .getDailyTimesheet(totalHour: totalTime.text, comment: comment.text)
+        .getDailyTimesheet(totalHour: totalTime.text, comment: comment.text,date: fullDate)
         .then((value) {
       submitDailyReport = value;
-      print(">>>>>>>>>>>>>>>>" + submitDailyReport.toString());
       _btnController.success();
       setState(() {
         yourDailyReport = true;
@@ -94,6 +98,32 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
     });
   }
 
+bool validateCommentField(String commentEntry) {
+    if (commentEntry.isEmpty) {
+      setState(() {
+        commentValidate = true;
+      });
+      return false;
+    }
+    setState(() {
+      commentValidate = false;
+    });
+    return true;
+  }
+bool validatetimeField(String timeEbtry) {
+    if (timeEbtry.toString().isEmpty) {
+      setState(() {
+        totalTimeValidate = true;
+      });
+      return false;
+    }
+    setState(() {
+      totalTimeValidate = false;
+    });
+    return true;
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -103,13 +133,8 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    //   firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
-    //  String formatted = formatter.format(firstDayOfTheweek);
-    // print("First Week in timesheet screen>>>>>>> " +
-    //     formatted);
-    
-    customDialog() {
+  Widget build(BuildContext context) { 
+    customDialog({String day,String date}) {
       return showDialog(
           context: context,
           builder: (BuildContext c) {
@@ -129,7 +154,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                           children: [
                             Container(
                                 margin: EdgeInsets.all(16),
-                                child: Text("Monday Time Sheet",
+                                child: Text(day +" Time Sheet",
                                     style: TextStyle(
                                         fontSize: 18, fontFamily: 'OpenSans'))),
                             InkWell(
@@ -160,11 +185,13 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                                     margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
                                     height: 35,
                                     child: TextFormField(
+                                key: Key('totalTimeKey'),
                                         enabled: true,
                                         controller: totalTime,
                                         decoration: InputDecoration(
                                             border: OutlineInputBorder(),
                                             labelText: "",
+                                            errorText: totalTimeValidate?"Time can't be empty":null,
                                             labelStyle: TextStyle(
                                                 color: Colors.black,
                                                 fontFamily: 'OpenSans',
@@ -190,11 +217,13 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                               margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
                               height: 100,
                               child: TextFormField(
+                                key: Key('commentKey'),
                                 enabled: true,
                                 maxLines: 5,
                                 controller: comment,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
+                                  errorText:  commentValidate ?" comments can't empty":null,
                                   // hintText: tmsReport.data.report,
                                 ),
                               ),
@@ -247,14 +276,20 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                         width: 150,
                         borderRadius: 10,
                         onPressed: () {
-                          _getDailyreport();
+                         if (!validateCommentField(comment.text))
+                    _btnController.stop();
+                    else if(validatetimeField(totalTime.text)
+                    else{
+                              _getDailyreport(fullDate: date);
                           Timer(Duration(seconds: 5), () {
                             Navigator.pop(context);
                             totalTime.text = "";
                             comment.text = "";
                           });
                           _getTimeSheet();
-                        },
+                        }
+                    }
+                          ,
                         child: Text('Submit',
                             style: TextStyle(color: Colors.white)),
                       ),
@@ -291,7 +326,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                           crossAxisCount: 3,
                           crossAxisSpacing: 4.0,
                           mainAxisSpacing: 4.0),
-                      itemBuilder: (BuildContext context, int index) {
+                      itemBuilder: (BuildContext context, index) {
                         return Column(
                           children: [
                             Container(
@@ -318,7 +353,8 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                                             fontSize: 14)))
                                 : InkWell(
                                     onTap: () {
-                                      customDialog();
+                                      print("Today date is >>>>>>>>>" +timeSheet.data[index].fullDate.toString());  
+                                      customDialog(day:timeSheet.data[index].day.toString(),date:timeSheet.data[index].fullDate);
                                     },
                                     child: Container(
                                         color: Colors.grey[300],
@@ -346,7 +382,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                                             fontSize: 14)))
                                 : InkWell(
                                     onTap: () {
-                                      customDialog();
+                                      customDialog(day:timeSheet.data[index].day.toString(),date:timeSheet.data[index].fullDate);
                                     },
                                     child: Container(
                                         color: Colors.grey[300],
