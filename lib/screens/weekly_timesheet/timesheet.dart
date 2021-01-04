@@ -278,8 +278,9 @@ bool validatetimeField(String timeEbtry) {
                         onPressed: () {
                          if (!validateCommentField(comment.text))
                     _btnController.stop();
-                    else if(validatetimeField(totalTime.text)
-                    else{
+                    else if(validatetimeField(totalTime.text))
+                    _btnController.stop();
+                    else {
                               _getDailyreport(fullDate: date);
                           Timer(Duration(seconds: 5), () {
                             Navigator.pop(context);
