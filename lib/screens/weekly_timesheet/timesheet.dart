@@ -13,6 +13,7 @@ import 'package:flutter_excellence_hr/services/tmsreport/tmsreport.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import 'package:flutter_excellence_hr/widgets/timesheet_widgets/timesheet_widgets.dart';
 import 'package:flutter_excellence_hr/widgets/timesheet_widgets/upoad_tracker.dart';
+import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
@@ -30,7 +31,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   final comment = TextEditingController();
   TMSReportService apireport = TMSReportService();
   TMSReport tmsReport;
-
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
   TimeSheetService api = TimeSheetService();
   TimeSheet timeSheet;
   TimeSheetDailyService apidaily = TimeSheetDailyService();
@@ -48,13 +49,10 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   _WeeklyTimeSheetState(this.firstDayOfTheweek);
 
   _getTimeSheet() async {
-    return await api.getTimesheet().then((value) {
+     firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
+     String formatted = formatter.format(firstDayOfTheweek);
+    return await api.getTimesheet(fromDate: formatted).then((value) {
       timeSheet = value;
-      print("The full time date " + timeSheet.data[0].fullDate);
-      print("the data text is: " + timeSheet.data[6].dayType);
-      // print("The status is  " + timeSheet.data[0].status);
-      // print("The comments are " + timeSheet.data[0].comments);
-      // print("Total time " + timeSheet.data[0].totalHours.toString());
       setState(() {
         yourTimesheet = true;
       });
@@ -107,8 +105,10 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   @override
   Widget build(BuildContext context) {
     //   firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
+    //  String formatted = formatter.format(firstDayOfTheweek);
     // print("First Week in timesheet screen>>>>>>> " +
-    //     firstDayOfTheweek.toString());
+    //     formatted);
+    
     customDialog() {
       return showDialog(
           context: context,
