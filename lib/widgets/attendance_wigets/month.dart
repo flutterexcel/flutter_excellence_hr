@@ -18,29 +18,29 @@ class Month extends StatelessWidget {
     return Card(
         color: Colors.blue,
         child: ListTile(
-          leading: IconButton(
-            icon: Icon(Icons.keyboard_arrow_left),
-            color: Colors.white,
-            highlightColor: Colors.lightBlue,
-            onPressed: () {
-              _getAttendance(monthAttendance.data.previousMonth.year,
-                  monthAttendance.data.previousMonth.month);
-            },
-          ),
-          title: Text(
-            monthAttendance.data.monthName + " - " + monthAttendance.data.year,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white, fontFamily: 'SourceSans'),
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.keyboard_arrow_right),
-            color: Colors.white,
-            highlightColor: Colors.lightBlue,
-            onPressed: () {
-              _getAttendance(monthAttendance.data.nextMonth.year,
-                  monthAttendance.data.nextMonth.month);
-            },
-          ),
-        ));
+            leading: IconButton(
+              icon: Icon(Icons.keyboard_arrow_left),
+              color: Colors.white,
+              highlightColor: Colors.lightBlue,
+              onPressed: () {
+                _getAttendance(monthAttendance.data.previousMonth.year,
+                    monthAttendance.data.previousMonth.month);
+              },
+            ),
+            title: Text(
+              monthAttendance.data.monthName +
+                  " - " +
+                  monthAttendance.data.year,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontFamily: 'SourceSans'),
+            ),
+            trailing: IconButton(
+                icon: Icon(Icons.keyboard_arrow_right),
+                color: Colors.white,
+                highlightColor: Colors.lightBlue,
+                onPressed: () {
+                  _getAttendance(monthAttendance.data.nextMonth.year,
+                      monthAttendance.data.nextMonth.month);
+                })));
   }
 }
