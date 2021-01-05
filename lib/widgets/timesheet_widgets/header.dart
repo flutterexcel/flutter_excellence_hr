@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/timesheet/timesheet.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/weekly_timesheet/timesheet.dart';
-
-
+import 'package:flutter_excellence_hr/services/timesheet/timesheet.dart';
 
 class Header extends StatefulWidget {
   @override
@@ -14,7 +14,8 @@ class _HeaderState extends State<Header> {
   DateTime now = DateTime.now();
 
   double week;
-
+  TimeSheetService api = TimeSheetService();
+  TimeSheet timeSheet;
   DateTime firstDayOfTheweek;
   String titleDate = "";
 
@@ -25,6 +26,7 @@ class _HeaderState extends State<Header> {
     week = now.day / 7 + 1;
     firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
     print("First day of week " + firstDayOfTheweek.day.toString());
+    // TimeSheetUI(firstDayOfTheweek: firstDayOfTheweek);
     switch (now.month.toString()) {
       case "1":
         {
@@ -130,7 +132,9 @@ class _HeaderState extends State<Header> {
               firstDayOfTheweek =
                   now.subtract(new Duration(days: now.weekday - 1));
               print("updated First day of week " +
-                  firstDayOfTheweek.day.toString());
+                  firstDayOfTheweek.day.toString() +
+                  " year" +
+                  firstDayOfTheweek.year.toString());
               setState(() {
                 titleDate = " week " +
                     week.toStringAsFixed(0) +
@@ -138,6 +142,7 @@ class _HeaderState extends State<Header> {
                     month +
                     " " +
                     now.year.toString();
+                 //TimeSheetUI(firstDayOfTheweek: firstDayOfTheweek);
                 // Navigator.of(context)
                 //     .push(MaterialPageRoute(builder: (BuildContext context) {
                 //   return TimeSheetUI(firstDayOfTheweek: firstDayOfTheweek);

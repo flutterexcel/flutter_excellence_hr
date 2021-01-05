@@ -17,14 +17,13 @@ import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-
 class TimeSheetUI extends StatefulWidget {
   DateTime firstDayOfTheweek;
   int index;
-  TimeSheetUI({this.firstDayOfTheweek,this.index});
+  TimeSheetUI({this.firstDayOfTheweek, this.index});
   @override
   _WeeklyTimeSheetState createState() =>
-      _WeeklyTimeSheetState(firstDayOfTheweek,index);
+      _WeeklyTimeSheetState(firstDayOfTheweek, index);
 }
 
 class _WeeklyTimeSheetState extends State<TimeSheetUI> {
@@ -39,7 +38,6 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   bool totalTimeValidate = false;
   bool commentValidate = false;
 
-
   SubmitDailyReport submitDailyReport;
   TimeSheetUpdateService apiUpdateTimeSheet = TimeSheetUpdateService();
   TimeSheetUpdated timeSheetUpdated;
@@ -50,12 +48,12 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   bool yourDailyReport = false;
   DateTime now = DateTime.now();
   DateTime firstDayOfTheweek;
- int index;
-  _WeeklyTimeSheetState(this.firstDayOfTheweek,this.index);
+  int index;
+  _WeeklyTimeSheetState(this.firstDayOfTheweek, this.index);
 
   _getTimeSheet() async {
-     firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
-     String formatted = formatter.format(firstDayOfTheweek);
+    firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
+    String formatted = formatter.format(firstDayOfTheweek);
     return await api.getTimesheet(fromDate: formatted).then((value) {
       timeSheet = value;
       setState(() {
@@ -66,7 +64,8 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
 
   void _getDailyreport({String fullDate}) async {
     return await apidaily
-        .getDailyTimesheet(totalHour: totalTime.text, comment: comment.text,date: fullDate)
+        .getDailyTimesheet(
+            totalHour: totalTime.text, comment: comment.text, date: fullDate)
         .then((value) {
       submitDailyReport = value;
       _btnController.success();
@@ -98,7 +97,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
     });
   }
 
-bool validateCommentField(String commentEntry) {
+  bool validateCommentField(String commentEntry) {
     if (commentEntry.isEmpty) {
       setState(() {
         commentValidate = true;
@@ -110,7 +109,8 @@ bool validateCommentField(String commentEntry) {
     });
     return true;
   }
-bool validatetimeField(String timeEbtry) {
+
+  bool validatetimeField(String timeEbtry) {
     if (timeEbtry.toString().isEmpty) {
       setState(() {
         totalTimeValidate = true;
@@ -123,7 +123,6 @@ bool validatetimeField(String timeEbtry) {
     return true;
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -133,8 +132,8 @@ bool validatetimeField(String timeEbtry) {
   }
 
   @override
-  Widget build(BuildContext context) { 
-    customDialog({String day,String date}) {
+  Widget build(BuildContext context) {
+    customDialog({String day, String date}) {
       return showDialog(
           context: context,
           builder: (BuildContext c) {
@@ -154,7 +153,7 @@ bool validatetimeField(String timeEbtry) {
                           children: [
                             Container(
                                 margin: EdgeInsets.all(16),
-                                child: Text(day +" Time Sheet",
+                                child: Text(day + " Time Sheet",
                                     style: TextStyle(
                                         fontSize: 18, fontFamily: 'OpenSans'))),
                             InkWell(
@@ -185,13 +184,15 @@ bool validatetimeField(String timeEbtry) {
                                     margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
                                     height: 35,
                                     child: TextFormField(
-                                key: Key('totalTimeKey'),
+                                        key: Key('totalTimeKey'),
                                         enabled: true,
                                         controller: totalTime,
                                         decoration: InputDecoration(
                                             border: OutlineInputBorder(),
                                             labelText: "",
-                                            errorText: totalTimeValidate?"Time can't be empty":null,
+                                            errorText: totalTimeValidate
+                                                ? "Time can't be empty"
+                                                : null,
                                             labelStyle: TextStyle(
                                                 color: Colors.black,
                                                 fontFamily: 'OpenSans',
@@ -223,7 +224,9 @@ bool validatetimeField(String timeEbtry) {
                                 controller: comment,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  errorText:  commentValidate ?" comments can't empty":null,
+                                  errorText: commentValidate
+                                      ? " comments can't empty"
+                                      : null,
                                   // hintText: tmsReport.data.report,
                                 ),
                               ),
@@ -276,21 +279,20 @@ bool validatetimeField(String timeEbtry) {
                         width: 150,
                         borderRadius: 10,
                         onPressed: () {
-                         if (!validateCommentField(comment.text))
-                    _btnController.stop();
-                    else if(validatetimeField(totalTime.text))
-                    _btnController.stop();
-                    else {
-                              _getDailyreport(fullDate: date);
-                          Timer(Duration(seconds: 5), () {
-                            Navigator.pop(context);
-                            totalTime.text = "";
-                            comment.text = "";
-                          });
-                          _getTimeSheet();
-                        }
-                    }
-                          ,
+                          if (!validateCommentField(comment.text))
+                            _btnController.stop();
+                          else if (validatetimeField(totalTime.text))
+                            _btnController.stop();
+                          else {
+                            _getDailyreport(fullDate: date);
+                            Timer(Duration(seconds: 5), () {
+                              Navigator.pop(context);
+                              totalTime.text = "";
+                              comment.text = "";
+                            });
+                            _getTimeSheet();
+                          }
+                        },
                         child: Text('Submit',
                             style: TextStyle(color: Colors.white)),
                       ),
@@ -354,8 +356,13 @@ bool validatetimeField(String timeEbtry) {
                                             fontSize: 14)))
                                 : InkWell(
                                     onTap: () {
-                                      print("Today date is >>>>>>>>>" +timeSheet.data[index].fullDate.toString());  
-                                      customDialog(day:timeSheet.data[index].day.toString(),date:timeSheet.data[index].fullDate);
+                                      print("Today date is >>>>>>>>>" +
+                                          timeSheet.data[index].fullDate
+                                              .toString());
+                                      customDialog(
+                                          day: timeSheet.data[index].day
+                                              .toString(),
+                                          date: timeSheet.data[index].fullDate);
                                     },
                                     child: Container(
                                         color: Colors.grey[300],
@@ -383,7 +390,10 @@ bool validatetimeField(String timeEbtry) {
                                             fontSize: 14)))
                                 : InkWell(
                                     onTap: () {
-                                      customDialog(day:timeSheet.data[index].day.toString(),date:timeSheet.data[index].fullDate);
+                                      customDialog(
+                                          day: timeSheet.data[index].day
+                                              .toString(),
+                                          date: timeSheet.data[index].fullDate);
                                     },
                                     child: Container(
                                         color: Colors.grey[300],

@@ -43,7 +43,6 @@ class _WeeklyTimeSheetState extends State<WeeklyTimeSheet> {
     return await api.getTimesheet().then((value) {
       timeSheet = value;
       print("The full time date " + timeSheet.data[0].fullDate);
-      
 
       // print("The comments are " + timeSheet.data[0].comments);
       // print("Total time " + timeSheet.data[0].totalHours.toString());
