@@ -183,14 +183,13 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                             Expanded(
                                 child: Container(
                                     margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
-                                    height: 35,
                                     child: TextFormField(
                                         key: Key('totalTimeKey'),
                                         enabled: true,
                                         controller: totalTime,
                                         inputFormatters: <TextInputFormatter>[
                                           FilteringTextInputFormatter.allow(
-                                              RegExp(r'[0-9.]')),
+                                              RegExp(r'[0-9.]'))
                                         ],
                                         keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
