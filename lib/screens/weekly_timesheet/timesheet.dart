@@ -16,6 +16,7 @@ import 'package:flutter_excellence_hr/widgets/timesheet_widgets/upoad_tracker.da
 import 'package:intl/intl.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter/services.dart';
 
 class TimeSheetUI extends StatefulWidget {
   DateTime firstDayOfTheweek;
@@ -111,7 +112,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   }
 
   bool validatetimeField(String timeEbtry) {
-    if (timeEbtry.toString().isEmpty) {
+    if (timeEbtry.isEmpty) {
       setState(() {
         totalTimeValidate = true;
       });
@@ -187,6 +188,11 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                                         key: Key('totalTimeKey'),
                                         enabled: true,
                                         controller: totalTime,
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp(r'[0-9.]')),
+                                        ],
+                                        keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
                                             border: OutlineInputBorder(),
                                             labelText: "",
@@ -216,17 +222,17 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                              height: 100,
                               child: TextFormField(
                                 key: Key('commentKey'),
                                 enabled: true,
                                 maxLines: 5,
                                 controller: comment,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
+                                  labelText: "",
                                   errorText: commentValidate
-                                      ? " comments can't empty"
+                                      ? "comments can't empty"
                                       : null,
+                                  border: OutlineInputBorder(),
                                   // hintText: tmsReport.data.report,
                                 ),
                               ),
@@ -279,9 +285,9 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                         width: 150,
                         borderRadius: 10,
                         onPressed: () {
-                          if (!validateCommentField(comment.text))
+                          if (!validateCommentField(comment.text)) {
                             _btnController.stop();
-                          else if (validatetimeField(totalTime.text))
+                          } else if (!validatetimeField(totalTime.text))
                             _btnController.stop();
                           else {
                             _getDailyreport(fullDate: date);
@@ -400,7 +406,6 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 .25,
-                                        //  margin: EdgeInsets.fromLTRB(8, 0, 1, 8),
                                         padding:
                                             EdgeInsets.fromLTRB(8, 0, 0, 8),
                                         child: Text(
