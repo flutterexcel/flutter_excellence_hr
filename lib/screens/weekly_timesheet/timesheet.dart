@@ -124,6 +124,11 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
     return true;
   }
 
+  void dispose() {
+    super.dispose();
+    //print("app dispose");
+  }
+
   @override
   void initState() {
     super.initState();
