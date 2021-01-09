@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/timesheet/timesheet.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:flutter_excellence_hr/screens/weekly_timesheet/timesheet.dart';
 import 'package:flutter_excellence_hr/services/timesheet/timesheet.dart';
 
 class Header extends StatefulWidget {

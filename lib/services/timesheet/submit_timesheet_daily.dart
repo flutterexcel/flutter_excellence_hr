@@ -10,7 +10,6 @@ class TimeSheetDailyService {
   Future getDailyTimesheet({String totalHour, String comment,String date}) async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'apiUrl');
     var token = StorageUtil.getUserToken();
-   // String date = '2020-12-04';
     final apiUrl = prodUrl.baseUrl;
     Map data = {
       "action": "user_timesheet_entry",
