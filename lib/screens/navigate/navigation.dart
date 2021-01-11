@@ -14,6 +14,7 @@ import 'package:flutter_excellence_hr/screens/my_salary/my_salary.dart';
 import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
 import 'package:flutter_excellence_hr/screens/policy_documents/policy_documents.dart';
 import 'package:flutter_excellence_hr/screens/screens.dart';
+import 'package:flutter_excellence_hr/screens/weekly_timesheet/header_issue.dart';
 import 'package:flutter_excellence_hr/screens/weekly_timesheet/timesheet.dart';
 import 'package:flutter_excellence_hr/screens/weekly_timesheet/weekly_timesheet.dart';
 
@@ -86,7 +87,7 @@ class _NavigationState extends State<Navigation> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TimeSheetUI()),
+                  MaterialPageRoute(builder: (context) => HeaderIssue()),
                 );
               },
             ),

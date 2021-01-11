@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/timesheet/timesheet.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
+import 'package:flutter_excellence_hr/screens/weekly_timesheet/header_issue.dart';
 import 'package:flutter_excellence_hr/services/timesheet/timesheet.dart';
 
 class Header extends StatefulWidget {
@@ -24,8 +25,7 @@ class _HeaderState extends State<Header> {
   Widget build(BuildContext context) {
     week = now.day / 7 + 1;
     firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
-    print("First day of week " + firstDayOfTheweek.day.toString());
-    // TimeSheetUI(firstDayOfTheweek: firstDayOfTheweek);
+    //print("First day of week " + firstDayOfTheweek.day.toString());
     switch (now.month.toString()) {
       case "1":
         {
