@@ -63,7 +63,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
 
   _getTimeSheet() async {
     firstDayOfTheweek = now.subtract(new Duration(days: now.weekday - 1));
-    String formatted = "2020-10-12"; //formatter.format(firstDayOfTheweek);
+    String formatted = formatter.format(firstDayOfTheweek);
     return await api.getTimesheet(fromDate: formatted).then((value) {
       timeSheet = value;
       setState(() {
@@ -87,7 +87,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   }
 
   void _submitWeeklyreport() async {
-    String formatted = "2020-10-12"; //formatter.format(firstDayOfTheweek);
+    String formatted = formatter.format(firstDayOfTheweek);
     return await apiWeekly.sentWeeklyTimesheet(date: formatted).then((value) {
       // if (submitWeeklyTimeSheet.error == 1) {
       //   _btnOkController.error();
@@ -97,7 +97,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
       setState(() {
         enableContent = false;
       });
-      Timer(Duration(seconds: 2), () {
+      Timer(Duration(seconds: 5), () {
         _btnOkController.reset();
         Navigator.of(context).pop();
       });
