@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigation.dart';
-import 'package:flutter_excellence_hr/screens/weekly_timesheet/content.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
+import 'package:flutter_excellence_hr/widgets/timesheet_widgets/timesheet_widgets.dart';
 
 class HeaderIssue extends StatefulWidget {
   @override
@@ -156,7 +156,7 @@ class _HeaderIssueState extends State<HeaderIssue> {
                     ),
                   ),
                 )),
-            Content(firstDayOfTheweek: firstDayOfTheweek),
+            Content(firstDayOfTheweek: firstDayOfTheweek)
           ],
         ),
       )),
