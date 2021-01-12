@@ -12,11 +12,9 @@ class HeaderIssue extends StatefulWidget {
 class _HeaderIssueState extends State<HeaderIssue> {
   var varible;
   DateTime now = DateTime.now();
-
   double week;
   DateTime firstDayOfTheweek;
   String titleDate = "";
-
   String month = "";
 
   @override
