@@ -122,6 +122,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
   void _doReset() async {
     Timer(Duration(seconds: 2), () {
       _btnController.reset();
+      Navigator.pop(context);
     });
   }
 
@@ -323,7 +324,7 @@ class _WeeklyTimeSheetState extends State<TimeSheetUI> {
                           else {
                             _getDailyreport(fullDate: date);
                             Timer(Duration(seconds: 5), () {
-                              Navigator.pop(context);
+                              // Navigator.pop(context);
                               totalTime.text = "";
                               comment.text = "";
                             });
