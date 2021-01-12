@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigation.dart';
+import 'package:flutter_excellence_hr/services/timesheet/timesheet.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import 'package:flutter_excellence_hr/widgets/timesheet_widgets/timesheet_widgets.dart';
+import 'package:flutter_excellence_hr/model/timesheet/timesheet.dart';
+import 'package:intl/intl.dart';
 
 class HeaderIssue extends StatefulWidget {
   @override
@@ -16,6 +19,26 @@ class _HeaderIssueState extends State<HeaderIssue> {
   DateTime firstDayOfTheweek;
   String titleDate = "";
   String month = "";
+  TimeSheetService api = TimeSheetService();
+  TimeSheet timeSheet;
+  DateFormat formatter = DateFormat('yyyy-MM-dd');
+  bool yourTimesheet = false;
+  String formatted = "";
+  bool totalTimeValidate = false;
+  bool commentValidate = false;
+
+
+  _getTimeSheet() async {
+    formatted = formatter.format(firstDayOfTheweek);
+    return await api.getTimesheet(fromDate: formatted).then((value) {
+      timeSheet = value;
+      print("From date for API " + formatted);
+      setState(() {
+        yourTimesheet = true;
+      });
+    });
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +131,7 @@ class _HeaderIssueState extends State<HeaderIssue> {
                       now = now.subtract(Duration(days: 7));
                       firstDayOfTheweek =
                           now.subtract(new Duration(days: now.weekday - 1));
-                      print("updated prev First day of week " +
-                          firstDayOfTheweek.day.toString());
+                      _getTimeSheet();
                       setState(() {
                         titleDate = " week " +
                             week.toStringAsFixed(0) +
@@ -135,10 +157,7 @@ class _HeaderIssueState extends State<HeaderIssue> {
                       now = now.add(Duration(days: 7));
                       firstDayOfTheweek =
                           now.subtract(new Duration(days: now.weekday - 1));
-                      print("updated First day of week " +
-                          firstDayOfTheweek.day.toString() +
-                          " year" +
-                          firstDayOfTheweek.year.toString());
+                      _getTimeSheet();
                       setState(() {
                         titleDate = " week " +
                             week.toStringAsFixed(0) +
@@ -154,7 +173,7 @@ class _HeaderIssueState extends State<HeaderIssue> {
                     ),
                   ),
                 )),
-            Content(firstDayOfTheweek: firstDayOfTheweek)
+            Content(firstDayOfTheweek: firstDayOfTheweek, timeSheet: timeSheet)
           ],
         ),
       )),
