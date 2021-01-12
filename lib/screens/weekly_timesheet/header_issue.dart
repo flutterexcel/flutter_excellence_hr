@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_excellence_hr/model/timesheet/submit_timesheet.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
 import 'package:flutter_excellence_hr/screens/navigate/navigation.dart';
+import 'package:flutter_excellence_hr/services/timesheet/submit_weekly_report.dart';
 import 'package:flutter_excellence_hr/services/timesheet/timesheet.dart';
 import 'package:flutter_excellence_hr/widgets/appbar.dart';
 import 'package:flutter_excellence_hr/widgets/timesheet_widgets/timesheet_widgets.dart';
 import 'package:flutter_excellence_hr/model/timesheet/timesheet.dart';
 import 'package:intl/intl.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class HeaderIssue extends StatefulWidget {
   @override
@@ -21,12 +26,19 @@ class _HeaderIssueState extends State<HeaderIssue> {
   String month = "";
   TimeSheetService api = TimeSheetService();
   TimeSheet timeSheet;
+  SubmitTimeSheet submitWeeklyTimeSheet;
+
+  String note =
+      """Are you sure want to submit as timesheet,cannot be changed once submit""";
   DateFormat formatter = DateFormat('yyyy-MM-dd');
   bool yourTimesheet = false;
   String formatted = "";
   bool totalTimeValidate = false;
   bool commentValidate = false;
+  TimeSheetWeeklyService apiWeekly = TimeSheetWeeklyService();
 
+  final RoundedLoadingButtonController _btnOkController =
+      new RoundedLoadingButtonController();
 
   _getTimeSheet() async {
     formatted = formatter.format(firstDayOfTheweek);
@@ -38,7 +50,24 @@ class _HeaderIssueState extends State<HeaderIssue> {
       });
     });
   }
-  
+
+  void _submitWeeklyreport() async {
+    String formatted = formatter.format(firstDayOfTheweek);
+    return await apiWeekly.sentWeeklyTimesheet(date: formatted).then((value) {
+      // if (submitWeeklyTimeSheet.error == 1) {
+      //   _btnOkController.error();
+      //   _btnOkController.reset();
+      // } else {
+      _btnOkController.success();
+      setState(() {
+        //   enableContent = false;
+      });
+      Timer(Duration(seconds: 5), () {
+        _btnOkController.reset();
+        Navigator.of(context).pop();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,11 +142,80 @@ class _HeaderIssueState extends State<HeaderIssue> {
         month +
         " " +
         now.year.toString();
+    submitDialog() {
+      return showDialog(
+          context: context,
+          builder: (BuildContext c) {
+            return Dialog(
+              child: Container(
+                height: 250,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        padding: EdgeInsets.all(16),
+                        child: Text(note,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: AppColors.LIGHTBLACK_COLOR))),
+                    SizedBox(height: 10),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: 150,
+                            color: Colors.grey,
+                            child: FlatButton(
+                                height: 50,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0)),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("Cancel",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white))),
+                          ),
+                          SizedBox(width: 15),
+                          RoundedLoadingButton(
+                              width: 150,
+                              borderRadius: 5,
+                              controller: _btnOkController,
+                              onPressed: () {
+                                _submitWeeklyreport();
+                                _getTimeSheet();
+                                // Timer(Duration(seconds: 5), () {
+                                //   Navigator.pop(context);
+                                // });
+                              },
+                              color: Colors.green[300],
+                              child: Text('Add',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white))),
+                        ])
+                  ],
+                ),
+              ),
+            );
+          });
+    }
 
     return Scaffold(
       backgroundColor: AppColors.BACKGROUND_COLOR,
       appBar: AppBar(title: AppBarWidget(pageName: "Weekly Timesheet")),
       drawer: Navigation(),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            submitDialog();
+            // _submitWeeklyreport();
+            // _getTimeSheet();
+            setState(() {
+              //   enableContent = false;
+            });
+          },
+          label: Text('Submit Weekly Timesheet'),
+          backgroundColor: AppColors.BTN_BLACK_COLOR),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(

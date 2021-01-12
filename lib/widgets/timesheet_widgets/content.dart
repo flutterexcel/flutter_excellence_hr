@@ -62,6 +62,7 @@ class _ContentState extends State<Content> {
   void _doReset() async {
     Timer(Duration(seconds: 2), () {
       _btnController.reset();
+      Navigator.pop(context);
     });
   }
 
@@ -253,9 +254,8 @@ class _ContentState extends State<Content> {
                             setState(() {
                               _getTimeSheet();
                             });
-
                             Timer(Duration(seconds: 5), () {
-                              Navigator.pop(context);
+                              // Navigator.pop(context);
                               totalTime.text = "";
                               comment.text = "";
                             });
