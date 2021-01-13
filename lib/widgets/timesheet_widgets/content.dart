@@ -16,7 +16,7 @@ class Content extends StatefulWidget {
   Content({this.firstDayOfTheweek, this.timeSheet});
 
   @override
-  _ContentState createState() => _ContentState();
+  _ContentState createState() => _ContentState(firstDayOfTheweek);
 }
 
 class _ContentState extends State<Content> {
@@ -32,11 +32,16 @@ class _ContentState extends State<Content> {
   String formatted = "";
   bool totalTimeValidate = false;
   bool commentValidate = false;
+  DateTime now = DateTime.now();
+  double week;
   RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
+  _ContentState(this.firstDayOfTheweek);
 
   _getTimeSheet() async {
-    String formatted = formatter.format(widget.firstDayOfTheweek);
+    week = now.day / 7 + 1;
+    firstDayOfTheweek ?? now.subtract(new Duration(days: now.weekday - 1));
+    String formatted = formatter.format(firstDayOfTheweek);
     return await api.getTimesheet(fromDate: formatted).then((value) {
       timeSheet = value;
       setState(() {

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/model/timesheet/submit_timesheet.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
@@ -27,7 +26,7 @@ class _HeaderIssueState extends State<HeaderIssue> {
   TimeSheetService api = TimeSheetService();
   TimeSheet timeSheet;
   SubmitTimeSheet submitWeeklyTimeSheet;
-
+  bool enableContent = true;
   String note =
       """Are you sure want to submit as timesheet,cannot be changed once submit""";
   DateFormat formatter = DateFormat('yyyy-MM-dd');
@@ -44,7 +43,6 @@ class _HeaderIssueState extends State<HeaderIssue> {
     formatted = formatter.format(firstDayOfTheweek);
     return await api.getTimesheet(fromDate: formatted).then((value) {
       timeSheet = value;
-      print("From date for API " + formatted);
       setState(() {
         yourTimesheet = true;
       });
@@ -54,14 +52,15 @@ class _HeaderIssueState extends State<HeaderIssue> {
   void _submitWeeklyreport() async {
     String formatted = formatter.format(firstDayOfTheweek);
     return await apiWeekly.sentWeeklyTimesheet(date: formatted).then((value) {
+      submitWeeklyTimeSheet = value;
+      print("The value is>>>>>>>>>>>>>>>>>>>>>>>>" +
+          submitWeeklyTimeSheet.message);
+      //if(submitWeeklyTimeSheet.message == "")
       // if (submitWeeklyTimeSheet.error == 1) {
       //   _btnOkController.error();
       //   _btnOkController.reset();
       // } else {
       _btnOkController.success();
-      setState(() {
-        //   enableContent = false;
-      });
       Timer(Duration(seconds: 5), () {
         _btnOkController.reset();
         Navigator.of(context).pop();
@@ -164,19 +163,18 @@ class _HeaderIssueState extends State<HeaderIssue> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            width: 150,
-                            color: Colors.grey,
-                            child: FlatButton(
-                                height: 50,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text("Cancel",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white))),
-                          ),
+                              width: 150,
+                              color: Colors.grey,
+                              child: FlatButton(
+                                  height: 50,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("Cancel",
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.white)))),
                           SizedBox(width: 15),
                           RoundedLoadingButton(
                               width: 150,
@@ -185,6 +183,9 @@ class _HeaderIssueState extends State<HeaderIssue> {
                               onPressed: () {
                                 _submitWeeklyreport();
                                 _getTimeSheet();
+                                setState(() {
+                                  enableContent = false;
+                                });
                                 // Timer(Duration(seconds: 5), () {
                                 //   Navigator.pop(context);
                                 // });
@@ -208,11 +209,6 @@ class _HeaderIssueState extends State<HeaderIssue> {
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             submitDialog();
-            // _submitWeeklyreport();
-            // _getTimeSheet();
-            setState(() {
-              //   enableContent = false;
-            });
           },
           label: Text('Submit Weekly Timesheet'),
           backgroundColor: AppColors.BTN_BLACK_COLOR),
@@ -224,54 +220,51 @@ class _HeaderIssueState extends State<HeaderIssue> {
                 color: AppColors.BLUE_COLOR,
                 margin: EdgeInsets.all(8),
                 child: ListTile(
-                  leading: InkWell(
-                    onTap: () {
-                      now = now.subtract(Duration(days: 7));
-                      firstDayOfTheweek =
-                          now.subtract(new Duration(days: now.weekday - 1));
-                      _getTimeSheet();
-                      setState(() {
-                        titleDate = " week " +
-                            week.toStringAsFixed(0) +
-                            " " +
-                            month +
-                            " " +
-                            now.year.toString();
-                      });
-                    },
-                    child: Icon(
-                      Icons.arrow_left,
-                      color: Colors.white,
-                    ),
-                  ),
-                  title: Text(
-                    titleDate,
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(color: Colors.white, fontFamily: 'OpenSans'),
-                  ),
-                  trailing: InkWell(
-                    onTap: () {
-                      now = now.add(Duration(days: 7));
-                      firstDayOfTheweek =
-                          now.subtract(new Duration(days: now.weekday - 1));
-                      _getTimeSheet();
-                      setState(() {
-                        titleDate = " week " +
-                            week.toStringAsFixed(0) +
-                            " " +
-                            month +
-                            " " +
-                            now.year.toString();
-                      });
-                    },
-                    child: Icon(
-                      Icons.arrow_right,
-                      color: Colors.white,
-                    ),
-                  ),
-                )),
-            Content(firstDayOfTheweek: firstDayOfTheweek, timeSheet: timeSheet)
+                    leading: InkWell(
+                        onTap: () {
+                          now = now.subtract(Duration(days: 7));
+                          firstDayOfTheweek =
+                              now.subtract(new Duration(days: now.weekday - 1));
+                          _getTimeSheet();
+                          setState(() {
+                            titleDate = " week " +
+                                week.toStringAsFixed(0) +
+                                " " +
+                                month +
+                                " " +
+                                now.year.toString();
+                          });
+                          enableContent = true;
+                        },
+                        child: Icon(Icons.arrow_left, color: Colors.white)),
+                    title: Text(titleDate,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: 'OpenSans')),
+                    trailing: InkWell(
+                        onTap: () {
+                          now = now.add(Duration(days: 7));
+                          firstDayOfTheweek =
+                              now.subtract(new Duration(days: now.weekday - 1));
+                          _getTimeSheet();
+                          setState(() {
+                            titleDate = " week " +
+                                week.toStringAsFixed(0) +
+                                " " +
+                                month +
+                                " " +
+                                now.year.toString();
+                          });
+                          enableContent = true;
+                        },
+                        child: Icon(Icons.arrow_right, color: Colors.white)))),
+            enableContent
+                ? Content(
+                    firstDayOfTheweek: firstDayOfTheweek, timeSheet: timeSheet)
+                : AbsorbPointer(
+                    child: Content(
+                        firstDayOfTheweek: firstDayOfTheweek,
+                        timeSheet: timeSheet))
           ],
         ),
       )),
