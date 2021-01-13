@@ -40,6 +40,8 @@ class _HeaderIssueState extends State<HeaderIssue> {
       new RoundedLoadingButtonController();
 
   _getTimeSheet() async {
+    week = now.day / 7 + 1;
+    firstDayOfTheweek ??= now.subtract(new Duration(days: now.weekday - 1));
     formatted = formatter.format(firstDayOfTheweek);
     return await api.getTimesheet(fromDate: formatted).then((value) {
       timeSheet = value;
@@ -50,11 +52,13 @@ class _HeaderIssueState extends State<HeaderIssue> {
   }
 
   void _submitWeeklyreport() async {
+    week = now.day / 7 + 1;
+    firstDayOfTheweek ??= now.subtract(new Duration(days: now.weekday - 1));
     String formatted = formatter.format(firstDayOfTheweek);
     return await apiWeekly.sentWeeklyTimesheet(date: formatted).then((value) {
       submitWeeklyTimeSheet = value;
-      print("The value is>>>>>>>>>>>>>>>>>>>>>>>>" +
-          submitWeeklyTimeSheet.message);
+      // print("The value is>>>>>>>>>>>>>>>>>>>>>>>>" +
+      //     submitWeeklyTimeSheet.message);
       //if(submitWeeklyTimeSheet.message == "")
       // if (submitWeeklyTimeSheet.error == 1) {
       //   _btnOkController.error();
@@ -66,6 +70,12 @@ class _HeaderIssueState extends State<HeaderIssue> {
         Navigator.of(context).pop();
       });
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getTimeSheet();
   }
 
   @override
@@ -258,13 +268,18 @@ class _HeaderIssueState extends State<HeaderIssue> {
                           enableContent = true;
                         },
                         child: Icon(Icons.arrow_right, color: Colors.white)))),
-            enableContent
-                ? Content(
-                    firstDayOfTheweek: firstDayOfTheweek, timeSheet: timeSheet)
-                : AbsorbPointer(
-                    child: Content(
+            yourTimesheet
+                ? enableContent
+                    ? Content(
                         firstDayOfTheweek: firstDayOfTheweek,
-                        timeSheet: timeSheet))
+                        timeSheet: timeSheet)
+                    : AbsorbPointer(
+                        child: Content(
+                            firstDayOfTheweek: firstDayOfTheweek,
+                            timeSheet: timeSheet))
+                : Center(
+                    child:
+                        CircularProgressIndicator(backgroundColor: Colors.cyan))
           ],
         ),
       )),

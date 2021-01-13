@@ -14,7 +14,6 @@ class Content extends StatefulWidget {
   DateTime firstDayOfTheweek;
   TimeSheet timeSheet;
   Content({this.firstDayOfTheweek, this.timeSheet});
-
   @override
   _ContentState createState() => _ContentState(firstDayOfTheweek);
 }
@@ -39,8 +38,6 @@ class _ContentState extends State<Content> {
   _ContentState(this.firstDayOfTheweek);
 
   _getTimeSheet() async {
-    week = now.day / 7 + 1;
-    firstDayOfTheweek ?? now.subtract(new Duration(days: now.weekday - 1));
     String formatted = formatter.format(firstDayOfTheweek);
     return await api.getTimesheet(fromDate: formatted).then((value) {
       timeSheet = value;
@@ -57,9 +54,6 @@ class _ContentState extends State<Content> {
         .then((value) {
       submitDailyReport = value;
       _btnController.success();
-      setState(() {
-        //  yourDailyReport = true;
-      });
       _doReset();
     });
   }
@@ -99,7 +93,6 @@ class _ContentState extends State<Content> {
 
   @override
   Widget build(BuildContext context) {
-    //   formatted = formatter.format(widget.firstDayOfTheweek);
     customDialog({String day, String date}) {
       return showDialog(
           context: context,
