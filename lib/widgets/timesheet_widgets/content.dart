@@ -28,6 +28,7 @@ class _ContentState extends State<Content> {
   TimeSheetDailyService apidaily = TimeSheetDailyService();
   SubmitDailyReport submitDailyReport;
   bool yourTimesheet = false;
+  bool dailyReport = false;
   String formatted = "";
   bool totalTimeValidate = false;
   bool commentValidate = false;
@@ -55,6 +56,9 @@ class _ContentState extends State<Content> {
       submitDailyReport = value;
       _btnController.success();
       _doReset();
+      setState(() {
+        dailyReport = true;
+      });
     });
   }
 
@@ -248,16 +252,15 @@ class _ContentState extends State<Content> {
                           } else if (!validatetimeField(totalTime.text))
                             _btnController.stop();
                           else {
+                            dailyReport = false;
                             _getDailyreport(fullDate: date);
                             setState(() {
                               _getTimeSheet();
                             });
                             Timer(Duration(seconds: 5), () {
-                              // Navigator.pop(context);
                               totalTime.text = "";
                               comment.text = "";
                             });
-                            //   _getTimeSheet();
                           }
                         },
                         child: Text('Submit',
@@ -284,9 +287,10 @@ class _ContentState extends State<Content> {
               children: [
                 Container(
                     width: MediaQuery.of(context).size.width * .25,
-                    //  margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
                     child: Text(
-                      widget.timeSheet.data[index].day,
+                      dailyReport
+                          ? timeSheet.data[index].day
+                          : widget.timeSheet.data[index].day,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontFamily: 'SourceSans',
@@ -299,13 +303,14 @@ class _ContentState extends State<Content> {
                         width: MediaQuery.of(context).size.width * .25,
                         margin: EdgeInsets.fromLTRB(0, 1, 0, 1),
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                        child: Text(widget.timeSheet.data[index].date,
+                        child: Text(
+                            dailyReport
+                                ? timeSheet.data[index].date
+                                : widget.timeSheet.data[index].date,
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))
                     : InkWell(
                         onTap: () {
-                          print("Today date is >>>>>>>>>" +
-                              widget.timeSheet.data[index].fullDate.toString());
                           customDialog(
                               day: widget.timeSheet.data[index].day.toString(),
                               date: widget.timeSheet.data[index].fullDate);
@@ -315,7 +320,10 @@ class _ContentState extends State<Content> {
                             width: MediaQuery.of(context).size.width * .25,
                             margin: EdgeInsets.fromLTRB(0, 1, 0, 1),
                             padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                            child: Text(widget.timeSheet.data[index].date,
+                            child: Text(
+                                dailyReport
+                                    ? timeSheet.data[index].date
+                                    : widget.timeSheet.data[index].date,
                                 style: TextStyle(
                                     fontFamily: 'OpenSans', fontSize: 14))),
                       ),
@@ -324,7 +332,10 @@ class _ContentState extends State<Content> {
                         color: Colors.yellowAccent,
                         width: MediaQuery.of(context).size.width * .25,
                         padding: EdgeInsets.fromLTRB(8, 0, 0, 8),
-                        child: Text(widget.timeSheet.data[index].dayText,
+                        child: Text(
+                            dailyReport
+                                ? timeSheet.data[index].dayText
+                                : widget.timeSheet.data[index].dayText,
                             style: TextStyle(
                                 fontFamily: 'OpenSans', fontSize: 14)))
                     : InkWell(
@@ -338,9 +349,13 @@ class _ContentState extends State<Content> {
                             width: MediaQuery.of(context).size.width * .25,
                             padding: EdgeInsets.fromLTRB(8, 0, 0, 8),
                             child: Text(
-                                widget.timeSheet.data[index].totalHours
-                                        .toString() +
-                                    " - Hours",
+                                dailyReport
+                                    ? timeSheet.data[index].totalHours
+                                            .toString() +
+                                        " - Hours"
+                                    : widget.timeSheet.data[index].totalHours
+                                            .toString() +
+                                        " - Hours",
                                 style: TextStyle(
                                     fontFamily: 'OpenSans', fontSize: 14))),
                       ),

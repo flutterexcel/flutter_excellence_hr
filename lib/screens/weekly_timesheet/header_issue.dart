@@ -57,14 +57,14 @@ class _HeaderIssueState extends State<HeaderIssue> {
     String formatted = formatter.format(firstDayOfTheweek);
     return await apiWeekly.sentWeeklyTimesheet(date: formatted).then((value) {
       submitWeeklyTimeSheet = value;
-      // print("The value is>>>>>>>>>>>>>>>>>>>>>>>>" +
-      //     submitWeeklyTimeSheet.message);
-      //if(submitWeeklyTimeSheet.message == "")
-      // if (submitWeeklyTimeSheet.error == 1) {
-      //   _btnOkController.error();
-      //   _btnOkController.reset();
-      // } else {
-      _btnOkController.success();
+      if (submitWeeklyTimeSheet.error == 1)
+        _btnOkController.error();
+      else {
+        _btnOkController.success();
+        setState(() {
+          enableContent = false;
+        });
+      }
       Timer(Duration(seconds: 5), () {
         _btnOkController.reset();
         Navigator.of(context).pop();
@@ -196,9 +196,6 @@ class _HeaderIssueState extends State<HeaderIssue> {
                                 setState(() {
                                   enableContent = false;
                                 });
-                                // Timer(Duration(seconds: 5), () {
-                                //   Navigator.pop(context);
-                                // });
                               },
                               color: Colors.green[300],
                               child: Text('Add',
@@ -235,6 +232,7 @@ class _HeaderIssueState extends State<HeaderIssue> {
                           now = now.subtract(Duration(days: 7));
                           firstDayOfTheweek =
                               now.subtract(new Duration(days: now.weekday - 1));
+                          yourTimesheet = false;
                           _getTimeSheet();
                           setState(() {
                             titleDate = " week " +
@@ -256,7 +254,9 @@ class _HeaderIssueState extends State<HeaderIssue> {
                           now = now.add(Duration(days: 7));
                           firstDayOfTheweek =
                               now.subtract(new Duration(days: now.weekday - 1));
+                          yourTimesheet = false;
                           _getTimeSheet();
+
                           setState(() {
                             titleDate = " week " +
                                 week.toStringAsFixed(0) +

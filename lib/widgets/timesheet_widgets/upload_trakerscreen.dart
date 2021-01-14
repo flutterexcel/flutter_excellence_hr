@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_excellence_hr/services/post.dart';
 import 'package:flutter_excellence_hr/services/storage_service.dart';
 import '../../app_config.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +9,6 @@ import 'package:mime_type/mime_type.dart';
 import 'package:http_parser/http_parser.dart';
 
 class UploadTrackerScreen {
-  // Post _post = Post();
   Future<http.Response> uploadTrackerScreen(
       {String docs, String action, File file, String submit}) async {
     final prodUrl = await AppConfig.forEnvironment('prod', 'uploadUrl');
@@ -32,15 +29,10 @@ class UploadTrackerScreen {
       "file_upload_action": action,
       "token": token,
       "docs": docs,
+      "submit": submit,
       "user_id": StorageUtil.getUserId()
     };
     request.fields.addAll(headers);
-    // return _post
-    //     .post(apiUrl, body: json.encode(data))
-    //     .then((dynamic res) async {
-    //   if (res["error"] >= 1) throw new Exception(res["data"]["message"]);
-    //   return UploadTrac.fromJson(res);
-    // });
     return await request.send().then((result) async {
       return await http.Response.fromStream(result);
     });
@@ -53,7 +45,7 @@ class UploadTrac {
   String message;
 
   UploadTrac({this.fileId, this.error, this.message});
-
+  
   UploadTrac.fromJson(Map<String, dynamic> json) {
     fileId = json['fileId'];
     error = json['error'];
