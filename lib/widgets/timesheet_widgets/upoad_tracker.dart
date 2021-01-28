@@ -3,45 +3,41 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_excellence_hr/resources/app_colors.dart';
-import 'package:flutter_excellence_hr/screens/my_leaves/my_leaves.dart';
-import 'package:flutter_excellence_hr/screens/mydocuments/documents.dart';
-import 'package:flutter_excellence_hr/services/profile/upload_image.dart';
-import 'package:flutter_excellence_hr/widgets/my_leaves_widgets/myleaves.dart';
+import 'package:flutter_excellence_hr/widgets/timesheet_widgets/timesheet_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
-class UploadPic extends StatefulWidget {
-  String leavid;
-  UploadPic({this.leavid});
-
+class UploadTracker extends StatefulWidget {
   @override
-  _UploadPicState createState() => _UploadPicState(leavid: leavid);
+  _UploadPicState createState() => _UploadPicState();
 }
 
-class _UploadPicState extends State<UploadPic> {
-  final GlobalKey<MyLeavesListState> _key = GlobalKey();
+class _UploadPicState extends State<UploadTracker> {
   File _image;
   var val;
-  String leavid;
-  _UploadPicState({this.leavid});
-  UploadImage api = UploadImage();
-  UploadImg uploadImg;
+  UploadTrackerScreen api = UploadTrackerScreen();
+  UploadTrac uploadTrac;
   bool uploading = true;
 
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery);
     _image = image;
+
     setState(() {
       if (_image.path.isNotEmpty) uploading = false;
     });
+
     try {
       await api
-          .uploadImage(
-              doctype: 'leave_doc',
-              action: "upload_leave_document",
+          .uploadTrackerScreen(
+              docs: '(binary)',
+              action: "timesheet_docs",
               file: _image,
-              leaveId: leavid)
+              submit: "Upload")
           .then((value) {
+        uploadTrac = jsonDecode(value.body);
+        print("your tracker msg  " + uploadTrac.message.toString());
         val = jsonDecode(value.body);
+        print(" Your value is  " + val);
         alertDialog();
       });
     } catch (e) {}
@@ -80,8 +76,7 @@ class _UploadPicState extends State<UploadPic> {
                       )
                     : Center(
                         child: CircularProgressIndicator(
-                            backgroundColor: Colors.cyan),
-                      ),
+                            backgroundColor: Colors.cyan)),
               ),
             ),
           ),
@@ -90,16 +85,14 @@ class _UploadPicState extends State<UploadPic> {
 
   void alertDialog() {
     var alert = AlertDialog(
-      title: Text('Your Leave Document'),
-      content: Text(val['message']),
+      title: Text('Your Traker Pic'),
+      content: Text(val["message"]),
       actions: <Widget>[
         FlatButton(
             onPressed: () {
               setState(() {
                 uploading = true;
-                var nav = Navigator.of(context);
-                nav.pop();
-                nav.pop();
+                Navigator.of(context).pop();
               });
             },
             child: Text(

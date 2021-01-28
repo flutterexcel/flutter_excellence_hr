@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_excellence_hr/globals.dart';
@@ -44,7 +43,6 @@ class _LoginScreenState extends State<LoginScreen> {
 class _AuthForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Container(
         alignment: Alignment.center,
         child: Column(
