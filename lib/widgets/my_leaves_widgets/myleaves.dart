@@ -294,23 +294,23 @@ class _ListLeavesState extends State<ListLeaves> {
                 ),
               ],
             ),
-            leaves.status.contains('Pending')?
-            RoundedLoadingButton(
-                borderRadius: 5,
-                height: 40,
-                width: 100,
-                errorColor: Colors.blue,
-                color: Colors.red[600],
-                controller: _btnController,
-                onPressed: () {
-                  _cancelLeave(leaves.fromDate);
-                },
-                child: Text(
-                  "Cancel Leave",
-                  style:
-                      TextStyle(color: Colors.white, fontFamily: 'SourceSans'),
-                )):
-                Center(),
+            leaves.status.contains('Pending')
+                ? RoundedLoadingButton(
+                    borderRadius: 5,
+                    height: 40,
+                    width: 100,
+                    errorColor: Colors.blue,
+                    color: Colors.red[600],
+                    controller: _btnController,
+                    onPressed: () {
+                      _cancelLeave(leaves.fromDate);
+                    },
+                    child: Text(
+                      "Cancel Leave",
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'SourceSans'),
+                    ))
+                : Center(),
           ]),
           trailing: Container(
             padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
