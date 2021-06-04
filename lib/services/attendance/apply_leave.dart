@@ -22,7 +22,7 @@ class ApplyLeave {
       "token": token,
       "from_date": fromDate,
       "to_date": toDate,
-      'reason':reason,
+      'reason': reason,
       "late_reason": lateReason,
       "leave_type": leaveType,
       "no_of_days": noOfDays,

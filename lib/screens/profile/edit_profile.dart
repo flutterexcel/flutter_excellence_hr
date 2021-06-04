@@ -22,9 +22,6 @@ class ShowProfile extends StatelessWidget {
             body: Center(
                 child: CircularProgressIndicator(backgroundColor: Colors.cyan)),
           );
-          // return Center(
-          //   child: CircularProgressIndicator(),
-          // );
         }
         if (state is ProfileInitial) {
           _proflieBloc.add(ProfileLoading());

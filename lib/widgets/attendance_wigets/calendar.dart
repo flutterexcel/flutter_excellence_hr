@@ -22,7 +22,6 @@ class CalendarScreen extends StatelessWidget {
               'NON_WORKING_DAY'
           ? InkWell(
               onTap: () {
-                print('tap-23');
               },
               child: Container(
                   margin: EdgeInsets.all(2),
@@ -253,107 +252,98 @@ class CalendarScreen extends StatelessWidget {
                         ),
                       ),
                     )
-                  : InkWell(
-                      onTap: () {
-                        
-                        _popupDialog(context, index);
-                      },
-                      child: Container(
-                        key: Key('$index'),
-                        margin: EdgeInsets.all(2),
-                        height: 90,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                padding: EdgeInsets.fromLTRB(4, 8, 0, 16),
-                                child: Row(
-                                  children: [
-                                    Text(monthAttendance
-                                        .data.attendance[index].date),
-                                  ],
-                                )),
-                            Container(
-                                padding: EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: Colors.white10,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        monthAttendance
-                                                .data.attendance[index].inTime +
-                                            " - " +
-                                            monthAttendance
-                                                .data.attendance[index].outTime,
-                                        style: TextStyle(
-                                            fontSize: 11, color: Colors.black),
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            // Divider(
-                            //   height: 1,
-                            //   endIndent: 1,
-                            //   indent: 1,
-                            //   thickness: 1,
-                            //   color: Colors.blue[200],
-                            // ),
-                            Container(
-                                padding: EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: Colors.white10,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        Duration(
-                                                    seconds: monthAttendance
-                                                        .data
-                                                        .attendance[index]
-                                                        .secondsActualWorkedTime)
-                                                .toString()
-                                                .split('.')
-                                                .first
-                                                .padLeft(8, "0") +
-                                            " Total Work Time",
-                                        style: TextStyle(
-                                            fontSize: 11, color: Colors.black),
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            monthAttendance.data.attendance[index].extraTime ==
-                                    0
-                                ? Container(
-                                    padding: EdgeInsets.all(4),
+                  : monthAttendance.data.attendance[index].inTime == "" &&
+                          monthAttendance.data.attendance[index].outTime == ""
+                      ? InkWell(
+                          onTap: () {
+                            _popupDialog(context, index);
+                          },
+                          child: Container(
+                            key: Key('$index'),
+                            margin: EdgeInsets.all(2),
+                            height: 90,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.blueAccent,
+                                      color: AppColors.NAVY_BLUE,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                    child: Center())
-                                : Container(
+                                    padding: EdgeInsets.fromLTRB(4, 8, 0, 16),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                            "* " +
+                                                monthAttendance.data
+                                                    .attendance[index].date,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            )),
+                                      ],
+                                    )),
+                                Container(
+                                  height: 30,
+                                  color: AppColors.NAVY_BLUE,
+                                ),
+                                Container(
                                     padding: EdgeInsets.all(4),
                                     decoration: BoxDecoration(
-                                      color: monthAttendance
-                                                  .data
-                                                  .attendance[index]
-                                                  .extraTimeStatus ==
-                                              '-'
-                                          ? Colors.redAccent
-                                          : Colors.greenAccent,
+                                      color: AppColors.NAVY_BLUE,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            monthAttendance
+                                                .data
+                                                .attendance[index]
+                                                .adminAlertMessage,
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              ],
+                            ),
+                          ),
+                        )
+                      : InkWell(
+                          onTap: () {
+                            _popupDialog(context, index);
+                          },
+                          child: Container(
+                            key: Key('$index'),
+                            margin: EdgeInsets.all(2),
+                            height: 90,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    padding: EdgeInsets.fromLTRB(4, 8, 0, 16),
+                                    child: Row(
+                                      children: [
+                                        Text(monthAttendance
+                                            .data.attendance[index].date),
+                                      ],
+                                    )),
+                                Container(
+                                    padding: EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white10,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Row(
@@ -363,18 +353,98 @@ class CalendarScreen extends StatelessWidget {
                                         Expanded(
                                           child: Text(
                                             monthAttendance.data
-                                                .attendance[index].extraTime,
+                                                    .attendance[index].inTime +
+                                                " - " +
+                                                monthAttendance.data
+                                                    .attendance[index].outTime,
                                             style: TextStyle(
                                                 fontSize: 11,
-                                                color: Colors.white),
+                                                color: Colors.black),
                                           ),
                                         ),
                                       ],
-                                    ))
-                          ],
+                                    )),
+                                // Divider(
+                                //   height: 1,
+                                //   endIndent: 1,
+                                //   indent: 1,
+                                //   thickness: 1,
+                                //   color: Colors.blue[200],
+                                // ),
+                                Container(
+                                    padding: EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white10,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            Duration(
+                                                        seconds: monthAttendance
+                                                            .data
+                                                            .attendance[index]
+                                                            .secondsActualWorkedTime)
+                                                    .toString()
+                                                    .split('.')
+                                                    .first
+                                                    .padLeft(8, "0") +
+                                                " Total Work Time",
+                                            style: TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.black),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                                monthAttendance
+                                            .data.attendance[index].extraTime ==
+                                        0
+                                    ? Container(
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                          color: Colors.blueAccent,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Center())
+                                    : Container(
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                          color: monthAttendance
+                                                      .data
+                                                      .attendance[index]
+                                                      .extraTimeStatus ==
+                                                  '-'
+                                              ? Colors.redAccent
+                                              : Colors.greenAccent,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                monthAttendance
+                                                    .data
+                                                    .attendance[index]
+                                                    .extraTime,
+                                                style: TextStyle(
+                                                    fontSize: 11,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ],
+                                        ))
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
       itemCount: monthAttendance.data.attendance.length,
     );
   }

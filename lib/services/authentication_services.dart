@@ -1,5 +1,3 @@
-import 'package:flutter_excellence_hr/globals.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/user.dart';
 import '../services/login.dart';

@@ -9,7 +9,6 @@ import '../bloc/inventory/inventory.dart';
 import '../model/inventory/user_assign_machine.dart';
 import '../widgets/navigate/imp_notes_inventory.dart';
 import '../screens/navigate/navigate.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ShowInventory extends StatefulWidget {
   @override

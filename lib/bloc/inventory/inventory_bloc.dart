@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_excellence_hr/model/inventory/audit_current_month.dart';
-import 'package:flutter_excellence_hr/model/inventory/history.dart';
 import 'package:flutter_excellence_hr/model/inventory/user_assign_machine.dart';
 import 'inventory_event.dart';
 import 'inventory_state.dart';
@@ -41,7 +40,8 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
     }
     if (event.count != null) {
       count = event.count;
-    } else {
+    }
+    else {
       yield InventoryLoading();
     }
     try {
@@ -55,7 +55,19 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
             showInventory: enableInventory);
         return;
       }
+      if(event.data==null){
+         yield InventorySuccess(
+          data: event.data,
+          count: event.count,
+          enablecomment: event.enablecomment,
+          comment: event.comment,
+          enableoverview: true,
+          showInventory: false);
+      }
+     
+
       final inventory = await invapi.inventory();
+     
       for (var i = 0; i < inventory.userMachine.length; i++) {
         final item = inventory.userMachine[i];
         UserAssignMachine usermachine = UserAssignMachine.fromJson(item);
@@ -78,7 +90,9 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
           comment: comment,
           enableoverview: enableoverview,
           showInventory: enableInventory);
-    } catch (err) {}
+    } catch (err) {
+      print(err.toString());
+    }
   }
 
   clearInventory() async* {

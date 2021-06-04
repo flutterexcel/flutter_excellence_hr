@@ -18,7 +18,7 @@ class IdCard extends StatelessWidget {
                 CircleAvatar(
                     radius: 30,
                     backgroundImage: NetworkImage(
-                        profileDetails.data.userProfileDetail.profileImage)),
+                       profileDetails.data.userProfileDetail.image)),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +27,7 @@ class IdCard extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         child: Text(
-                          profileDetails.data.userProfileDetail.username,
+                          profileDetails.data.userProfileDetail.name,
                           style: TextStyle(
                             fontSize: 18,
                             fontFamily: 'SourceSans',
@@ -71,7 +71,7 @@ class IdCard extends StatelessWidget {
                                     style: TextStyle(
                                         fontFamily: 'SourceSans',
                                         fontSize: 14,
-                                        color: Colors.black)))),
+                                        color: AppColors.BTN_BLACK_COLOR)))),
                           ),
                         ],
                       )

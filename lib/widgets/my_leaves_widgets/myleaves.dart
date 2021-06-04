@@ -112,10 +112,8 @@ class _ListLeavesState extends State<ListLeaves> {
   _cancelLeave(String date) async {
     return await cancelMyLeave.cancelMyLeave(date).then((value) {
       if (value.error == 1) {
-        print('failed');
         _btnController.error();
       } else if (value.error == 0) {
-        print('success');
         _btnController.success();
       }
       _doReset();
